@@ -1,0 +1,155 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: url(/img/landing-page-bg.png);
+    background-size: cover;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+    min-width: min-content;
+}
+
+/* Navbar */
+
+nav{
+    border: none;
+}
+
+.logo{
+    width: 20%;
+}
+
+a.nav-btn{
+    font-size: 20px !important;
+    color: black;
+    font-weight: 450;
+}
+a.nav-btn:hover{
+    font-weight: 500;
+}
+button.nav-btn-contact{
+    border: 1px solid #2EB757;
+    border-radius: 20px;
+    background-color: #2EB757;
+    font-weight: 450;
+    padding: 0;
+}
+
+button.nav-btn-contact:hover{
+    background-color: #178c3a;
+}
+
+a.nav-btn-con{
+    color:#491815 !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+}
+
+i.fa-bars{
+    font-size: 30px;
+    border: none;
+    color: #491815;
+}
+
+/* search */
+button.search-btn{
+    background-color: #2EB757;
+    color: #ffffff;
+    border-radius: 15px;
+}
+button.search-btn:hover{
+    background-color: #0fcf49 !important;
+    color: #ffffff !important;
+}
+input.search-input{
+    border-radius: 15px 0 0 15px;
+    padding: 10px;
+    font-size: 16px;
+}
+form.search-container{
+    width: 25vw;
+}
+div.search-group{
+    border:1px solid #2EB757;
+    border-radius: 20px;
+}
+.fa-magnifying-glass{
+    font-size: 150%;
+    padding: auto;
+}
+
+/* login */
+
+.login-bg-color{
+    background-color: #491815 !important;
+}
+
+.login-btn{
+    background-color: #2EB757;
+    color: #EBEBEB;
+}
+.login-btn:hover{
+    background-color: #178c3a;
+    color: #EBEBEB;
+}
+
+.login-link{
+    color: #226ee0 !important;
+    text-decoration: none;
+}
+.login-link:hover{
+    color: #09377c;
+}
+
+#signup-form{
+    margin-top: -10px;
+}
+
+/* set font */
+@font-face {
+    font-family: Lucida;
+    src: url('/assets/fonts/LucidaHandwritingStdBold.TTF')  format('truetype');
+}
+
+/* business name / tagline */
+.lsfp{
+    font-family: Lucida;
+    color: #000000;
+    font-size: 40px;
+}
+h1.lsfp{
+    font-weight: bolder !important;
+    font-size: 75px;
+    color: #491815;
+}
+p.lsfp{
+    font-size: 24px;
+}
+
+button.explore-btn{
+    background-color: #F68010;
+    color: #000000;
+    font-size: 16px;
+}
+button.explore-btn:hover{
+    background-color: #d46d0b;
+    color: #000000;
+}
+/* mobile view */
+@media (max-width: 480px) {
+    a.nav-link{
+        font-size: 20px !important; 
+    }
+
+}
+
+/* ipad/tablet view */
+@media (max-width: 768px) {
+
+
+}
+
