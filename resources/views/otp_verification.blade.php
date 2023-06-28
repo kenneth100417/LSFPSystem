@@ -20,8 +20,8 @@
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
-  <link rel="stylesheet" href="css\style.css">
+  <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
@@ -29,7 +29,6 @@
 
   <script src="/assets/js/ph-address-selector.js"></script>   
   
-
 
 
 </head>
@@ -83,21 +82,34 @@
       <div class="container mt-4 text-center">
           <div class="row">
               <div class="col-md-3 card-container">
-              
+                @if (session('success'))
+                <div class="alert alert-success" role="alert"> {{session('success')}} 
+                </div>
+                @endif
+
+                @if (session('error'))
+                <div class="alert alert-danger" role="alert"> {{session('error')}} 
+                </div>
+                @endif
                 <!-- verify OTP Form -->
                 <div class="card z-index-0 fadeIn3 fadeInBottom mt-5 m-2" id="otpverify-form">    
                   <h4 class="font-weight-bolder text-center mt-4">We need to verify<br /> if it's you!</h4>
                   <div class="card-body">
-                    <form role="form" class="text-start">
+                    <form role="form" class="text-start" method="POST" action="{{ route('otp.verify_code') }}">
                         @csrf
                       <p class="text-center mt-0" style="font-size: 14px;">A 6-digit OTP has been sent to your mobile number <span id="mobile_no"></span>.</p>
                       <div class="input-group input-group-outline mb-2">
                         <label class="form-label">Enter OTP Code</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control @error('otp') is-invalid @enderror" name="otp" id="otp">
                       </div>
+                      @error('otp')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                       <div class="text-center">
-                        <button type="" class="btn verify-btn w-100 my-3 mb-1" onclick="verify();">Verify</button>
-                        <button type="button" class="btn cancel-btn w-100 my-1 mb-1" onclick="showRegForm();">Cancel</button>
+                        <button type="submit" class="btn verify-btn w-100 my-3 mb-1">Verify</button>
+                        <button type="button" class="btn resend-btn w-100 my-1 mb-1" onclick="window.location='{{ route('otp.resend') }}' ">Resend OTP</button>
                       </div>
                     </form>
                   </div>

@@ -121,6 +121,10 @@ div.search-group{
     background-color: #CFA4A2;
     color: #EBEBEB;
 }
+.resend-btn{
+    background-color: #d46d0b;
+    color: #EBEBEB;
+}
 .cancel-btn:hover{
     background-color: #a57875;
     color: #EBEBEB;

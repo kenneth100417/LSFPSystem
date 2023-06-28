@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Carbon\Carbon;
+use App\Models\VerificationCode;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class UserController extends Controller
@@ -27,7 +31,27 @@ class UserController extends Controller
     }
 
     public function admin_dashboard(){
-        return view('pages.admin_dashboard');
+        return view('otp_verification');
+    }
+
+    public function logout(Request $request){
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
+    public function otp_verify(){
+        return view('otp_verification');
+    }
+
+    public function resendOtp(){
+        $verificationCode = $this->generateOtp();
+        $message = "Your OTP Code is - ".$verificationCode->otp." This code is valid only for 10 minutes.";
+
+        return redirect()->route('otp.verify')->with('success',  $message); 
     }
 
     public function add_user(Request $request){
@@ -48,22 +72,12 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
+
         auth()->login($user);
-        if(auth()->user()->access == "0"){
-            $name = auth()->user()->firstname;
-            return redirect('/user_dashboard')->with('message', 'Welcome, '.$name.'!');
-        }
-        return redirect('/admin_dashboard')->with('message', 'Welcome!');
-        
-    }
 
-    public function logout(Request $request){
-        auth()->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+        $verificationCode = $this->generateOtp();
+        $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+        return redirect()->route('otp.verify')->with('success',  $message); 
     }
 
     public function login(Request $request){
@@ -77,15 +91,96 @@ class UserController extends Controller
 
             $name = auth()->user()->firstname;
 
-            if(auth()->user()->access == "0"){
-                return redirect('/user_dashboard')->with('message', 'Welcome back, '.$name.'!');
-            }
-            return redirect('/admin_dashboard')->with('message', 'Welcome back, '.$name.'!');
+            // if(auth()->user()->access == "0"){
+            //     return redirect('/user_dashboard')->with('message', 'Welcome back, '.$name.'!');
+            // }
+            // return redirect('/admin_dashboard')->with('message', 'Welcome back, '.$name.'!');
+
+            $verificationCode = $this->generateOtp();
+            $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+            $this->sendSMS(auth()->user()->mobile_number, $message);
+            return redirect()->route('otp.verify')->with('success',  $message); 
 
         }
 
         return back()->withErrors(['email' => 'Email and Password does not match.'])->onlyInput('email');
     }
 
-    
+
+    // Generate OTP
+    public function generateOtp()
+    {
+
+        # User Does not Have Any Existing OTP
+        $verificationCode = VerificationCode::where('mobile_number', auth()->user()->mobile_number)->latest()->first();
+
+        $now = Carbon::now();
+
+        if($verificationCode && $now->isBefore($verificationCode->expire_at)){
+            return $verificationCode;
+        }
+
+        // Create a New OTP
+        return VerificationCode::create([
+            'mobile_number' => auth()->user()->mobile_number,
+            'otp' => rand(123456, 999999),
+            'expire_at' => Carbon::now()->addMinutes(10)
+        ]);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        #Validation
+        $request->validate([
+            'otp' => 'required'
+        ]);
+
+        #Validation Logic
+        $verificationCode   = VerificationCode::where('mobile_number', auth()->user()->mobile_number)->where('otp', $request->otp)->first();
+
+        $now = Carbon::now();
+        if (!$verificationCode) {
+            return redirect()->back()->with('error', 'Your OTP is not correct');
+        }elseif($verificationCode && $now->isAfter($verificationCode->expire_at)){
+            return redirect()->route('otp.login')->with('error', 'Your OTP has been expired');
+        }
+
+
+        if(auth()->user()->access == "0"){
+            $name = auth()->user()->firstname;
+            return redirect('/user_dashboard')->with('message', 'Welcome, '.$name.'!');
+        }else{
+            return redirect('/admin_dashboard')->with('message', 'Welcome!');
+        }
+
+        $verificationCode->update([
+            'expire_at' => Carbon::now()
+        ]);
+
+    }
+
+
+    public function sendSMS($mobile_number, $message){
+        $ch = curl_init();
+        $parameters = array(
+            'apikey' => 'acd2a93b808ee8f8e725ceba1f84ff3b', //Your API KEY
+            'number' => $mobile_number,
+            'message' => $message,
+            'sendername' => "SEMAPHORE"
+        );
+        curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
+        curl_setopt( $ch, CURLOPT_POST, 1 );
+
+        //Send the parameters set above with the request
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+
+        // Receive response from server
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        $output = curl_exec( $ch );
+        curl_close ($ch);
+
+        //Show the server response
+        echo $output;
+    }
+
 }
