@@ -21,482 +21,587 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
-  <link rel="stylesheet" href="css\style.css">
-
+  <link rel="stylesheet" href="/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   
 
-
+  
 
 </head>
 
 <body>
   <x-message />
-  <header>
-      <nav class="navbar fixed navbar-expand-md mr-5 fixed-top mt-2">
-          <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="logo">
-          <i class="navbar-toggler fa-solid fa-bars" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          </i>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-            <ul class="navbar-nav text-center justify-content-end">
-              <li class="nav-item mx-3">
-                <a class="nav-link nav-btn" href="#home">Home</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link nav-btn" href="#product">Products</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link nav-btn" href="#about">About</a>
-              </li>
-              <li class="nav-item mx-3 ">
-                <button class="btn nav-btn-contact px-3">
-                  <a class="nav-link nav-btn-con mt-0" href="#">Contact Us</a>
-                </button>
-              </li>
-              </ul>
-          </div>
-      </nav>
-  </header>
-<div class="page-container">
+  <div class="leaves">
+    <img src="/img/leaves.png">
     
-  <Section id="home">
-    <div class="container-fluid d-flex flex-row-reverse search-container" >
-      <div class="row">
-        <div class="col-md-3">
-          <div class="">
-            <form class="form-inline search-container">
-              <div class="input-group search-group">
-                <input class="form-control search-input mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-success search-btn my-sm-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+<header>
+  <nav class="navbar navbar-expand-md fixed-top mt-2">
+    <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="logo">
+    <i class="navbar-toggler fa-solid fa-bars" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"></i>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav text-center justify-content-end">
+        <li class="nav-item mx-3">
+          <a class="nav-link nav-btn" href="#home">Home</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link nav-btn" href="#product">Products</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link nav-btn" href="#about">About</a>
+        </li>
+        <li class="nav-item mx-3 ">
+          <button class="btn nav-btn-contact px-3">
+            <a class="nav-link nav-btn-con mt-0" href="#contact">Contact Us</a>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<div class="page-container">
+  <section id="home">
+    <div class="container search-container pt-4" >
+      <div class="row justify-content-end">
+        <div class="col-sm-3">
+          <form class="form-inline search-container">
+            <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-outline-success search-btn" type="button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-4 text-center">
+      <div class="row align-middle">
+        <div class="col-md-3 card-container">
+
+          <!-- log in form -->
+          <div class="card fadeIn3 fadeInBottom mt-3 m-1" id="login-form">    
+            <h4 class="font-weight-bolder text-center mt-4 card-title">Sign In</h4>
+            <div class="card-body">
+              <form action="/login" method="POST" role="form" class="text-start">
+
+                @csrf
+                @error('email')
+                  <p class="text-danger text-center">
+                    <small> {{$message}} </small>
+                  </p>
+                @enderror
+
+                <div class="input-group input-group-outline mb-1">
+                  <input placeholder="Email" name="email" type="email" class="form-control" value={{old('email')}} >
+                </div>
+                <div class="input-group input-group-outline mt-2">
+                  <input name="password" type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="text-end mb-2">
+                  <a class="login-link" href="">Forgot Password?</a>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn login-btn w-100 my-2 mb-1">Sign in</button>
+                </div>
+                <p class="mt-3 text-sm text-center">
+                  Don't have an account?
+                  <a href="/register" class="login-link register-link text-bold"><br />Register</a>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9 text-center mt-1 title-container">
+          <div class="container">
+            <div class="row">
+              <div class="text-center lsfp-container col-md-12">
+                <H4 class="lsfp">Louella's</H4>
+                <H1 class="text-bold lsfp">Sweet Food Products</H1>
+                <p class="lsfp-tagline">Every Bite is Delight!</p>
+                <p class="lsfp-desc">At Louella's Sweet Food Products, we take pride in sourcing only the highest quality ingredients for our chocolate, ensuring that every piece is a true indulgence for your taste buds.</p>
+                
+                <div class="explore-btn-container mt-3 col-md-9">
+                  <a href="#product"><button class="btn explore-btn mt-4"> Explore Now <span><i class="fa-solid fa-arrow-right"></i></span></button></a>
                 </div>
               </div>
-            </form>
+            </div>
+            <div class="row justify-content-end">
+              <div class="cacao col-md-12">
+                <img src="/img/cacao.png">
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-      <div class="container mt-4 text-center">
-          <div class="row">
-              <div class="col-md-3 card-container">
-                <!-- log in form -->
-                <div class="card z-index-0 fadeIn3 fadeInBottom mt-3 m-1" id="login-form">    
-                    <h4 class="font-weight-bolder text-center mt-4 card-title">Sign In</h4>
-                  <div class="card-body">
-                    <form action="/login" method="POST" role="form" class="text-start">
-                      @csrf
-                      @error('email')
-                        <p class="text-danger">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="input-group input-group-outline mb-1">
-                        <input placeholder="Email" name="email" type="email" class="form-control" value={{old('email')}} >
-                      </div>
-                      <div class="input-group input-group-outline mt-2">
-                        <input name="password" type="password" class="form-control" placeholder="Password">
-                      </div>
-                      
-                      <div class="text-end mb-2">
-                        <a class="login-link" href="">Forgot Password?</a>
-                      </div>
-                      <div class="text-center">
-                        <button type="submit" class="btn login-btn w-100 my-2 mb-1">Sign in</button>
-                      </div>
-                      <p class="mt-3 text-sm text-center">
-                        Don't have an account?
-                        <a href="/register" class="login-link register-link text-bold"><br />Register</a>
-                      </p>
-                    </form>
-                  </div>
-                </div>
-
-                <!-- signup form -->
-                <div class="card z-index-0 fadeIn3 fadeInBottom" id="signup-form" hidden>    
-                  <h4 class="font-weight-bolder text-center mt-3">Sign Up</h4>
-                  <div class="card-body">
-                    <form method="POST" action="/register" role="form" class="text-start">
-                      @csrf {{-- Cross-site Request Forgery --}}
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="firstname">Firstname</label>
-                        <input name="firstname" id="firstname" type="text" class="form-control" autocomplete="off" required value={{old('firstname')}}>
-                      </div>
-                      @error('firstname')
-                        <p class="text-danger mt-1">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="middlename">Middlename</label>
-                        <input name="middlename" id="middlename" type="text" class="form-control" autocomplete="off" required value={{old('middlename')}}>
-                      </div>
-                      @error('middlename')
-                        <p class="text-danger mt-1">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="input-group input-group-outline mb-2" >
-                        <label class="form-label" for="lastname">Lastname</label>
-                        <input name="lastname" id="lastname" type="text" class="form-control" autocomplete="off" required value={{old('lastname')}}>
-                      </div>
-                      @error('lastname')
-                        <p class="text-danger mt-1">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="input-group input-group-outline mb-2 date" id="datepicker">
-                        <label class="form-label" for="birthdate">Birthdate</label>
-                        <input name="birthdate" id="birthdate" type="text" class="form-control" autocomplete="off" value={{old('birthdate')}}>
-                        <span class="input-group-append">
-                          <span class="input-group-text mx-2">
-                            <i class="fa fa-calendar"></i>
-                          </span>
-                        </span>
-                      </div>
-                      @error('birthdate')
-                        <p class="text-danger mt-1">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="mobile_number">Mobilenumber</label>
-                        <input name="mobile_number" id="mobile_number" type="text" class="form-control" autocomplete="off" value={{old('mobile_number')}}>
-                      </div>
-                      @error('mobile_number')
-                        <p class="text-danger mt-1">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="email">Email</label>
-                        <input name="email" id="email1" type="email" class="form-control" autocomplete="off" required value={{old('email')}}>
-                      </div>
-                      @error('#email1')
-                        <p class="text-danger mt-1">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="password">Password</label>
-                        <input name="password" id="password1" type="Password" class="form-control" required >
-                      </div>
-                      @error('#password1')
-                        <p class="text-danger mt-1">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="password_confirmation">Confirm Password</label>
-                        <input name="password_confirmation" id="password_confirmation" type="Password" class="form-control" autocomplete="off" required>
-                      </div>
-                      @error('password_confirmation')
-                        <p class="text-danger mt-1">
-                          <small> {{$message}} </small>
-                        </p>
-                      @enderror
-                      <div class="text-center">
-                        <button type="submit" class="btn signup-btn w-100 my-2 mb-1">Next</button>
-                      </div>
-                      <p class="mt-3 text-sm text-center mb-0">
-                        Already have an account?
-                        <a href="#" class="login-link register-link text-bold mb-0" onclick="showLogInForm();"><br />Log in</a>
-                      </p>
-                    </form>
-                  </div>
-                </div>
-
-                <!-- set up address form -->
-
-                <div class="card z-index-0 fadeIn3 fadeInBottom " id="setupadd-form" hidden>    
-                  <h4 class="font-weight-bolder text-center mt-4">Setup Address</h4>
-                  <div class="card-body">
-                    <form role="form" class="text-start">
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="street">Street</label>
-                        <input type="text" class="form-control" name="street" id="street">
-                      </div>
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="barangay">Barangay</label>
-                        <input type="text" class="form-control" name="barangay" id="barangay">
-                      </div>
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="municipality">Municipality</label>
-                        <input type="text" class="form-control" name="municipality" id="municipality">
-                      </div>
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="province">Province</label>
-                        <input type="text" class="form-control" name="province" id="province">
-                      </div>
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="country">Country</label>
-                        <input type="text" class="form-control" name="country" id="country">
-                      </div>
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label" for="zip_code">Zip Code</label>
-                        <input type="text" class="form-control" name="zip_code" id="zip_code">
-                      </div>
-                      <div class="text-center">
-                        <button type="submit" class="btn setupadd-btn w-100 my-4 mb-1" onclick="showOtpVerifyForm();">Next</button>
-                        <button type="button" class="btn cancel-btn w-100 my-1 mb-1" onclick="showRegForm();">Back</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-
-                <!-- verify OTP Form -->
-                <div class="card z-index-0 fadeIn3 fadeInBottom mt-5 m-2" id="otpverify-form" hidden>    
-                  <h4 class="font-weight-bolder text-center mt-4">We need to verify<br /> if it's you!</h4>
-                  <div class="card-body">
-                    <form role="form" class="text-start">
-                      <p class="text-center mt-0" style="font-size: 14px;">A 6-digit OTP has been sent to your mobile number {{}}.</p>
-                      <div class="input-group input-group-outline mb-2">
-                        <label class="form-label">Enter OTP Code</label>
-                        <input type="text" class="form-control">
-                      </div>
-                      <div class="text-center">
-                        <button type="" class="btn verify-btn w-100 my-3 mb-1" onclick="verify();">Verify</button>
-                        <button type="button" class="btn cancel-btn w-100 my-1 mb-1" onclick="showLogInForm();">Cancel</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-9 text-center mt-1 title-container">
-                  <H4 class="lsfp">Louella's</H4>
-                  <H1 class="text-bold lsfp">Sweet Food Products</H1>
-                  <p class="lsfp-tagline">Every Bite is Delight!</p>
-                  <p class="lsfp-desc">At Louella's Sweet Food Products, we take pride in sourcing only the highest quality ingredients for our chocolate, ensuring that every piece is a true indulgence for your taste buds.</p>
-                  <div class="explore-btn-container mt-3 col-md-9">
-                    <a href="#product"><button class="btn explore-btn mt-5"> Explore Now <span><i class="fa-solid fa-arrow-right"></i></span></button></a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </Section>
+  </section>
 
   {{-- Product Section --}}
 
-  <section id="product" style="height: 100vh; width: 100vw;">
-    <div class="container-fluid d-flex flex-row-reverse search-container" >
-      <div class="row">
-        <div class="col-md-3">
-          <div class="">
-            <form class="form-inline search-container">
-              <div class="input-group  search-group">
-                <input class="form-control search-input mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-success search-btn my-2 my-sm-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+  <section id="product">
+    <div class="container pt-5">
+      <div class="row pt-5">
+        <div class="col-sm-12 ">
+            <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif;">Product Categories</h4>
+          <swiper-container class="mySwiper" init="false" space-between="30" slides-per-view="5" style="padding-bottom: 80px;" id="swiper1">
+            
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
               </div>
-            </form>
-          </div>
-        </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="slide-container text-center col-sm-12 ">
+              <div class="cat-card">          
+                <img src="/img/category/category.jpg" class="card-title" alt="...">
+              </div>
+              <div class="product-cat w-100">
+                <h5 class="text-center mx-0 px-0">Product Category</h5>
+              </div>
+            </swiper-slide>
+
+        </swiper-container>
       </div>
     </div>
-    <div>
-      <div class="text-center container py-5">
-        <h4 class="mt-4 mb-5"><strong>Bestsellers</strong></h4>
-    
-        <div class="row">
-          <div class="col-lg-4 col-md-12 mb-4">
-            <div class="card">
-              <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                data-mdb-ripple-color="light">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/belt.webp"
-                  class="w-100" />
-                <a href="#!">
-                  <div class="mask">
-                    <div class="d-flex justify-content-start align-items-end h-100">
-                      <h5><span class="badge bg-primary ms-2">New</span></h5>
-                    </div>
-                  </div>
-                  <div class="hover-overlay">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                  </div>
-                </a>
+    </div>
+  </section>
+
+  {{-- product section --}}
+  <section>
+    <div class="container pt-5">
+      <div class="row pt-5">
+        <div class="col-sm-12 ">
+            <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif;">Top Products</h4>
+          <swiper-container class="mySwiper" space-between="30" slides-per-view="5" style="padding-bottom: 80px;" init="false" id="swiper2">
+            
+          <swiper-slide class="slide-container text-center col-sm-12 ">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
               </div>
-              <div class="card-body">
-                <a href="" class="text-reset">
-                  <h5 class="card-title mb-3">Product name</h5>
-                </a>
-                <a href="" class="text-reset">
-                  <p>Category</p>
-                </a>
-                <h6 class="mb-3">$61.99</h6>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
               </div>
-            </div>
-          </div>
-    
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                data-mdb-ripple-color="light">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(4).webp"
-                  class="w-100" />
-                <a href="#!">
-                  <div class="mask">
-                    <div class="d-flex justify-content-start align-items-end h-100">
-                      <h5><span class="badge bg-success ms-2">Eco</span></h5>
-                    </div>
-                  </div>
-                  <div class="hover-overlay">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                  </div>
-                </a>
+              <div class="text-center mx-2 product-price">
+                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
               </div>
-              <div class="card-body">
-                <a href="" class="text-reset">
-                  <h5 class="card-title mb-3">Product name</h5>
-                </a>
-                <a href="" class="text-reset">
-                  <p>Category</p>
-                </a>
-                <h6 class="mb-3">$61.99</h6>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2 mx-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
               </div>
             </div>
-          </div>
-    
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/shoes%20(3).webp"
-                  class="w-100" />
-                <a href="#!">
-                  <div class="mask">
-                    <div class="d-flex justify-content-start align-items-end h-100">
-                      <h5><span class="badge bg-danger ms-2">-10%</span></h5>
-                    </div>
-                  </div>
-                  <div class="hover-overlay">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                  </div>
-                </a>
+          </swiper-slide>
+
+          <swiper-slide class="slide-container text-center col-sm-12 ">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
               </div>
-              <div class="card-body">
-                <a href="" class="text-reset">
-                  <h5 class="card-title mb-3">Product name</h5>
-                </a>
-                <a href="" class="text-reset">
-                  <p>Category</p>
-                </a>
-                <h6 class="mb-3">
-                  <s>$61.99</s><strong class="ms-2 text-danger">$50.99</strong>
-                </h6>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
               </div>
-            </div>
-          </div>
-        </div>
-    
-        <div class="row">
-          <div class="col-lg-4 col-md-12 mb-4">
-            <div class="card">
-              <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(23).webp"
-                  class="w-100" />
-                <a href="#!">
-                  <div class="mask">
-                    <div class="d-flex justify-content-start align-items-end h-100">
-                      <h5>
-                        <span class="badge bg-success ms-2">Eco</span><span
-                          class="badge bg-danger ms-2">-10%</span>
-                      </h5>
-                    </div>
-                  </div>
-                  <div class="hover-overlay">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                  </div>
-                </a>
+              <div class="text-center mx-2 product-price">
+                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
               </div>
-              <div class="card-body">
-                <a href="" class="text-reset">
-                  <h5 class="card-title mb-3">Product name</h5>
-                </a>
-                <a href="" class="text-reset">
-                  <p>Category</p>
-                </a>
-                <h6 class="mb-3">
-                  <s>$61.99</s><strong class="ms-2 text-danger">$50.99</strong>
-                </h6>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2 mx-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
               </div>
             </div>
-          </div>
-    
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                data-mdb-ripple-color="light">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(17).webp"
-                  class="w-100" />
-                <a href="#!">
-                  <div class="mask">
-                    <div class="d-flex justify-content-start align-items-end h-100"></div>
-                  </div>
-                  <div class="hover-overlay">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                  </div>
-                </a>
+          </swiper-slide>
+
+          <swiper-slide class="slide-container text-center col-sm-12 ">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
               </div>
-              <div class="card-body">
-                <a href="" class="text-reset">
-                  <h5 class="card-title mb-3">Product name</h5>
-                </a>
-                <a href="" class="text-reset">
-                  <p>Category</p>
-                </a>
-                <h6 class="mb-3">$61.99</h6>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
               </div>
-            </div>
-          </div>
-    
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-              <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(30).webp"
-                  class="w-100" />
-                <a href="#!">
-                  <div class="mask">
-                    <div class="d-flex justify-content-start align-items-end h-100">
-                      <h5>
-                        <span class="badge bg-primary ms-2">New</span><span
-                          class="badge bg-success ms-2">Eco</span><span class="badge bg-danger ms-2">-10%</span>
-                      </h5>
-                    </div>
-                  </div>
-                  <div class="hover-overlay">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                  </div>
-                </a>
+              <div class="text-center mx-2 product-price">
+                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
               </div>
-              <div class="card-body">
-                <a href="" class="text-reset">
-                  <h5 class="card-title mb-3">Product name</h5>
-                </a>
-                <a href="" class="text-reset">
-                  <p>Category</p>
-                </a>
-                <h6 class="mb-3">
-                  <s>$61.99</s><strong class="ms-2 text-danger">$50.99</strong>
-                </h6>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2 mx-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
               </div>
             </div>
-          </div>
+          </swiper-slide>
+
+          <swiper-slide class="slide-container text-center col-sm-12 ">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
+              </div>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
+              </div>
+              <div class="text-center mx-2 product-price">
+                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              </div>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2 mx-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
+              </div>
+            </div>
+          </swiper-slide>
+
+          <swiper-slide class="slide-container text-center col-sm-12 ">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
+              </div>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
+              </div>
+              <div class="text-center mx-2 product-price">
+                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              </div>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2 mx-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
+              </div>
+            </div>
+          </swiper-slide>
+
+          <swiper-slide class="slide-container text-center col-sm-12 ">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
+              </div>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
+              </div>
+              <div class="text-center mx-2 product-price">
+                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              </div>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2 mx-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
+              </div>
+            </div>
+          </swiper-slide>
+
+          <swiper-slide class="slide-container text-center col-sm-12 ">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
+              </div>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
+              </div>
+              <div class="text-center mx-2 product-price">
+                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              </div>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2 mx-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
+              </div>
+            </div>
+          </swiper-slide>
+
+          
+          
+        </swiper-container>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <fieldset class="about-container">
+            <legend class="mx-3">
+              <div type="" class="bg-warning about-title">
+                About
+              </div>
+            </legend>
+            <div class="about-content">
+              <p class="about-text">
+                Welcome to Louella's Sweet Food Products, where we bring you the finest and most delectable chocolate made from original cacao beans, along with a variety of other products that celebrate the rich heritage of our local communities.
+              </p>
+              <p class="about-text">
+                At Louella's, we take pride in sourcing only the highest quality ingredients for our chocolate, ensuring that every piece is a true indulgence for your taste buds. From the rich and creamy milk chocolate to the deep and complex flavors of our dark chocolate, every bite is a journey to the heart of the cacao plantations. But chocolate is just the beginning of what we offer. We also showcase the unique beauty of our local culture with our collection of native bags, wallets, and pouches made from traditional materials. Our shirts, keychains, and souvenirs are also designed to capture the essence of our heritage, making them perfect mementos for your travels or gifts for your loved ones.
+              </p>
+              <p class="about-text"> 
+                And, if you're looking for something healthy, we also offer turmeric powders and tea that harness the power of this wonder spice, known for its anti-inflammatory and antioxidant properties.
+              </p>
+              <p class="about-text">
+                Our mission at Louella's Sweet Food Products is to not only bring you the finest treats and products but also to support our local communities by sourcing our ingredients and materials locally. We are committed to promoting sustainability and ethical practices in our business, while also providing you with the best possible customer service.
+              </p>
+              <p class="about-text">
+                Thank you for choosing Louella's Sweet Food Products. We hope you enjoy our products as much as we enjoy creating them.
+              </p>
+            </div>
+            <div>
+              <h3>History</h3>
+              <p class="about-text">"Louella's tablea started in May 2019 when my wife tried to make tablea as a "Pasalubong" to her former co-employee in Manila. Inspired by the good feedback, she tried to make some and sold it to her co-teachers and friends with an initial capital of 500 pesos. As it was good, we expanded marketing to other people.
+              </p>
+              <p class="about-text">
+                In 2020, we decided to register the business with DTI (Department of trade and Industry) and aimed to further increase our sales and improve our production.
+              </p>
+              <p class="about-text">
+                Today, we take pride in producing tablea out of fermented cacao beans".
+              </p>
+              <div class="owner-container my-5">
+                <h6 class="owner-name">Louie G. Grantos</h6>
+                <p class="position">Louella's Sweet Food Product Owner</p>
+              </div>
+            </div>
+          </fieldset>
         </div>
       </div>
     </div>
   </section>
 
-  {{-- about --}}
-  <section id="about" style="height: 100vh; width: 100vw;">
-    <div>
-        <h1>hello, page 3 test</h1>
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <fieldset class="contact-container">
+            <legend>
+              <div class="bg-warning contact-title">
+                Contact Us
+              </div>
+            </legend>
+           <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="text-center mb-5">
+                  <h3 class="contact-sub-title">Louela's Sweet Food Products</h3>
+                  <h5>Contact Information</h5>
+                </div>
+                <div class="contact d-flex justify-content-start align-items-center mb-4">
+                  <i class="fa-brands fa-facebook"></i><a href="#" class="mx-4 contact">www.facebook.com/Louella'sSweetFoodProducts</a>
+                </div>
+                <div class="contact d-flex justify-content-start align-items-center mb-4 ">
+                  <i class="fa-solid fa-envelope"></i><a href="#" class="mx-4 contact">LouellasSweetFoodProducts@gmail.com</a>
+                </div>
+                <div class="contact d-flex justify-content-start align-items-center mb-4">
+                  <i class="fa-solid fa-location-dot"></i></i><a href="#" class="mx-4 contact"> Zone 1 Bulan, Sorsogon, Philippines, 4706</a>
+                </div>
+                <div class="contact d-flex justify-content-start align-items-center ">
+                  <i class="fa-solid fa-phone"></i><a href="#" class="mx-4 contact">+639103157621</a>
+                </div>
+    
+              </div>
+  
+              <div class="col-md-6">
+                <form action="">
+                  @csrf
+                  <div class="input-container mx-5 text-center mt-3">
+                    <div class="input-group input-group-outline mb-2 mt-5">
+                      <input placeholder="Name" name="name" id="name" type="text" class="form-control email-input-form" value={{old('name')}}>
+                    </div>
+                    <div class="input-group input-group-outline mb-2">
+                      <input placeholder="Email" name="email" id="email" type="Email" class="form-control email-input-form" value={{old('email')}}>
+                    </div>
+                    <div class="input-group input-group-outline mb-2">
+                      <input placeholder="Subject" name="subject" id="subject" type="text" class="form-control email-input-form" value={{old('subject')}}>
+                    </div>
+                    <div class="input-group input-group-outline mb-2">
+                      <textarea placeholder="Your message here" name="message" id="message" type="text" class="form-control email-input-form email-textarea" value={{old('message')}}></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end mt-2">
+                      <button class="btn btn-success">Send Message</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+           </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="d-flex justify-content-between align-content-middle col-md-12 mt-4">
+          <div class="copyright align-content-center">
+            <a class="footer-text"><span class="copy">&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
+          </div>
+          <div class="terms">
+            <a href="">Terms & Conditions</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </div>
+  
 
-
+  
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
   <script type="text/javascript">
+    
+  </script>
+  <script type="text/javascript">
+    $('#spanYear').html(new Date().getFullYear());
     function showRegForm(){
       console.log('clicked');
       document.getElementById('login-form').hidden = true;
@@ -526,8 +631,51 @@
     $('#birthdate').datepicker({
        endDate: '-16y'
       });
+
+
+      // custom swiper
+
+      const swiperEl1 = document.getElementById('swiper1');
+      const swiperEl2 = document.getElementById('swiper2');
+
+    const params = {
+      injectStyles: [`
+      .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        text-align: center;
+        line-height: 20px;
+        font-size: 12px;
+        color: #000;
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .swiper-pagination-bullet-active {
+        color: #fff;
+        background: #178c3a;
+        width: 12px;
+        height: 12px;
+      }
+
+      .swiper-pagination{
+        margin-top: 100px;
+      }
+      `],
+      pagination: {
+        clickable: true,
+      },
+    }
+
+    Object.assign(swiperEl1, params);
+    Object.assign(swiperEl2, params);
+
+    swiperEl1.initialize();
+    swiperEl2.initialize();
+
   </script>
- 
+  
+  
   <!--   Core JS Files   -->
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>

@@ -49,15 +49,15 @@ class UserController extends Controller
 
     public function resendOtp(){
         $verificationCode = $this->generateOtp();
-        $message = "Your OTP Code is - ".$verificationCode->otp." This code is valid only for 10 minutes.";
-
-        return redirect()->route('otp.verify')->with('success',  $message); 
+        $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
+        // $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
+        return redirect()->route('otp.verify')->with('success',  $message);
     }
 
     public function add_user(Request $request){
         $validated = $request->validate([
             "firstname" => ['required'],
-            "middlename" => ['required'],
+            "middlename" => [' '],
             "lastname" => ['required'],
             "birthdate" => ['required'],
             "address" => ['required'],
@@ -69,14 +69,15 @@ class UserController extends Controller
 
         $validated['password'] = Hash::make($validated['password']); //pwede bycrypt instead hash:make
         
+       
 
         $user = User::create($validated);
-
 
         auth()->login($user);
 
         $verificationCode = $this->generateOtp();
-        $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+        $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
+        // $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
         return redirect()->route('otp.verify')->with('success',  $message); 
     }
 
@@ -98,7 +99,7 @@ class UserController extends Controller
 
             $verificationCode = $this->generateOtp();
             $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-            $this->sendSMS(auth()->user()->mobile_number, $message);
+            // $this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
             return redirect()->route('otp.verify')->with('success',  $message); 
 
         }
