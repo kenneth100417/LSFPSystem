@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,9 +41,8 @@
 
 <body class="g-sidenav-show  bg-gray-100">
     
-    
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-white" id="sidenav-main">
- <div id="preloader"></div>   
+    <div id="preloader"></div>  
     <div class="sidenav-header d-flex justify-content-start align-items-center mx-3">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
 
@@ -64,7 +62,7 @@
         <ul class="navbar-nav">
         
             <li class="nav-item ">
-                <a class="nav-link text-white tab active" href="/user_dashboard">
+                <a class="nav-link text-white tab " href="/user_dashboard">
                     
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-house w-100"></i>
@@ -75,7 +73,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white tab " href="/user_orders">
+                <a class="nav-link text-white tab active" href="/user_orders">
                     
                     <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-cart-shopping w-100"></i>
@@ -171,20 +169,12 @@
         </div>
     </nav>
 
-    <section class="title mx-5">
-        <div class="container mb-4">
-            <div class="row">
-                <div class="col md-12">
-                    <div class="text-center lsfp-container col-md-12 mt-5">
-                        <H4 class="lsfp">Louella's</H4>
-                        <H1 class="text-bold lsfp">Sweet Food Products</H1>
-                        <p class="lsfp-tagline">Every Bite is Delight!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section>
+    
+</section>
 
+   
+    
 </main>
     
 
@@ -204,7 +194,7 @@
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
   }
 
-//   alerts
+  //   alerts
 
 function logout(){
     Swal.fire({
@@ -221,6 +211,7 @@ function logout(){
     }
     })
 }
+
 
 // preloader
 var loader = document.getElementById('preloader');

@@ -16,7 +16,7 @@
   <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/71aac4163c.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
@@ -583,7 +583,7 @@
       <div class="row">
         <div class="d-flex justify-content-between align-content-middle col-md-12 mt-4">
           <div class="copyright align-content-center">
-            <a class="footer-text"><span class="copy">&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
+            <a class="footer-text"><span class="copy mx-1" >&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
           </div>
           <div class="terms">
             <a href="">Terms & Conditions</a>

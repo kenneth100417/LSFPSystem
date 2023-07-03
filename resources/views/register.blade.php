@@ -659,7 +659,7 @@
                   <i class="fa-solid fa-envelope"></i><a href="#" class="mx-4 contact">LouellasSweetFoodProducts@gmail.com</a>
                 </div>
                 <div class="contact d-flex justify-content-start align-items-center mb-4">
-                  <i class="fa-solid fa-location-dot"></i></i><a href="#" class="mx-4 contact"> Zone 1 Bulan, Sorsogon, Philippines, 4706</a>
+                  <i class="fa-solid fa-location-dot"></i><a href="#" class="mx-4 contact"> Zone 1 Bulan, Sorsogon, Philippines, 4706</a>
                 </div>
                 <div class="contact d-flex justify-content-start align-items-center ">
                   <i class="fa-solid fa-phone"></i><a href="#" class="mx-4 contact">+639103157621</a>
@@ -699,7 +699,7 @@
       <div class="row">
         <div class="d-flex justify-content-between align-content-middle col-md-12 mt-4">
           <div class="copyright align-content-center">
-            <a class="footer-text"><span class="copy">&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
+            <a class="footer-text"><span class="copy mx-1">&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
           </div>
           <div class="terms">
             <a href="">Terms & Conditions</a>
@@ -715,6 +715,7 @@
     
   </script>
   <script type="text/javascript">
+    $('#spanYear').html(new Date().getFullYear());
     $('#reg_form').change(function(){
         let add = document.getElementById('address');
         let street = document.getElementById('street-text').value;

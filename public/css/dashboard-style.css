@@ -1,0 +1,129 @@
+body{
+    background: url(/img/dashboard-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+#preloader{
+    background: #ebebeb url(/img/preloader/preloader.gif) no-repeat center center;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 1000;
+   
+}
+.sidenav-header{
+    text-align: center;
+}
+.profile-img-container{
+    border: 2px solid #0ca53a;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    padding: 0;
+}
+.profile-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+}
+h6.user-name{
+    margin-top: 2vh;
+    margin-bottom: -10px;
+    color: rgb(20, 20, 20) !important;
+    font-size: 1.5vw !important;
+}
+p.user-email{
+    font-size: 12px !important;
+}
+.nav-horizontal{
+    border: 1px solid #2EB757;
+}
+.tab{
+    box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75);
+}
+a.nav-link{
+    color: rgb(20, 20, 20) !important;
+}
+span.nav-link-text{
+    font-size: 15px !important;
+}
+.icon{
+    width: 2vw !important;
+}
+.fa-house, .fa-cart-shopping, .fa-user, .fa-bell, .fa-power-off{
+    font-size: 1.4vw !important;
+    color: #0ca53a !important;
+}
+.active{
+    background-color: #2EB757 !important;
+    box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75);
+    color: white !important;
+}
+.nav-logout{
+    border-radius: 15px !important;
+}
+.user-dash-logo{
+    width: 10vw;
+    margin-left: -3vw !important;
+}
+.welcome-message{
+    color: black !important;
+    font-size: 2vw !important;
+    font-weight: 350 !important;
+    margin-bottom: -10px;
+}
+.search-input{
+    border: 1px solid #0ca53a !important;
+    border-radius: 15px !important;
+    padding: 5px !important;
+}
+.nav-cart{
+    color: #d46d0b !important;
+}
+.nav-bell{
+    color: #0c68a5 !important;
+}
+.nav-power{
+    color: #491815 !important;
+}
+.logout-btn{
+    border: none !important;
+    background-color: #ebebeb !important;
+}
+nav.navbar-main{
+    border-bottom: 1px solid gray;
+    border-radius: 0;
+}
+
+@font-face {
+    font-family: Lucida;
+    src: url('/assets/fonts/LucidaHandwritingStdBold.TTF')  format('truetype');
+}
+
+.lsfp{
+    font-family: Lucida;
+    color: #000000;
+    font-size: 2.5vw !important;
+}
+h1.lsfp{
+    font-weight: bolder !important;
+    font-size: 5vw !important;
+    color: #491815;
+}
+p.lsfp-tagline{
+    font-family: Lucida;
+    color: #b60909;
+    font-size: 2vw;
+}
+section.title{
+    border-bottom: 2px solid grey;
+    border-radius: 0;
+}
+/* sweetatert custom css */
+

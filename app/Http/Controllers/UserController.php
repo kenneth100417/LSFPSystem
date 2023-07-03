@@ -29,6 +29,12 @@ class UserController extends Controller
     public function user_dashboard(){
         return view('pages.user_dashboard');
     }
+    public function user_orders(){
+        return view('pages.user_orders');
+    }
+    public function user_profile(){
+        return view('pages.user_profile');
+    }
 
     public function admin_dashboard(){
         return view('otp_verification');
@@ -149,9 +155,9 @@ class UserController extends Controller
 
         if(auth()->user()->access == "0"){
             $name = auth()->user()->firstname;
-            return redirect('/user_dashboard')->with('message', 'Welcome, '.$name.'!');
+            return redirect('/user_dashboard')->with('message', 'Thanks for choosing us , '.$name.'! ');
         }else{
-            return redirect('/admin_dashboard')->with('message', 'Welcome!');
+            return redirect('/admin_dashboard')->with('message', 'Welcome Admin!');
         }
 
         $verificationCode->update([

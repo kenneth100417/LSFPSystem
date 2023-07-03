@@ -24,10 +24,14 @@ Route::post('/login', [UserController::class, 'login']);
 
 
 Route::get('/user_dashboard', [UserController::class, 'user_dashboard'])->middleware('auth')->name('home');
+Route::get('/user_orders', [UserController::class, 'user_orders'])->middleware('auth');
+Route::get('//user_profile', [UserController::class, 'user_profile'])->middleware('auth');
 Route::get('/admin_dashboard', [UserController::class, 'admin_dashboard'])->middleware('auth')->name('home');
 Route::get('/otp/verify', [UserController::class, 'otp_verify'])->name('otp.verify');
 Route::post('/otp/verify_code', [UserController::class, 'verifyOtp'])->name('otp.verify_code');
 Route::get('/otp/resend_code', [UserController::class, 'resendOtp'])->name('otp.resend');
+
+
 
 
 

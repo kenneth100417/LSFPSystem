@@ -4,6 +4,7 @@
 }
 nav{
     position: fixed;
+    padding-top: 2vh !important;
 }
 body{
     overflow: hidden;
@@ -217,12 +218,15 @@ button.explore-btn:hover{
     color: #000000;
 }
 .datepicker{
-    border: 2px solid #d46d0b !important;
+    border: 2px solid #0ca53a !important;
+    border-radius: 15px !important;
 }
 .datepicker thead, tbody{
     color: #491815 !important;
 }
-
+.datepicker thead{
+    border-bottom: 1px solid #d46d0b;
+}
  /* ///////////////////////  CATEGORY SECTION    /////////////////////// */
  .swiper-title{
     color: #491815;
@@ -354,10 +358,10 @@ p.about-text{
     color: #ee9644;
 }
 .fa-phone{
-    color: #0fcf49;
+    color: #0ca53a;
 }
 .fa-phone:hover{
-    color: #14ee55;
+    color: #12d14b;
 }
 .fa-location-dot{
     color: #b60909;

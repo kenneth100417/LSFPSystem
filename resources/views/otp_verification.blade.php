@@ -588,7 +588,7 @@
     <div class="row">
       <div class="d-flex justify-content-between align-content-middle col-md-12 mt-4">
         <div class="copyright align-content-center">
-          <a class="footer-text"><span class="copy">&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
+          <a class="footer-text"><span class="copy mx-1">&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
         </div>
         <div class="terms">
           <a href="">Terms & Conditions</a>
@@ -604,6 +604,7 @@
     
   </script>
   <script type="text/javascript">
+    $('#spanYear').html(new Date().getFullYear());
     function showRegForm(){
         document.getElementById('signup-form').removeAttribute('hidden');
         document.getElementById('setupadd-form').hidden = true;
