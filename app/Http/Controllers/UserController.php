@@ -9,8 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use App\Models\VerificationCode;
 use Illuminate\Support\Facades\Auth;
-
-
+use PhpParser\Node\NullableType;
 
 class UserController extends Controller
 {
@@ -30,12 +29,21 @@ class UserController extends Controller
         return view('pages.user_dashboard');
     }
     public function user_orders(){
-        return view('pages.user_orders');
+        return view('pages.user-order-pages.pending_orders');
     }
+    public function user_toreceive(){
+        return view('pages.user-order-pages.toreceive_orders');
+    }
+    public function user_completed(){
+        return view('pages.user-order-pages.completed_orders');
+    }
+    public function user_cancelled(){
+        return view('pages.user-order-pages.cancelled_orders');
+    }
+
     public function user_profile(){
         return view('pages.user_profile');
     }
-
     public function admin_dashboard(){
         return view('otp_verification');
     }
@@ -63,7 +71,6 @@ class UserController extends Controller
     public function add_user(Request $request){
         $validated = $request->validate([
             "firstname" => ['required'],
-            "middlename" => [' '],
             "lastname" => ['required'],
             "birthdate" => ['required'],
             "address" => ['required'],

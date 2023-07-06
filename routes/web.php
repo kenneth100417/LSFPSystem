@@ -31,8 +31,9 @@ Route::get('/otp/verify', [UserController::class, 'otp_verify'])->name('otp.veri
 Route::post('/otp/verify_code', [UserController::class, 'verifyOtp'])->name('otp.verify_code');
 Route::get('/otp/resend_code', [UserController::class, 'resendOtp'])->name('otp.resend');
 
-
-
+Route::get('/user_toreceive', [UserController::class, 'user_toreceive'])->middleware('auth');
+Route::get('/user_completed', [UserController::class, 'user_completed'])->middleware('auth');
+Route::get('/user_cancelled', [UserController::class, 'user_cancelled'])->middleware('auth');
 
 
 

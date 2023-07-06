@@ -64,6 +64,7 @@
     </div>
   </nav>
 </header>
+<div id="preloader"></div> 
 <div class="page-container">
   <Section id="home">
     <div class="container search-container pt-4" >
@@ -794,6 +795,12 @@
     swiperEl1.initialize();
     swiperEl2.initialize();
 
+    // preloader
+var loader = document.getElementById('preloader');
+
+window.addEventListener("load", function(){
+    loader.style.display = "none";
+});
   </script>
   
   

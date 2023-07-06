@@ -170,7 +170,85 @@
     </nav>   
 
    <section>
-    
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card my-4 mt-5">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
+                          <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
+                            <div class="text-end position-absolute col-md-12">
+                                <a href="">
+                                    <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
+                                </a>
+                            </div>
+                            <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
+                                <div class="profile-img-container-lg w-15 h-auto">
+                                    <img src="/img/Profile_pic/Profile_temp.png" class="profile-img" alt="profile">
+                                </div>
+                                <div class="profile-text-container-lg ps-3">
+                                    <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
+                                    <p class="text-email text-success">{{auth()->user()->email;}}</p>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="card-body px-0 pb-2 mt-5 mx-5">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <h5 class="mb-0">Profile Information</h5>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="firsname">Firstname</label>
+                                        <input class="form-control profile-input-form" type="text" value="{{auth()->user()->firstname;}}" disabled>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="firsname">Middlename</label>
+                                        <input class="form-control profile-input-form" type="text" value="{{auth()->user()->middlename;}}" disabled>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="firsname">Lastname</label>
+                                        <input class="form-control profile-input-form" type="text" value="{{auth()->user()->lastname;}}" disabled>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="firsname">Birthdate</label>
+                                        <input class="form-control profile-input-form" type="text" value="{{auth()->user()->birthdate;}}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mt-5">
+                                        <h5 class="mb-0">Address</h5>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="firsname">Home Address</label>
+                                        <input class="form-control profile-input-form" type="text" value="{{auth()->user()->address;}}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-5">
+                                    <div class="col-md-12 mt-5">
+                                        <h5 class="mb-0">Account Information</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="firsname">Email</label>
+                                        <input class="form-control profile-input-form" type="email" value="{{auth()->user()->email;}}" disabled>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="firsname">Mobile Number</label>
+                                        <input class="form-control profile-input-form" type="text" value="{{auth()->user()->mobile_number;}}" disabled>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="firsname">Password</label>
+                                        <input class="form-control profile-input-form" type="password" value="********" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
    </section>
     
 </main>
@@ -202,7 +280,7 @@ function logout(){
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Log out'
+    confirmButtonText: 'Log Out'
     }).then((result) => {
     if (result.isConfirmed) {
        document.getElementById('logout').submit();
