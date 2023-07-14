@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -125,6 +126,14 @@ input.search-input:focus{
     font-size: 1.3vw;
 }
 
+/* Alert message */
+div.alert-message{
+    bottom: 70vh;
+    right: 75vw;
+    left: 5vw;
+    top: 10vh;
+    z-index: 100 !important;
+}
 /* card */
 .card{
     width: 20vw;
@@ -310,6 +319,8 @@ fieldset.about-container{
     border-radius: 15px;
 }
 fieldset.contact-container{
+    overflow-y: scroll;
+    overflow-x: hidden;
     margin-top: 7vh;
     border: 2px solid #a09f9f;
     height: 70vh;
@@ -419,19 +430,49 @@ span.copy{
 }
 
 @media (max-width: 1366px) {
-   
+    /* HOME SECTION */
+    div.search-container{
+        padding-top: 5vh !important;
+    }
+    h4.lsfp{
+    font-size: 2.5vw !important;
+    }
+    h1.lsfp{
+    font-size: 4.9vw !important;
+    }
+    p.lsfp-tagline{
+    font-size: 2vw !important;
+    }
+    p.lsfp-desc{
+    font-size: 0.9vw !important;
+    }
+    a.explore-btn{
+    font-size: 1.0vw !important;
+    }
+    div.cacao img{
+    width: 20vw !important;
+    height: auto;
+    }
+
+    /* CONTACT US SECTION */
+    
+    H3.contact-sub-title{
+        font-size: 2vw !important;
+    }
+    div.contact-header{
+        margin-bottom: 3vh !important;
+    }
+    div.input-container{
+        margin-left: 2vw !important;
+    }
+
+    
     
 }
 
 @media (max-width: 1440px) {
-  
-    
+   
+
+
 }
 
-/* To continue
-
-    index palang ang naaayos
-    fix background, dapat responsive
-    maayos san responsiveness, from search 
-
-*/

@@ -155,8 +155,8 @@ section.title{
  }
  div.cat-card, div.product-card{
     border-radius: 15px;
-    width: 15vw;
-    height: 45vh;
+    width: 230px;
+    height: 335px !important;
     box-shadow: 1px 2px 5px #491815;
     overflow: hidden;
  }
@@ -272,4 +272,64 @@ button.swal2-cancel{
 }
 .text-name{
     font-size: 2vw !important;
+}
+
+/* ///////////// Modal Edit Profile ////////////// */
+
+.modal-update-btn, .modal-cancel-btn{
+    border-radius: 15px !important;
+}
+div.modal{
+    width: 90vw !important;
+    height: auto !important;
+    left: 15vw;
+}
+div.modal-content{
+    background: rgba(0, 0, 0, 0);
+    border: none;
+}
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0);
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+}
+
+div.profile input{
+    font-size: 1.1vw !important;
+}
+
+/* /////////////////////////////////////// */
+
+@media (max-width: 1366px) {
+   
+    /* HOME SECTION */
+
+    h4.lsfp{
+        font-size: 2vw !important;
+    }
+    h1.lsfp{
+        font-size: 4.5vw !important;
+    }
+    p.lsfp-tagline{
+        font-size: 1.8vw !important;
+    }
+
+    div.cat-card, div.product-card{
+        width: 220px;
+        height: 305px !important;
+     }
+
+
 }

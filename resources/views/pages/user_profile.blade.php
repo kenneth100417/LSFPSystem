@@ -36,6 +36,9 @@
 <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 </head>
 
@@ -177,7 +180,7 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
                           <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                             <div class="text-end position-absolute col-md-12">
-                                <a href="">
+                                <a href="" data-toggle="modal" data-target="#editProfile">
                                     <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
                                 </a>
                             </div>
@@ -193,7 +196,7 @@
                           </div>
                         </div>
                         
-                        <div class="card-body px-0 pb-2 mt-5 mx-5">
+                        <div class="card-body px-0 pb-2 mt-5 mx-5 profile">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-12 ">
@@ -241,7 +244,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="firsname">Password</label>
-                                        <input class="form-control profile-input-form" type="password" value="********" disabled>
+                                        <input class="form-control profile-input-form" type="password" value="******" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +252,248 @@
                 </div>
             </div>
         </div>
+        @if (session('success'))
+          <div class="alert alert-success" role="alert"> {{session('success')}} 
+          </div>
+          @endif
+
+          @if (session('error'))
+          <div class="alert alert-danger" role="alert"> {{session('error')}} 
+          </div>
+          @endif
    </section>
+  
+    <!-- Modal -->
+    <div class="modal fade modal-profile" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfileTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="card my-4 mt-5 modal-card">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
+                      <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
+                        <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
+                            <div class="profile-img-container-lg w-15 h-auto">
+                                <img type="image" src="/img/Profile_pic/Profile_temp.png" class="profile-img" alt="profile">
+                            </div>
+                            <div class="profile-text-container-lg ps-3">
+                                <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
+                                <p class="text-email text-success">{{auth()->user()->email;}}</p>
+                            </div>
+                            
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <form action="/user_update"  method="POST" id="profile-update-form">
+                        @method('PUT')
+                        @csrf
+                    <div class="card-body px-0 pb-2 mt-5 mx-5 text-sm profile">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <h5 class="mb-0">Profile Information</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="firstname">Firstname</label>
+                                    <input name="firstname" class="form-control profile-input-form" type="text" value="{{auth()->user()->firstname;}}" placeholder="Firstname">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="middlename">Middlename</label>
+                                    <input name="middlename" class="form-control profile-input-form" type="text" value="{{auth()->user()->middlename;}}" placeholder="Middlename">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="lastname">Lastname</label>
+                                    <input name="lastname" class="form-control profile-input-form" type="text" value="{{auth()->user()->lastname;}}" placeholder="Lastname">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="birthdate">Birthdate</label>
+                                    <input name="birthdate" class="form-control profile-input-form" type="text" value="{{auth()->user()->birthdate;}}" placeholder="Birthdate">
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="row">
+                                <div class="col-md-12 mt-5">
+                                    <h5 class="mb-0">Address</h5>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="address">Home Address</label>
+                                    <input class="form-control profile-input-form text-start" type="text" value="{{auth()->user()->address;}}" id="address" name="address" readonly="readonly">
+                                </div>
+                            </div>
+
+                            
+                            <div class="row mt-3">
+                               
+                                <div class="col-md-3">
+                                    <label for="purok">Street/Purok</label>
+                                    <input class="form-control profile-input-form add-input" type="text" value="" placeholder="Street/Purok" id="purok">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="barangay">Barangay</label>
+                                    <input class="form-control profile-input-form add-input" type="text" value="" placeholder="Barangay" id="barangay">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="municipality">Municipality</label>
+                                    <input class="form-control profile-input-form add-input" type="text" value="" placeholder="Municipality" id="municipality">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="province">Province</label>
+                                    <input class="form-control profile-input-form  add-input" type="text" value="" placeholder="Province" id="province">
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <label for="country">Country</label>
+                                    <input class="form-control profile-input-form  add-input" type="text" value="" placeholder="Country" id="country">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="zip-code">Zip Code</label>
+                                    <input class="form-control profile-input-form  add-input" type="text" value="" placeholder="Zip Code" id="zip_code">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12 mt-5">
+                                    <h5 class="mb-0">Account Information</h5>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="email">Email</label>
+                                    <input  name="email" class="form-control profile-input-form" type="email" value="{{auth()->user()->email;}}" placeholder="Email">
+                                    @error('email')
+                                        <p class="text-danger">
+                                            <small> {{$message}} </small>
+                                        </p>
+                                    @enderror
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="mobile_number">Mobile Number</label>
+                                    <input  name="mobile_number" class="form-control profile-input-form" type="text" value="{{auth()->user()->mobile_number;}}" placeholder="Mobile Number">
+                                    @error('mobile_number')
+                                        <p class="text-danger">
+                                            <small> {{$message}} </small>
+                                        </p>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="password"> Password </label>
+                                    <button class="btn btn-info btn-sm py-2" style="border-radius: 15px;" data-toggle="modal" data-target="#change_password" type="button" data-dismiss="modal">Change Password</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="modal-footer me-3">
+                        
+                            <button type="submit" class="btn btn-success modal-update-btn">Update</button>
+                            <button type="button" class="btn btn-danger modal-cancel-btn" data-dismiss="modal">Close</button>
+                        
+                    </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+        </div>
+    </div>
+        {{-- Change Password Modal --}}
+
+    <div class="modal fade" id="change_password" tabindex="-1" role="dialog" aria-labelledby="change_passwordTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="card my-4 mt-5 modal-card">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
+                      <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
+                        <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
+                            <div class="profile-img-container-lg w-15 h-auto">
+                                <img type="image" src="/img/Profile_pic/Profile_temp.png" class="profile-img" alt="profile">
+                            </div>
+                            <div class="profile-text-container-lg ps-3">
+                                <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
+                                <p class="text-email text-success">{{auth()->user()->email;}}</p>
+                            </div>
+                            
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <form action="/user_update"  method="POST" id="profile-update-form">
+                        @method('PUT')
+                        @csrf
+                    <div class="card-body px-0 pb-2 mt-5 mx-5 text-sm profile">
+                        <div class="container">
+                        
+                            <div class="row">
+                                <div class="col-md-12 mt-5">
+                                    <h5 class="mb-0">Account Information</h5>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="email">Email</label>
+                                    <input  name="email" class="form-control profile-input-form" type="email" value="{{auth()->user()->email;}}" placeholder="Email">
+                                    @error('email')
+                                        <p class="text-danger">
+                                            <small> {{$message}} </small>
+                                        </p>
+                                    @enderror
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="mobile_number">Mobile Number</label>
+                                    <input  name="mobile_number" class="form-control profile-input-form" type="text" value="{{auth()->user()->mobile_number;}}" placeholder="Mobile Number">
+                                    @error('mobile_number')
+                                        <p class="text-danger">
+                                            <small> {{$message}} </small>
+                                        </p>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="">Password</label>
+                                    <input   class="form-control profile-input-form" type="password" value="******" disabled>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 mt-3">
+                                <div class="col-md-4">
+                                    <label for="password">New Password</label>
+                                    <input  name="password" class="form-control profile-input-form" type="password" value="" placeholder="New Password">
+                                    @error('password')
+                                        <p class="text-danger">
+                                            <small> {{$message}} </small>
+                                        </p>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="password_confirmation">Confirm New Password</label>
+                                    <input  name="password_confirmation" class="form-control profile-input-form" type="password" value="" placeholder="Confirm Password">
+                                    @error('password_confirmation')
+                                        <p class="text-danger">
+                                            <small> {{$message}} </small>
+                                        </p>
+                                    @enderror
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="modal-footer me-3">
+                        
+                            <button type="submit" class="btn btn-success modal-update-btn">Update</button>
+                            <button type="button" class="btn btn-danger modal-cancel-btn" data-toggle="modal" data-target="#editProfile" data-dismiss="modal">Cancel</button>
+                        
+                    </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+        </div>
+    </div>
     
 </main>
     
@@ -295,6 +539,28 @@ var loader = document.getElementById('preloader');
 window.addEventListener("load", function(){
     loader.style.display = "none";
 });
+
+
+$('.add-input').change(function(){
+    let purok = document.getElementById('purok').value.concat(' ');
+    let barangay = document.getElementById('barangay').value.concat(', ');
+    let municipality = document.getElementById('municipality').value.concat(', ');
+    let province = document.getElementById('province').value.concat(', ');
+    let country = document.getElementById('country').value.concat(', ');
+    let zip_code = document.getElementById('zip_code').value;
+    let new_address = document.getElementById('address');
+
+    let address = purok.concat(barangay, municipality, province, country, zip_code);
+
+    new_address.value = address;
+    console.log(address);
+});
+
+// Bootstrap Modal
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+});
+
 </script>
 
 <!-- Github buttons -->

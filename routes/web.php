@@ -35,5 +35,5 @@ Route::get('/user_toreceive', [UserController::class, 'user_toreceive'])->middle
 Route::get('/user_completed', [UserController::class, 'user_completed'])->middleware('auth');
 Route::get('/user_cancelled', [UserController::class, 'user_cancelled'])->middleware('auth');
 
-
+Route::put('/user_update', [UserController::class, 'update']);
 

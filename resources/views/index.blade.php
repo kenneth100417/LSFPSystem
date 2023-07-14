@@ -1,7 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
@@ -30,8 +32,8 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   
 
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
   
-
 </head>
 
 <body>
@@ -241,7 +243,7 @@
 
   {{-- product section --}}
   <section>
-    <div class="container pt-5">
+    <div class="container pt-4">
       <div class="row pt-5">
         <div class="col-sm-12 ">
           <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif;">Top Products</h4>
@@ -530,10 +532,10 @@
                 Contact Us
               </div>
             </legend>
-           <div class="container">
+           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-6">
-                <div class="text-center mb-5">
+              <div class="col-md-6 contact-info">
+                <div class="text-center mb-5 contact-header">
                   <h3 class="contact-sub-title">Louela's Sweet Food Products</h3>
                   <h5>Contact Information</h5>
                 </div>
@@ -552,10 +554,10 @@
     
               </div>
   
-              <div class="col-md-6">
+              <div class="col-md-6 contact-form">
                 <form action="">
                   @csrf
-                  <div class="input-container mx-5 text-center mt-3">
+                  <div class="input-container mx-3 text-center mt-3">
                     <div class="input-group input-group-outline mb-2 mt-5">
                       <input placeholder="Name" name="name" id="name" type="text" class="form-control email-input-form" value={{old('name')}}>
                     </div>

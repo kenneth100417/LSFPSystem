@@ -86,12 +86,14 @@
         <div class="col-md-3 card-container">
 
           @if (session('success'))
-          <div class="alert alert-success" role="alert"> {{session('success')}} 
+          <div x-data="{show: true}" x-init="setTimeout(()=> show =   false, 5000)" class="alert alert-success alert-message fixed-bottom" role="alert">
+            {{ session('success') }}
           </div>
           @endif
 
           @if (session('error'))
-          <div class="alert alert-danger" role="alert"> {{session('error')}} 
+          <div class="alert alert-success alert-message fixed-bottom alert-dismissible fade show" role="alert">
+            {{ session('error') }}
           </div>
           @endif
 
@@ -103,7 +105,7 @@
                 
                 @csrf
 
-                <p class="text-center mt-0" style="font-size: 14px;">A 6-digit OTP has been sent to your mobile number <span id="mobile_no"></span>.</p>
+                <p class="text-center mt-0" style="font-size: 14px;">A 6-digit OTP has been sent to your mobile number <span id="mobile_no" style="font-weight: bold;">{{auth()->user()->mobile_number}}</span>.</p>
                 <div class="input-group input-group-outline mb-2">
                   <label class="form-label">Enter OTP Code</label>
                   <input type="text" class="form-control @error('otp') is-invalid @enderror" name="otp" id="otp">

@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Models\VerificationCode;
-use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\NullableType;
 
 class UserController extends Controller
 {
@@ -19,6 +17,26 @@ class UserController extends Controller
 
     public function register(){
         return view('register');
+    }
+
+    public function update(Request $request){
+        $validated = $request->validate([
+            "email" => ['required', 'email', Rule::unique('users', 'email')],
+            "password"=> ['confirmed'],
+        ]);
+
+        $validated['password'] = Hash::make($validated['password']); //pwede bycrypt instead hash:make
+        
+        $user = auth()->user();
+        $user->firstname = request('firstname');
+        $user->middlename = request('middlename');
+        $user->lastname = request('lastname');
+        $user->birthdate = request('birthdate');
+        $user->address = request('address');
+
+        $user->save();
+        
+        return back()->with('success', 'Profile Updated');
     }
 
     public function verify(){
@@ -177,7 +195,7 @@ class UserController extends Controller
     public function sendSMS($mobile_number, $message){
         $ch = curl_init();
         $parameters = array(
-            'apikey' => 'acd2a93b808ee8f8e725ceba1f84ff3b', //Your API KEY
+            'apikey' => '1ee8625dd653bdf085653d29c9b69b20', //Your API KEY acd2a93b808ee8f8e725ceba1f84ff3b - old
             'number' => $mobile_number,
             'message' => $message,
             'sendername' => "SEMAPHORE"

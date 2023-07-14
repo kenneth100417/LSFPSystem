@@ -137,7 +137,7 @@
                     </span>
                   </span>
                 </div>
-                @error('Birthdate')
+                @error('birthdate')
                   <p class="text-danger">
                     <small> {{$message}} </small>
                   </p>
@@ -730,7 +730,6 @@
         let address = street.concat(', ', barangay, ', ', city, ', ' ,province, ', ', country, ', ', zip);
 
         add.value = address;
-        console.log(add.value);
     });
     
     function showRegForm(){
