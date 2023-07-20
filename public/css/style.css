@@ -162,6 +162,10 @@ div.alert-message{
     background-color: #d46d0b;
     color: #EBEBEB;
 }
+.resend-btn:hover{
+    background-color: #b45b07;
+    color: #EBEBEB;
+}
 .cancel-btn:hover{
     background-color: #a57875;
     color: #EBEBEB;
@@ -420,6 +424,7 @@ a.contact:hover{
 span.copy{
     color: #F68010;
 }
+
 /* mobile view */
 @media (max-width: 320px) {
     

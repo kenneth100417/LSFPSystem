@@ -54,7 +54,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
 
         <button class="profile-img-container d-flex justify-content-start align-items-center">
-            <img src="/img/Profile_pic/Profile_temp.png" class=" profile-img" alt="profile">
+            <img src="{{auth()->user()->photo}}" class=" profile-img" alt="profile">
         </button>
         <div class="text-start p-0 profile-name-email align-items-center mx-1">
             <h6 class="ms-1 font-weight-bold text-dark user-name">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h6>
@@ -144,7 +144,7 @@
                         </li>
     
                         <li class="nav-item d-flex align-items-center">
-                            <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                            <a href="/user_profile" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
                             </a>
                         </li>
@@ -551,7 +551,7 @@ function logout(){
     text: "",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
+    confirmButtonColor: '#DC3545',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Log Out'
     }).then((result) => {

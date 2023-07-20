@@ -50,7 +50,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
 
         <button class="profile-img-container d-flex justify-content-start align-items-center">
-            <img src="/img/Profile_pic/Profile_temp.png" class=" profile-img" alt="profile">
+            <img src="{{url(auth()->user()->photo)}}" class=" profile-img" alt="profile">
         </button>
         <div class="text-start p-0 profile-name-email align-items-center mx-1">
             <h6 class="ms-1 font-weight-bold text-dark user-name">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h6>
@@ -131,19 +131,19 @@
                     
                     
                     <li class="nav-item d-flex align-items-center">
-                        <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                        <a href="" class="nav-link text-body font-weight-bold px-0">
                             <i class="fa fa-cart-shopping me-sm-1 mx-2 nav-cart"></i>
                         </a>
                     </li>
                     
                     <li class="nav-item d-flex align-items-center">
-                    <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                    <a href="" class="nav-link text-body font-weight-bold px-0">
                         <i class="fa fa-bell me-sm-1 mx-2 nav-bell"></i>
                     </a>
                     </li>
 
                     <li class="nav-item d-flex align-items-center">
-                        <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                        <a href="/user_profile" class="nav-link text-body font-weight-bold px-0">
                             <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
                         </a>
                     </li>
@@ -185,8 +185,8 @@
                                 </a>
                             </div>
                             <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
-                                <div class="profile-img-container-lg w-15 h-auto">
-                                    <img src="/img/Profile_pic/Profile_temp.png" class="profile-img" alt="profile">
+                                <div class="profile-img-container-lg">
+                                    <img src="{{auth()->user()->photo}}" class="profile-img" alt="profile">
                                 </div>
                                 <div class="profile-text-container-lg ps-3">
                                     <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
@@ -252,15 +252,7 @@
                 </div>
             </div>
         </div>
-        @if (session('success'))
-          <div class="alert alert-success" role="alert"> {{session('success')}} 
-          </div>
-          @endif
-
-          @if (session('error'))
-          <div class="alert alert-danger" role="alert"> {{session('error')}} 
-          </div>
-          @endif
+        
    </section>
   
     <!-- Modal -->
@@ -268,13 +260,20 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-body">
-
+                <form action="/user_update"  method="POST" id="profile-update-form" enctype="multipart/form-data">
+                    @method('PUT')
+                    @csrf
                 <div class="card my-4 mt-5 modal-card">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
                       <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                         <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
-                            <div class="profile-img-container-lg w-15 h-auto">
-                                <img type="image" src="/img/Profile_pic/Profile_temp.png" class="profile-img" alt="profile">
+                            <div class="profile-img-container-lg">
+                                <img type="image" src="{{auth()->user()->photo}}" class="profile-img" alt="profile"  style="cursor: pointer;">
+
+                                <span class="profile-upload-icon" id="profile-pic-upload"><i class="fa-solid fa-camera"></i><br /><p style="font-size: 1vw;">Change Profile</p></span>
+
+                                <input type="file" name="profile_pic" id="profile-pic" style="display: none; " accept="image/x-png,image/jpeg">
+                                
                             </div>
                             <div class="profile-text-container-lg ps-3">
                                 <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
@@ -285,9 +284,7 @@
                       </div>
                     </div>
                     
-                    <form action="/user_update"  method="POST" id="profile-update-form">
-                        @method('PUT')
-                        @csrf
+                    
                     <div class="card-body px-0 pb-2 mt-5 mx-5 text-sm profile">
                         <div class="container">
                             <div class="row">
@@ -411,7 +408,7 @@
                       <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                         <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
                             <div class="profile-img-container-lg w-15 h-auto">
-                                <img type="image" src="/img/Profile_pic/Profile_temp.png" class="profile-img" alt="profile">
+                                <img type="image" src="{{auth()->user()->photo}}" class="profile-img" alt="profile">
                             </div>
                             <div class="profile-text-container-lg ps-3">
                                 <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
@@ -422,14 +419,14 @@
                       </div>
                     </div>
                     
-                    <form action="/user_update"  method="POST" id="profile-update-form">
+                    <form action="/user_change_password"  method="POST" id="update-form">
                         @method('PUT')
                         @csrf
                     <div class="card-body px-0 pb-2 mt-5 mx-5 text-sm profile">
                         <div class="container">
                         
                             <div class="row">
-                                <div class="col-md-12 mt-5">
+                                <div class="col-md-12 mt-2">
                                     <h5 class="mb-0">Account Information</h5>
                                 </div>
                                 <div class="col-md-4">
@@ -452,8 +449,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="">Password</label>
-                                    <input   class="form-control profile-input-form" type="password" value="******" disabled>
+                                    <label for=""> Old Password</label>
+                                    <input   class="form-control profile-input-form" type="password" >
                                 </div>
                             </div>
 
@@ -483,7 +480,7 @@
     
                     <div class="modal-footer me-3">
                         
-                            <button type="submit" class="btn btn-success modal-update-btn">Update</button>
+                            <button type="submit" class="btn btn-success modal-update-btn">Submit</button>
                             <button type="button" class="btn btn-danger modal-cancel-btn" data-toggle="modal" data-target="#editProfile" data-dismiss="modal">Cancel</button>
                         
                     </div>
@@ -544,7 +541,7 @@ window.addEventListener("load", function(){
 $('.add-input').change(function(){
     let purok = document.getElementById('purok').value.concat(' ');
     let barangay = document.getElementById('barangay').value.concat(', ');
-    let municipality = document.getElementById('municipality').value.concat(', ');
+    let municipality = document.getElementById('municipality').value.concat(', ' );
     let province = document.getElementById('province').value.concat(', ');
     let country = document.getElementById('country').value.concat(', ');
     let zip_code = document.getElementById('zip_code').value;
@@ -561,7 +558,46 @@ $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
 });
 
+// profile pic apload trigger
+const profilePic = document.getElementById('profile-pic-upload');
+const profilePicInput = document.getElementById('profile-pic');
+
+profilePic.addEventListener('click', function() {
+      // Trigger the hidden file input when the image is clicked
+      profilePicInput.click();
+    });
 </script>
+
+@if (session('success'))
+      
+    <script type="text/javascript">
+
+        setTimeout(message, 1000);
+
+        function message(){
+            Swal.fire(
+                    'Updated Successfully!',
+                    'Your profile has been Updated!',
+                    'success'
+                )
+        }   
+    </script>
+@endif     
+
+@if (session('error'))
+<script type="text/javascript">
+
+    setTimeout(message, 1000);
+
+    function message(){t
+        Swal.fire(
+                'Update Failed!',
+                'An error occured!',
+                'error'
+            )
+    }   
+</script>
+@endif
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

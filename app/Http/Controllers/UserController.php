@@ -20,13 +20,6 @@ class UserController extends Controller
     }
 
     public function update(Request $request){
-        $validated = $request->validate([
-            "email" => ['required', 'email', Rule::unique('users', 'email')],
-            "password"=> ['confirmed'],
-        ]);
-
-        $validated['password'] = Hash::make($validated['password']); //pwede bycrypt instead hash:make
-        
         $user = auth()->user();
         $user->firstname = request('firstname');
         $user->middlename = request('middlename');
@@ -34,9 +27,16 @@ class UserController extends Controller
         $user->birthdate = request('birthdate');
         $user->address = request('address');
 
+        // profile pic
+        $requestData = $request->all();
+        $filename = time().$request->file('profile_pic')->getClientOriginalName();
+        $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
+        
+        $user->photo = '/storage/'.$path;
+
         $user->save();
         
-        return back()->with('success', 'Profile Updated');
+        return back()->with('success', 'Your profile has been Updated!');
     }
 
     public function verify(){
@@ -95,7 +95,8 @@ class UserController extends Controller
             "mobile_number" => ['required'],
             "email" => ['required', 'email', Rule::unique('users', 'email')],
             "password"=> 'required|confirmed|min:6',
-            "access" => ['required']
+            "access" => ['required'],
+            "photo" => ['required']
         ]);
 
         $validated['password'] = Hash::make($validated['password']); //pwede bycrypt instead hash:make
