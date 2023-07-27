@@ -23,10 +23,31 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 
-Route::get('/user_dashboard', [UserController::class, 'user_dashboard'])->middleware('auth')->name('home');
+Route::get('/user_dashboard', [UserController::class, 'user_dashboard'])->middleware('auth')->name('user');
 Route::get('/user_orders', [UserController::class, 'user_orders'])->middleware('auth');
 Route::get('//user_profile', [UserController::class, 'user_profile'])->middleware('auth');
-Route::get('/admin_dashboard', [UserController::class, 'admin_dashboard'])->middleware('auth')->name('home');
+
+// admin pages
+Route::get('/admin_dashboard', [UserController::class, 'admin_dashboard'])->middleware('auth')->name('admin');
+Route::get('/admin_product_info', [UserController::class, 'admin_product_info'])->middleware('auth')->name('admin');
+Route::get('/admin_orders', [UserController::class, 'admin_orders'])->middleware('auth')->name('admin');
+Route::get('/admin_manage_account', [UserController::class, 'admin_manage_account'])->middleware('auth')->name('admin');
+Route::get('/admin_users', [UserController::class, 'admin_users'])->middleware('auth')->name('admin');
+
+
+// admin product info pages
+Route::get('/admin_product_info_inventory', [UserController::class, 'admin_product_info_inventory'])->middleware('auth')->name('admin');
+Route::get('/admin_product_info_list', [UserController::class, 'admin_product_info_list'])->middleware('auth')->name('admin');
+Route::get('/admin_product_info_reviews', [UserController::class, 'admin_product_info_reviews'])->middleware('auth')->name('admin');
+Route::get('/admin_product_info_archived', [UserController::class, 'admin_product_info_archived'])->middleware('auth')->name('admin');
+
+// admin orders pages
+Route::get('/admin_orders_orderrequests', [UserController::class, 'admin_orders_orderrequests'])->middleware('auth')->name('admin');
+Route::get('/admin_orders_inprocess', [UserController::class, 'admin_orders_inprocess'])->middleware('auth')->name('admin');
+Route::get('/admin_orders_completed', [UserController::class, 'admin_orders_completed'])->middleware('auth')->name('admin');
+Route::get('/admin_orders_cancelled', [UserController::class, 'admin_orders_cancelled'])->middleware('auth')->name('admin');
+
+// otp verification routes
 Route::get('/otp/verify', [UserController::class, 'otp_verify'])->name('otp.verify');
 Route::post('/otp/verify_code', [UserController::class, 'verifyOtp'])->name('otp.verify_code');
 Route::get('/otp/resend_code', [UserController::class, 'resendOtp'])->name('otp.resend');

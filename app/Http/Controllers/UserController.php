@@ -62,9 +62,58 @@ class UserController extends Controller
     public function user_profile(){
         return view('pages.user_profile');
     }
+
+    // admin pages
     public function admin_dashboard(){
-        return view('otp_verification');
+        return view('pages.admin_dashboard');
     }
+    public function admin_product_info(){
+        return view('pages.admin-product-info-pages.admin_product_info_inventory');
+    }
+    public function admin_orders(){
+        return view('pages.admin-orders-pages.admin_orders_orderrequests');
+    }
+    public function admin_manage_account(){
+        return view('pages.admin_manage_account');
+    }
+    public function admin_users(){
+        return view('pages.admin_users');
+    }
+
+
+    // admin product info pages
+    public function admin_product_info_inventory(){
+        return view('pages.admin-product-info-pages.admin_product_info_inventory');
+    }
+
+    public function admin_product_info_list(){
+        return view('pages.admin-product-info-pages.admin_product_info_list');
+    }
+
+    public function admin_product_info_reviews(){
+        return view('pages.admin-product-info-pages.admin_product_info_reviews');
+    }
+
+    public function admin_product_info_archived(){
+        return view('pages.admin-product-info-pages.admin_product_info_archived');
+    }
+
+    
+    //  admin orders pages
+    public function admin_orders_orderrequests(){
+        return view('pages.admin-orders-pages.admin_orders_orderrequests');
+    }
+    public function admin_orders_inprocess(){
+        return view('pages.admin-orders-pages.admin_orders_inprocess');
+    }
+    public function admin_orders_completed(){
+        return view('pages.admin-orders-pages.admin_orders_completed');
+    }
+    public function admin_orders_cancelled(){
+        return view('pages.admin-orders-pages.admin_orders_cancelled');
+    }
+
+
 
     public function logout(Request $request){
         auth()->logout();
@@ -120,20 +169,24 @@ class UserController extends Controller
         ]);
 
         if(auth()->attempt($validated)){
-            $request->session()->regenerate();
+            
 
-            $name = auth()->user()->firstname;
+            if(auth()->user()->access == "0"){
+                $request->session()->regenerate();
 
-            // if(auth()->user()->access == "0"){
-            //     return redirect('/user_dashboard')->with('message', 'Welcome back, '.$name.'!');
-            // }
-            // return redirect('/admin_dashboard')->with('message', 'Welcome back, '.$name.'!');
+                $name = auth()->user()->firstname;
 
-            $verificationCode = $this->generateOtp();
-            $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-            // $this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
-            return redirect()->route('otp.verify')->with('success',  $message); 
+                $verificationCode = $this->generateOtp();
+                $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+                // $this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
+                return redirect()->route('otp.verify')->with('success',  $message); 
+            }else{
+                $request->session()->regenerate();
 
+                $name = auth()->user()->firstname;
+                return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
+            }
+        
         }
 
         return back()->withErrors(['email' => 'Email and Password does not match.'])->onlyInput('email');

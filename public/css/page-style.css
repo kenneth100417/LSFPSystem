@@ -6,6 +6,8 @@ body{
     width: 100vw;
     overflow: hidden;
 }
+
+
 #preloader{
     background: #ebebeb url(/img/preloader/preloader.gif) no-repeat center center;
     width: 100vw;
@@ -280,10 +282,13 @@ button.swal2-cancel{
     position: absolute;
     color: #ffffff;
     font-size: 1.3vw;
-    left: 7px !important;
+    left: 15px !important;
     top: 30px !important;
     text-align: center;
     cursor: pointer;
+}
+.profile-upload-icon:hover{
+    color: #0baf3c !important;
 }
 .modal-update-btn, .modal-cancel-btn{
     border-radius: 15px !important;
@@ -319,11 +324,44 @@ div.profile input{
     font-size: 1.1vw !important;
 }
 
+/* /////////////// ADMIN PAGES ////////////  */
+
+/* Dashboard  */
+
+div.top-p-container{
+    height: 63vh;
+    max-height: 63vh !important;
+}
+div.p-main-container{
+    height: 63vh;
+    max-height: 63vh !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+div.p-container{
+    box-shadow: 1px 2px 5px #491815;
+}
+
+.p-image{
+    width: auto !important;
+    height: 5vw !important;
+    margin: 0 !important;
+}
+
+div.star-ratings{
+    padding-top: 6vh;
+    font-size: 1vw;
+}
+a.card-nav:hover{
+    color: #0aa137 !important;
+}
+/* ///////////////// table style ///////////////// */
+
 /* /////////////////////////////////////// */
 
 @media (max-width: 1366px) {
    
-    /* HOME SECTION */
+    HOME SECTION
 
     h4.lsfp{
         font-size: 2vw !important;

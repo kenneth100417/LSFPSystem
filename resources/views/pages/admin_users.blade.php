@@ -13,7 +13,7 @@
         </button>
         <div class="text-start p-0 profile-name-email align-items-center mx-1">
             <h6 class="ms-1 font-weight-bold text-dark user-name">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h6>
-            <p class="ms-1 text-dark user-email px-0 mt-1">{{auth()->user()->email;}}</p>
+            <p class="ms-1 text-dark user-email px-0">{{auth()->user()->email;}}</p>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
         <ul class="navbar-nav ">
         
             <li class="nav-item ">
-                <a class="nav-link tab active" href="/admin_dashboard">
+                <a class="nav-link tab" href="/admin_dashboard">
                     
                     <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-table-cells-large fa-lg"></i>
@@ -68,7 +68,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white tab " href="/admin_users">
+                <a class="nav-link text-white tab active" href="/admin_users">
                     
                     <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-users fa-lg"></i>
@@ -170,7 +170,7 @@
             <div class="container mt-2">
                 <div class="row ">
                     <div class="col-md-3">
-                        <a href="" class="card-nav">
+                        <a href="/user_orders">
                             <div class="card mt-4">
                                 <div class="card-header p-3 pt-1 bg-transparent">
                                     <div class="icon icon-lg icon-shape bg-gradient-warning shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
@@ -192,7 +192,7 @@
                     </div>
         
                     <div class="col-md-3">
-                        <a href="" class="card-nav">
+                        <a href="user_toreceive">
                             <div class="card mt-4">
                                 <div class="card-header p-3 pt-1 bg-transparent">
                                     <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
@@ -214,7 +214,7 @@
                     </div>
         
                     <div class="col-md-3">
-                        <a href="" class="card-nav">
+                        <a href="/user_completed">
                             <div class="card mt-4 ">
                                 <div class="card-header p-3 pt-1 bg-transparent">
                                     <div class="icon icon-lg icon-shape bg-gradient-success shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
@@ -236,7 +236,7 @@
                     </div>
         
                     <div class="col-md-3">
-                        <a href="" class="card-nav">
+                        <a href="user_cancelled">
                             <div class="card mt-4">
                                 <div class="card-header p-3 pt-1 bg-transparent">
                                     <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
@@ -540,9 +540,9 @@ window.addEventListener("load", function(){
     new Chart(ctx2, {
         type: "line",
         data: {
-            labels: ["6 days ago", "5 days ago", "4 days ago", "3 days ago", "2 days ago", "Yesterday", "Today"],
+            labels: ["S", "M", "T", "W", "T", "F", "S"],
             datasets: [{
-                label: "Total Sales",
+                label: "Mobile apps",
                 tension: 0,
                 borderWidth: 0,
                 pointRadius: 5,
@@ -553,7 +553,7 @@ window.addEventListener("load", function(){
                 borderWidth: 4,
                 backgroundColor: "transparent",
                 fill: true,
-                data: [50, 40, 300, 320, 1000, 350, 500],
+                data: [50, 40, 300, 320, 500, 350, 40],
                 maxBarThickness: 6
 
             }],

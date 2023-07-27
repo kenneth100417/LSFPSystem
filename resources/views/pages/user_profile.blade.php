@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="/img/logo.png">
-  <title>
-    Louella's Sweet Food Products
-  </title>
-
-
-<!--     Fonts and icons     -->
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-
-<!-- Nucleo Icons -->
-<link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
-<link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
-
-<!-- Font Awesome Icons -->
-<script src="https://kit.fontawesome.com/71aac4163c.js" crossorigin="anonymous"></script>
-
-<!-- Material Icons -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
- <!-- Font Awesome Icons -->
-
-<!-- CSS Files -->
-<link rel="stylesheet" href="/css/dashboard-style.css">
-<link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.0.5" rel="stylesheet" />
-
-<!-- Nepcha Analytics (nepcha.com) -->
-<!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-<script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-</head>
+@include('components.user-components.header')
 
 <body class="g-sidenav-show  bg-gray-100">
     
@@ -268,7 +226,7 @@
                       <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                         <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
                             <div class="profile-img-container-lg">
-                                <img type="image" src="{{auth()->user()->photo}}" class="profile-img" alt="profile"  style="cursor: pointer;">
+                                <img type="image" src="{{auth()->user()->photo}}" class="profile-img edit-photo" alt="profile"  style="cursor: pointer;" id="profile-img">
 
                                 <span class="profile-upload-icon" id="profile-pic-upload"><i class="fa-solid fa-camera"></i><br /><p style="font-size: 1vw;">Change Profile</p></span>
 
@@ -386,7 +344,7 @@
                     <div class="modal-footer me-3">
                         
                             <button type="submit" class="btn btn-success modal-update-btn">Update</button>
-                            <button type="button" class="btn btn-danger modal-cancel-btn" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger modal-cancel-btn" data-dismiss="modal">Cancel</button>
                         
                     </div>
                 </form>
@@ -450,7 +408,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for=""> Old Password</label>
-                                    <input   class="form-control profile-input-form" type="password" >
+                                    <input   class="form-control profile-input-form" type="password" placeholder="Old Password">
                                 </div>
                             </div>
 
@@ -566,6 +524,29 @@ profilePic.addEventListener('click', function() {
       // Trigger the hidden file input when the image is clicked
       profilePicInput.click();
     });
+
+
+
+// Event listener for the file input element
+profilePicInput.addEventListener('change', handleFileSelect, false);
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  const imageType = /^image\//;
+
+  if (imageType.test(file.type)) {
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      const previewImage = document.getElementById('profile-img');
+      previewImage.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    alert('Please select an image file.');
+  }
+}
 </script>
 
 @if (session('success'))

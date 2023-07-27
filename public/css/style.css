@@ -11,6 +11,10 @@ body{
     overflow: hidden;
     position: fixed;
 }
+a:hover{
+    color: #0aa137;
+}
+
 #preloader{
     background: #ebebeb url(/img/preloader/preloader.gif) no-repeat center center;
     width: 100vw;
