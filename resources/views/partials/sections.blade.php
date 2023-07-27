@@ -467,7 +467,7 @@
             <a class="footer-text"><span class="copy mx-1" >&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
           </div>
           <div class="terms">
-            <a href="">Terms & Conditions</a>
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#termsAndConditions">Terms & Conditions</a>
           </div>
         </div>
       </div>
@@ -475,7 +475,7 @@
   </section>
 </div>
   
-
+@include('partials.terms-and-conditions')
   
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
   <script type="text/javascript">

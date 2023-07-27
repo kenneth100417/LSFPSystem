@@ -83,7 +83,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white tab " href="">
+                <a class="nav-link text-white tab " href="/admin_add_sales">
                     
                     <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-layer-group fa-lg"></i>
@@ -93,16 +93,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-white tab " href="">
-                    
-                    <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
-                        <i class="fa-solid fa-user-plus fa-lg"></i>
-                    </div>
-                    
-                    <span class="nav-link-text ms-1">Add Admin Account</span>
-                </a>
-            </li>
+           
         </ul>
 
             
@@ -166,294 +157,69 @@
         </nav>
     
       
-        <section>
-            <div class="container mt-2">
-                <div class="row ">
-                    <div class="col-md-3">
-                        <a href="/user_orders">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-warning shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-peso-sign"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Monthly Sales</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="user_toreceive">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-cubes"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Pending Orders</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="/user_completed">
-                            <div class="card mt-4 ">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-success shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-cubes-stacked"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Orders to Ship</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="user_cancelled">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-users"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">User Accounts</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container mt-3">
+        <section class="mx-2">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12 mt-4">
-                        <div class="card z-index-2">
-                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-                                    <div class="chart">
-                                        <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-                                    </div>
+                    <div class="col-md-12 bg-white border-radius-lg mt-5">
+                        <div class="card-header p-0 mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-success border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+                              <div>
+                                <h6 class="text-white text-capitalize ps-3">User List</h6>
+                              </div>
+                              <div class="d-flex  align-items-center">
+                                <div class="d-flex  align-items-center" >
+
+                                    <h5 class="text-white text-capitalize pe-3"><i class="fa-solid fa-arrow-up-wide-short"></i></h5>
+
+                                    <h5 class="text-white text-capitalize pe-4"><i class="fa-solid fa-arrow-down-short-wide"></i></h5>
+
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="mb-0"> Daily Sales </h6>
-                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today
-                                    sales. </p>
-                                <hr class="dark horizontal">
-                                <div class="d-flex ">
-                                    <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                    <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now();}} </p>
-                                </div>
+
                             </div>
                         </div>
-                    </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                              <table class="table align-items-center mb-0" >
+                                <thead>
+                                  <tr>
+                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">User ID</th>
+                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-20">Name</th>
+                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Email</th>
+                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Mobile Number</th>
+                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-20">Address</th>
+                                    <th class="text-dark w-15">
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="mw-15 text-center">
+                                            <p class="text-xs text-dark mb-0">LSFP23453452342346</p>
+                                        </td>
+                                        <td class="mw-20 text-center">
+                                            <p class="text-xs text-dark mb-0">Kenneth Gisalan</p>
+                                        </td>
+                                        <td class="mw-15 text-center">
+                                            <p class="text-xs text-dark mb-0">kenneth05@gmail.com</p>
+                                        </td>
+                                        <td class="mw-15 text-center">
+                                            <p class="text-xs text-dark mb-0">09510126952</p>
+                                        </td>
+                                        <td class="w-20 text-xs  text-center">Purok 2, E.Quirino Bulan, Sorsogon, Philippines, 4706</td>
+                                       
+                                        <td class="mw-15 text-center">
+                                            <button class="btn btn-danger btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer ">
+                                                Block User</button>
+                                            
+                                        </td>
+                                    </tr>
 
-                    <div class="col-lg-5 col-md-12">
-                        <div class="card top-p-container ">
-                            <div class="bg-transparent">
-                               <h4 class="mt-3 mx-4">Top Products</h4>
-                               <hr class="dark horizontal mb-1">
+                                    
+                                   
+                                </tbody>
+                              </table>
                             </div>
-                        
-                            <div class="card-body p-main-container mt-0 py-0 pe-3">
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                              
-                            
-
-                            
-                            
-
-                            
-                                
-                            </div>
-                        </div>
+                          </div>
                     </div>
                 </div>
             </div>

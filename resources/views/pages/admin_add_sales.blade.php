@@ -35,7 +35,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white tab active" href="/admin_product_info">
+                <a class="nav-link text-white tab " href="/admin_product_info">
                     
                     <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-file-invoice fa-lg"></i>
@@ -83,7 +83,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white tab " href="/admin_add_sales">
+                <a class="nav-link text-white tab active" href="/admin_add_sales">
                     
                     <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-layer-group fa-lg"></i>
@@ -93,6 +93,7 @@
                 </a>
             </li>
 
+           
         </ul>
 
             
@@ -156,194 +157,123 @@
         </nav>
     
       
-        <section>
-            <div class="container mt-2">
-                <div class="row ">
-                    <div class="col-md-3">
-                        <a href="/admin_product_info_inventory" class="card-nav">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-warning shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-warehouse"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Product Inventory</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="/admin_product_info_list" class="card-nav">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-list"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Product List</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="/admin_product_info_reviews" class="card-nav">
-                            <div class="card mt-4 active ">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-success shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-comments"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Product Reviews</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="/admin_product_info_archived" class="card-nav">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-box-archive"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Archived Products</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section class="mt-5 mx-2">
+        <section class="mx-2">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12 bg-white border-radius-lg">
+                    <div class="col-md-12 bg-white border-radius-lg mt-5">
                         <div class="card-header p-0 mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-success border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
-                              <div>
-                                <h6 class="text-white text-capitalize ps-3">Product Reviews</h6>
-                              </div>
-                              <div class="d-flex  align-items-center">
-                                <div class="d-flex  align-items-center" >
-
-                                    <h5 class="text-white text-capitalize pe-3"><i class="fa-solid fa-arrow-up-wide-short"></i></h5>
-
-                                    <h5 class="text-white text-capitalize pe-4"><i class="fa-solid fa-arrow-down-short-wide"></i></h5>
-
-                                </div>
-
-                                <div class="btn-group pe-3">
-                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Sort By
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Product Name</a>
-                                      <a class="dropdown-item" href="#">Ratings</a> 
-                                    </div>
-                              </div>
+                                <h6 class="text-white text-capitalize ps-3">Add Sales</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
-                            <div class="table-responsive p-0">
-                              <table class="table align-items-center mb-0" >
-                                <thead>
-                                  <tr>
-                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Product ID</th>
-                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Products</th>
-                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Price</th>
-                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Category</th>
-                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-20">Ratings</th>
-                                    <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-20">Latest Comment</th>
-                                    <th class="text-dark opacity-7 w-10"></th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="w-10">
-                                            <p class="text-xs text-dark mb-0">23453452342346</p>
-                                        </td>
-                                        <td class="mw-15">
-                                            <div class="d-flex px-2 py-1 align-items-center justify-content-center" style="min-width: 15; max-width: 15; white-space:normal;min-height:80px ;max-height: 80px; overflow:scroll; align-items: center;">
-                                                <div>
-                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-md me-3 border-radius-lg">
+                            <form action="">
+                                @csrf
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class=" m-4" style="min-height: 15rem;">
+                                                <div class="">
+                                                  <h6 class="">Select Product</h6>
+                                                  <div class="form-outline">
+                                                    <input type="search" id="form1" class="form-control  p-2" placeholder="Search Product" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;"/>
+                                                  </div>
                                                 </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                <p class="mb-0 text-sm text-dark">Lorem ipsum dolor sit amet.</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="mw-10 text-center">
-                                            <p class="text-xs text-dark mb-0">PHP65.00</p>
-                                        </td>
-                                        <td class="mw-15 text-center">
-                                            <p class="text-xs text-dark mb-0">Powdered Products</p>
-                                        </td>
-                                        <td class="mw-20 text-center">
-                                            <div class="ms-auto text-warning ratings-star text-sm text-center">
-                                                <i class="fa fa-star fa-sm"></i>
-                                                <i class="fa fa-star fa-sm"></i>
-                                                <i class="fa fa-star fa-sm"></i>
-                                                <i class="fa fa-star fa-sm"></i>
-                                                <i class="fa fa-star fa-sm"></i>
-                                            </div>
-                                        </td>
-                                        <td class="mw-20 text-center" >
-                                            <div class="d-flex" style="min-width: 20; max-width: 20; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
-                                                <p class="text-xs text-dark mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                                            </div>
-                                        </td>
-                                        <td class="mw-10">
-                                            <button class="btn btn-success btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer ">View all reviews<i class="fa-solid fa-arrow-up-right-from-square ms-2" title="View product details" style="font-size: 14px;"></i></button>
-                                        </td>
-                                    </tr>
 
-                                    
-                                   
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
+                                                <div class="mt-2">
+                                                    <h6 class="">Quantity</h6>
+                                                    <div class="form-outline">
+                                                      <input type="text" id="form1" class="form-control  p-2" placeholder="Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center align-items-center mt-5">
+                                                        <button class="btn btn-success btn-sm mx-1">Submit</button>
+                                                        <button class="btn btn-warning btn-sm mx-1">Clear</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                
+                                                
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="mt-3" style="min-height: 15rem;">
+                                                <div class="">
+                                                  <h5 class="">Card title</h5>
+                                                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                  <a href="#" class="card-link">Card link</a>
+                                                  <a href="#" class="card-link">Another link</a>
+                                                </div>
+                                              </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive p-0">
+                                                <table class="table align-items-center mb-0" >
+                                                  <thead>
+                                                    <tr>
+                                                      <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Product ID</th>
+                                                      <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Products</th>
+                                                      <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Price</th>
+                                                      <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Sold</th>
+                                                      <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">In Stock</th>
+                                                      <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Category</th>
+                                                      <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Description</th>
+                                        
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      <tr>
+                                                          <td class="w-10">
+                                                              <p class="text-xs text-dark mb-0">23453452342346</p>
+                                                          </td>
+                                                          <td class="mw-15">
+                                                              <div class="d-flex px-2 py-1 align-items-center justify-content-center" style="min-width: 15; max-width: 15; white-space:normal;min-height:80px ;max-height: 80px; overflow:scroll; align-items: center;">
+                                                                  <div>
+                                                                  <img src="../assets/img/team-2.jpg" class="avatar avatar-md me-3 border-radius-lg">
+                                                                  </div>
+                                                                  <div class="d-flex flex-column justify-content-center">
+                                                                  <p class="mb-0 text-sm text-dark">Lorem ipsum dolor sit amet.</p>
+                                                                  </div>
+                                                              </div>
+                                                          </td>
+                                                          <td class="mw-10 text-center">
+                                                              <p class="text-xs text-dark mb-0">PHP65.00</p>
+                                                          </td>
+                                                          <td class="mw-10 text-center">
+                                                              <p class="text-xs text-dark mb-0">50</p>
+                                                          </td>
+                                                          <td class="mw-10 text-center">
+                                                              <p class="text-xs text-dark mb-0">100</p>
+                                                          </td>
+                                                          <td class="mw-15 text-center">
+                                                              <p class="text-xs text-dark mb-0">Powdered Products</p>
+                                                          </td>
+                                                          <td class="mw-15 text-center" >
+                                                              <div class="d-flex" style="min-width: 15; max-width: 15; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
+                                                                  <p class="text-xs text-dark mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                                              </div>
+                                                          </td>
+                                                        
+                                                      </tr>
+                  
+                                                      
+                                                     
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
                     </div>
+                </div>
                 </div>
             </div>
         </section>
+    
     </main>
         
 
@@ -427,7 +357,7 @@ window.addEventListener("load", function(){
         data: {
             labels: ["S", "M", "T", "W", "T", "F", "S"],
             datasets: [{
-                label: "Total Sales",
+                label: "Mobile apps",
                 tension: 0,
                 borderWidth: 0,
                 pointRadius: 5,

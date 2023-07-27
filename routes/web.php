@@ -33,6 +33,7 @@ Route::get('/admin_product_info', [UserController::class, 'admin_product_info'])
 Route::get('/admin_orders', [UserController::class, 'admin_orders'])->middleware('auth')->name('admin');
 Route::get('/admin_manage_account', [UserController::class, 'admin_manage_account'])->middleware('auth')->name('admin');
 Route::get('/admin_users', [UserController::class, 'admin_users'])->middleware('auth')->name('admin');
+Route::get('/admin_add_sales', [UserController::class, 'admin_add_sales'])->middleware('auth')->name('admin');
 
 
 // admin product info pages

@@ -38,6 +38,7 @@
   @include('partials.sections')
 
   
+  
   <script type="text/javascript">
     $('#spanYear').html(new Date().getFullYear());
     function showRegForm(){

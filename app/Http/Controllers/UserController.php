@@ -79,6 +79,9 @@ class UserController extends Controller
     public function admin_users(){
         return view('pages.admin_users');
     }
+    public function admin_add_sales(){
+        return view('pages.admin_add_sales');
+    }
 
 
     // admin product info pages

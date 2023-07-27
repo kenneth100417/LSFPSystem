@@ -83,7 +83,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white tab " href="">
+                <a class="nav-link text-white tab " href="/admin_add_sales">
                     
                     <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-layer-group fa-lg"></i>
@@ -93,16 +93,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-white tab " href="">
-                    
-                    <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
-                        <i class="fa-solid fa-user-plus fa-lg"></i>
-                    </div>
-                    
-                    <span class="nav-link-text ms-1">Add Admin Account</span>
-                </a>
-            </li>
+            
         </ul>
 
             
@@ -167,293 +158,144 @@
     
       
         <section>
-            <div class="container mt-2">
-                <div class="row ">
-                    <div class="col-md-3">
-                        <a href="/user_orders">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-warning shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-peso-sign"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Monthly Sales</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="user_toreceive">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-cubes"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Pending Orders</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="/user_completed">
-                            <div class="card mt-4 ">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-success shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-cubes-stacked"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Orders to Ship</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="user_cancelled">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-users"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">User Accounts</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container mt-3">
+            <div class="container">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12 mt-4">
-                        <div class="card z-index-2">
-                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-                                    <div class="chart">
-                                        <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+
+                    <div class="col-lg-3 col-md-12 mt-4">
+                        <div class="card" style="min-height: 100%">
+                            
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="">
+                                        <h5 class="card-title">Admin Accounts</h5>
+                                    </div>
+                                    <div class="text-success cursor-pointer">
+                                        <i class="fa-solid fa-user-plus"></i>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="mb-0"> Daily Sales </h6>
-                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today
-                                    sales. </p>
-                                <hr class="dark horizontal">
-                                <div class="d-flex ">
-                                    <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                    <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now();}} </p>
+                                <hr class="horizontal mt-0 mb-2 nav-horizontal">
+                                <div class="mt-3">
+                                    <ul class="navbar-nav ">
+        
+                                        <li class="">
+                                            <div class="d-flex px-2 py-1 align-items-center justify-content-start" style="overflow: hidden">
+                                                <div>
+                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-md me-3 border-radius-lg">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-start">
+                                                <h6 class="mb-0 text-sm text-dark">Kath Gollena</h6>
+                                                <p class="mb-0 text-sm text-success">admin1@admin.com</p>
+                                                </div>
+                                            </div>
+                                            <hr class="horizontal mt-2 mb-2 bg-dark">
+                                        </li>
+                                        <li class="">
+                                            <div class="d-flex px-2 py-1 align-items-center justify-content-start" style="overflow: hidden">
+                                                <div>
+                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-md me-3 border-radius-lg">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-start">
+                                                <h6 class="mb-0 text-sm text-dark">Aljon Adamos</h6>
+                                                <p class="mb-0 text-sm text-success">admin2@admin.com</p>
+                                                </div>
+                                            </div>
+                                            <hr class="horizontal mt-2 mb-2 bg-dark">
+                                        </li>
+                                        <li class="">
+                                            <div class="d-flex px-2 py-1 align-items-center justify-content-start" style="overflow: hidden">
+                                                <div>
+                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-md me-3 border-radius-lg">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-start">
+                                                <h6 class="mb-0 text-sm text-dark">Cha Gerero</h6>
+                                                <p class="mb-0 text-sm text-success">admin3@admin.com</p>
+                                                </div>
+                                            </div>
+                                            <hr class="horizontal mt-2 mb-2 bg-dark">
+                                        </li>
+                                        
+                                        
+                                    </ul>
+
                                 </div>
                             </div>
-                        </div>
+                          </div>
                     </div>
 
-                    <div class="col-lg-5 col-md-12">
-                        <div class="card top-p-container ">
-                            <div class="bg-transparent">
-                               <h4 class="mt-3 mx-4">Top Products</h4>
-                               <hr class="dark horizontal mb-1">
+                    <div class="col-lg-9 col-md-12">
+                        <div class="card my-4 mt-5" style="height: 93%">
+                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
+                              <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
+                                <div class="text-end position-absolute col-md-12">
+                                    <a href="" data-toggle="modal" data-target="#editProfile">
+                                        <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
+                                    </a>
+                                </div>
+                                <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
+                                    <div class="profile-img-container-lg">
+                                        <img src="{{auth()->user()->photo}}" class="profile-img" alt="profile">
+                                    </div>
+                                    <div class="profile-text-container-lg ps-3">
+                                        <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
+                                        <p class="text-email text-success">{{auth()->user()->email;}}</p>
+                                    </div>
+                                </div>
+                              </div>
                             </div>
-                        
-                            <div class="card-body p-main-container mt-0 py-0 pe-3">
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
+                            
+                            <div class="card-body px-0 pb-2 mt-5 mx-5 profile">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12 ">
+                                            <h5 class="mb-0">Profile Information</h5>
                                         </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
+                                        <div class="col-md-3">
+                                            <label for="firsname">Firstname</label>
+                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->firstname;}}" disabled>
                                         </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+                                        <div class="col-md-3">
+                                            <label for="firsname">Middlename</label>
+                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->middlename;}}" disabled>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
+                                        <div class="col-md-3">
+                                            <label for="firsname">Lastname</label>
+                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->lastname;}}" disabled>
                                         </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
+                                        <div class="col-md-3">
+                                            <label for="firsname">Birthdate</label>
+                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->birthdate;}}" disabled>
                                         </div>
                                     </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+    
+                                    <div class="row">
+                                        <div class="col-md-12 mt-5">
+                                            <h5 class="mb-0">Address</h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="firsname">Home Address</label>
+                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->address;}}" disabled>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
+    
+                                    <div class="row mb-5">
+                                        <div class="col-md-12 mt-5">
+                                            <h5 class="mb-0">Account Information</h5>
                                         </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
+                                        <div class="col-md-4">
+                                            <label for="firsname">Email</label>
+                                            <input class="form-control profile-input-form" type="email" value="{{auth()->user()->email;}}" disabled>
                                         </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+                                        <div class="col-md-4">
+                                            <label for="firsname">Mobile Number</label>
+                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->mobile_number;}}" disabled>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                    <div  class="d-flex align-items-center">
-                                        <div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                            class="img-fluid rounded-3 p-image" alt="Shopping item">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="text-sm">Samsung galaxy Note 10 </h6>
-                                            <p class="small mb-0">PHP65.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+                                        <div class="col-md-4">
+                                            <label for="firsname">Password</label>
+                                            <input class="form-control profile-input-form" type="password" value="******" disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                              
-                            
-
-                            
-                            
-
-                            
-                                
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

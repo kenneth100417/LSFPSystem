@@ -83,7 +83,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white tab " href="">
+                <a class="nav-link text-white tab " href="/admin_add_sales">
                     
                     <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                         <i class="fa-solid fa-layer-group fa-lg"></i>
@@ -93,16 +93,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-white tab " href="">
-                    
-                    <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
-                        <i class="fa-solid fa-user-plus fa-lg"></i>
-                    </div>
-                    
-                    <span class="nav-link-text ms-1">Add Admin Account</span>
-                </a>
-            </li>
+           
         </ul>
 
             
@@ -199,7 +190,7 @@
                                         <i class="fa-solid fa-bag-shopping"></i>
                                     </div>
                                     <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Orders to Ship</p>
+                                        <p class="text-md mb-0 text-capitalize ">Orders in Process</p>
                                         <h4 class="mb-0 ">+91</h4>
                                     </div>
                                 </div>
@@ -510,7 +501,8 @@ window.addEventListener("load", function(){
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc --><script src="./assets/js/material-dashboard.min.js?v=3.0.5"></script>
-  </body>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="./assets/js/material-dashboard.min.js?v=3.0.5"></script>
+</body>
 
 </html>
