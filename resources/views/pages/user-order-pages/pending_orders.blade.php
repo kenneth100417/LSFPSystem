@@ -1,5 +1,5 @@
 
-@include('pages.user-order-pages.partials.header')
+@include('components.user.header')
 
 <section>
     <div class="container">
