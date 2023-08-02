@@ -3,7 +3,7 @@
 
     
         <section class="title mx-5">
-            <div class="container mb-4">
+            <div class="container mb-2">
                 <div class="row">
                     <div class="col md-12">
                         <div class="text-center lsfp-container col-md-12 mt-5">
@@ -30,9 +30,9 @@
                                 </div>
                             </div>
                         </a>
-                        <swiper-container class="mySwiper" space-between="30" slides-per-view="4" style="padding-bottom: 50px;" init="false" id="swiper" centeredSlides="true">
+                        <swiper-container class="mySwiper" space-between="20" slides-per-view="auto"  init="false" id="swiper" >
                             
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -63,7 +63,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -94,7 +94,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -125,7 +125,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -156,7 +156,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -187,7 +187,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -218,7 +218,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -249,7 +249,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -280,7 +280,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -311,7 +311,7 @@
                             </div>
                         </swiper-slide>
 
-                        <swiper-slide class="slide-container text-center col-sm-12 ">
+                        <swiper-slide class="slide-container text-center col-sm-12 mb-2 ms-2">
                             <div class="product-card">
                             <div class="product-img-container">
                                 <img class="product-img" src="/img/category/category1.jpg"
@@ -341,12 +341,6 @@
                             </div>
                             </div>
                         </swiper-slide>
-
-                        
-
-
-    
-                        
                         
                         </swiper-container>
                     </div>

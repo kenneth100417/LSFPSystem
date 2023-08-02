@@ -125,7 +125,7 @@
                                     </div>
                               </div>
                               <div class="d-flex align-items-center">
-                                <button class="btn btn-info btn-sm me-3 d-flex align-items-center">Add Product <i class="fa-regular fa-square-plus ms-2" style="font-size: 18px"></i></button>
+                                <a href="{{url('admin/products/add')}}" class="btn btn-info btn-sm me-3 d-flex align-items-center">Add Product <i class="fa-regular fa-square-plus ms-2" style="font-size: 14px"></i></a>
                               </div>
                             </div>
                         </div>
@@ -195,7 +195,8 @@
             </div>
         </section>
     </main>
-        
+
+    @livewireScripts
 
 <!--   Core JS Files   -->
 <script src="./assets/js/core/popper.min.js" ></script>
@@ -230,29 +231,7 @@ function logout(){
     })
 }
 
-// custom swiper
-//custom swiper
-    // const swiperEl = document.getElementById('swiper');
 
-    // const params = {
-    //   injectStyles: [`
-    //   .swiper-pagination-bullet {
-    //     display: none;
-    //   }
-
-    //   .swiper-pagination{
-    //     display: none;
-    //   }
-
-    //   `],
-    //   pagination: {
-    //     clickable: true,
-    //   },
-    // }
-
-    // Object.assign(swiperEl, params);
-
-    // swiperEl.initialize();
 
 
 
@@ -267,95 +246,7 @@ window.addEventListener("load", function(){
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script type="text/javascript">
-    
 
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    new Chart(ctx2, {
-        type: "line",
-        data: {
-            labels: ["S", "M", "T", "W", "T", "F", "S"],
-            datasets: [{
-                label: "Total Sales",
-                tension: 0,
-                borderWidth: 0,
-                pointRadius: 5,
-                pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                pointBorderColor: "transparent",
-                borderColor: "rgba(255, 255, 255, .8)",
-                borderColor: "rgba(255, 255, 255, .8)",
-                borderWidth: 4,
-                backgroundColor: "transparent",
-                fill: true,
-                data: [50, 40, 300, 320, 500, 350, 40],
-                maxBarThickness: 6
-
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5],
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
-                        display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-            },
-        },
-    });
-
-    
-
-</script>
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -366,8 +257,40 @@ window.addEventListener("load", function(){
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+@if (session('success'))
 
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc --><script src="./assets/js/material-dashboard.min.js?v=3.0.5"></script>
-  </body>
+
+      
+    <script type="text/javascript">
+
+        setTimeout(message, 500);
+
+        function message(){
+            Swal.fire({
+                    title: 'Success!',
+                    text: '{{session('success')}}',
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: false
+                })
+        }   
+    </script>
+@endif     
+
+@if (session('error'))
+<script type="text/javascript">
+
+    setTimeout(message, 1000);
+
+    function message(){t
+        Swal.fire(
+                'Update Failed!',
+                'An error occured!',
+                'error'
+            )
+    }   
+</script>
+@endif
+</body>
 
 </html>

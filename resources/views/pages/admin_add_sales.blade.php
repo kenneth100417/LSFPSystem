@@ -50,7 +50,7 @@
                                                 </div>
                                               </div>
                                         </div>
-
+                                        <hr class="bg-dark">
                                         <div class="col-lg-12">
                                             <div class="table-responsive p-0">
                                                 <table class="table align-items-center mb-0" >

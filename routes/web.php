@@ -59,3 +59,20 @@ Route::get('/user_cancelled', [UserController::class, 'user_cancelled'])->middle
 
 Route::put('/user_update', [UserController::class, 'update']);
 
+// Category Route
+Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function(){
+    Route::get('admin/category','index');
+    Route::get('admin/category/add','add');
+
+    Route::post('admin/category/add','store');
+    Route::get('admin/category/{category}/edit','edit');
+    Route::put('admin/category/{category}','update');
+});
+
+// Product Routs
+Route::controller(App\Http\Controllers\Admin\ProductController::class)->group(function(){
+    Route::get('admin/products','index');
+    Route::get('admin/products/add','add');
+    Route::post('admin/products','store');
+
+});

@@ -158,7 +158,7 @@ section.title{
  div.cat-card, div.product-card{
     border-radius: 15px;
     width: 230px;
-    height: 335px !important;
+    height: 330px !important;
     box-shadow: 1px 2px 5px #491815;
     overflow: hidden;
  }
@@ -181,7 +181,7 @@ img.product-img:hover{
  }
  div.product-card{
     background-color: #EBEBEB;
-    height: 43vh;
+    height: 40vh;
  }
  div.product-img-container{
     overflow: hidden;
@@ -357,8 +357,37 @@ a.card-nav:hover{
 }
 /* ///////////////// table style ///////////////// */
 
-/* /////////////////////////////////////// */
 
+/* add category */
+input.category-checkbox{
+    border-color: #0aa137 !important;
+    background-color: none !important;
+}
+input[type="checkbox"].category-checkbox:checked{
+    border-color: #0aa137 !important;
+    background-color: #0aa137 !important;
+}
+/* /////////////////////////////////////// */
+/* pagination */
+
+.page-item.active{
+    background: none !important;
+    box-shadow: none !important;
+}
+.page-item.active span{
+    background-color: #0baf3c !important;
+    border: 1px solid #0b9133 !important;
+    
+}
+
+/* Sweet Alert customs */
+.swal2-success-line-tip, .swal2-success-line-long {
+    font-size: 14px !important;
+  }
+
+.swal2-x-mark-line-right, .swal2-x-mark-line-left {
+    font-size: 14px !important;
+  } 
 @media (max-width: 1366px) {
    
     HOME SECTION

@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+@livewireStyles
 </head>
 
 
@@ -83,7 +84,9 @@
                         {{ 'admin_product_info_inventory' == request()->path()   ? 'active' : ''}}
                         {{ 'admin_product_info_list' == request()->path()   ? 'active' : ''}}
                         {{ 'admin_product_info_reviews' == request()->path()  ? 'active' : ''}}
-                        {{ 'admin_product_info_archived' == request()->path()  ? 'active' : ''}} " href="/admin_product_info">
+                        {{ 'admin_product_info_archived' == request()->path()  ? 'active' : ''}}
+                        {{ 'admin/products' == request()->path()  ? 'active' : ''}}
+                        {{ 'admin/products/add' == request()->path()  ? 'active' : ''}} " href="/admin_product_info">
                         
                         <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                             <i class="fa-solid fa-file-invoice fa-lg"></i>
@@ -143,6 +146,22 @@
                         </div>
                         
                         <span class="nav-link-text ms-1">Add Sales</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white tab
+                        {{ 'admin/category' == request()->path() ? 'active' : ''}}
+                        {{ 'admin/category/add' == request()->path() ? 'active' : ''}}
+                        {{ 'admin/category/edit' == request()->path() ? 'active' : ''}}" href="{{url('admin/category')}}">
+                        
+                        <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
+                            <i class="fa-solid fa-layer-group fa-lg"></i>
+                        </div>
+                        
+                        <span class="nav-link-text ms-1">
+                            Product Categories
+                        </span>
                     </a>
                 </li>
     

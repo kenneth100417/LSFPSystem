@@ -1,98 +1,7 @@
 
 @include('components.user.header')
-<section>
-    <div class="container">
-        <div class="row ">
-            <div class="col-md-3">
-                <a href="/user_orders">
-                    <div class="card mt-4">
-                        <div class="card-header p-3 pt-1 bg-transparent">
-                            <div class="icon icon-lg icon-shape bg-gradient-warning shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                <i class="fa-solid fa-bag-shopping card-icon"></i>
-                            </div>
-                            <div class="text-end pt-1">
-                                <p class="text-md mb-0 text-capitalize ">Order Requests</p>
-                                <h4 class="mb-0 ">+91</h4>
-                            </div>
-                        </div>
-                      
-                        <hr class="horizontal my-0 dark">
-    
-                        <div class="card-footer p-3">
-                          <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+@include('pages.user-order-pages.tabs.tabs')
 
-            <div class="col-md-3">
-                <a href="user_toreceive">
-                    <div class="card mt-4">
-                        <div class="card-header p-3 pt-1 bg-transparent">
-                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                <i class="fa-solid fa-bag-shopping card-icon"></i>
-                            </div>
-                            <div class="text-end pt-1">
-                                <p class="text-md mb-0 text-capitalize ">To Receive</p>
-                                <h4 class="mb-0 ">+91</h4>
-                            </div>
-                        </div>
-                      
-                        <hr class="horizontal my-0 dark">
-    
-                        <div class="card-footer p-3">
-                          <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3">
-                <a href="/user_completed">
-                    <div class="card mt-4 active">
-                        <div class="card-header p-3 pt-1 bg-transparent">
-                            <div class="icon icon-lg icon-shape bg-gradient-success shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                <i class="fa-solid fa-bag-shopping card-icon"></i>
-                            </div>
-                            <div class="text-end pt-1">
-                                <p class="text-md mb-0 text-capitalize ">Completed</p>
-                                <h4 class="mb-0 ">+91</h4>
-                            </div>
-                        </div>
-                      
-                        <hr class="horizontal my-0 dark">
-    
-                        <div class="card-footer p-3">
-                          <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3">
-                <a href="user_cancelled">
-                    <div class="card mt-4">
-                        <div class="card-header p-3 pt-1 bg-transparent">
-                            <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                <i class="fa-solid fa-bag-shopping card-icon"></i>
-                            </div>
-                            <div class="text-end pt-1">
-                                <p class="text-md mb-0 text-capitalize ">Cancelled</p>
-                                <h4 class="mb-0 ">+91</h4>
-                            </div>
-                        </div>
-                      
-                        <hr class="horizontal my-0 dark">
-    
-                        <div class="card-footer p-3">
-                          <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="mt-5 mx-2">
     <div class="container-fluid">
         <div class="row">
@@ -118,27 +27,27 @@
                         <tbody>
                             <tr>
                                 <td class="w-20">
-                                    <p class="text-xs text-dark mb-0">23453452342346</p>
+                                    <p class="text-xs text-dark mb-0">LSWP_ORDR23453452342346</p>
                                 </td>
-                                <td class="w-30">
+                                <td class="w-30" style="min-width: 30; max-width: 30;">
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                        <img src="/img/category/category.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                        <p class="text-xs text-dark mb-0">john@creative-tim.com</p>
+                                        <h6 class="mb-0 text-sm">Tablea chocolate</h6>
+                                        <p class="text-xs text-dark mb-0">Cacao Products</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="w-20 text-center">
-                                    <p class="text-xs text-dark mb-0">john@creative-tim.com</p>
+                                    <p class="text-xs text-dark mb-0">25/06/23</p>
                                 </td>
                                 <td class="w-10 text-center">
-                                    <p class="text-xs text-dark mb-0">john@creative-tim.com</p>
+                                    <p class="text-xs text-dark mb-0">5</p>
                                 </td>
                                 <td class="w-10 text-center">
-                                    <p class="text-xs text-dark mb-0">john@creative-tim.com</p>
+                                    <p class="text-xs text-dark mb-0"><span class="text-success">PHP</span>300.00</p>
                                 </td>
                                 <td class="w-10 text-center align-items-middle">
                                     <button class="btn btn-warning btn-sm mt-3"> Buy Again</button>
@@ -157,4 +66,4 @@
     
 </main>
     
-@include('pages.user-order-pages.partials.footer')
+@include('components.user.footer')

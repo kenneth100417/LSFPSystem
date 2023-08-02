@@ -30,7 +30,7 @@
 <div class="row pt-5">
   <div class="col-sm-12 ">
       <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif;">Product Categories</h4>
-    <swiper-container class="mySwiper" init="false" space-between="30" slides-per-view="5" style="padding-bottom: 80px;" id="swiper1">
+    <swiper-container class="mySwiper" init="false" space-between="30" slides-per-view="auto" style="padding-bottom: 80px;" id="swiper1">
       
       <swiper-slide class="slide-container text-center col-sm-12 ">
         <div class="cat-card">          
@@ -125,7 +125,7 @@
       <div class="row pt-5">
         <div class="col-sm-12 ">
           <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif;">Top Products</h4>
-          <swiper-container class="mySwiper" space-between="30" slides-per-view="5" style="padding-bottom: 80px;" init="false" id="swiper2">
+          <swiper-container class="mySwiper" space-between="30" slides-per-view="auto" style="padding-bottom: 80px;" init="false" id="swiper2">
             
           <swiper-slide class="slide-container text-center col-sm-12 ">
             <div class="product-card">
