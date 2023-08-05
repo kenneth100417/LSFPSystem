@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-use Carbon\Carbon;
 use App\Models\VerificationCode;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -90,7 +92,9 @@ class UserController extends Controller
     }
 
     public function admin_product_info_list(){
-        return view('pages.admin-product-info-pages.admin_product_info_list');
+        $products = Product::where('status','1')->get();
+        $categories = Category::all();
+        return view('pages.admin-product-info-pages.admin_product_info_list', compact('products','categories'));
     }
 
     public function admin_product_info_reviews(){

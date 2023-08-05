@@ -51,31 +51,31 @@ class ProductFormRequest extends FormRequest
                 'string'
             ],
             'image' => [
-                'required',
+                'nullable',
                 'mimes:jpg,jpeg,png'
             ],
             'trending' => [
                 'nullable',
-                'string'
+                'integer'
             ],
             'status' => [
                 'nullable',
-                'string'
+                'integer'
             ],
             'slug' => [
                 'required',
                 'string'
             ],
             'meta_title' => [
-                'required',
+                'nullable',
                 'string'
             ],
             'meta_keyword' => [
-                'required',
+                'nullable',
                 'string'
             ],
             'meta_description' => [
-                'required',
+                'nullable',
                 'string'
             ],
             

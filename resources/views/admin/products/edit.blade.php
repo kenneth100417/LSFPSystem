@@ -8,7 +8,7 @@
                         <div class="card-header p-0 mt-n4 mx-3 z-index-2 mb-n2">
                             <div class="bg-gradient-success border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h6 class="text-white text-capitalize ps-3">Add New Product</h6>
+                                    <h6 class="text-white text-capitalize ps-3">Edit Product Details</h6>
                                 </div>
                                 <div class="me-3">
                                     <a class="btn btn-warning btn-sm" href="{{url('admin/products')}}">View All Products<i class="fa-solid fa-arrow-up-right-from-square ms-2" style="font-size: 14px"></i></a>
@@ -17,8 +17,10 @@
                             
                         </div>
                         <div class="card-body px-0">
-                            <form action="{{url('admin/products')}}" id="categoryForm" enctype="multipart/form-data" method="post">
+                            <form action="{{url('admin/products/'.$product->id)}}" id="categoryForm" enctype="multipart/form-data" method="post">
                                 @csrf
+                                @method('PUT')
+
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-lg-8">
@@ -29,7 +31,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Product Name</h6>
                                                                 <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Product Name" style="box-shadow: 0 2px 5px #b6b6b6bf; font-size: 14px;" name="name" value="{{old('name')}}"/>
+                                                                <input type="text" id="" class="form-control  p-2" placeholder="Product Name" style="box-shadow: 0 2px 5px #b6b6b6bf; font-size: 14px;" name="name" value="{{$product->name}}"/>
                                                                 </div>
                                                                 @error('name')
                                                                     <p class="text-danger">
@@ -42,11 +44,12 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Product Category</h6>
                                                                 <div class="form-outline">
-                                                                <Select type="text" id="" class="form-control  p-2 selectpicker" data-style="select-with-transition" placeholder="Product Category" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="category_id" value="{{old('category_id')}}">
+                                                                <Select type="" id="" class="form-control  p-2 selectpicker" data-style="select-with-transition" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="category_id" value="">>
+                                                                    
                                                                     @foreach ($categories as $category)
-                                                                        <option class="" value="{{$category->id}}">{{$category->name}}</option>
+                                                                        <option  value="{{$category->id}}" {{$category->id == $product->category_id ? 'selected' : ''}}>{{$category->name}}</option>
                                                                     @endforeach
-                                                                
+                                                                  
                                                                 
                                                                 </Select>
                                                                 </div>
@@ -61,7 +64,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Original Price</h6>
                                                                 <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Original Price" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="original_price" value="{{old('original_price')}}"/>
+                                                                <input type="text" id="" class="form-control  p-2" placeholder="Original Price" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="original_price" value="{{$product->original_price}}"/>
                                                                 </div>
                                                                 @error('original_price')
                                                                     <p class="text-danger">
@@ -74,7 +77,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Selling Price</h6>
                                                                 <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Selling Price" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="selling_price" value="{{old('selling_price')}}"/>
+                                                                <input type="text" id="" class="form-control  p-2" placeholder="Selling Price" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="selling_price" value="{{$product->selling_price}}"/>
                                                                 </div>
                                                                 @error('selling_price')
                                                                     <p class="text-danger">
@@ -87,7 +90,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Stock Quantity</h6>
                                                                 <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Stock Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="quantity" value="{{old('quantity')}}"/>
+                                                                <input type="text" id="" class="form-control  p-2" placeholder="Stock Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="quantity" value="{{$product->quantity}}"/>
                                                                 </div>
                                                                 @error('quantity')
                                                                     <p class="text-danger">
@@ -100,7 +103,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Description</h6>
                                                                 <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Description" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="description" value="{{old('description')}}"/>
+                                                                <input type="text" id="" class="form-control  p-2" placeholder="Description" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="description" value="{{$product->description}}"/>
                                                                 </div>
                                                                 @error('description')
                                                                     <p class="text-danger">
@@ -114,7 +117,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Slug</h6>
                                                                 <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Slug" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="slug" value="{{old('slug')}}"/>
+                                                                <input type="text" id="" class="form-control  p-2" placeholder="Slug" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="slug" value="{{$product->slug}}"/>
                                                                 </div>
                                                                 @error('slug')
                                                                     <p class="text-danger">
@@ -127,7 +130,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Meta Title</h6>
                                                                 <div class="form-outline">
-                                                                <input type="Meta title" id="" class="form-control  p-2" placeholder="Slug" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_title" value="{{old('meta_title')}}"/>
+                                                                <input type="Meta title" id="" class="form-control  p-2" placeholder="Slug" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_title" value="{{$product->meta_title}}"/>
                                                                 </div>
                                                                 @error('meta_title')
                                                                     <p class="text-danger">
@@ -140,7 +143,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Meta Keyword</h6>
                                                                 <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Meta keyword" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_keyword" value="{{old('meta_keyword')}}"/>
+                                                                <input type="text" id="" class="form-control  p-2" placeholder="Meta keyword" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_keyword" value="{{$product->meta_keyword}}"/>
                                                                 </div>
                                                                 @error('meta_keyword')
                                                                     <p class="text-danger">
@@ -153,7 +156,7 @@
                                                             <div class="mt-3">
                                                                 <h6 class="">Meta Description</h6>
                                                                 <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Meta description" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_description" value="{{old('meta_description')}}"/>
+                                                                <input type="text" id="" class="form-control  p-2" placeholder="Meta description" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_description" value="{{$product->meta_description}}"/>
                                                                 </div>
                                                                 @error('meta_description')
                                                                     <p class="text-danger">
@@ -173,7 +176,7 @@
                                         <div class="col-lg-4">
                                             <div class="mt-5 d-flex justify-content-center" >
                                                 <div class="" style="border-radius: 15px; width: 80%; height: 45vh; overflow:hidden;box-shadow: 1px 2px 5px #491815;">          
-                                                    <img type="image" src="/img/category/category.jpg" class="card-title" alt="Category image preview" id="category-pic" style="width: 100%;height: 100%;object-fit: cover;margin: 0;">
+                                                    <img type="image" src="/uploads/products/{{$product->image}}" class="card-title" alt="Product image preview" id="category-pic" style="width: 100%;height: 100%;object-fit: cover;margin: 0;">
                                                 </div>
                                                 
                                                 
@@ -357,8 +360,6 @@ window.addEventListener("load", function(){
     loader.style.display = "none";
 });
 
-
-//   category pic
 
 
 

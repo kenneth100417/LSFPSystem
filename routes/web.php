@@ -74,5 +74,7 @@ Route::controller(App\Http\Controllers\Admin\ProductController::class)->group(fu
     Route::get('admin/products','index');
     Route::get('admin/products/add','add');
     Route::post('admin/products','store');
+    Route::get('admin/products/{product}/edit','edit');
+    Route::put('admin/products/{product}','update');
 
 });
