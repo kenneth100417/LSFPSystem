@@ -429,6 +429,12 @@ span.copy{
     color: #F68010;
 }
 
+
+/* ///////////////// */
+a.card-nav:hover{
+    color: #0aa137 !important;
+}
+
 /* mobile view */
 @media (max-width: 320px) {
     

@@ -1,104 +1,5 @@
 @include('components.admin.header')
-@if (session('error'))
-    {{session('error')}}
-@else
-    
-@endif
-      
-        <section>
-            <div class="container mt-2">
-                <div class="row ">
-                    <div class="col-md-3">
-                        <a href="/admin_product_info_inventory" class="card-nav">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-warning shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-warehouse"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Product Inventory</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="/admin_product_info_list" class="card-nav">
-                            <div class="card mt-4 active">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-list"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Product List</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="/admin_product_info_reviews" class="card-nav">
-                            <div class="card mt-4 ">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-success shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-comments"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Product Reviews</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <a href="/admin_product_info_archived" class="card-nav">
-                            <div class="card mt-4">
-                                <div class="card-header p-3 pt-1 bg-transparent">
-                                    <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                        <i class="fa-solid fa-box-archive"></i>
-                                    </div>
-                                    <div class="text-end pt-1">
-                                        <p class="text-md mb-0 text-capitalize ">Archived Products</p>
-                                        <h4 class="mb-0 ">+91</h4>
-                                    </div>
-                                </div>
-                              
-                                <hr class="horizontal my-0 dark">
-            
-                                <div class="card-footer p-3">
-                                  <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </section>
+@include('pages.admin-product-info-pages.tabs.tabs')
 
         <livewire:admin.product.index />
     </main>
@@ -112,6 +13,44 @@
 <script src="./assets/js/plugins/smooth-scrollbar.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 <script type="text/javascript">
+
+    let productName = document.getElementById('product-name').value;
+    // Product Delete function
+
+    window.addEventListener('show-delete-confirmation', event =>{
+    Swal.fire({
+    title: 'Are you sure?',
+    text: "This action will move the ".concat(productName,' to archived products.'),
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, proceed'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Livewire.emit('deleteConfirmed')
+    }
+  })
+});
+
+window.addEventListener('categoryDeleted', event =>{
+    
+    Swal.fire({
+      title: 'Success!',
+      text: productName.concat(' will be moved to archived products list'),
+      icon: 'success',
+      timer: 3000,
+      showConfirmButton: false
+  })
+});
+
+
+
+
+
+
+
+
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
     var options = {

@@ -5,7 +5,7 @@
                 <div class="card-header p-0 mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-success border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
                       <div>
-                        <h6 class="text-white text-capitalize ps-3">Product List</h6>
+                        <h6 class="text-white text-capitalize ps-3">Product Inventory</h6>
                       </div>
                       <div class="d-flex  align-items-center">
                         <div class="d-flex  align-items-center" >
@@ -26,9 +26,6 @@
                               <a class="dropdown-item" href="#">Number of Stocks</a>
                             </div>
                       </div>
-                      <div class="d-flex align-items-center">
-                        <a href="{{url('admin/products/add')}}" class="btn btn-info btn-sm me-3 d-flex align-items-center">Add Product <i class="fa-regular fa-square-plus ms-2" style="font-size: 14px"></i></a>
-                      </div>
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
@@ -48,8 +45,7 @@
                         </thead>
                         <tbody>
                             @forelse ($products as $product)
-                                
-                            
+                        
                             <tr>
                                 <td class="w-10">
                                     <p class="text-xs text-dark mb-0"><span>LSFP_P</span>{{$product->id}}</p>
@@ -60,8 +56,7 @@
                                         <img src="/uploads/products/{{$product->image}}" class="avatar avatar-md me-3 border-radius-lg">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
-                                        <p  class="mb-0 text-sm text-dark">{{$product->name}}</p>
-                                        <input type="hidden" id="product-name" value="{{$product->name}}">
+                                        <p class="mb-0 text-sm text-dark">{{$product->name}}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -72,42 +67,38 @@
                                     <p class="text-xs text-dark mb-0">{{$product->quantity_sold}}</p>
                                 </td>
                                 <td class="mw-10 text-center">
-                                    <p class="text-xs text-dark mb-0">{{$product->quantity - $product->quantity_sold}}</p>
+                                    <p class="text-xs text-dark mb-0">{{$product->quantity}}</p>
                                 </td>
                                 <td class="mw-15 text-center">
                                     <p class="text-xs text-dark mb-0">{{$product->category->name}}</p>
                                 </td>
-                                <td class="m-15 text-center" >
+                                <td class="mw-15 text-center" >
                                     <div class="d-flex" style="min-width: 15; max-width: 15; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
                                         <p class="text-xs text-dark mb-0">{{$product->description}}</p>
                                     </div>
                                 </td>
                                 <td class="mw-10">
-                                    <a class="mt-3 me-1 text-success tbl-row-icon" style="cursor: pointer "><i class="fa-solid fa-arrow-up-right-from-square" title="View product details" style="font-size: 20px;"></i></a>
-                                    <a href="{{url('admin/products/'.$product->id.'/edit')}}" class="mt-3 mx-1 text-warning tbl-row-icon" style="cursor: pointer"><i class="fa-regular fa-pen-to-square" title="Edit product details" style="font-size: 21px;"></i></a>
-                                    <a class="mt-3 mx-1 text-danger fa-sm tbl-row-icon" style="cursor: pointer" wire:click.prevent = 'deleteConfirmation({{$product->id}})'><i class="fa-solid fa-trash" title="Remove product" style="font-size: 19px;"></i></a>
-
+                                    <button class="btn btn-success btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer ">View details<i class="fa-solid fa-arrow-up-right-from-square ms-2" title="View product details" style="font-size: 14px;"></i></button>
+                                    
                                 </td>
                             </tr>
-
-                            
+        
                             @empty
                             <td class="mw-100 text-center" >
-                                <div class="d-flex justify-content-center align-items-center" style="min-width: 100; max-width: 100; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
+                                <div class="d-flex" style="min-width: 100; max-width: 100; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
                                     <p class="text-xs text-dark mb-0">No Products Found.</p>
                                 </div>
                             </td>
                             @endforelse
+                            
+                           
                         </tbody>
                       </table>
-                      
                     </div>
                     <div class="d-flex justify-content-center mb-0">
-                    {{ $products->links() }}
+                        {{ $products->links() }}
                     </div>
-                    
                   </div>
-                  
             </div>
         </div>
     </div>

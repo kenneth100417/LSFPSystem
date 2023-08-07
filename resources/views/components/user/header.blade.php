@@ -55,7 +55,7 @@
           </button>
           <div class="text-start p-0 profile-name-email align-items-center mx-1">
               <h6 class="ms-1 font-weight-bold text-dark user-name">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h6>
-              <p class="ms-1 text-dark user-email px-0">{{auth()->user()->email;}}</p>
+              <p class="ms-1 text-dark user-email px-0 mt-1">{{auth()->user()->email;}}</p>
           </div>
       </div>
   

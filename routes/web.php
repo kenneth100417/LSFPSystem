@@ -15,52 +15,69 @@ use GuzzleHttp\Middleware;
 |
 */
 
-Route::get('/', [UserController::class, 'index'])->name('login')->middleware('guest');
-Route::get('/register', [UserController::class, 'register']);
-Route::get('/verify', [UserController::class, 'verify']);
-Route::post('/add_user', [UserController::class, 'add_user']);
-Route::post('/logout', [UserController::class, 'logout']);
-Route::post('/login', [UserController::class, 'login']);
+Route::controller(App\Http\Controllers\UserController::class)->group(function(){
+    // User Routes
+    Route::get('/', 'index' )->name('login')->middleware('guest');
+    Route::get('/register',  'register');
+    Route::get('/verify','verify');
+    Route::post('/add_user',  'add_user');
+    Route::post('/logout', 'logout');
+    Route::post('/login', 'login');
+
+    // otp verification routes
+    Route::get('/otp/verify', 'otp_verify')->name('otp.verify');
+    Route::post('/otp/verify_code', 'verifyOtp')->name('otp.verify_code');
+    Route::get('/otp/resend_code', 'resendOtp')->name('otp.resend');
 
 
-Route::get('/user_dashboard', [UserController::class, 'user_dashboard'])->middleware('auth')->name('user');
-Route::get('/user_orders', [UserController::class, 'user_orders'])->middleware('auth');
-Route::get('//user_profile', [UserController::class, 'user_profile'])->middleware('auth');
-
-// admin pages
-Route::get('/admin_dashboard', [UserController::class, 'admin_dashboard'])->middleware('auth')->name('admin');
-Route::get('/admin_product_info', [UserController::class, 'admin_product_info'])->middleware('auth')->name('admin');
-Route::get('/admin_orders', [UserController::class, 'admin_orders'])->middleware('auth')->name('admin');
-Route::get('/admin_manage_account', [UserController::class, 'admin_manage_account'])->middleware('auth')->name('admin');
-Route::get('/admin_users', [UserController::class, 'admin_users'])->middleware('auth')->name('admin');
-Route::get('/admin_add_sales', [UserController::class, 'admin_add_sales'])->middleware('auth')->name('admin');
+});
 
 
-// admin product info pages
-Route::get('/admin_product_info_inventory', [UserController::class, 'admin_product_info_inventory'])->middleware('auth')->name('admin');
-Route::get('/admin_product_info_list', [UserController::class, 'admin_product_info_list'])->middleware('auth')->name('admin');
-Route::get('/admin_product_info_reviews', [UserController::class, 'admin_product_info_reviews'])->middleware('auth')->name('admin');
-Route::get('/admin_product_info_archived', [UserController::class, 'admin_product_info_archived'])->middleware('auth')->name('admin');
+Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth', 'isAdmin'])->group(function(){
 
-// admin orders pages
-Route::get('/admin_orders_orderrequests', [UserController::class, 'admin_orders_orderrequests'])->middleware('auth')->name('admin');
-Route::get('/admin_orders_inprocess', [UserController::class, 'admin_orders_inprocess'])->middleware('auth')->name('admin');
-Route::get('/admin_orders_completed', [UserController::class, 'admin_orders_completed'])->middleware('auth')->name('admin');
-Route::get('/admin_orders_cancelled', [UserController::class, 'admin_orders_cancelled'])->middleware('auth')->name('admin');
+    // admin pages
+    Route::get('/admin_dashboard', 'admin_dashboard')->name('admin');
+    Route::get('/admin_product_info', 'admin_product_info');
+    Route::get('/admin_orders', 'admin_orders');
+    Route::get('/admin_manage_account',  'admin_manage_account');
+    Route::get('/admin_users',  'admin_users');
+    Route::get('/admin_add_sales', 'admin_add_sales');
 
-// otp verification routes
-Route::get('/otp/verify', [UserController::class, 'otp_verify'])->name('otp.verify');
-Route::post('/otp/verify_code', [UserController::class, 'verifyOtp'])->name('otp.verify_code');
-Route::get('/otp/resend_code', [UserController::class, 'resendOtp'])->name('otp.resend');
 
-Route::get('/user_toreceive', [UserController::class, 'user_toreceive'])->middleware('auth');
-Route::get('/user_completed', [UserController::class, 'user_completed'])->middleware('auth');
-Route::get('/user_cancelled', [UserController::class, 'user_cancelled'])->middleware('auth');
+    // admin product info pages
+    Route::get('/admin_product_info_inventory','admin_product_info_inventory');
+    Route::get('/admin_product_info_list','admin_product_info_list');
+    Route::get('/admin_product_info_reviews', 'admin_product_info_reviews');
+    Route::get('/admin_product_info_archived',  'admin_product_info_archived');
 
-Route::put('/user_update', [UserController::class, 'update']);
+    // admin orders pages
+    Route::get('/admin_orders_orderrequests',  'admin_orders_orderrequests');
+    Route::get('/admin_orders_inprocess', 'admin_orders_inprocess');
+    Route::get('/admin_orders_completed', 'admin_orders_completed');
+    Route::get('/admin_orders_cancelled',  'admin_orders_cancelled');
+
+});
+
+
+Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth','isUser'])->group(function(){
+
+      
+    Route::get('/user_dashboard',  'user_dashboard')->name('user');
+    Route::get('/user_orders',  'user_orders');
+    Route::get('/user_profile',  'user_profile');
+  
+    Route::get('/user_toreceive',  'user_toreceive');
+    Route::get('/user_completed', 'user_completed');
+    Route::get('/user_cancelled',  'user_cancelled');
+
+    Route::put('/user_update',  'update');
+
+});
+
+
 
 // Category Route
-Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function(){
+Route::controller(App\Http\Controllers\Admin\CategoryController::class)->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('admin/category','index');
     Route::get('admin/category/add','add');
 
@@ -70,7 +87,7 @@ Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(f
 });
 
 // Product Routs
-Route::controller(App\Http\Controllers\Admin\ProductController::class)->group(function(){
+Route::controller(App\Http\Controllers\Admin\ProductController::class)->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('admin/products','index');
     Route::get('admin/products/add','add');
     Route::post('admin/products','store');
@@ -78,3 +95,7 @@ Route::controller(App\Http\Controllers\Admin\ProductController::class)->group(fu
     Route::put('admin/products/{product}','update');
 
 });
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

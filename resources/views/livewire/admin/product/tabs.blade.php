@@ -1,16 +1,18 @@
 <section>
-    <div class="container">
+    <div class="container mt-2">
         <div class="row ">
             <div class="col-md-3">
-                <a href="/user_orders" class="card-nav">
-                    <div class="card mt-4 {{ 'user_orders' == request()->path() ? 'active' : ''}}">
+                <a href="/admin_product_info_inventory" class="card-nav">
+                    <div class="card mt-4 
+                    {{ 'admin_product_info_inventory' == request()->path()  ? 'active' : ''}}
+                    {{ 'admin_product_info' == request()->path()  ? 'active' : ''}}">
                         <div class="card-header p-3 pt-1 bg-transparent">
                             <div class="icon icon-lg icon-shape bg-gradient-warning shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                <i class="fa-solid fa-bag-shopping card-icon"></i>
+                                <i class="fa-solid fa-warehouse"></i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-md mb-0 text-capitalize ">Order Requests</p>
-                                <h4 class="mb-0 ">0</h4>
+                                <p class="text-md mb-0 text-capitalize ">Product Inventory</p>
+                                <h4 class="mb-0 ">{{$product_count}}</h4>
                             </div>
                         </div>
                       
@@ -24,15 +26,15 @@
             </div>
 
             <div class="col-md-3">
-                <a href="user_toreceive" class="card-nav">
-                    <div class="card mt-4 {{ 'user_toreceive' == request()->path() ? 'active' : ''}}">
+                <a href="/admin_product_info_list" class="card-nav">
+                    <div class="card mt-4 {{ 'admin_product_info_list' == request()->path()  ? 'active' : ''}}">
                         <div class="card-header p-3 pt-1 bg-transparent">
                             <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                <i class="fa-solid fa-bag-shopping card-icon"></i>
+                                <i class="fa-solid fa-list"></i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-md mb-0 text-capitalize ">To Receive</p>
-                                <h4 class="mb-0 ">0</h4>
+                                <p class="text-md mb-0 text-capitalize ">Product List</p>
+                                <h4 class="mb-0 ">{{$product_count}}</h4>
                             </div>
                         </div>
                       
@@ -46,14 +48,14 @@
             </div>
 
             <div class="col-md-3">
-                <a href="/user_completed" class="card-nav">
-                    <div class="card mt-4 {{ 'user_completed' == request()->path() ? 'active' : ''}}">
+                <a href="/admin_product_info_reviews" class="card-nav">
+                    <div class="card mt-4 {{ 'admin_product_info_reviews' == request()->path()  ? 'active' : ''}}">
                         <div class="card-header p-3 pt-1 bg-transparent">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                <i class="fa-solid fa-bag-shopping card-icon"></i>
+                                <i class="fa-solid fa-comments"></i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-md mb-0 text-capitalize ">Completed</p>
+                                <p class="text-md mb-0 text-capitalize ">Product Reviews</p>
                                 <h4 class="mb-0 ">0</h4>
                             </div>
                         </div>
@@ -68,15 +70,15 @@
             </div>
 
             <div class="col-md-3">
-                <a href="user_cancelled" class="card-nav">
-                    <div class="card mt-4 {{ 'user_cancelled' == request()->path() ? 'active' : ''}}">
+                <a href="/admin_product_info_archived" class="card-nav">
+                    <div class="card mt-4 {{ 'admin_product_info_archived' == request()->path()  ? 'active' : ''}}">
                         <div class="card-header p-3 pt-1 bg-transparent">
                             <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
-                                <i class="fa-solid fa-bag-shopping card-icon"></i>
+                                <i class="fa-solid fa-box-archive"></i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-md mb-0 text-capitalize ">Cancelled</p>
-                                <h4 class="mb-0 ">0</h4>
+                                <p class="text-md mb-0 text-capitalize ">Archived Products</p>
+                                <h4 class="mb-0 ">{{$archived_count}}</h4>
                             </div>
                         </div>
                       
@@ -88,6 +90,7 @@
                     </div>
                 </a>
             </div>
+
         </div>
     </div>
 </section>

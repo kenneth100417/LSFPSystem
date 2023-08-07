@@ -86,23 +86,23 @@ function clearForm(){
 
 
 
-//   alerts
+// //   alerts
 
-function logout(){
-    Swal.fire({
-    title: 'Are you sure you want to Log out?',
-    text: "",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#DC3545',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Log Out'
-    }).then((result) => {
-    if (result.isConfirmed) {
-       document.getElementById('logout').submit();
-    }
-    })
-}
+// function logout(){
+//     Swal.fire({
+//     title: 'Are you sure you want to Log out?',
+//     text: "",
+//     icon: 'warning',
+//     showCancelButton: true,
+//     confirmButtonColor: '#DC3545',
+//     cancelButtonColor: '#d33',
+//     confirmButtonText: 'Log Out'
+//     }).then((result) => {
+//     if (result.isConfirmed) {
+//        document.getElementById('logout').submit();
+//     }
+//     })
+// }
 
 
 

@@ -4,7 +4,7 @@
             <div class="container mt-2">
                 <div class="row ">
                     <div class="col-md-3">
-                        <a href="" class="card-nav">
+                        <div class="card-nav">
                             <div class="card mt-4">
                                 <div class="card-header p-3 pt-1 bg-transparent">
                                     <div class="icon icon-lg icon-shape bg-gradient-warning shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
@@ -22,11 +22,11 @@
                                   <p class="mb-0 text-sm">As of {{Carbon\Carbon::now();}}</p>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
         
                     <div class="col-md-3">
-                        <a href="" class="card-nav">
+                        <a href="/admin_orders" class="card-nav">
                             <div class="card mt-4">
                                 <div class="card-header p-3 pt-1 bg-transparent">
                                     <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
@@ -48,7 +48,7 @@
                     </div>
         
                     <div class="col-md-3">
-                        <a href="" class="card-nav">
+                        <a href="/admin_orders_inprocess" class="card-nav">
                             <div class="card mt-4 ">
                                 <div class="card-header p-3 pt-1 bg-transparent">
                                     <div class="icon icon-lg icon-shape bg-gradient-success shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
@@ -70,7 +70,7 @@
                     </div>
         
                     <div class="col-md-3">
-                        <a href="" class="card-nav">
+                        <a href="/admin_users" class="card-nav">
                             <div class="card mt-4">
                                 <div class="card-header p-3 pt-1 bg-transparent">
                                     <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute w-25">
