@@ -96,14 +96,14 @@
         </section>
 
         <section>
-            <div class="container mt-3">
+            <div class="container mt-4">
                 <div class="row">
                     <div class="col-lg-7 col-md-12 mt-4">
                         <div class="card z-index-2">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                                 <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
                                     <div class="chart">
-                                        <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+                                        <canvas id="chart-line" class="chart-canvas" height="320"></canvas>
                                     </div>
                                 </div>
                             </div>

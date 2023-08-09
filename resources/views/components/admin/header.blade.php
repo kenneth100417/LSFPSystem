@@ -168,14 +168,14 @@
             </ul>
     
                 
-        <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+        {{-- <div class="sidenav-footer position-absolute w-100 bottom-0 ">
             <form action="/logout" method="POST">
                 @csrf
                 <div class="mx-3 text-end">
                     <button class="btn text-white bg-danger mt-4 w-50 nav-logout" href="" type="button" onclick="logout();">Log Out</button>
                 </div>
             </form>
-        </div>
+        </div> --}}
       
     </aside>
     

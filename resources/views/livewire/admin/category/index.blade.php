@@ -36,7 +36,7 @@
                                   
                                   <td class="mw-15">
                                     <div class="d-flex px-2 py-1 d-flex justify-content-center align-items-center" style="min-width: 15; max-width: 15; white-space:normal;min-height:80px ;max-height: 80px;">
-                                        <img src="/uploads/category/{{$category->image}}" class="avatar avatar-md me-3 border-radius-lg">
+                                        <img src="/uploads/category/{{$category->image}}" class="avatar avatar-lg  me-3 border-radius-lg">
                                     </div>
                                 </td>
                                 <td class="mw-20 text-center" >
