@@ -1,15 +1,75 @@
-<div class="col-md-9 text-center mt-1 title-container">
-    <div class="container">
+
+{{-- Log in Modal --}}
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4 class="font-weight-bolder text-center mt-2 mb-4 card-title">Sign In</h4>
+        <form action="/login" method="POST" role="form" class="text-start">
+
+          @csrf
+          @error('email')
+            <p class="text-danger text-center">
+              <small> {{$message}} </small>
+            </p>
+          @enderror
+
+          <div class="input-group input-group-outline mb-1">
+            <input placeholder="Email" name="email" type="email" class="form-control" value={{old('email')}} >
+          </div>
+          <div class="input-group input-group-outline mt-2">
+            <input name="password" type="password" class="form-control" placeholder="Password">
+          </div>
+          <div class="text-end mb-2">
+            <a class="login-link" href="">Forgot Password?</a>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn login-btn w-100 my-2 mb-1">Sign in</button>
+            
+          </div>
+          <p class="mt-4 text-sm text-center">
+            Don't have an account?
+            <a href="/register" class="login-link register-link text-bold"><br />Register</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="col-md-12 col-xl-9 text-center mt-n4 title-container" id="main">
+  
+    <div class="container  {{"/" == request()->path() ? '/' : 'reg-section-sm'}}">
       <div class="row">
         <div class="text-center lsfp-container col-md-12">
           <H4 class="lsfp">Louella's</H4>
           <H1 class="text-bold lsfp">Sweet Food Products</H1>
           <p class="lsfp-tagline">Every Bite is Delight!</p>
-          <p class="lsfp-desc">At Louella's Sweet Food Products, we take pride in sourcing only the highest quality ingredients for our chocolate, ensuring that every piece is a true indulgence for your taste buds.</p>
+          <p class="lsfp-desc ">At Louella's Sweet Food Products, we take pride in sourcing only the highest quality ingredients for our chocolate, ensuring that every piece is a true indulgence for your taste buds.</p>
           
-          <div class="explore-btn-container mt-3 col-md-9">
-            <a href="#product"><button class="btn explore-btn mt-4"> Explore Now <span><i class="fa-solid fa-arrow-right"></i></span></button></a>
+          <div class="d-flex justify-content-center align-items-center mt-5 expl-btn">
+            <div class="explore-btn-container">
+              <a href="#product" class="btn btn-warning explore-btn"> Explore Now <span><i class="fa-solid fa-arrow-right"></i></span></a>
+            </div>
+            <div class="sm-login-btn">
+              @if(request()->path() == "register")
+                <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-success ms-2 ">Register</button>
+              
+              @else
+                  <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-success ms-2 ">Get Started</button>
+              @endif
+              
+            </div>
+
           </div>
+
+          
+          
         </div>
       </div>
       <div class="row justify-content-end">
@@ -26,139 +86,90 @@
 {{-- Product Section --}}
 
 <section id="product">
-<div class="container pt-5">
-<div class="row pt-5">
-  <div class="col-sm-12 ">
-      <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif;">Product Categories</h4>
-    <swiper-container class="mySwiper" init="false" space-between="30" slides-per-view="auto" style="padding-bottom: 80px;" id="swiper1">
-      
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="slide-container text-center col-sm-12 ">
-        <div class="cat-card">          
-          <img src="/img/category/category.jpg" class="card-title" alt="...">
-        </div>
-        <div class="product-cat w-100">
-          <h5 class="text-center mx-0 px-0">Product Category</h5>
-        </div>
-      </swiper-slide>
+  <div class="container pt-5 px-n5 {{"/" == request()->path() ? '/' : 'reg-section-sm'}}" id="category">
+  <div class="row pt-5 px-n5">
+    <div class="col-sm-12 ">
+        <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif;">Product Categories</h4>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper" init="false"   style="padding-bottom: 80px;" >
+        
+          <div class="swiper-slide d-flex justify-content-center ">
+            <div class="cat-card">          
+              <img src="/img/category/category.jpg" class="card-title" alt="...">
+            </div>
+            <div class="product-cat">
+              <h5 class=" mx-0 px-0">Product Category</h5>
+            </div>
+          </div>
 
-  </swiper-container>
-</div>
-</div>
-</div>
+          <div class="swiper-slide d-flex justify-content-center ">
+            <div class="cat-card">          
+              <img src="/img/category/category.jpg" class="card-title" alt="...">
+            </div>
+            <div class="product-cat">
+              <h5 class=" mx-0 px-0">Product Category</h5>
+            </div>
+          </div>
+
+          <div class="swiper-slide d-flex justify-content-center ">
+            <div class="cat-card">          
+              <img src="/img/category/category.jpg" class="card-title" alt="...">
+            </div>
+            <div class="product-cat">
+              <h5 class=" mx-0 px-0">Product Category</h5>
+            </div>
+          </div>
+
+          <div class="swiper-slide d-flex justify-content-center ">
+            <div class="cat-card">          
+              <img src="/img/category/category.jpg" class="card-title" alt="...">
+            </div>
+            <div class="product-cat">
+              <h5 class=" mx-0 px-0">Product Category</h5>
+            </div>
+          </div>
+
+          <div class="swiper-slide d-flex justify-content-center ">
+            <div class="cat-card">          
+              <img src="/img/category/category.jpg" class="card-title" alt="...">
+            </div>
+            <div class="product-cat">
+              <h5 class=" mx-0 px-0">Product Category</h5>
+            </div>
+          </div>
+
+          <div class="swiper-slide d-flex justify-content-center ">
+            <div class="cat-card">          
+              <img src="/img/category/category.jpg" class="card-title" alt="...">
+            </div>
+            <div class="product-cat">
+              <h5 class=" mx-0 px-0">Product Category</h5>
+            </div>
+          </div>
+          
+          
+
+          
+
+          
+        
+      </div>
+      <div class="swiper-pagination"></div>
+  </div>
+  </div>
+  </div>
 </section>
 
 {{-- product section --}}
 <section>
-    <div class="container pt-4">
-      <div class="row pt-5">
-        <div class="col-sm-12 ">
+  <div class="container pt-5 px-n5 {{"/" == request()->path() ? '/' : 'reg-section-sm'}}" id="top-products">
+    <div class="row pt-5 px-n5">
+      <div class="col-sm-12 ">
           <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif;">Top Products</h4>
-          <swiper-container class="mySwiper" space-between="30" slides-per-view="auto" style="padding-bottom: 80px;" init="false" id="swiper2">
-            
-          <swiper-slide class="slide-container text-center col-sm-12 ">
-            <div class="product-card">
-              <div class="product-img-container">
-                <img class="product-img" src="/img/category/category1.jpg"
-                class="card-img-top"/>
-              </div>
-              <div class="text-center mt-3">
-                <h5 class="product-name mb-0">Original Cacao Powder</h5>
-                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
-              </div>
-              <div class="text-center mx-2 product-price">
-                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
-                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
-              </div>
-              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
-                <p class="text-muted my-0 small">Product Ratings:</p>
-                <div class="ms-auto text-warning ratings-star">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between mt-2 mx-2">
-                <button class="btn btn-success add-cart-btn">Add to Cart</button>
-                <button class="btn btn-warning buy-btn ">Buy Now</button>
-              </div>
-            </div>
-          </swiper-slide>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper" init="false"   style="padding-bottom: 80px;" >
 
-          <swiper-slide class="slide-container text-center col-sm-12 ">
+          <div class=" swiper-slide d-flex justify-content-center">
             <div class="product-card">
               <div class="product-img-container">
                 <img class="product-img" src="/img/category/category1.jpg"
@@ -168,9 +179,15 @@
                 <h5 class="product-name mb-0">Original Cacao Powder</h5>
                 <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
               </div>
-              <div class="text-center mx-2 product-price">
-                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
-                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              <div class="text-center mx-2 mt-2 product-price d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                </div>
+                <div>
+                  <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+                </div>
+                
+                
               </div>
               <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
                 <p class="text-muted my-0 small">Product Ratings:</p>
@@ -182,14 +199,14 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="d-flex justify-content-between mt-2 mx-2">
+              <div class="d-flex justify-content-between m-2">
                 <button class="btn btn-success add-cart-btn">Add to Cart</button>
                 <button class="btn btn-warning buy-btn ">Buy Now</button>
               </div>
             </div>
-          </swiper-slide>
+          </div>
 
-          <swiper-slide class="slide-container text-center col-sm-12 ">
+          <div class=" swiper-slide d-flex justify-content-center">
             <div class="product-card">
               <div class="product-img-container">
                 <img class="product-img" src="/img/category/category1.jpg"
@@ -199,9 +216,15 @@
                 <h5 class="product-name mb-0">Original Cacao Powder</h5>
                 <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
               </div>
-              <div class="text-center mx-2 product-price">
-                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
-                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              <div class="text-center mx-2 mt-2 product-price d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                </div>
+                <div>
+                  <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+                </div>
+                
+                
               </div>
               <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
                 <p class="text-muted my-0 small">Product Ratings:</p>
@@ -213,14 +236,14 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="d-flex justify-content-between mt-2 mx-2">
+              <div class="d-flex justify-content-between m-2">
                 <button class="btn btn-success add-cart-btn">Add to Cart</button>
                 <button class="btn btn-warning buy-btn ">Buy Now</button>
               </div>
             </div>
-          </swiper-slide>
+          </div>
 
-          <swiper-slide class="slide-container text-center col-sm-12 ">
+          <div class=" swiper-slide d-flex justify-content-center">
             <div class="product-card">
               <div class="product-img-container">
                 <img class="product-img" src="/img/category/category1.jpg"
@@ -230,9 +253,15 @@
                 <h5 class="product-name mb-0">Original Cacao Powder</h5>
                 <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
               </div>
-              <div class="text-center mx-2 product-price">
-                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
-                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              <div class="text-center mx-2 mt-2 product-price d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                </div>
+                <div>
+                  <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+                </div>
+                
+                
               </div>
               <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
                 <p class="text-muted my-0 small">Product Ratings:</p>
@@ -244,14 +273,14 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="d-flex justify-content-between mt-2 mx-2">
+              <div class="d-flex justify-content-between m-2">
                 <button class="btn btn-success add-cart-btn">Add to Cart</button>
                 <button class="btn btn-warning buy-btn ">Buy Now</button>
               </div>
             </div>
-          </swiper-slide>
+          </div>
 
-          <swiper-slide class="slide-container text-center col-sm-12 ">
+          <div class=" swiper-slide d-flex justify-content-center">
             <div class="product-card">
               <div class="product-img-container">
                 <img class="product-img" src="/img/category/category1.jpg"
@@ -261,9 +290,15 @@
                 <h5 class="product-name mb-0">Original Cacao Powder</h5>
                 <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
               </div>
-              <div class="text-center mx-2 product-price">
-                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
-                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              <div class="text-center mx-2 mt-2 product-price d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                </div>
+                <div>
+                  <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+                </div>
+                
+                
               </div>
               <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
                 <p class="text-muted my-0 small">Product Ratings:</p>
@@ -275,14 +310,14 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="d-flex justify-content-between mt-2 mx-2">
+              <div class="d-flex justify-content-between m-2">
                 <button class="btn btn-success add-cart-btn">Add to Cart</button>
                 <button class="btn btn-warning buy-btn ">Buy Now</button>
               </div>
             </div>
-          </swiper-slide>
+          </div>
 
-          <swiper-slide class="slide-container text-center col-sm-12 ">
+          <div class=" swiper-slide d-flex justify-content-center">
             <div class="product-card">
               <div class="product-img-container">
                 <img class="product-img" src="/img/category/category1.jpg"
@@ -292,9 +327,15 @@
                 <h5 class="product-name mb-0">Original Cacao Powder</h5>
                 <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
               </div>
-              <div class="text-center mx-2 product-price">
-                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
-                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+              <div class="text-center mx-2 mt-2 product-price d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                </div>
+                <div>
+                  <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+                </div>
+                
+                
               </div>
               <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
                 <p class="text-muted my-0 small">Product Ratings:</p>
@@ -306,57 +347,101 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="d-flex justify-content-between mt-2 mx-2">
+              <div class="d-flex justify-content-between m-2">
                 <button class="btn btn-success add-cart-btn">Add to Cart</button>
                 <button class="btn btn-warning buy-btn ">Buy Now</button>
               </div>
             </div>
-          </swiper-slide>
-
-          <swiper-slide class="slide-container text-center col-sm-12 ">
-            <div class="product-card">
-              <div class="product-img-container">
-                <img class="product-img" src="/img/category/category1.jpg"
-                class="card-img-top"/>
-              </div>
-              <div class="text-center mt-3">
-                <h5 class="product-name mb-0">Original Cacao Powder</h5>
-                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
-              </div>
-              <div class="text-center mx-2 product-price">
-                <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
-                <h5 class="text-dark mb-2 mx-1">P60.00</h5>
-              </div>
-              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
-                <p class="text-muted my-0 small">Product Ratings:</p>
-                <div class="ms-auto text-warning ratings-star">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between mt-2 mx-2">
-                <button class="btn btn-success add-cart-btn">Add to Cart</button>
-                <button class="btn btn-warning buy-btn ">Buy Now</button>
-              </div>
-            </div>
-          </swiper-slide>
+          </div>
 
           
+          <div class=" swiper-slide d-flex justify-content-center">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
+              </div>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
+              </div>
+              <div class="text-center mx-2 mt-2 product-price d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                </div>
+                <div>
+                  <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+                </div>
+                
+                
+              </div>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between m-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
           
-        </swiper-container>
+          <div class=" swiper-slide d-flex justify-content-center">
+            <div class="product-card">
+              <div class="product-img-container">
+                <img class="product-img" src="/img/category/category1.jpg"
+                class="card-img-top"/>
+              </div>
+              <div class="text-center mt-3">
+                <h5 class="product-name mb-0">Original Cacao Powder</h5>
+                <p class="small"><a href="#!" class="text-muted">Cacao Products</a></p>
+              </div>
+              <div class="text-center mx-2 mt-2 product-price d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="small text-danger mb-0 mx-1"><s>P75.00</s></p>
+                </div>
+                <div>
+                  <h5 class="text-dark mb-2 mx-1">P60.00</h5>
+                </div>
+                
+                
+              </div>
+              <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
+                <p class="text-muted my-0 small">Product Ratings:</p>
+                <div class="ms-auto text-warning ratings-star">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between m-2">
+                <button class="btn btn-success add-cart-btn">Add to Cart</button>
+                <button class="btn btn-warning buy-btn ">Buy Now</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="swiper-pagination"></div>
       </div>
       </div>
     </div>
   </section>
 
   <section id="about">
-    <div class="container">
+    <div class="container {{"/" == request()->path() ? '/' : 'reg-section-sm'}}">
       <div class="row">
         <div class="col-md-12">
-          <fieldset class="about-container">
+          <fieldset class="about-container ">
             <legend class="mx-3">
               <div type="" class="bg-warning about-title">
                 About
@@ -379,8 +464,8 @@
                 Thank you for choosing Louella's Sweet Food Products. We hope you enjoy our products as much as we enjoy creating them.
               </p>
             </div>
-            <div>
-              <h3>History</h3>
+            <div class="">
+              <h3 class="history-text">History</h3>
               <p class="about-text">"Louella's tablea started in May 2019 when my wife tried to make tablea as a "Pasalubong" to her former co-employee in Manila. Inspired by the good feedback, she tried to make some and sold it to her co-teachers and friends with an initial capital of 500 pesos. As it was good, we expanded marketing to other people.
               </p>
               <p class="about-text">
@@ -401,7 +486,7 @@
   </section>
 
   <section id="contact">
-    <div class="container">
+    <div class="container {{"/" == request()->path() ? '/' : 'reg-section-sm'}}">
       <div class="row">
         <div class="col-md-12">
           <fieldset class="contact-container">
@@ -411,28 +496,32 @@
               </div>
             </legend>
            <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-6 contact-info">
-                <div class="text-center mb-5 contact-header">
-                  <h3 class="contact-sub-title">Louela's Sweet Food Products</h3>
-                  <h5>Contact Information</h5>
+            <div class="row d-flex justify-content-between">
+              <div class="col-lg-7 contact-info">
+                <div class="text-center mb-3 contact-header mx-5">
+                  <h5 class="contact-sub-title">Louela's Sweet Food Products</h5>
+                  <h5 class="con-info-text">Contact Information</h5>
                 </div>
-                <div class="contact d-flex justify-content-start align-items-center mb-4">
-                  <i class="fa-brands fa-facebook"></i><a href="#" class="mx-4 contact">www.facebook.com/Louella'sSweetFoodProducts</a>
+                <div class="contact d-flex justify-content-start align-items-center mb-3">
+                  <span class="me-2"><i class="fa-brands fa-facebook"></i></span>
+                  <a href="#" class="mx-4 contact">www.facebook.com/Louella'sSweetFoodProducts</a>
                 </div>
-                <div class="contact d-flex justify-content-start align-items-center mb-4 ">
-                  <i class="fa-solid fa-envelope"></i><a href="#" class="mx-4 contact">LouellasSweetFoodProducts@gmail.com</a>
+                <div class="contact d-flex justify-content-start align-items-center mb-3 ">
+                  <span class="me-2"><i class="fa-solid fa-envelope"></i></span>
+                  <a href="#" class="mx-4 contact">LouellasSweetFoodProducts@gmail.com</a>
                 </div>
-                <div class="contact d-flex justify-content-start align-items-center mb-4">
-                  <i class="fa-solid fa-location-dot"></i></i><a href="#" class="mx-4 contact"> Zone 1 Bulan, Sorsogon, Philippines, 4706</a>
+                <div class="contact d-flex justify-content-start align-items-center mb-3">
+                 <span class="me-2"> <i class="fa-solid fa-location-dot"></i></span>
+                 <a href="#" class="mx-4 contact"> Zone 1 Bulan, Sorsogon, Philippines, 4706</a>
                 </div>
                 <div class="contact d-flex justify-content-start align-items-center ">
-                  <i class="fa-solid fa-phone"></i><a href="#" class="mx-4 contact">+639103157621</a>
+                 <span class="me-2">  <i class="fa-solid fa-phone"></i></span>
+                 <a href="#" class="mx-4 contact">+639103157621</a>
                 </div>
     
               </div>
   
-              <div class="col-md-6 contact-form">
+              <div class="col-lg-5 contact-form">
                 <form action="">
                   @csrf
                   <div class="input-container mx-3 text-center mt-3">
@@ -449,7 +538,7 @@
                       <textarea placeholder="Your message here" name="message" id="message" type="text" class="form-control email-input-form email-textarea" value={{old('message')}}></textarea>
                     </div>
                     <div class="d-flex justify-content-end mt-2">
-                      <button class="btn btn-success">Send Message</button>
+                      <button class="btn btn-success btn-sm">Send Message</button>
                     </div>
                   </div>
                 </form>
@@ -460,14 +549,18 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="footer container {{"/" == request()->path() ? '/' : 'reg-section-sm'}}">
       <div class="row">
-        <div class="d-flex justify-content-between align-content-middle col-md-12 mt-4">
-          <div class="copyright align-content-center">
-            <a class="footer-text"><span class="copy mx-1" >&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
+        <div class="d-flex justify-content-between align-content-center mt-4">
+          <div class="copyright d-flex align-items-center">
+            <div class="d-flex align-items-center">
+              <a class="footer-text"><span class="copy mx-1" >&copy;</span><span id="spanYear"> </span><span class="bar" style="color:black"> | </span>Louella's Sweet Food Products </a>
+            </div>
           </div>
-          <div class="terms">
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#termsAndConditions">Terms & Conditions</a>
+          <div class="terms d-flex align-items-center">
+            <div class="d-flex align-items-center">
+              <a class="footer-text" href="javascript:void(0)" data-toggle="modal" data-target="#termsAndConditions">Terms & Conditions</a>
+            </div>
           </div>
         </div>
       </div>
@@ -476,8 +569,8 @@
 </div>
   
 @include('partials.terms-and-conditions')
+
+
+
   
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
-  <script type="text/javascript">
-    
-  </script>
+  

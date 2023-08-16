@@ -30,12 +30,13 @@ class UserController extends Controller
         $user->address = request('address');
 
         // profile pic
-        $requestData = $request->all();
-        $filename = time().$request->file('profile_pic')->getClientOriginalName();
-        $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
+        // $requestData = $request->all();
+        if($request->hasFile('profile_pic')){
+            $filename = time().$request->file('profile_pic')->getClientOriginalName();
+            $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
+            $user->photo = '/storage/'.$path;
+        }
         
-        $user->photo = '/storage/'.$path;
-
         $user->save();
         
         return back()->with('success', 'Your profile has been Updated!');
@@ -63,6 +64,10 @@ class UserController extends Controller
 
     public function user_profile(){
         return view('pages.user_profile');
+    }
+
+    public function user_products(){
+        return view('pages.user_products');
     }
 
     // admin pages

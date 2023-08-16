@@ -40,15 +40,24 @@
                                         </div>
 
                                         <div class="col-lg-4">
-                                            <div class="mt-3" style="min-height: 15rem;">
-                                                <div class="">
-                                                  <h5 class="">Card title</h5>
-                                                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                                  <a href="#" class="card-link">Card link</a>
-                                                  <a href="#" class="card-link">Another link</a>
+                                            <div class="mt-4">
+                                                <h6 class="">Product</h6>
+                                                <div class="form-outline">
+                                                  <input type="search" id="form1" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;"/>
                                                 </div>
-                                              </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <h6 class="">Price/Item</h6>
+                                                <div class="form-outline">
+                                                  <input type="search" id="form1" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;"/>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <h6 class="">Total Amount Payable</h6>
+                                                <div class="form-outline">
+                                                  <input type="search" id="form1" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;"/>
+                                                </div>
+                                            </div>
                                         </div>
                                         <hr class="bg-dark">
                                         <div class="col-lg-12">

@@ -36,10 +36,10 @@ body{
     margin: 0;
 }
 h6.user-name{
-    margin-top: 2vh;
+    margin-top: 22px;
     margin-bottom: -10px;
     color: rgb(20, 20, 20) !important;
-    font-size: 1.3vw !important;
+    font-size: 18px !important;
 }
 p.user-email{
     font-size: 12px !important;
@@ -57,10 +57,10 @@ span.nav-link-text{
     font-size: 15px !important;
 }
 .icon{
-    width: 2vw !important;
+    width: 24px !important;
 }
 .fa-house, .fa-cart-shopping, .fa-user, .fa-bell, .fa-power-off{
-    font-size: 1.4vw !important;
+    font-size: 20px !important;
     color: #0ca53a !important;
 }
 .active{
@@ -72,20 +72,24 @@ span.nav-link-text{
     border-radius: 15px !important;
 }
 .user-dash-logo{
-    width: 10vw;
-    margin-left: -3vw !important;
+    width: 125px;
+    margin-left: -30px !important;
 }
-.welcome-message{
-    color: black !important;
-    font-size: 2vw !important;
-    font-weight: 350 !important;
-    margin-bottom: -10px;
+div.welcome-message{
+    position: absolute;
+    right: 5px;
+    top: 80px;
+    z-index: 100;
+    height: 55px;
+    width: 300px;
+    padding: 15px 10px;
 }
 .search-input{
-    border: 1px solid #7e7e7e !important;
+    border: 1px solid #b4b4b4 !important;
     border-radius: 15px !important;
-    width: 15vw !important;
+    width: 230px !important;
     padding: 6px 10px !important;
+    display: none !important;
 }
 .search-input:focus{
     border: 1px solid #0ca53a !important;
@@ -116,7 +120,9 @@ nav.navbar-main{
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
+.swiper-header{
+    margin-top: 10px !important;
+}
 @font-face {
     font-family: Lucida;
     src: url('/assets/fonts/LucidaHandwritingStdBold.TTF')  format('truetype');
@@ -125,37 +131,35 @@ nav.navbar-main{
 .lsfp{
     font-family: Lucida;
     color: #000000;
-    font-size: 2.5vw !important;
+    font-size: 24px !important;
 }
 h1.lsfp{
     font-weight: bolder !important;
-    font-size: 5vw !important;
+    font-size: 50px !important;
     color: #491815;
 }
 p.lsfp-tagline{
     font-family: Lucida;
     color: #b60909;
-    font-size: 2vw;
+    font-size: 18px;
 }
 section.title{
     border-bottom: 2px solid grey;
-    border-radius: 0;
 }
 
 /* product card */
-
+.top-products-swiper{
+    height: 320px !important;
+}
 .swiper-title{
     color: #491815;
-    font-size: 1.5vw;
+    font-size: 20px;
 }
 .browse-all-text{
-    font-size: 1.2vw !important;
+    font-size: 16px !important;
     color: #000000 !important;
 }
- .slide-container{
-    width: 15vw !important;
- }
- div.cat-card, div.product-card{
+div.cat-card, div.product-card{
     border-radius: 15px;
     width: 230px;
     height: 330px !important;
@@ -168,7 +172,7 @@ section.title{
     object-fit: cover;
  }
  .product-name{
-    font-size: 1.2vw !important;
+    font-size: 16px !important;
  }
 img.product-img:hover{
     transform: scale(1.02);
@@ -177,31 +181,29 @@ img.product-img:hover{
  }
  div.product-cat{
     position: absolute;
-    bottom: 5vh;
+    bottom: 15px;
  }
  div.product-card{
     background-color: #EBEBEB;
-    height: 40vh;
+    height: 305px !important;
  }
  div.product-img-container{
     overflow: hidden;
-    height: 22vh;
+    height: 140px;
  }
 .product-name{
     color: #491815;
 }
-.product-cat-name{
-    font-size: 0.8vw !important;
-}
 .product-price{
-    margin-top: -2vh;
+    margin-top: 0px !important;
 }
-.product-act-price{
-    font-size: 1.2vw;
-}
+
 .rating-container{
-    font-size: 10px;
-    margin-top: -1.8vh !important;
+    font-size: 10px !important;
+    margin-top: -10px !important;
+}
+.rating-text{
+    font-size: 12px !important;
 }
 
 .buy-btn, .add-cart-btn{
@@ -232,6 +234,7 @@ button.swal2-confirm, button.swal2-cancel{
 }
 button.swal2-confirm{
     background-color:  #28a745 !important;
+    width: 100px !important;
 }
 button.swal2-cancel{
     background-color: #007bff !important;
@@ -247,7 +250,7 @@ button.swal2-cancel{
 
 /* //////////////////// PROFILE PAGE ///////////////////// */
 .profile-card-header{
-    height: 13vh !important;
+    height: 95px !important;
 }
 
 .profile-img-container-lg{
@@ -256,11 +259,11 @@ button.swal2-cancel{
     height: 120px !important;
     width: 120px !important;
     overflow: hidden;
-    margin-bottom: -16vh !important;
+    margin-bottom: -100px !important;
 }
 
 .profile-text-container-lg{
-    margin-bottom: -21vh !important;
+    margin-bottom: -130px !important;
 }
 .profile-input-form{
     border: 1px solid #8f8f8f !important;
@@ -270,10 +273,10 @@ button.swal2-cancel{
 }
 .profile-edit-icon{
     color: #ffffff !important;
-    font-size: 2.3vw !important;
+    font-size: 35px !important;
 }
 .text-name{
-    font-size: 2vw !important;
+    font-size: 28px !important;
 }
 
 /* ///////////// Modal Edit Profile ////////////// */
@@ -281,7 +284,7 @@ button.swal2-cancel{
 .profile-upload-icon{
     position: absolute;
     color: #ffffff;
-    font-size: 1.3vw;
+    font-size: 18px;
     left: 15px !important;
     top: 30px !important;
     text-align: center;
@@ -294,9 +297,8 @@ button.swal2-cancel{
     border-radius: 15px !important;
 }
 div.modal{
-    width: 90vw !important;
+    width: 1200px !important;
     height: auto !important;
-    left: 15vw;
 }
 div.modal-content{
     background: rgba(0, 0, 0, 0);
@@ -321,7 +323,7 @@ div.modal-content{
 }
 
 div.profile input{
-    font-size: 1.1vw !important;
+    font-size: 16px !important;
 }
 
 /* /////////////// ADMIN PAGES ////////////  */
@@ -329,28 +331,38 @@ div.profile input{
 /* Dashboard  */
 
 div.top-p-container{
-    height: 63vh;
-    max-height: 63vh !important;
+    height: 345px;
+    max-height: 345px !important;
 }
 div.p-main-container{
-    height: 63vh;
-    max-height: 63vh !important;
+    height: 350px;
+    max-height: 350px !important;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 div.p-container{
     box-shadow: 1px 2px 5px #491815;
 }
+.top-product-text{
+    padding-bottom: -10px !important;
+}
+
+canvas.chart-canvas{
+    height: 250px !important;
+}
+.graph-card{
+    height: 320px !important;
+}
 
 .p-image{
     width: auto !important;
-    height: 5vw !important;
+    height: 60px !important;
     margin: 0 !important;
 }
 
 div.star-ratings{
-    padding-top: 6vh;
-    font-size: 1vw;
+    padding-top: 50px;
+    font-size: 12px;
 }
 a.card-nav:hover{
     color: #0aa137 !important;
@@ -388,24 +400,99 @@ input[type="checkbox"].category-checkbox:checked{
 .swal2-x-mark-line-right, .swal2-x-mark-line-left {
     font-size: 14px !important;
   } 
-@media (max-width: 1366px) {
-   
-    HOME SECTION
 
-    h4.lsfp{
-        font-size: 2vw !important;
+
+
+@media screen and (max-width:767px){
+    /* .welcome-message{
+        display: none !important;
+    } */
+    .user-dash-logo{
+        width: 100px;
+        margin-left: -30px !important;
+    }
+    .nav-cart, .nav-bell, .nav-power, .nav-user{
+        font-size: 18px !important;
+    }
+    .sidenav-toggler-line{
+        width: 25px;
+        height: 3px !important;
+    }
+
+    .lsfp{
+        font-size: 18px !important;
     }
     h1.lsfp{
-        font-size: 4.5vw !important;
+        font-weight: bolder !important;
+        font-size: 40px !important;
     }
     p.lsfp-tagline{
-        font-size: 1.8vw !important;
+        font-size: 14px;
+    }
+   
+    .swiper-header{
+        margin-top: 20px !important;
+    }
+    .swiper-title{
+        font-size: 18px;
+    }
+    .browse-all-text{
+        font-size: 14px !important;
     }
 
     div.cat-card, div.product-card{
-        width: 220px;
-        height: 305px !important;
-     }
+        width: 200px;
+        height: 300px !important;
+    }
+    .product-price{
+        font-size: 16px;
+    }
+    .product-selling-price{
+        font-size: 18px;
+    }
+    /* profile page */
 
+    .profile-img-container-lg{
+        height: 80px !important;
+        width: 80px !important;
+        overflow: hidden;
+        margin-bottom: -130px !important;
+    }
+    .profile-text-container-lg{
+        margin-bottom: -150px !important;
+    }
+    .edit-profie-icon{
+        right: -10px;
+        top: 10px;
+    }
+    .profile-edit-icon{
+        font-size: 30px !important;
+    }
+    .text-name{
+        font-size: 24px !important;
+    }
+    div.modal{
+        width: 385px !important;
+        height: auto !important;
+    }
+    
+
+    /* Admin */
+    .search-input{
+        width: 200px !important;
+    }
+   
+    
+
+}
+
+
+@media screen and (min-width:768px) and (max-width: 1023px){
+
+
+}
+
+
+@media screen and (min-width:1440px){
 
 }

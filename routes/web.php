@@ -63,6 +63,7 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
 
       
     Route::get('/user_dashboard',  'user_dashboard')->name('user');
+    Route::get('/user_products',  'user_products');
     Route::get('/user_orders',  'user_orders');
     Route::get('/user_profile',  'user_profile');
   

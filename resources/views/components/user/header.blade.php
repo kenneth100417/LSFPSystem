@@ -31,6 +31,8 @@
 <link rel="stylesheet" href="/css/page-style.css">
 <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.0.5" rel="stylesheet" />
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
 <!-- Nepcha Analytics (nepcha.com) -->
 <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
 <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -75,6 +77,17 @@
                       <span class="nav-link-text ms-1">Home</span>
                   </a>
               </li>
+              
+              <li class="nav-item">
+                <a class="nav-link text-white tab {{ 'user_products' == request()->path() ? 'active' : ''}}" href="/user_products">
+                    
+                    <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
+                        <i class="fa-solid fa-bag-shopping fa-xl"></i>
+                    </div>
+                    
+                    <span class="nav-link-text ms-1">Products</span>
+                </a>
+            </li>
   
               <li class="nav-item">
                   <a class="nav-link text-white tab 
@@ -84,7 +97,7 @@
                   {{ 'user_cancelled' == request()->path() ? 'active' : ''}}" href="/user_orders">
                       
                       <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
-                          <i class="fa-solid fa-cart-shopping w-100"></i>
+                          <i class="fa-solid fa-cart-shopping "></i>
                       </div>
                       
                       <span class="nav-link-text ms-1">Orders</span>
@@ -102,74 +115,72 @@
                   </a>
               </li>
           </ul>
-  
-              
-      <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-          <form action="/logout" method="POST">
-              @csrf
-              <div class="mx-3 text-end">
-                  <button class="btn text-white bg-danger mt-4 w-50 nav-logout" href="" type="button" onclick="logout();">Log Out</button>
-              </div>
-          </form>
-      </div>
     
   </aside>
   
   <main class="main-content border-radius-lg ">
   
-          <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-              <div class="container-fluid py-1">
+          <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="true">
+              <div class="container-fluid py-1 d-flex justify-content-between">
                   
-                  <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="user-dash-logo">
-                  <x-message />
+                  <div>
+                    <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="user-dash-logo">
+                    <x-message />
+
+
+                    
+
+
+                  </div>
                   
-                  <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                  <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-0 d-flex justify-content-end" id="navbar">
                       <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                           <form class="form-inline search-container">
                               <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
                           </form>
                       </div>
-                      <ul class="navbar-nav  justify-content-end">
+                      <div>
+                        <ul class="navbar-nav d-flex justify-content-end">
                           
-                          
-                          <li class="nav-item d-flex align-items-center">
-                              <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
-                                  <i class="fa fa-cart-shopping me-sm-1 mx-2 nav-cart"></i>
-                              </a>
-                          </li>
-                          
-                          <li class="nav-item d-flex align-items-center">
-                          <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
-                              <i class="fa fa-bell me-sm-1 mx-2 nav-bell"></i>
-                          </a>
-                          </li>
-      
-                          <li class="nav-item d-flex align-items-center">
-                              <a href="/user_profile" class="nav-link text-body font-weight-bold px-0">
-                                  <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
-                              </a>
-                          </li>
-      
-                          <li class="nav-item d-flex align-items-center">
-                              <form action="/logout" method="POST" id="logout">
-                                  @csrf
-                                  <button  type="button" class="logout-btn" onclick="logout();">
-                                      <i class="fa fa-power-off mx-2 nav-power"></i>
-                                  </button>
-                              </form>
-                          </li>
-      
-                          <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                              <a href="javascript:;" class="nav-link text-body mx-2 " id="iconNavbarSidenav">
-                                  <div class="sidenav-toggler-inner">
-                                  <i class="sidenav-toggler-line"></i>
-                                  <i class="sidenav-toggler-line"></i>
-                                  <i class="sidenav-toggler-line"></i>
-                                  </div>
-                              </a>
-                          </li>
-      
-                      </ul>
+                            <li class="nav-item d-flex align-items-center">
+                                <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                                    <i class="fa fa-cart-shopping me-sm-1 mx-2 nav-cart"></i>
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item d-flex align-items-center">
+                            <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-bell me-sm-1 mx-2 nav-bell"></i>
+                            </a>
+                            </li>
+        
+                            <li class="nav-item d-flex align-items-center">
+                                <a href="/user_profile" class="nav-link text-body font-weight-bold px-0">
+                                    <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
+                                </a>
+                            </li>
+        
+                            <li class="nav-item d-flex align-items-center">
+                                <form action="/logout" method="POST" id="logout">
+                                    @csrf
+                                    <button  type="button" class="logout-btn" onclick="logout();">
+                                        <i class="fa fa-power-off ms-2 nav-power"></i>
+                                    </button>
+                                </form>
+                            </li>
+        
+                            <li class="nav-item d-xl-none ps-0 d-flex align-items-center justify-content-end p3-n5">
+                                <a href="javascript:;" class="nav-link text-body menu" id="iconNavbarSidenav">
+                                    <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    </div>
+                                </a>
+                            </li>
+        
+                        </ul>
+                      </div>
                   </div>
               </div>
           </nav>

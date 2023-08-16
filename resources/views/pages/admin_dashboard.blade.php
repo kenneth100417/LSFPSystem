@@ -99,32 +99,27 @@
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-lg-7 col-md-12 mt-4">
-                        <div class="card z-index-2">
+                        <div class="card z-index-2 graph-card">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+                                <div class="bg-gradient-success shadow-success border-radius-lg py-0 pe-1">
                                     <div class="chart">
-                                        <canvas id="chart-line" class="chart-canvas" height="320"></canvas>
+                                        <canvas id="chart-line" class="chart-canvas" ></canvas>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h6 class="mb-0"> Daily Sales </h6>
-                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today
-                                    sales. </p>
+                                <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now();}} </p>
                                 <hr class="dark horizontal">
-                                <div class="d-flex ">
-                                    <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                    <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now();}} </p>
-                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-5 col-md-12">
                         <div class="card top-p-container ">
-                            <div class="bg-transparent">
-                               <h4 class="mt-3 mx-4">Top Products</h4>
-                               <hr class="dark horizontal mb-1">
+                            <div class="bg-transparent top-product-text-con">
+                               <h4 class="mt-3 ms-4 top-product-text">Top Products</h4>
+                               <hr class="dark horizontal mb-1 mt-n2">
                             </div>
                         
                             <div class="card-body p-main-container mt-0 py-0 pe-3">
@@ -168,7 +163,7 @@
                                     </div>
                                     </div>
                                     <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
+                                        <div class="ms-auto text-warning ratings-star">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -193,7 +188,7 @@
                                     </div>
                                     </div>
                                     <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
+                                        <div class="ms-auto text-warning ratings-star">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -218,7 +213,7 @@
                                     </div>
                                     </div>
                                     <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
+                                        <div class="ms-auto text-warning ratings-star">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -243,7 +238,7 @@
                                     </div>
                                     </div>
                                     <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
+                                        <div class="ms-auto text-warning ratings-star">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -268,7 +263,7 @@
                                     </div>
                                     </div>
                                     <div class="star-ratings">
-                                        <div class="ms-auto text-warning ratings-star text-sm">
+                                        <div class="ms-auto text-warning ratings-star">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -277,8 +272,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                              
+
+                                
                             
 
                             
@@ -303,6 +298,9 @@
 <script src="./assets/js/plugins/smooth-scrollbar.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 <script type="text/javascript">
+
+$('#alert').delay(5000).hide(0); 
+  
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
     var options = {
@@ -360,7 +358,10 @@ var loader = document.getElementById('preloader');
 
 window.addEventListener("load", function(){
     loader.style.display = "none";
+    
 });
+
+
 
 
 </script>

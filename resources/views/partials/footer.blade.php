@@ -1,3 +1,19 @@
+
+{{-- 
+@env('local')
+<script src="http://localhost:35729/livereload.js"></script>
+@endenv --}}
+
+<script>
+    $(".nav-link").on("click", function(){
+        let x = document.getElementById('navbar-toggler').getAttribute("aria-expanded");
+        let nav = document.getElementById('navbarNavDropdown');
+        
+        if(x == "true"){
+            nav.classList.remove("show");
+        }
+    });
+</script>
 <!--   Core JS Files   -->
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/core/bootstrap.min.js"></script>

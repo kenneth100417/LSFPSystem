@@ -8,6 +8,7 @@
                         <h6 class="text-white text-capitalize ps-3">Product Inventory</h6>
                       </div>
                       <div class="d-flex  align-items-center">
+                        
                         <div class="d-flex  align-items-center" >
 
                             <h5 class="text-white text-capitalize pe-3"><i class="fa-solid fa-arrow-up-wide-short"></i></h5>
@@ -29,6 +30,18 @@
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
+                    <div class="col-lg-12 mt-2">
+                        <div class="d-flex justify-content-end search align-items-center">
+                            <form class="form-inline search-container">
+                                <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search"  style="display: 
+                                {{ 'admin_product_info' == request()->path() ? 'block !important;' : ''}}
+                                {{ 'admin_product_info_list' == request()->path() ? 'block !important;' : ''}}
+                                {{ 'admin_product_info_inventory' == request()->path() ? 'block !important;' : ''}}
+                                {{ 'admin_product_info_reviews' == request()->path() ? 'block !important;' : ''}}
+                                {{ 'admin_product_info_archived' == request()->path() ? 'block !important;' : ''}}">
+                            </form>
+                        </div>
+                    </div>
                     <div class="table-responsive p-0">
                       <table class="table align-items-center mb-0" >
                         <thead>

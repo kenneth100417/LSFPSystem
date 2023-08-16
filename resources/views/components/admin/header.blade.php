@@ -181,49 +181,52 @@
     
     <main class="main-content border-radius-lg ">
     
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-                <div class="container-fluid py-1 ">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+            <div class="container-fluid py-1 d-flex justify-content-between align-items-center ">
                     
+                <div>
                     <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="user-dash-logo">
                     <x-message />
+                </div>
                     
-                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
-                       
-                        <ul class="navbar-nav">
-                            
-                            <li class="nav-item d-flex align-items-center mx-1">
+                <div class="d-flex justify-content-end align-items-center">
+
+                    <ul class="navbar-nav">
+                    
+                        <li class="nav-item d-flex align-items-center mx-1">
                             <a href="/" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-bell me-sm-1 mx-2 nav-bell"></i>
                             </a>
-                            </li>
-        
-                            <li class="nav-item d-flex align-items-center">
-                                <a href="/admin_manage_account" class="nav-link text-body font-weight-bold px-0">
-                                    <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
-                                </a>
-                            </li>
-        
-                            <li class="nav-item d-flex align-items-center">
-                                <form action="/logout" method="POST" id="logout">
-                                    @csrf
-                                    <button  type="button" class="logout-btn" onclick="logout();">
-                                        <i class="fa fa-power-off mx-2 nav-power"></i>
-                                    </button>
-                                </form>
-                            </li>
-        
-                            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                                <a href="javascript:;" class="nav-link text-body mx-2 " id="iconNavbarSidenav">
-                                    <div class="sidenav-toggler-inner">
+                        </li>
+    
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="/admin_manage_account" class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
+                            </a>
+                        </li>
+    
+                        <li class="nav-item d-flex align-items-center">
+                            <form action="/logout" method="POST" id="logout">
+                                @csrf
+                                <button  type="button" class="logout-btn" onclick="logout();">
+                                    <i class="fa fa-power-off mx-2 nav-power"></i>
+                                </button>
+                            </form>
+                        </li>
+    
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body mx-2 " id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
                                     <i class="sidenav-toggler-line"></i>
                                     <i class="sidenav-toggler-line"></i>
                                     <i class="sidenav-toggler-line"></i>
-                                    </div>
-                                </a>
-                            </li>
-        
-                        </ul>
-                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
+            </div>
+        </div>
+    </div>
+</nav>
 

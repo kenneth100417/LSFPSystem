@@ -28,61 +28,68 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  
+  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script> --}}
+  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/> --}}
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+
   
 </head>
 
 <body>
   <x-message />
-  <div class="leaves">
+   <div class="leaves">
     <img src="/img/leaves.png">
-    
-  </div>
+  </div> 
+  
 <header>
-  <nav class="navbar navbar-expand-md fixed-top mt-2">
-    <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="logo">
-    <i class="navbar-toggler fa-solid fa-bars" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"></i>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-      <ul class="navbar-nav text-center justify-content-end">
-        <li class="nav-item mx-3">
-          <a class="nav-link nav-btn" href="#home">Home</a>
-        </li>
-        <li class="nav-item mx-3">
-          <a class="nav-link nav-btn" href="#product">Products</a>
-        </li>
-        <li class="nav-item mx-3">
-          <a class="nav-link nav-btn" href="#about">About</a>
-        </li>
-        <li class="nav-item mx-3 ">
-          <button class="btn nav-btn-contact px-3">
-            <a class="nav-link nav-btn-con mt-0" href="#contact">Contact Us</a>
-          </button>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div class="navbar-container">
+    <nav class="navbar navbar-expand-md fixed-top mt-2">
+      <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="logo">
+      <i class="navbar-toggler fa-solid fa-bars" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggler"></i>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav text-center justify-content-end">
+          <li class="nav-item mx-3">
+            <a class="nav-link nav-btn" href="#home">Home</a>
+          </li>
+          <li class="nav-item mx-3">
+            <a class="nav-link nav-btn" href="#product">Products</a>
+            
+          </li>
+          <li class="nav-item mx-3">
+            <a class="nav-link nav-btn" href="#about">About</a>
+          </li>
+          <li class="nav-item mx-3 ">
+            <button class="btn nav-btn-contact px-3">
+              <a class="nav-link nav-btn-con mt-0" href="#contact">Contact Us</a>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </header>
 <div id="preloader"></div> 
 <div class="page-container">
   <section id="home">
-    <div class="container search-container pt-4" >
-      <div class="row justify-content-end">
-        <div class="col-sm-3">
-          <form class="form-inline search-container">
-            <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-outline-success search-btn" type="button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </div>
-          </form>
+    <div class="container search-container pt-4" id="search">
+      <div class="row d-flex justify-content-end">
+        <div class=" col-lg-3 col-sm-3 col-md-3 col-xl-3">
+          <div class="d-flex justify-content-end search">
+            <form class="form-inline search-container">
+              <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-outline-success search-btn d-flex justify-content-center align-items-center" type="button">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
     <div class="container mt-4 text-center">
       <div class="row align-middle">
-        <div class="col-md-3 card-container">
+        <div class="col-md-3 col-sm-12 card-container login-container">

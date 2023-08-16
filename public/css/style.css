@@ -3,10 +3,14 @@
     margin: 0;
     padding: 0;
 }
+
 nav{
+    background: url(/img/landing-page-bg.png);
+    background-size: cover;
     position: fixed;
-    padding-top: 2vh !important;
+    padding-top: 12px !important;
 }
+
 body{
     overflow: hidden;
     position: fixed;
@@ -27,20 +31,34 @@ a:hover{
 }
 div.leaves img{
     transform: scaleX(-1);
-    width: 15vw;
-    position: fixed !important;
-    left: 20vw;
-    top: 0vh;
+    width: 200px;
+    position: absolute !important;
+    left: 200px;
+    top: -35px;
+    z-index: 2000;
+    
 }
+
+/* div.leaves img{
+    
+    width: 300px;
+    position: absolute !important;
+    right: -50px;
+    bottom: -80px;
+    z-index: 2000;
+    
+} */
 
 /* Navbar */
 
 .logo{
-    width: 10vw;
+    width: 180px;
+    height: auto;
+    filter: drop-shadow(2px 2px 1px #ebebeb);
 }
 
 a.nav-btn{
-    font-size: 1.4vw !important;
+    font-size: 22px !important;
     color: black;
     font-weight: 450;
 }
@@ -61,13 +79,13 @@ button.nav-btn-contact:hover{
 
 a.nav-btn-con{
     color:#491815 !important;
-    font-size: 1.3vw !important;
+    font-size: 18px !important;
     font-weight: 500 !important;
     text-transform: capitalize;
 }
 
 i.fa-bars{
-    font-size: 4vw;
+    font-size: 40px;
     border: none;
     color: #491815;
 }
@@ -87,7 +105,7 @@ div.page-container{
     overflow-x: hidden;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    scroll-padding-top: 11vh;
+    scroll-padding-top: 60px;
 }
 section{
     height: 100%;
@@ -95,39 +113,41 @@ section{
     scroll-snap-align: start;
 }
 section#home{
-    margin-top: 11vh;
+    margin-top: 100px;
 }
 /* search */
 form.search-container{
     display: flex;
+    margin-top: 25px;
 }
 button.search-btn{
     background-color: #2EB757;
+    border: 1px solid #2EB757;
     color: #ffffff;
     border-radius: 15px;
     margin-left: -68px;
-    height: 5.5vh;
+    height: 45px;
 }
 button.search-btn:hover{
-    background-color: #0fcf49 !important;
+    background-color: #31cc5f !important;
     opacity: 100%;
     color: #ffffff !important;
 }
 input.search-input{
     border-radius: 15px;
-    border: 1px solid #0bc944;
+    border: 1px solid #2EB757;
     padding: 10px !important;
     padding-right: 73px !important;
-    font-size: 1vw;
-    height: 5.5vh;
-    width: 80vw !important;
+    font-size: 18px;
+    height: 45px;
+    width: 300px !important;
 }
 input.search-input:focus{
-    border: 2px solid #0bc944;
+    border: 1px solid #0bc944;
 }
 
 .fa-magnifying-glass{
-    font-size: 1.3vw;
+    font-size: 18px;
 }
 
 /* Alert message */
@@ -138,17 +158,20 @@ div.alert-message{
     top: 10vh;
     z-index: 100 !important;
 }
+
 /* card */
 .card{
-    width: 20vw;
+    width: 280px;
     height: auto;
 }
-
+div.register-add-card{
+    margin-top: -80px;
+}
 /* forms */
 
-.login-bg-color{
+/* .login-bg-color{
     background-color: #491815 !important;
-}
+} */
 
 .login-btn,.signup-btn,.setupadd-btn,.verify-btn{
     background-color: #2EB757;
@@ -183,12 +206,10 @@ div.alert-message{
 .login-link:hover{
     color: #09377c;
 }
-p.d-account{
-    font-size: 1.1vh;
-}
-div.reg-card{
-    margin-top: -30px !important;
-}
+/* p.d-account{
+    font-size: 50px;
+} */
+
 div.card-body input{
     border: 1px solid #a09f9f !important;
 }
@@ -203,46 +224,54 @@ div.card-body input:focus{
 
 /* business name / tagline */
 .lsfp-container{
-    padding-right: 1vw;
-    padding-left: 2.5vw;
+    padding-right: 5px;
+    padding-left: 40px;
 }
 .lsfp{
     font-family: Lucida;
     color: #000000;
-    font-size: 2.5vw !important;
+    font-size: 35px !important;
 }
 h1.lsfp{
     font-weight: bolder !important;
-    font-size: 5vw !important;
+    font-size: 65px !important;
     color: #491815;
 }
 p.lsfp-tagline{
     font-family: Lucida;
     color: #b60909;
-    font-size: 2vw;
+    font-size: 24px;
 }
 p.lsfp-desc{
     font-family: Lucida;
     color: #000000;
-    font-size: 1vw;
-    padding-left: 5vw;
-    padding-right: 2vw;
+    font-size: 13px;
+    padding-left: 30px;
+    padding-right: 10px;
 }
+
 div.cacao img{
-    width: 25vw;
+    width: 270px;
     height: auto;
     position: relative;
-    left: 18vw;
-    bottom: 12vh;
+    left: 250px;
+    bottom: 90px;
+}
+div.sm-login-btn{
+        display: none;
+}
+div.expl-btn{
+    justify-content: start !important;
+    padding-left: 280px;
 }
 button.explore-btn{
     background-color: #F68010;
     color: #000000;
-    font-size: 1vw;
+    font-size: 18px;
 }
 button.explore-btn:hover{
     background-color: #d46d0b;
-    color: #000000;
+    color: #000000;;
 }
 .datepicker{
     border: 2px solid #0ca53a !important;
@@ -257,15 +286,21 @@ button.explore-btn:hover{
  /* ///////////////////////  CATEGORY SECTION    /////////////////////// */
  .swiper-title{
     color: #491815;
-    font-size: 2vw;
+    font-size: 30px;
 }
- .slide-container{
-    width: 18vw !important;
- }
+ 
+ .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
  div.cat-card, div.product-card{
     border-radius: 15px;
-    width: 18vw;
-    height: 50vh;
+    width: 250px;
+    height: 350px;
     box-shadow: 1px 2px 5px #491815;
     overflow: hidden;
  }
@@ -281,7 +316,10 @@ button.explore-btn:hover{
  }
  div.product-cat{
     position: absolute;
-    bottom: 5vh;
+    left: 50;
+    right: 50;
+    bottom: 30px;
+    width: 250px;
  }
  div.product-cat h5{
     color: #EBEBEB !important;
@@ -289,11 +327,11 @@ button.explore-btn:hover{
  }
  div.product-card{
     background-color: #EBEBEB;
-    height: 55vh;
+    height: 405px;
  }
  div.product-img-container{
     overflow: hidden;
-    height: 28vh;
+    height: 200px;
  }
 .product-name{
     color: #491815;
@@ -304,7 +342,9 @@ button.explore-btn:hover{
 .rating-container{
     font-size: 14px;
 }
-
+.add-cart-btn{
+    padding: 0px 10px;
+}
 .buy-btn{
     background-color: #F68010;
     font-size: 12px !important;
@@ -317,22 +357,22 @@ button.explore-btn:hover{
 /* /////////////////////////////////////////// */
 
 fieldset.about-container{
-    margin-top: 7vh;
+    margin-top: 70px;
     border: 2px solid #a09f9f;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 75vh;
-    padding: 2vh 5vw;
+    height: 460px;
+    padding: 10px 60px;
     background-color: rgba(201, 201, 201, 0.29);
     border-radius: 15px;
 }
 fieldset.contact-container{
     overflow-y: scroll;
     overflow-x: hidden;
-    margin-top: 7vh;
+    margin-top: 70px;
     border: 2px solid #a09f9f;
-    height: 70vh;
-    padding: 2vh 5vw;
+    height: 420px;
+    padding: 5px 60px;
     background-color: rgba(201, 201, 201, 0.29);
     border-radius: 15px;
 }
@@ -341,8 +381,8 @@ legend{
     width: auto;
 }
 .about-title, .contact-title{
-    font-size: 1.3vw;
-    width: 10vw;
+    font-size: 18px;
+    width: 150px;
     border: 1px solid #EBEBEB !important;
     border-radius: 15px;
     padding: 5px 0px !important;
@@ -351,10 +391,14 @@ legend{
     text-transform: uppercase;
     font-weight: 500;
 }
+.history-text{
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 p.about-text{
-    text-indent: 5vw;
+    text-indent: 60px;
     color: #491815;
-    font-size: 1.3vw;
+    font-size: 18px;
     text-align: justify;
     font-weight: 400;
 }
@@ -362,19 +406,26 @@ p.about-text{
     text-align: center !important;
 }
 .owner-name{
-    font-size: 2.2vw;
+    font-size: 40px;
     color: #111111;
     font-family: 'Times New Roman', Times, serif;
     text-decoration: underline;
 }
 .position{
     text-align: center;
-    margin-top: -5px !important;
-    font-size: 1.2vw;
+    margin-top: -20px !important;
+    font-size: 16px;
     color: #111;
 }
 .fa-facebook,.fa-envelope,.fa-phone{
-    font-size: 3vw;
+    font-size: 40px;
+}
+.fa-location-dot{
+    color: #b60909;
+    font-size: 50px;
+}
+.fa-location-dot:hover{
+    color: #db0e0e;
 }
 .fa-facebook{
     color: #226ee0;
@@ -394,19 +445,14 @@ p.about-text{
 .fa-phone:hover{
     color: #12d14b;
 }
-.fa-location-dot{
-    color: #b60909;
-    font-size: 3.7vw;
-}
-.fa-location-dot:hover{
-    color: #db0e0e;
-}
+
 .contact-sub-title{
     color: #491815;
     font-family: Lucida;
+    font-size: 25px;
 }
 a.contact{
-    font-size: 1.4vw !important;
+    font-size: 20px !important;
 }
 a.contact:hover{
     color: #111111;
@@ -419,12 +465,13 @@ a.contact:hover{
     border: 1px solid #0baf3c !important;
 }
 .email-textarea{
-    height: 18vh;
+    height: 100px;
 }
 .footer-text,.terms{
-    font-size: 1.3vw;
+    font-size: 20px;
     color: #491815 !important;
 }
+
 span.copy{
     color: #F68010;
 }
@@ -435,59 +482,478 @@ a.card-nav:hover{
     color: #0aa137 !important;
 }
 
-/* mobile view */
-@media (max-width: 320px) {
-    
-}
-/* ipad/tablet view */
-@media (max-width: 767px) {
-    
-}
 
-@media (max-width: 1366px) {
-    /* HOME SECTION */
-    div.search-container{
-        padding-top: 5vh !important;
+
+/* MOBILE VIEW */
+
+@media screen and (max-width:767px){
+    nav{
+        background: #ebebeb;
     }
-    h4.lsfp{
-    font-size: 2.5vw !important;
+    ul li a.nav-link{
+        font-size: 16px !important;
+    }
+    ul li a.nav-btn-con{
+        font-size: 14px !important;
+    }
+    div.page-container{
+        background: url(/img/landing-page-bg.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .logo{
+        width: 110px;
+        height: auto;
+    }
+    div.leaves img{
+        display: none;
+    }
+    i.fa-bars{
+        font-size: 30px;
+    }
+    button.search-btn{
+        border-radius: 10px;
+        margin-left: -50px;
+        height: 35px;
+        width: 20px;
+    }
+    input.search-input{
+        border-radius: 10px;
+        padding-right: 5px !important;
+        padding-right: 0px;
+        font-size: 14px;
+        height: 35px;
+        width: 200px !important;
+    }
+    .fa-magnifying-glass{
+        font-size: 14px;
+    }
+    div.search{
+        padding-right: 15px;
+        margin-top: -25px;
+    }
+    div#login-form{
+        display: none;
+    }
+    .lsfp-container{
+        padding-right: 10px;
+        padding-left: 0;
+        margin-top: 20px;
+    }
+    .lsfp{
+        font-size: 24px !important;
     }
     h1.lsfp{
-    font-size: 4.9vw !important;
+        font-size: 50px !important;
     }
     p.lsfp-tagline{
-    font-size: 2vw !important;
+        font-size: 18px;
     }
     p.lsfp-desc{
-    font-size: 0.9vw !important;
-    }
-    a.explore-btn{
-    font-size: 1.0vw !important;
+        font-size: 13px;
+        padding-left: 10px;
+        padding-right: 5px;
     }
     div.cacao img{
-    width: 20vw !important;
-    height: auto;
+       display: none;
+    }
+    div.expl-btn{
+        justify-content: center !important;
+        padding-left: 0px;
+    }
+    div.sm-login-btn{
+        display: block;
     }
 
-    /* CONTACT US SECTION */
-    
-    H3.contact-sub-title{
-        font-size: 2vw !important;
+    /* log in modal */
+    div.modal-content{
+        margin: 30px !important;
     }
-    div.contact-header{
-        margin-bottom: 3vh !important;
-    }
-    div.input-container{
-        margin-left: 2vw !important;
+    a.login-link{
+        font-size: 14px;
     }
 
-    
-    
-}
+    /* register page */
+    div.card-container{
+        display: flex;
+        justify-content: center !important;
+        align-items: center;
+        margin-left: 0;
+        padding: 0px;
+        
+    }
+    div.card{
+        top: 100px;
+        z-index: 100 !important;
+    }
 
-@media (max-width: 1440px) {
+    .reg-section-sm{
+        display: none;
+    }
+
+    /* category */
+    .swiper-title{
+        color: #491815;
+        font-size: 25px;
+    }
+    div#category{
+        padding-top: 10px !important;
+    }
+    div#top-products{
+        padding-top: 10px !important;
+    }
+
+    /* about*/
+
+    fieldset.about-container{
+    margin-top: 20px;
+    border: 2px solid #a09f9f;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 85vh;
+    padding: 5px 10px;
+    background-color: rgba(201, 201, 201, 0.29);
+    border-radius: 15px;
+    }
+    p.about-text{
+        text-indent: 60px;
+        color: #491815;
+        font-size: 18px;
+        text-align: justify;
+        font-weight: 400;
+    }
+    .about-title, .contact-title{
+        font-size: 14px;
+        width: 120px;
+    }
+    p.about-text{
+        text-indent: 60px;
+        color: #491815;
+        font-size: 14px;
+        text-align: justify;
+        font-weight: 400;
+    }
+    .history-text{
+        font-size: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .owner-name{
+        font-size: 28px;
+    }
+    .position{
+        margin-top: -20px !important;
+        font-size: 12px;
+        color: #111;
+    }
+
+    /* contact */
+
+    fieldset.contact-container{
+        margin-top: 20px;
+        border: 2px solid #a09f9f;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 80vh;
+        padding: 5px 10px;
+        background-color: rgba(201, 201, 201, 0.29);
+        border-radius: 15px;
+    }
+    .contact-sub-title{
+        color: #491815;
+        font-family: Lucida;
+        font-size: 16px;
+    }
+    a.contact{
+        font-size: 14px !important;
+    }
+    .con-info-text{
+        font-size: 14px;
+    }
+
+    .fa-facebook,.fa-envelope,.fa-phone{
+        font-size: 30px;
+    }
+    .fa-location-dot{
+        color: #b60909;
+        font-size: 35px;
+    }
+    a.contact{
+        inline-size: 67vw;
+        overflow-wrap: break-word;
+    }
+    .footer-text{
+        font-size: 12px;
+    }
+    div.footer{
+        margin-top: -10px !important;
+    }
+    
+}   
+
+
+
+/* TABLET VIEW */
+
+@media screen and (min-width:768px) and (max-width: 1023px){
+    
+    nav{
+        background: #ebebeb;
+    }
+    ul li a.nav-link{
+        font-size: 16px !important;
+    }
+    ul li a.nav-btn-con{
+        font-size: 14px !important;
+    }
+    div.page-container{
+        background: url(/img/landing-page-bg.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .logo{
+        width: 110px;
+        height: auto;
+    }
+    div.leaves img{
+        display: none;
+    }
+    i.fa-bars{
+        font-size: 30px;
+    }
+    button.search-btn{
+        border-radius: 10px;
+        margin-left: -50px;
+        height: 35px;
+        width: 20px;
+    }
+    input.search-input{
+        border-radius: 10px;
+        padding-right: 5px !important;
+        padding-right: 0px;
+        font-size: 14px;
+        height: 35px;
+        width: 200px !important;
+    }
+    .fa-magnifying-glass{
+        font-size: 14px;
+    }
+    div.search{
+        padding-right: 15px;
+        margin-top: 0px;
+    }
+    div.login-container{
+        display: none !important;
+    }
+    .lsfp-container{
+        padding-right: 10px;
+        padding-left: 0;
+        margin-top: 20px;
+    }
+    .lsfp{
+        font-size: 24px !important;
+    }
+    h1.lsfp{
+        font-size: 50px !important;
+    }
+    p.lsfp-tagline{
+        font-size: 18px;
+    }
+    p.lsfp-desc{
+        font-size: 13px;
+        padding-left: 10px;
+        padding-right: 5px;
+    }
+    div.cacao img{
+       display: none;
+    }
+    div.expl-btn{
+        justify-content: center !important;
+        padding-left: 0px;
+    }
+    div.sm-login-btn{
+        display: block;
+    }
+
+    /* log in modal */
+    div.modal-content{
+        margin: 30px !important;
+    }
+    a.login-link{
+        font-size: 14px;
+    }
+
+    /* register page */
+    div.card-container{
+        display: flex;
+        justify-content: center !important;
+        align-items: center;
+        margin-left: 0;
+        padding: 0px;
+        
+    }
+    div.card{
+        top: 100px;
+        z-index: 100 !important;
+    }
+
+    .reg-section-sm{
+        display: none;
+    }
+
+    /* category */
+    .swiper-title{
+        color: #491815;
+        font-size: 25px;
+    }
+    div#category{
+        padding-top: 10px !important;
+    }
+    div#top-products{
+        padding-top: 10px !important;
+    }
+
+    /* product */
+    .add-cart-btn, .buy-btn{
+        padding: 10px 20px !important;
+ 
+    }
+    
+
+    /* about*/
+
+    fieldset.about-container{
+        margin-top: 30px;
+        height: 85vh;
+        padding: 5px 10px;
+        }
+    p.about-text{
+        text-indent: 60px;
+        color: #491815;
+        font-size: 18px;
+        text-align: justify;
+        font-weight: 400;
+    }
+    .about-title, .contact-title{
+        font-size: 14px;
+        width: 120px;
+    }
+    p.about-text{
+        text-indent: 60px;
+        color: #491815;
+        font-size: 14px;
+        text-align: justify;
+        font-weight: 400;
+    }
+    .history-text{
+        font-size: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .owner-name{
+        font-size: 28px;
+    }
+    .position{
+        margin-top: -20px !important;
+        font-size: 12px;
+        color: #111;
+    }
+
+    /* contact */
+
+    fieldset.contact-container{
+        margin-top: 30px;
+        height: 80vh;
+        padding: 10px 20px;
+    }
+    div.contact{
+        margin-left: 70px;
+        margin-right: 80px;
+    }
+    .contact-sub-title{
+        color: #491815;
+        font-family: Lucida;
+        font-size: 22px;
+    }
+    a.contact{
+        font-size: 18px !important;
+    }
+    .con-info-text{
+        font-size: 18px;
+    }
+
+    .fa-facebook,.fa-envelope,.fa-phone{
+        font-size: 40px;
+    }
+    .fa-location-dot{
+        color: #b60909;
+        font-size: 50px;
+    }
+    div.contact-form{
+        padding: 0px 50px;
+    }
+    a.contact{
+        inline-size: 67vw;
+        overflow-wrap: break-word;
+    }
+    .footer-text{
+        font-size: 15px;
+    }
+    div.footer{
+        margin-top: -10px !important;
+    }
+    
+}  
+
+/* DESKTOP VIEW */
+@media screen and (min-width:1024px) and (max-width: 1439px){
+    
+}   
+
+@media screen and (min-width:1440px){
    
+    div.leaves img{
+        left: 215px;
+        top: -30px;
+    }
+    form.search-container{
+        margin-top: 35px;
+    }
+    h1.lsfp{
+        font-size: 75px !important;
+    }
+    p.lsfp-tagline{
+        font-size: 26px;
+    }
+    p.lsfp-desc{
+        font-size: 16px;
+    }
+    div.cacao img{
+        width: 350px;
+    }
 
+
+    /* ////////////// */
+
+    fieldset.about-container{
+        height: 80vh;
+    }
+    fieldset.contact-container{
+        height: 70vh;
+        padding: 10px 80px;
+    }
+    .contact-sub-title{
+        color: #491815;
+        font-family: Lucida;
+        font-size: 30px;
+    }
+    .con-info-text{
+        font-size: 22px;
+        margin-bottom: 50px;
+    }
+    div.contact-form{
+        padding: 50px 30px;
+    }
 
 }
 

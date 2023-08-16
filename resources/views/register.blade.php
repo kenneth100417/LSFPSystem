@@ -12,9 +12,9 @@
           {{-- Setup Personal Info --}}
           <form action="/add_user" method="POST" role="form" class="text-start" id="reg_form">
             @csrf {{--  Cross-site Request Forgery --}}
-            <div class="card z-index-0 fadeIn3 fadeInBottom" id="signup-form">    
+            <div class="card z-index-0 fadeIn3 fadeInBottom mt-n5 " id="signup-form">    
               <h4 class="font-weight-bolder text-center mt-3">Sign Up</h4>
-              <h6 class="font-weight-bolder text-start mx-4">Personal Information</h6>
+              <h6 class="font-weight-bolder text-start mx-4 mb-n3">Personal Information</h6>
               <div class="card-body reg-card">
                 <div class="input-group input-group-outline mb-2">
                   <input placeholder="Firstname" name="firstname" id="firstname" type="text" class="form-control" value={{old('firstname')}}>
@@ -77,9 +77,9 @@
               </div>
 
               {{-- Setup Address --}}
-              <div class="card z-index-0 fadeIn3 fadeInBottom " id="setupadd-form" hidden>    
+              <div class="card z-index-0 fadeIn3 fadeInBottom  register-add-card" id="setupadd-form" hidden>    
                 <h4 class="font-weight-bolder text-center mt-3">Sign Up</h4>
-                <h6 class="font-weight-bolder text-start mx-4">Setup Address</h6>
+                <h6 class="font-weight-bolder text-start mx-4 mb-n3">Setup Address</h6>
                 <div class="card-body reg-card">
                   <div class="input-group input-group-outline mb-2">
                     <input  placeholder="Street/Purok" type="text" class="form-control" name="street" id="street-text">
@@ -110,9 +110,9 @@
               </div>
 
               {{-- Setup Account Info --}}
-              <div class="card z-index-0 fadeIn3 fadeInBottom" id="account-form" hidden>    
+              <div class="card z-index-0 fadeIn3 fadeInBottom mt-n5" id="account-form"  hidden>    
                 <h4 class="font-weight-bolder text-center mt-3">Sign Up</h4>
-                <h6 class="font-weight-bolder text-start mx-4">Account Information</h6>
+                <h6 class="font-weight-bolder text-start mx-4 mb-n3">Account Information</h6>
                 <div class="card-body reg-card">
                   <div class="input-group input-group-outline mb-2">
                     <input  placeholder="Email" name="email" id="email1" type="email" class="form-control" value={{old('email')}}>
@@ -144,6 +144,7 @@
                   <div class="text-center">
                     <button type="submit" class="btn signup-btn w-100 my-2 mb-1">Next</button>
                     <button type="button" class="btn cancel-btn w-100 my-1 mb-1" onclick="showSetupAddForm();">Back</button>
+                    <small class="mt-1">By clicking next, you agree to our <a href="javascript:void(0)" data-toggle="modal" data-target="#termsAndConditions">Terms & Conditions</a>.</small>
                   </div>
                 </div>
               </div>
@@ -152,8 +153,22 @@
         
 
   @include('partials.sections')
-
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        <script>
+            if(window.screen.width < 767){
+              document.getElementById('main').style.display = "none";
+              document.getElementById('product').style.display = "none";
+              document.getElementById('top-products').style.display = "none";
+              document.getElementById('about').style.display = "none";
+              document.getElementById('contact').style.display = "none";
+              document.getElementById('search').style.display = "none";
+            }
+        </script>
   <script type="text/javascript">
+    
+
+
+
     $('#spanYear').html(new Date().getFullYear());
     $('#reg_form').change(function(){
         let add = document.getElementById('address');
@@ -194,45 +209,47 @@
 
       // custom swiper
 
-      const swiperEl1 = document.getElementById('swiper1');
-      const swiperEl2 = document.getElementById('swiper2');
+    //   const swiperEl1 = document.getElementById('swiper1');
+    //   const swiperEl2 = document.getElementById('swiper2');
 
-    const params = {
-      injectStyles: [`
-      .swiper-pagination-bullet {
-        width: 10px;
-        height: 10px;
-        text-align: center;
-        line-height: 20px;
-        font-size: 12px;
-        color: #000;
-        opacity: 1;
-        background: rgba(0, 0, 0, 0.2);
-      }
+    // const params = {
+    //   injectStyles: [`
+    //   .swiper-pagination-bullet {
+    //     width: 10px;
+    //     height: 10px;
+    //     text-align: center;
+    //     line-height: 20px;
+    //     font-size: 12px;
+    //     color: #000;
+    //     opacity: 1;
+    //     background: rgba(0, 0, 0, 0.2);
+    //   }
 
-      .swiper-pagination-bullet-active {
-        color: #fff;
-        background: #178c3a;
-        width: 12px;
-        height: 12px;
-      }
+    //   .swiper-pagination-bullet-active {
+    //     color: #fff;
+    //     background: #178c3a;
+    //     width: 12px;
+    //     height: 12px;
+    //   }
 
-      .swiper-pagination{
-        margin-top: 100px;
-      }
-      `],
-      pagination: {
-        clickable: true,
-      },
-    }
+    //   .swiper-pagination{
+    //     margin-top: 100px;
+    //   }
+    //   `],
+    //   pagination: {
+    //     clickable: true,
+    //   },
+    // }
 
-    Object.assign(swiperEl1, params);
-    Object.assign(swiperEl2, params);
+    // Object.assign(swiperEl1, params);
+    // Object.assign(swiperEl2, params);
 
-    swiperEl1.initialize();
-    swiperEl2.initialize();
+    // swiperEl1.initialize();
+    // swiperEl2.initialize();
 
     // preloader
+
+    
 var loader = document.getElementById('preloader');
 
 window.addEventListener("load", function(){
@@ -240,5 +257,33 @@ window.addEventListener("load", function(){
 });
   </script>
   
-  
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      // slidesPerView: 5,
+      // spaceBetween: 10,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      freeMode:{
+        enabled : true,
+        sticky: true,
+      },
+      breakpoints: {
+        480: {
+          slidesPerView: 2,
+          spaceBetween: 10,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 10,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 10,
+        },
+      },
+    });
+  </script>
   @include('partials.footer')

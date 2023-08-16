@@ -7,7 +7,7 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-12 mt-4">
-                        <div class="card" style="min-height: 100%">
+                        <div class="card" style="height: 102%">
                             
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
@@ -58,8 +58,6 @@
                                             </div>
                                             <hr class="horizontal mt-2 mb-2 bg-dark">
                                         </li>
-                                        
-                                        
                                     </ul>
 
                                 </div>
@@ -71,10 +69,12 @@
                         <div class="card my-4 mt-5" style="height: 93%">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
                               <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
-                                <div class="text-end position-absolute col-md-12">
-                                    <a href="" data-toggle="modal" data-target="#editProfile">
-                                        <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
-                                    </a>
+                                <div class="float-end position-absolute col-md-12 edit-profie-icon" >
+                                    <div class="">
+                                        <a href="" data-toggle="modal" data-target="#editProfile" title="Edit Profile">
+                                            <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
                                     <div class="profile-img-container-lg">
@@ -88,7 +88,7 @@
                               </div>
                             </div>
                             
-                            <div class="card-body px-0 pb-2 mt-5 mx-5 profile">
+                            <div class="card-body px-0 pb-2 mt-3 mx-5 profile">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12 ">
@@ -112,17 +112,14 @@
                                         </div>
                                     </div>
     
-                                    <div class="row">
-                                        <div class="col-md-12 mt-5">
-                                            <h5 class="mb-0">Address</h5>
-                                        </div>
+                                    <div class="row mt-3">
                                         <div class="col-md-12">
                                             <label for="firsname">Home Address</label>
                                             <input class="form-control profile-input-form" type="text" value="{{auth()->user()->address;}}" disabled>
                                         </div>
                                     </div>
     
-                                    <div class="row mb-5">
+                                    <div class="row mb-3">
                                         <div class="col-md-12 mt-5">
                                             <h5 class="mb-0">Account Information</h5>
                                         </div>

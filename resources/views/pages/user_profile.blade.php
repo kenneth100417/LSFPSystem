@@ -8,10 +8,12 @@
                     <div class="card my-4 mt-5">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
                           <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
-                            <div class="text-end position-absolute col-md-12">
-                                <a href="" data-toggle="modal" data-target="#editProfile">
-                                    <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
-                                </a>
+                            <div class="float-end position-absolute col-md-12 edit-profie-icon" >
+                                <div class="">
+                                    <a href="" data-toggle="modal" data-target="#editProfile" title="Edit Profile">
+                                        <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
+                                    </a>
+                                </div>
                             </div>
                             <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
                                 <div class="profile-img-container-lg">
@@ -19,7 +21,7 @@
                                 </div>
                                 <div class="profile-text-container-lg ps-3">
                                     <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
-                                    <p class="text-email text-success">{{auth()->user()->email;}}</p>
+                                    <p class="text-email text-success">User ID: <span>LSFP_USER</span>{{auth()->user()->id;}}</p>
                                 </div>
                             </div>
                           </div>
@@ -49,17 +51,14 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 mt-5">
-                                        <h5 class="mb-0">Address</h5>
-                                    </div>
+                                <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label for="firsname">Home Address</label>
                                         <input class="form-control profile-input-form" type="text" value="{{auth()->user()->address;}}" disabled>
                                     </div>
                                 </div>
 
-                                <div class="row mb-5">
+                                <div class="row mb-3">
                                     <div class="col-md-12 mt-5">
                                         <h5 class="mb-0">Account Information</h5>
                                     </div>
@@ -82,7 +81,7 @@
   
     <!-- Modal -->
     <div class="modal fade modal-profile" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfileTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body">
                 <form action="/user_update"  method="POST" id="profile-update-form" enctype="multipart/form-data">
@@ -102,7 +101,7 @@
                             </div>
                             <div class="profile-text-container-lg ps-3">
                                 <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
-                                <p class="text-email text-success">{{auth()->user()->email;}}</p>
+                                <p class="text-email text-success">User ID: <span>LSFP_USER</span>{{auth()->user()->id;}}</p>
                             </div>
                             
                         </div>
@@ -210,7 +209,7 @@
     
                     <div class="modal-footer me-3">
                         
-                            <button type="submit" class="btn btn-success modal-update-btn">Update</button>
+                            <button type="submit" class="btn btn-success modal-update-btn" id="updateBtn" disabled>Update</button>
                             <button type="button" class="btn btn-danger modal-cancel-btn" data-dismiss="modal">Cancel</button>
                         
                     </div>
@@ -328,6 +327,15 @@
 <script src="./assets/js/plugins/smooth-scrollbar.min.js" ></script>
 
 <script type="text/javascript">
+// button disable if not edited
+let updateForm = document.getElementById('profile-update-form');
+
+updateForm.addEventListener('change', function(){
+    let updateBtn = document.getElementById('updateBtn');
+    updateBtn.disabled = false;
+});
+
+
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
     var options = {
