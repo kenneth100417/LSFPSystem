@@ -15,7 +15,7 @@
                                     </div>
                                     <div class="text-end pt-1">
                                         <p class="text-md mb-0 text-capitalize ">Order Requests</p>
-                                        <h4 class="mb-0 ">+91</h4>
+                                        <h4 class="mb-0 ">0</h4>
                                     </div>
                                 </div>
                               
@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="text-end pt-1">
                                         <p class="text-md mb-0 text-capitalize ">Orders in Process</p>
-                                        <h4 class="mb-0 ">+91</h4>
+                                        <h4 class="mb-0 ">0</h4>
                                     </div>
                                 </div>
                               
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="text-end pt-1">
                                         <p class="text-md mb-0 text-capitalize ">Completed Orders</p>
-                                        <h4 class="mb-0 ">+91</h4>
+                                        <h4 class="mb-0 ">0</h4>
                                     </div>
                                 </div>
                               
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="text-end pt-1">
                                         <p class="text-md mb-0 text-capitalize ">Cancelled Orders</p>
-                                        <h4 class="mb-0 ">+91</h4>
+                                        <h4 class="mb-0 ">0</h4>
                                     </div>
                                 </div>
                               

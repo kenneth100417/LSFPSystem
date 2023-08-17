@@ -7,7 +7,7 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-12 mt-4">
-                        <div class="card" style="height: 102%">
+                        <div class="card admin-account-cards" style="height: 102%">
                             
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
@@ -70,7 +70,7 @@
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
                               <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                                 <div class="float-end position-absolute col-md-12 edit-profie-icon" >
-                                    <div class="">
+                                    <div class="col-lg-12 d-flex justify-content-end">
                                         <a href="" data-toggle="modal" data-target="#editProfile" title="Edit Profile">
                                             <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
                                         </a>

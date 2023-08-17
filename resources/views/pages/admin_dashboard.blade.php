@@ -107,10 +107,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <h6 class="mb-0"> Daily Sales </h6>
-                                <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now();}} </p>
-                                <hr class="dark horizontal">
+                            <div class="card-body d-flex justify-content-between">
+                                <div>
+                                    <h6 class="mb-0"> Daily Sales </h6>
+                                    <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now();}} </p>
+                                </div>
+                                <div>
+                                    <div class="btn-group pe-3">
+                                        <button type="button" class="btn btn-sm btn-warning dropdown-toggle w-25" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Show data
+                                        </button>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item" href="#">Daily</a>
+                                          <a class="dropdown-item" href="#">Monthly</a>
+                                          <a class="dropdown-item" href="#">Annually</a>
+                                        </div>
+                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>

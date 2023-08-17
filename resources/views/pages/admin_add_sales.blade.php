@@ -39,7 +39,7 @@
                                                 
                                         </div>
 
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 display-card">
                                             <div class="mt-4">
                                                 <h6 class="">Product</h6>
                                                 <div class="form-outline">

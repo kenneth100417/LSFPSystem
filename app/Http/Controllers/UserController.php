@@ -170,8 +170,8 @@ class UserController extends Controller
 
         $verificationCode = $this->generateOtp();
         $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
-        // $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
-        return redirect()->route('otp.verify')->with('success',  $message); 
+         $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
+        return redirect()->route('otp.verify'); 
     }
 
     public function login(Request $request){
@@ -190,8 +190,8 @@ class UserController extends Controller
 
                 $verificationCode = $this->generateOtp();
                 $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                // $this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
-                return redirect()->route('otp.verify')->with('success',  $message); 
+                 $this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
+                return redirect()->route('otp.verify'); 
             }else{
                 $request->session()->regenerate();
 

@@ -299,6 +299,7 @@ button.swal2-cancel{
 div.modal{
     width: 1200px !important;
     height: auto !important;
+    margin-left: 240px;
 }
 div.modal-content{
     background: rgba(0, 0, 0, 0);
@@ -378,6 +379,11 @@ input.category-checkbox{
 input[type="checkbox"].category-checkbox:checked{
     border-color: #0aa137 !important;
     background-color: #0aa137 !important;
+}
+/* add sale page */
+.display-card{
+    border-left: 1px solid #818181;
+
 }
 /* /////////////////////////////////////// */
 /* pagination */
@@ -481,8 +487,11 @@ input[type="checkbox"].category-checkbox:checked{
     .search-input{
         width: 200px !important;
     }
-   
+   /* add sales */
+    .display-card{
+        border-left: 1px solid #bdbdbd;
     
+    }
 
 }
 
@@ -494,5 +503,31 @@ input[type="checkbox"].category-checkbox:checked{
 
 
 @media screen and (min-width:1440px){
+    canvas.chart-canvas{
+        height: 380px !important;
+    }
+    .graph-card{
+        height: 455px !important;
+    }
+    div.top-p-container{
+        height: 480px;
+        max-height: 480px !important;
+    }
+    div.p-main-container{
+        height: 420;
+        max-height: 420px !important;
+    }
 
+    /* manage acc page */
+
+    .admin-account-cards{
+        height: 650px !important;
+    }
+    
+    /* add sales */
+    .display-card{
+        border-left: 1px solid #bdbdbd;
+        margin-left: -20px !important;
+    
+    }
 }
