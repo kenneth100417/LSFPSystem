@@ -231,8 +231,8 @@
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
                       <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                         <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
-                            <div class="profile-img-container-lg w-15 h-auto">
-                                <img type="image" src="{{auth()->user()->photo}}" class="profile-img" alt="profile">
+                            <div class="profile-img-container-lg ">
+                                <img type="image" src="{{auth()->user()->photo}}" class="profile-img edit-photo" alt="profile">
                             </div>
                             <div class="profile-text-container-lg ps-3">
                                 <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>

@@ -1,7 +1,7 @@
 
 @include('partials.header')
-
-
+<x-message />
+          
           <!-- log in form -->
           <div class="card fadeIn3 fadeInBottom mt-n3 m-1" id="login-form">    
             <h4 class="font-weight-bolder text-center mt-4 card-title">Sign In</h4>
@@ -22,7 +22,7 @@
                   <input name="password" type="password" class="form-control" placeholder="Password">
                 </div>
                 <div class="text-end mb-2">
-                  <a class="login-link" href="">Forgot Password?</a>
+                  <a class="login-link" href="#" data-bs-toggle="modal" data-bs-target="#changePassword">Forgot Password?</a>
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn login-btn w-100 my-2 mb-1">Sign in</button>
@@ -36,6 +36,48 @@
             </div>
           </div>
         </div>
+
+      {{-- change pass modal --}}
+        {{-- <div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Recover Account</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-start">
+                <form action="{{url('/change-password')}}" method="POST">
+                  @csrf
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <label for="email">Email</label>
+                        <input name="email" class="form-control change-pass-input" type="email" placeholder="Email">
+                      </div> 
+                      <div class="col-lg-6">
+                        <label for="email">Mobile number</label>
+                        <input name="current-password" class="form-control change-pass-input" type="password" placeholder="Current Password">
+                      </div>
+                      <div class="col-lg-6 mt-4">
+                        <label for="email">New Password</label>
+                        <input name="password" class="form-control change-pass-input" type="password" placeholder="New Password">
+                      </div>
+                      <div class="col-lg-6 mt-4">
+                        <label for="email">Confirm New Password</label>
+                        <input name="password_confirmation" class="form-control change-pass-input" type="password" placeholder="Confirm New Password">
+                      </div> 
+                    </div>
+                  </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Change Password</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div> --}}
 
   @include('partials.sections')
 
@@ -152,5 +194,35 @@
       },
     });
   </script>
+  @if (session('success'))
+      
+  <script type="text/javascript">
+
+      setTimeout(message, 1000);
+
+      function message(){
+          Swal.fire(
+                  'Updated Successfully!',
+                  'Your profile has been Updated!',
+                  'success'
+              )
+      }   
+  </script>
+@endif     
+
+@if (session('error'))
+<script type="text/javascript">
+
+  setTimeout(message, 1000);
+
+  function message(){t
+      Swal.fire(
+              'Update Failed!',
+              'An error occured!',
+              'error'
+          )
+  }   
+</script>
+@endif
   
   @include('partials.footer')

@@ -29,8 +29,12 @@ Route::controller(App\Http\Controllers\UserController::class)->group(function(){
     Route::post('/otp/verify_code', 'verifyOtp')->name('otp.verify_code');
     Route::get('/otp/resend_code', 'resendOtp')->name('otp.resend');
 
+    // change Password
+    Route::post('/change-password', 'changePassword');
+
 
 });
+
 
 
 Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth', 'isAdmin'])->group(function(){

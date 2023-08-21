@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\VerificationCode;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -22,22 +23,43 @@ class UserController extends Controller
     }
 
     public function update(Request $request){
-        $user = auth()->user();
-        $user->firstname = request('firstname');
-        $user->middlename = request('middlename');
-        $user->lastname = request('lastname');
-        $user->birthdate = request('birthdate');
-        $user->address = request('address');
+        // $user = auth()->user();
+        // $user->firstname = request('firstname');
+        // $user->middlename = request('middlename');
+        // $user->lastname = request('lastname');
+        // $user->birthdate = request('birthdate');
+        // $user->address = request('address');
 
         // profile pic
         // $requestData = $request->all();
+        $validated = $request->validate([
+            "firstname" => ['required'],
+            "lastname" => ['required'],
+            "birthdate" => ['required'],
+            "address" => ['required']
+        ]);
+        
+
         if($request->hasFile('profile_pic')){
             $filename = time().$request->file('profile_pic')->getClientOriginalName();
             $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
-            $user->photo = '/storage/'.$path;
+            $photo = '/storage/'.$path;
         }
+
+        $user = User::findOrFail(Auth()->user()->id);
+        if($user){
+            $user->update([
+                "firstname" => $validated['firstname'],
+                "middlename" => request('middlename'),
+                "lastname" => $validated['lastname'],
+                "birthdate" => $validated['birthdate'],
+                "address" => $validated['address'],
+                "photo" => $photo
+            ]);
+        }
+
         
-        $user->save();
+        // $user->save();
         
         return back()->with('success', 'Your profile has been Updated!');
     }
@@ -153,7 +175,7 @@ class UserController extends Controller
             "lastname" => ['required'],
             "birthdate" => ['required'],
             "address" => ['required'],
-            "mobile_number" => ['required'],
+            "mobile_number" => ['required','min:11','numeric',Rule::unique('users', 'mobile_number')],
             "email" => ['required', 'email', Rule::unique('users', 'email')],
             "password"=> 'required|confirmed|min:6',
             "access" => ['required'],
@@ -169,9 +191,9 @@ class UserController extends Controller
         auth()->login($user);
 
         $verificationCode = $this->generateOtp();
-        $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
-         $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
-        return redirect()->route('otp.verify'); 
+        $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
+         //$this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
+        return redirect()->route('otp.verify')->with('success',  $message);; 
     }
 
     public function login(Request $request){
@@ -186,16 +208,16 @@ class UserController extends Controller
             if(auth()->user()->access == "0"){
                 $request->session()->regenerate();
 
-                $name = auth()->user()->firstname;
+                // $name = auth()->user()->firstname;
 
                 $verificationCode = $this->generateOtp();
-                $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                 $this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
-                return redirect()->route('otp.verify'); 
+                $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+                 //$this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
+                return redirect()->route('otp.verify')->with('success',  $message);; 
             }else{
                 $request->session()->regenerate();
 
-                $name = auth()->user()->firstname;
+                // $name = auth()->user()->firstname;
                 return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
             }
         
@@ -278,7 +300,32 @@ class UserController extends Controller
         curl_close ($ch);
 
         //Show the server response
-        echo $output;
+        // echo $output;
     }
+
+
+    // public function changePassword(Request $request){
+
+    //     $validated = $request->validate([
+    //         'current-password' => 'required|min:6',
+    //         'password' => 'required|confirmed|min:6',
+    //         'email' => ['required', 'email']
+    //     ]);
+    //     $user = User::findOrFail($validated['email'], 'email');
+        
+    //     $currentPasswordStatus = Hash::check($validated['current-password'], $user->password);
+    //     if($currentPasswordStatus){
+           
+    //         User::findOrFail($user->id)->update([
+    //             'password' => Hash::make($validated['password']),
+    //         ]);
+
+    //         return redirect()->back()->with('success','Password Updated Successfully');
+
+    //     }else{
+
+    //         return redirect()->back()->with('error','Current Password does not match with Old Password');
+    //     }
+    //}
 
 }

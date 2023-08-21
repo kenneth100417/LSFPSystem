@@ -3,7 +3,7 @@
 @env('local')
 <script src="http://localhost:35729/livereload.js"></script>
 @endenv --}}
-
+@livewireScripts
 <script>
     $(".nav-link").on("click", function(){
         let x = document.getElementById('navbar-toggler').getAttribute("aria-expanded");
@@ -19,6 +19,7 @@
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+
 
 <!-- bootstrap -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
