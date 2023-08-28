@@ -22,6 +22,97 @@ class UserController extends Controller
         return view('register');
     }
 
+    public function forgotPassword(){
+        return view('forgot_pass');
+    }
+    public function resendRecoveryCode($user_id){
+        $user = User::where('id', $user_id)->first();
+        $verificationCode = $this->generateOtp($user->id);
+        $message = "Your recovery code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+        //$this->sendSMS(auth()->user()->mobile_number, $message); // Send Recovery SMS
+        return redirect('/recovery-verification/'.$user->id)->with('success',  $message);
+    }
+
+    public function forgotPasswordVerify(Request $request){
+
+        $validated = $request->validate([
+            'email' => ['email', 'required'],
+            'mobile_number' => ['numeric', 'min:11', 'required']
+        ]);
+
+
+        if($validated){
+            $user = User::where('email', $validated['email'])->where('access', '0')->first();
+            if($user){
+                if($validated['mobile_number'] === $user->mobile_number){
+                    //send verification code to user's mobile number.
+                    $verificationCode = $this->generateOtp($user->id);
+                    $message = "Your recovery code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+                    //$this->sendSMS(auth()->user()->mobile_number, $message); // Send Recovery SMS
+                return redirect('/recovery-verification/'.$user->id)->with('success',  $message);
+                }else{
+                    return redirect()->back()->withErrors(['error' => 'No User Found. Try another Email or Mobile Number.']);
+                }
+            }else{
+                return redirect()->back()->withErrors(['error' => 'No User Found. Try another Email or Mobile Number.']);
+            }
+            
+
+        }
+    }
+
+    public function recoveryVerification(){
+        return view('recovery_verification');
+    }
+    public function createNewPassword(){
+        return view('recovery_change_pass');
+    }
+    public function setNewPassword(Request $request, $user_id){
+        $validated = $request->validate([
+            "password"=> 'required|confirmed|min:6'
+        ]);
+
+        $validated['password'] = Hash::make($validated['password']);
+
+        $user = User::where('id', $user_id)->first();
+
+        if($validated){
+            if($user){
+                $user->update([
+                    "password" => $validated['password']
+                ]);
+
+                return redirect()->back()->with('success', "Congratulations! Your account has been recovered.");
+            }
+        }else{
+            return redirect()->back()->with('error', "An error occured. Please try again later.");
+        }
+
+    }
+
+    public function verifyRecovery(Request $request, $user_id){
+        $request->validate([
+            'otp' => 'required'
+        ]);
+
+        $user = User::where('id',$user_id)->first();
+        #Validation Logic
+        $verificationCode   = VerificationCode::where('mobile_number', $user->mobile_number)->where('otp', $request->otp)->first();
+
+        $now = Carbon::now();
+        if (!$verificationCode) {
+            return redirect()->back()->with('error', 'Incorrect Recovery Code.');
+        }elseif($verificationCode && $now->isAfter($verificationCode->expire_at)){
+            return redirect('/recovery-verification/'.$user->id)->with('error', 'Your Recovery Code has been expired');
+        }else{
+            return redirect('/create-new-password/'.$user->id);
+        }
+        
+        $verificationCode->update([
+            'expire_at' => Carbon::now()
+        ]);
+    }
+
     public function update(Request $request){
         // $user = auth()->user();
         // $user->firstname = request('firstname');
@@ -38,7 +129,6 @@ class UserController extends Controller
             "birthdate" => ['required'],
             "address" => ['required']
         ]);
-        
 
         if($request->hasFile('profile_pic')){
             $filename = time().$request->file('profile_pic')->getClientOriginalName();
@@ -57,9 +147,6 @@ class UserController extends Controller
                 "photo" => $photo
             ]);
         }
-
-        
-        // $user->save();
         
         return back()->with('success', 'Your profile has been Updated!');
     }
@@ -83,7 +170,6 @@ class UserController extends Controller
     public function user_cancelled(){
         return view('pages.user-order-pages.cancelled_orders');
     }
-
     public function user_profile(){
         return view('pages.user_profile');
     }
@@ -162,11 +248,12 @@ class UserController extends Controller
         return view('otp_verification');
     }
 
-    public function resendOtp(){
-        $verificationCode = $this->generateOtp();
-        $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP Code is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
+    public function resendOtp($user_id){
+        $user = User::where('id', $user_id)->first();
+        $verificationCode = $this->generateOtp($user->id);
+        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
         // $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
-        return redirect()->route('otp.verify')->with('success',  $message);
+        return redirect('/otp/verify/'.$user->id)->with('success',  $message);
     }
 
     public function add_user(Request $request){
@@ -187,13 +274,12 @@ class UserController extends Controller
        
 
         $user = User::create($validated);
-
-        auth()->login($user);
-
-        $verificationCode = $this->generateOtp();
-        $message = "Welcome to Louella's Sweet Food Products ".auth()->user()->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
+       
+        $verificationCode = $this->generateOtp($user->id);
+        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
          //$this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
-        return redirect()->route('otp.verify')->with('success',  $message);; 
+        return redirect('/otp/verify/'.$user->id)->with('success',  $message);
+
     }
 
     public function login(Request $request){
@@ -202,37 +288,52 @@ class UserController extends Controller
             "password"=> 'required'
         ]);
 
-        if(auth()->attempt($validated)){
-            
-
-            if(auth()->user()->access == "0"){
-                $request->session()->regenerate();
-
-                // $name = auth()->user()->firstname;
-
-                $verificationCode = $this->generateOtp();
-                $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                 //$this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
-                return redirect()->route('otp.verify')->with('success',  $message);; 
-            }else{
-                $request->session()->regenerate();
-
-                // $name = auth()->user()->firstname;
-                return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
-            }
+        $user = User::where('email',$validated['email'])->first();
         
-        }
+     
+        // if(auth()->attempt($validated)){
 
-        return back()->withErrors(['email' => 'Email and Password does not match.'])->onlyInput('email');
+        //     if(auth()->user()->access == "0"){
+        //          $request->session()->regenerate();
+
+        //         // $name = auth()->user()->firstname;
+
+        //         $verificationCode = $this->generateOtp($user->id);
+        //         $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+        //          //$this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
+        //         return redirect('/otp/verify/'.$user->id)->with('success',  $message);; 
+        //     }else{
+        //         $request->session()->regenerate();
+
+        //         // $name = auth()->user()->firstname;
+        //         return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
+        //     }
+        
+        // }
+        
+        if($validated){
+            if(Hash::check($validated['password'], $user->password)){
+                if($user->access == "0"){
+                    
+                    $verificationCode = $this->generateOtp($user->id);
+                    $message = "Welcome back ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+                    return redirect('/otp/verify/'.$user->id)->with('success',  $message);
+                }else{
+                    auth()->login($user);
+                    return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
+                }
+            }
+        }
+        return back()->withErrors(['error' => 'Email and Password does not match.']);
     }
 
 
     // Generate OTP
-    public function generateOtp()
+    public function generateOtp($user_id)
     {
-
+        $user = User::where('id',$user_id)->first();
         # User Does not Have Any Existing OTP
-        $verificationCode = VerificationCode::where('mobile_number', auth()->user()->mobile_number)->latest()->first();
+        $verificationCode = VerificationCode::where('mobile_number', $user->mobile_number)->latest()->first();
 
         $now = Carbon::now();
 
@@ -242,33 +343,34 @@ class UserController extends Controller
 
         // Create a New OTP
         return VerificationCode::create([
-            'mobile_number' => auth()->user()->mobile_number,
+            'mobile_number' => $user->mobile_number,
             'otp' => rand(123456, 999999),
             'expire_at' => Carbon::now()->addMinutes(10)
         ]);
     }
 
-    public function verifyOtp(Request $request)
+    public function verifyOtp(Request $request, $user_id)
     {
         #Validation
         $request->validate([
             'otp' => 'required'
         ]);
-
+        $user = User::where('id',$user_id)->first();
         #Validation Logic
-        $verificationCode   = VerificationCode::where('mobile_number', auth()->user()->mobile_number)->where('otp', $request->otp)->first();
+        $verificationCode   = VerificationCode::where('mobile_number', $user->mobile_number)->where('otp', $request->otp)->first();
 
         $now = Carbon::now();
         if (!$verificationCode) {
-            return redirect()->back()->with('error', 'Your OTP is not correct');
+            return redirect()->back()->with('error', 'Incorrect OTP.');
         }elseif($verificationCode && $now->isAfter($verificationCode->expire_at)){
-            return redirect()->route('otp.login')->with('error', 'Your OTP has been expired');
+            return redirect('/otp/verify/'.$user->id)->with('error', 'Your OTP has been expired');
         }
 
 
-        if(auth()->user()->access == "0"){
-            $name = auth()->user()->firstname;
-            return redirect('/user_dashboard')->with('message', 'Thanks for choosing us , '.$name.'! ');
+        if($user->access == "0"){
+            $name = $user->firstname;
+            auth()->login($user);
+            return redirect('/user_dashboard')->with('message', 'Thanks for choosing us, '.$name.'! ');
         }else{
             return redirect('/admin_dashboard')->with('message', 'Welcome Admin!');
         }
@@ -327,5 +429,14 @@ class UserController extends Controller
     //         return redirect()->back()->with('error','Current Password does not match with Old Password');
     //     }
     //}
+
+
+
+    // ////////////////////////////////////////////////////
+
+    public function productView(){
+
+        return view('user.product.view');
+    }
 
 }

@@ -25,13 +25,21 @@ Route::controller(App\Http\Controllers\UserController::class)->group(function(){
     Route::post('/login', 'login');
 
     // otp verification routes
-    Route::get('/otp/verify', 'otp_verify')->name('otp.verify');
-    Route::post('/otp/verify_code', 'verifyOtp')->name('otp.verify_code');
-    Route::get('/otp/resend_code', 'resendOtp')->name('otp.resend');
+    Route::get('/otp/verify/{user_id}', 'otp_verify');
+    Route::post('/otp/verify_code/{user_id}', 'verifyOtp');
+    Route::get('/otp/resend_code/{user_id}', 'resendOtp');
 
     // change Password
-    Route::post('/change-password', 'changePassword');
+    // Route::post('/change-password', 'changePassword');
 
+    // forgot-pass
+    Route::get('/forgot-password', 'forgotPassword');
+    Route::post('/forgot-password-verify', 'forgotPasswordVerify');
+    Route::get('/recovery-verification/{user_id}', 'recoveryVerification');
+    Route::post('/verify-recovery/{user_id}','verifyRecovery');
+    Route::get('/create-new-password/{user_id}', 'createNewPassword');
+    Route::post('/create-new-password/{user_id}', 'setNewPassword');
+    Route::get('/resend-recovery-code/{user_id}', 'resendRecoveryCode');
 
 });
 
@@ -76,6 +84,9 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     Route::get('/user_cancelled',  'user_cancelled');
 
     Route::put('/user_update',  'update');
+
+    // products
+    Route::get('/product-view',  'productView');
 
 });
 

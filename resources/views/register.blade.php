@@ -124,7 +124,10 @@
                   @enderror
 
                   <div class="input-group input-group-outline mb-2">
-                    <input  placeholder="Password" name="password" id="password" type="Password" class="form-control" required>
+                    <input  placeholder="Password" name="password" id="regPassword" type="password" class="form-control" required>
+                    <div class="align-items-center" style="position: absolute; right: 10px; top: 7px;">
+                      <a id="regEye" href=""><i class="fa fa-eye-slash" aria-hidden="true" id="eyeIcon"></i></a>
+                    </div>
                   </div>
                   @error('password')
                     <p class="text-danger">
@@ -155,6 +158,19 @@
   @include('partials.sections')
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
         <script>
+          $("#regEye").on('click', function(event) {
+            event.preventDefault();
+              if($('#regPassword').attr("type") == "text"){
+                  $('#regPassword').attr('type', 'password');
+                  $('#eyeIcon').addClass( "fa-eye-slash" );
+                  $('#eyeIcon').removeClass( "fa-eye" );
+              }else if($('#regPassword').attr("type") == "password"){
+                  $('#regPassword').attr('type', 'text');
+                  $('#eyeIcon').removeClass( "fa-eye-slash" );
+                  $('#eyeIcon').addClass( "fa-eye" );
+              }
+          });
+
             if(window.screen.width < 767){
               document.getElementById('main').style.display = "none";
               document.getElementById('product').style.display = "none";
@@ -166,7 +182,7 @@
         </script>
   <script type="text/javascript">
     
-
+    
 
 
     $('#spanYear').html(new Date().getFullYear());
@@ -302,6 +318,9 @@
     $('#birthdate').datepicker({
        endDate: '-16y'
       });
+
+
+      
 
 
       // custom swiper

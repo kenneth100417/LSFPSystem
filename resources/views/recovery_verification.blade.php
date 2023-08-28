@@ -16,11 +16,11 @@
           <div class="card z-index-0 fadeIn3 fadeInBottom mt-n4 m-2 " id="otpverify-form">    
             <h4 class="font-weight-bolder text-center mt-4">We need to verify<br /> if it's you!</h4>
             <div class="card-body">
-              <form role="form" class="text-start" method="POST" action="{{ url('otp/verify_code/'.request()->segment(3) ) }}">
+              <form role="form" class="text-start" method="POST" action="{{ url('/verify-recovery/'.request()->segment(2) ) }}">
                 
                 @csrf
 
-                <p class="text-center mt-0" style="font-size: 14px;">A 6-digit OTP has been sent to your mobile number.</p>
+                <p class="text-center mt-0" style="font-size: 14px;">A 6-digit recovery code has been sent to your mobile number.</p>
                 <div class="input-group input-group-outline mb-2">
                   
                   <input placeholder="Enter OTP Code" type="text" class="form-control @error('otp') is-invalid @enderror" name="otp" id="otp">
@@ -33,7 +33,7 @@
 
                 <div class="text-center">
                   <button type="submit" class="btn verify-btn w-100 my-3 mb-1">Verify</button>
-                  <button type="button" class="btn resend-btn w-100 my-1 mb-1" onclick="window.location='{{ url('/otp/resend_code/'.request()->segment(3) ) }}' ">Resend OTP</button>
+                  <button type="button" class="btn resend-btn w-100 my-1 mb-1" onclick="window.location.href ='{{ url('/resend-recovery-code/'.request()->segment(2) ) }}' ">Resend OTP</button>
                 </div>
               </form>
             </div>

@@ -5,6 +5,9 @@
 @endenv --}}
 @livewireScripts
 <script>
+    
+    
+
     $(".nav-link").on("click", function(){
         let x = document.getElementById('navbar-toggler').getAttribute("aria-expanded");
         let nav = document.getElementById('navbarNavDropdown');

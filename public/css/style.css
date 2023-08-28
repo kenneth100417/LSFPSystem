@@ -319,7 +319,7 @@ button.explore-btn:hover{
     left: 50;
     right: 50;
     bottom: 30px;
-    width: 250px;
+    width: 215px;
  }
  div.product-cat h5{
     color: #EBEBEB !important;
@@ -615,7 +615,7 @@ a.card-nav:hover{
     div#top-products{
         padding-top: 10px !important;
     }
-
+    
     /* about*/
 
     fieldset.about-container{
@@ -944,7 +944,9 @@ a.card-nav:hover{
         width: 350px;
     }
 
-
+    div.product-cat{
+        width: 250px;
+    }
     /* ////////////// */
 
     fieldset.about-container{

@@ -12,7 +12,7 @@
                     <img src="/uploads/category/{{$category->image}}" class="card-title" alt="...">
                     </div>
                     <div class="product-cat" style="" >
-                    <h5 class=" mx-0 px-0" style="color:rgb(124, 62, 18) !important; z-index: 10;background-color:aliceblue;">{{$category->name}}</h5>
+                    <h5 class=" mx-0 px-0 category-name" style="color:rgb(124, 62, 18) !important; z-index: 10;background-color:aliceblue;">{{$category->name}}</h5>
                     </div>
                 </div>
             @endforeach

@@ -52,7 +52,7 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav text-center justify-content-end">
           <li class="nav-item mx-3">
-            <a class="nav-link nav-btn" href="#home">Home</a>
+            <a class="nav-link nav-btn" href="{{'register' == request()->path() ? '/':'#home'}}">Home</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link nav-btn" href="#product">Products</a>

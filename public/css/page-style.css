@@ -503,6 +503,16 @@ input[type="checkbox"].category-checkbox:checked{
 
 
 @media screen and (min-width:1440px){
+    .lsfp{
+        font-size: 34px !important;
+    }
+    h1.lsfp{
+        font-weight: bolder !important;
+        font-size: 68px !important;
+    }
+    p.lsfp-tagline{
+        font-size: 30px;
+    }
     canvas.chart-canvas{
         height: 380px !important;
     }
@@ -529,5 +539,15 @@ input[type="checkbox"].category-checkbox:checked{
         border-left: 1px solid #bdbdbd;
         margin-left: -20px !important;
     
+    }
+
+    /* product card */
+    .buy-btn, .add-cart-btn{
+        background-color: #F68010;
+        font-size: 10px !important;
+    }
+    .add-cart-btn:hover{
+        background-color: #0baf3c;
+        font-size: 10px !important;
     }
 }
