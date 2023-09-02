@@ -14,7 +14,8 @@
                     <div class="swiper-wrapper" init="true"   style="padding-bottom: 80px;" >
                         
                         @forelse ($recommendedProducts as $product)
-                        <div class=" swiper-slide d-flex justify-content-center">
+
+                        <div class=" swiper-slide d-flex justify-content-center" onclick="window.location.href = '{{url('/product-view/'.$product->id)}}' ">
                             <div class="product-card">
                                 <div class="product-img-container">
                                     <img class="product-img" src="/uploads/products/{{$product->image}}" class="card-img-top"/>
@@ -28,7 +29,7 @@
                                         <p class="small"><a href="#!" class="text-muted">{{$product->category->name}}</a></p>
                                     </div>
                                     <div class="align-items-center">
-                                        <p><small>{{$product->quantity_sold}} Sold</small></p>
+                                        <p><small>{{$product->quantity_sold}} Sold </small></p>
                                     </div>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Rating;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
         'firstname',
         'middlename',
@@ -29,6 +31,8 @@ class User extends Authenticatable
         'access',
         'photo'
     ];
+
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -49,4 +53,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function ratings(){
+        return $this->hasMany(Rating::class, 'user_id','id');
+    }
 }

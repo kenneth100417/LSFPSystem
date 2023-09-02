@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Rating;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -432,11 +433,21 @@ class UserController extends Controller
 
 
 
-    // ////////////////////////////////////////////////////
+    // /////////////////////////// RATINGS  /////////////////////////
 
-    public function productView(){
+    public function productView($product_id){
 
-        return view('user.product.view');
+        $product = Product::where('id', $product_id)->where('status', '1')->get();
+        $ratings = Rating::where('product_id', $product_id)->where('user_id', Auth::user()->id)->get();
+        $reviews = Rating::where('product_id', $product_id)->where('user_id','!=', Auth::user()->id)->get();
+        $rating_sum = Rating::where('product_id', $product_id)->where('user_id', Auth::user()->id)->sum('star_rating');
+        
+        if($ratings->count() == 0){
+            $rating_val = 0;
+        }else{
+            $rating_val = $rating_sum/$ratings->count();
+        }
+        return view('user.product.view',compact('product','ratings','rating_val','reviews'));
     }
 
 }

@@ -86,8 +86,12 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     Route::put('/user_update',  'update');
 
     // products
-    Route::get('/product-view',  'productView');
+    Route::get('/product-view/{product_id}',  'productView');
 
+});
+
+Route::controller(App\Http\Controllers\RatingController::class)->middleware(['auth','isUser'])->group(function(){
+    Route::get('add-rating', 'addRating');
 });
 
 
