@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\User\Product;
 
 use App\Models\Product;
+use App\Models\Rating;
 use Livewire\Component;
 use Livewire\WithPagination;
 

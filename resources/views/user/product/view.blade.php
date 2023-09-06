@@ -29,10 +29,10 @@
                       <div class="d-flex">
                         <label for="rating" class="text-md text-dark">{{$ratings->count()}} Ratings: </label>
                         <div class=" px-2 text-md">
-                          @for($i = 1; $i <= $rating_val; $i++)
+                          @for($i = 1; $i <= number_format($rating_val); $i++)
                             <i class="fa fa-star checked"></i>
                           @endfor
-                          @for($i = $rating_val+1; $i <= 5; $i++)
+                          @for($i = number_format($rating_val)+1; $i <= 5; $i++)
                             <i class="fa fa-star"></i>
                           @endfor
                         </div>
@@ -48,7 +48,12 @@
                     <div class="mt-2 d-flex ">
                       <label for="quantity" class="text-md text-dark">Quantity:</label>
                       <div>
-                        <input type="number" min="1" name="" id="" class="form-control px-2 py-1 mx-3" placeholder="Quantity" style="max-width: 100px !important; border: 1px solid gray">
+                        
+                        @for($i = 1; $i <=  $product->quantity_sold - $product->quantity; $i++)
+                          {{$max = $i;}}
+                        @endfor
+                        
+                        <input type="number" min="1" max="{{$i}}" name="" id="" class="form-control px-2 py-1 mx-3" placeholder="Quantity" style="max-width: 100px !important; border: 1px solid gray">
                       </div>
                     </div>
                     <div class="d-flex justify-content-center mt-3">
@@ -84,11 +89,13 @@
                                       <img src="{{$review->user->photo}}"
                                       class="img-fluid rounded-3 p-image" alt="User" style="border-radius: 50% !important; min-width: 60px !important; min-height: 60px !important; object-fit: cover;">
                                   </div>
-                                  <div class="ms-3">
-                                    <div class="d-flex  align-items-center ">
-                                      <h5 class="">{{$review->user->firstname}} {{$review->user->lastname}}</h5>
+                                  <div class="ms-3" >
+                                    <div class="d-flex  align-items-center justify-content-between">
+                                      <div>
+                                        <h5 class="">{{$review->user->firstname}} {{$review->user->lastname}}</h5>
+                                      </div>
                                       
-                                      <div class="ms-auto px-2">
+                                      <div class="ms-auto px-2 position-absolute" style="right: 40px">
                                         @for($i = 1; $i <= $review->star_rating; $i++)
                                           <i class="fa fa-star checked"></i>
                                         @endfor
@@ -97,7 +104,7 @@
                                         @endfor
                                       </div>
                                     </div>
-                                    <p class="text-sm mt-n3">{{$review->user->email}}</p>
+                                    <p class="text-sm mt-n2">USER ID: LSFP_UID{{$review->user->id}}</p>
                                     <div style="width: 900px !important">
                                       <h6 class="text-md">Comment:</h6>
                                       <p class="mt-n2" style="text-align: justify; font-size: 16px !important; ">{{$review->comment}}</p>

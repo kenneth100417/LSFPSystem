@@ -49,8 +49,8 @@ class UserController extends Controller
                     //send verification code to user's mobile number.
                     $verificationCode = $this->generateOtp($user->id);
                     $message = "Your recovery code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                    //$this->sendSMS(auth()->user()->mobile_number, $message); // Send Recovery SMS
-                return redirect('/recovery-verification/'.$user->id)->with('success',  $message);
+                    $this->sendSMS(auth()->user()->mobile_number, $message); // Send Recovery SMS ->with('success',  $message)
+                return redirect('/recovery-verification/'.$user->id);
                 }else{
                     return redirect()->back()->withErrors(['error' => 'No User Found. Try another Email or Mobile Number.']);
                 }
@@ -253,7 +253,7 @@ class UserController extends Controller
         $user = User::where('id', $user_id)->first();
         $verificationCode = $this->generateOtp($user->id);
         $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
-        // $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
+       // $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS 
         return redirect('/otp/verify/'.$user->id)->with('success',  $message);
     }
 
@@ -278,7 +278,7 @@ class UserController extends Controller
        
         $verificationCode = $this->generateOtp($user->id);
         $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
-         //$this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS
+        //$this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS 
         return redirect('/otp/verify/'.$user->id)->with('success',  $message);
 
     }
@@ -318,6 +318,7 @@ class UserController extends Controller
                     
                     $verificationCode = $this->generateOtp($user->id);
                     $message = "Welcome back ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+                    //$this->sendSMS($user->mobile_number, $message);
                     return redirect('/otp/verify/'.$user->id)->with('success',  $message);
                 }else{
                     auth()->login($user);
@@ -367,7 +368,6 @@ class UserController extends Controller
             return redirect('/otp/verify/'.$user->id)->with('error', 'Your OTP has been expired');
         }
 
-
         if($user->access == "0"){
             $name = $user->firstname;
             auth()->login($user);
@@ -379,7 +379,6 @@ class UserController extends Controller
         $verificationCode->update([
             'expire_at' => Carbon::now()
         ]);
-
     }
 
 

@@ -38,7 +38,7 @@
                             
                             <tr>
                                 <td class="mw-15 text-center">
-                                    <p class="text-xs text-dark mb-0">LSFP_{{$user->id}}</p>
+                                    <p class="text-xs text-dark mb-0">LSFP_UID{{$user->id}}</p>
                                 </td>
                                 <td class="mw-20 text-center">
                                     <p class="text-xs text-dark mb-0">{{$user->firstname}} {{$user->lastname}}</p>

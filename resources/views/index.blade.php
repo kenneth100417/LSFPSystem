@@ -133,6 +133,13 @@
       }
   }
   
+  function openProduct(){
+    Swal.fire(
+      'Acount is required!',
+      'Please log in to order products.',
+      'warning'
+    )
+  }
 
 
 

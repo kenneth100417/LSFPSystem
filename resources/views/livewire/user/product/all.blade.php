@@ -26,7 +26,7 @@
                     <h5 class="product-name mb-0 " >{{$product->name}}</h5>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-n3">
-                    <div class="align-items-center  d-inline-block text-truncate" style="width: 130px;">
+                    <div class="align-items-center  d-inline-block text-truncate" style="width: 120px;">
                         <p class="small"><a href="#!" class="text-muted">{{$product->category->name}}</a></p>
                     </div>
                     <div class="align-items-center">
@@ -43,13 +43,23 @@
                 </div>
             </div>
             <div class="d-flex justify-content-start align-items-center mb-2 mx-2 rating-container">
-                <p class="text-muted my-0 rating-text">Product Ratings:</p>
-                <div class="ms-auto text-warning ratings-star">
+                <p class="text-muted my-0 rating-text">{{$product->ratings->count()}} Rating{{$product->ratings->count() > 1 ? 's':''}}:</p>
+                <div class="ms-auto ratings-star">
+                  @php
+                    $rating_sum = $product->ratings->sum('star_rating');
+                    if($product->ratings->count() == 0){
+                      $rating_val = 0;
+                    }else{
+                      $rating_val = $rating_sum/$product->ratings->count();
+                    }
+                    
+                  @endphp
+                  @for($i = 1; $i <= number_format($rating_val); $i++)
+                    <i class="fa fa-star checked"></i>
+                  @endfor
+                  @for($i = number_format($rating_val)+1; $i <= 5; $i++)
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                  @endfor
                 </div>
             </div>
             <div class="d-flex justify-content-between m-2">
