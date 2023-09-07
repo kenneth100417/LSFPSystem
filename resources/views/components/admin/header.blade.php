@@ -180,6 +180,7 @@
     </aside>
     
     <main class="main-content border-radius-lg ">
+        
     
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
             <div class="container-fluid py-1 d-flex justify-content-between align-items-center ">

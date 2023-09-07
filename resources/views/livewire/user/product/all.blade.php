@@ -16,7 +16,7 @@
       <div class="row row-cols-lg-5 row-cols-md-4">
   
         @forelse ($products as $product)
-        <div class="col text-center mt-3 d-flex justify-content-center" onclick="window.location.href = '{{url('/product-view/'.$product->id)}}' ">
+        <div class="col text-center mt-3 d-flex justify-content-center" onclick="window.location.href = '{{url('/product-view/'.$product->category->slug.'/'.$product->slug)}}'">
             <div class="product-card">
                 <div class="product-img-container">
                     <img class="product-img" src="/uploads/products/{{$product->image}}" class="card-img-top"/>
@@ -63,8 +63,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between m-2">
-                <button class="btn btn-success add-cart-btn px-3">Add to Cart</button>
-                <button class="btn btn-warning buy-btn ">Buy Now</button>
+                <button type="button" onclick="window.location.href = '{{url('/product-view/'.$product->category->slug.'/'.$product->slug)}}'" class="btn btn-success add-cart-btn px-3">Add to Cart</button>
+                <button type="button" class="btn btn-warning buy-btn ">Buy Now</button>
             </div>
         </div>
           </div>

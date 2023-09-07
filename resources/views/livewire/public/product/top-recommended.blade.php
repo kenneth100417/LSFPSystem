@@ -28,10 +28,10 @@
                 </div>
                 <div class="text-center mx-2 mt-2 product-price d-flex justify-content-between align-items-center">
                   <div>
-                    <p class="small text-danger mb-0 mx-1"><s>{{$product->original_price}}</s></p>
+                    <p class="small text-danger mb-0 mx-1"><s>&#8369;{{$product->original_price}}</s></p>
                   </div>
                   <div>
-                    <h5 class="text-dark mb-2 mx-1">{{$product->selling_price}}</h5>
+                    <h5 class="text-dark mb-2 mx-1">&#8369;{{$product->selling_price}}</h5>
                   </div>
                   
                   

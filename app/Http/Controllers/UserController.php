@@ -432,21 +432,50 @@ class UserController extends Controller
 
 
 
-    // /////////////////////////// RATINGS  /////////////////////////
+    // /////////////////////////// Product View  /////////////////////////
 
-    public function productView($product_id){
+    public function productView($category_slug, $product_slug){
 
-        $product = Product::where('id', $product_id)->where('status', '1')->get();
-        $ratings = Rating::where('product_id', $product_id)->where('user_id', Auth::user()->id)->get();
-        $reviews = Rating::where('product_id', $product_id)->where('user_id','!=', Auth::user()->id)->get();
-        $rating_sum = Rating::where('product_id', $product_id)->where('user_id', Auth::user()->id)->sum('star_rating');
+        // $product = Product::where('id', $product_id)->where('status', '1')->get();
+        // $ratings = Rating::where('product_id', $product_id)->where('user_id', Auth::user()->id)->get();
+        // $reviews = Rating::where('product_id', $product_id)->where('user_id','!=', Auth::user()->id)->get();
+        // $rating_sum = Rating::where('product_id', $product_id)->where('user_id', Auth::user()->id)->sum('star_rating');
         
-        if($ratings->count() == 0){
-            $rating_val = 0;
+        // if($ratings->count() == 0){
+        //     $rating_val = 0;
+        // }else{
+        //     $rating_val = $rating_sum/$ratings->count();
+        // }
+        $category = Category::where('slug',$category_slug)->first();
+        if($category){
+
+            $product = $category->products()->where('slug',$product_slug)->where('status', '1')->first();
+            $ratings = Rating::where('product_id', $product->id)->get();
+            $ratings_sum = Rating::where('product_id', $product->id)->sum('star_rating');
+            $reviews = Rating::where('product_id', $product->id)->where('user_id','!=', Auth::user()->id)->get();
+            $ratingcount = $ratings->count();
+            if($ratings->count() == 0){
+                $ratingval = 0;
+            }else{
+                $ratingval = $ratings_sum/$ratingcount;
+            }
+
+            if($product){
+                return view('user.product.view',compact('category','product','ratingval','ratingcount','reviews'));
+            }else{
+                return redirect()->back();
+            }
         }else{
-            $rating_val = $rating_sum/$ratings->count();
+            return redirect()->back();
         }
-        return view('user.product.view',compact('product','ratings','rating_val','reviews'));
+        
     }
+
+    //cart
+    public function cart(){
+        
+        return view('pages.user_cart');
+    }
+
 
 }

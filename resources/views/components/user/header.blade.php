@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -143,21 +145,12 @@
                       <div>
                         <ul class="navbar-nav d-flex justify-content-end">
                           
-                            <li class="nav-item d-flex align-items-center">
-                                <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
-                                    <i class="fa fa-cart-shopping me-sm-1 mx-2 nav-cart"></i>
-                                </a>
-                            </li>
-                            
-                            <li class="nav-item d-flex align-items-center">
-                            <a href="./pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-bell me-sm-1 mx-2 nav-bell"></i>
-                            </a>
-                            </li>
+                            <livewire:user.nav>
         
                             <li class="nav-item d-flex align-items-center">
                                 <a href="/user_profile" class="nav-link text-body font-weight-bold px-0">
                                     <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
+                                    
                                 </a>
                             </li>
         
