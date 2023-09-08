@@ -318,7 +318,7 @@ class UserController extends Controller
                     
                     $verificationCode = $this->generateOtp($user->id);
                     $message = "Welcome back ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                    //$this->sendSMS($user->mobile_number, $message);
+                    //$this->sendSMS($user->mobile_number, $message); // 
                     return redirect('/otp/verify/'.$user->id)->with('success',  $message);
                 }else{
                     auth()->login($user);
@@ -475,6 +475,12 @@ class UserController extends Controller
     public function cart(){
         
         return view('pages.user_cart');
+    }
+
+    //notifications
+    public function notifications(){
+        
+        return view('pages.user_notifs');
     }
 
 

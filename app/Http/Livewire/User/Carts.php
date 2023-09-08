@@ -20,6 +20,7 @@ class Carts extends Component
         $products = Product::join('carts','products.id','=','carts.product_id')
                             ->where('carts.user_id','=',Auth()->user()->id)
                             ->select('products.*','carts.quantity as cart_quantity','carts.id as cart_id')
+                            ->orderBy('carts.id','DESC')
                             ->paginate(6);
         return view('livewire.user.carts',['products' => $products]);
     }

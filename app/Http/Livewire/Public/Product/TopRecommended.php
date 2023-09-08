@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Public\Product;
 
+use App\Models\Cart;
 use App\Models\Rating;
 use App\Models\Product;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class TopRecommended extends Component
 {
@@ -17,4 +19,6 @@ class TopRecommended extends Component
         ->get();
         return view('livewire.public.product.top-recommended', [ 'recommendedProducts' => $rec_products]);
     }
+
+    
 }

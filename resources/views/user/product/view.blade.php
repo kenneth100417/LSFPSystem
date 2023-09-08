@@ -8,23 +8,24 @@
   
 
 
-    window.addEventListener('exists', event =>{
+  window.addEventListener('exists', event =>{
         Swal.fire({
-          title: 'Product already added to cart.',
+          title: 'Product already in your cart.',
           text: '',
           icon: 'info',
-          timer: 3000,
-          showConfirmButton: false
+          timer: 5000,
+          showConfirmButton: true
       })
+
     });
 
     window.addEventListener('success', event =>{
         Swal.fire({
-          title: 'Product successfully added to cart.',
+          title: 'Product is added to your cart.',
           text: '',
           icon: 'success',
-          timer: 3000,
-          showConfirmButton: false
+          timer: 5000,
+          showConfirmButton: true
       })
     });
 
@@ -33,8 +34,8 @@
           title: 'Insufficient Stock.',
           text: '',
           icon: 'info',
-          timer: 3000,
-          showConfirmButton: false
+          timer: 5000,
+          showConfirmButton: true
       })
     });
 
@@ -43,8 +44,8 @@
           title: 'Product not Found.',
           text: '',
           icon: 'info',
-          timer: 3000,
-          showConfirmButton: false
+          timer: 5000,
+          showConfirmButton: true
       })
     });
 
@@ -53,17 +54,17 @@
           title: 'Product out of Stock',
           text: '',
           icon: 'info',
-          timer: 3000,
-          showConfirmButton: false
+          timer: 5000,
+          showConfirmButton: true
       })
     });
     window.addEventListener('lessThanZero', event =>{
         Swal.fire({
-          title: 'Quantity must be greater than 0.',
+          title: 'Quantity must be more than 0.',
           text: '',
           icon: 'info',
-          timer: 3000,
-          showConfirmButton: false
+          timer: 5000,
+          showConfirmButton: true
       })
     });
     window.addEventListener('null', event =>{
@@ -71,10 +72,11 @@
           title: 'Please input quantity.',
           text: '',
           icon: 'info',
-          timer: 3000,
-          showConfirmButton: false
+          timer: 5000,
+          showConfirmButton: true
       })
     });
+
     
     // var input_quantity = document.getElementById('quantity');
     // input_quantity.addEventListener('change',function(){

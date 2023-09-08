@@ -57,7 +57,7 @@
                                 <td class="mw-15">
                                     <div class="d-flex px-2 py-1 align-items-center justify-content-start" style="min-width: 15; max-width: 15; white-space:normal;min-height:80px ;max-height: 80px; overflow:scroll; align-items: center;">
                                         <div>
-                                        <img src="/uploads/products/{{$product->image}}" class="avatar avatar-md me-3 border-radius-lg">
+                                        <img src="/uploads/products/{{$product->image}}" class="avatar avatar-md me-3 border-radius-lg" style="object-fit: cover">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                         <p  class="mb-0 text-sm text-dark">{{$product->name}}</p>

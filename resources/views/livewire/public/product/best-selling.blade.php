@@ -57,7 +57,7 @@
                             </div>
                     </div>
                     <div class="d-flex justify-content-between m-2">
-                      <button type="button" onclick="openProduct()" class="btn btn-success add-cart-btn px-4">Add to Cart</button>
+                      <button type="button" onclick="openProduct()" class="btn btn-success add-cart-btn px-2">Add to Cart</button>
                       <button type="button" onclick="openProduct()" class="btn btn-warning buy-btn ">Buy Now</button>
                     </div>
                   </div>

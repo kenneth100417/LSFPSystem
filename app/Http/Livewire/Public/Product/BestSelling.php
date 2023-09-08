@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Public\Product;
 
+use App\Models\Cart;
 use App\Models\Rating;
 use App\Models\Product;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class BestSelling extends Component
 {
@@ -14,4 +16,6 @@ class BestSelling extends Component
 
         return view('livewire.public.product.best-selling', ['bestProducts' => $best_products]);
     }
+
+   
 }
