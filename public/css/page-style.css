@@ -413,7 +413,10 @@ input[type="checkbox"].category-checkbox:checked{
     color: #ffc107;
   }
 
-
+input.cart-quantity::placeholder{
+    opacity: 1 !important;
+    color: #353434 !important;
+}
 @media screen and (max-width:767px){
     /* .welcome-message{
         display: none !important;

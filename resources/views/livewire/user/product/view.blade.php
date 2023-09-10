@@ -23,6 +23,7 @@
                       </div>
                       
                     </div>
+                    <hr class="bg-dark mt-n2"/>
                     <div class="d-flex justify-content-between mt-2">
                       <div class="d-flex">
                         <label for="rating" class="text-md text-dark">{{$ratingcount}} Rating{{$ratingcount > 1 ? 's':''}}: </label>
@@ -43,18 +44,28 @@
                       <label for="description" class="text-md text-dark">Description:</label>
                       <p class="mt-n2 mx-1" style="text-align: justify; ">{{$product->description}}</p>
                     </div>
-                    <div class="mt-2 d-flex ">
-                      <label for="quantity" class="text-md text-dark">Quantity:</label>
-                      <div>
-                        
-                        @for($i = 1; $i <=  $product->quantity_sold - $product->quantity; $i++)
-                          {{$max = $i;}}
-                        @endfor
-                        
-                        <input wire:model = "add_quantity" :value = "add_quantity" type="number" min="1" max="{{$i}}" name="" id="quantity" class="form-control px-2 py-1 mx-3" placeholder="Quantity" style="max-width: 100px !important; border: 1px solid gray">
+                    <div class="d-flex justify-content-between">
+                      <div class="mt-2 d-flex ">
+                        <label for="quantity" class="text-md text-dark">Quantity:</label>
+                        <div>
+                          
+                          @for($i = 1; $i <=  $product->quantity_sold - $product->quantity; $i++)
+                            {{$max = $i;}}
+                          @endfor
+                          
+                          <input wire:model = "add_quantity" :value = "add_quantity" type="number" min="1" max="{{$i}}" name="" id="quantity" class="form-control px-2 py-1 mx-3" placeholder="Quantity" style="max-width: 100px !important; border: 1px solid gray">
+                        </div>
+                      </div>
+                      <div class="text-center mx-2 product-price d-flex justify-content-between align-items-center mt-n1">
+                          <div>
+                              <p class=" text-danger mb-0 mx-1"><s>&#8369;{{$product->original_price}}</s></p>
+                          </div>
+                          <div>
+                              <h4 class="text-dark mb-2 mx-1 product-selling-price">&#8369;{{$product->selling_price}}</h4>
+                          </div>
                       </div>
                     </div>
-                    <div class="d-flex justify-content-center mt-3">
+                    <div class="d-flex justify-content-end mt-3">
                       <button type="button" class="btn btn-success add-cart-btn me-2" style="font-size: 12px !important" wire:click="addToCart({{$product->id}})" id="addToCartBtn">Add to Cart</button>
                       <button type="button" class="btn btn-warning buy-btn mx-2" style="font-size: 12px !important">Buy Now</button>
                     </div>

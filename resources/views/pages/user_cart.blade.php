@@ -14,7 +14,10 @@
 
 <script type="text/javascript">
 
-
+// var quantity = document.getElementById('quantity'); 
+// quantity.addEventListener('change', function(){
+//   Livewire.emit('quantityUpdate')
+// });
 
 window.addEventListener('show-delete-confirmation', event =>{
     Swal.fire({
@@ -42,7 +45,27 @@ window.addEventListener('cartDeleted', event =>{
   })
 });
 
+window.addEventListener('greaterThanStock', event =>{
+        Swal.fire({
+          title: 'Insufficient Stock.',
+          text: '',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
+      location.reload();
+    });
 
+    window.addEventListener('zero', event =>{
+        Swal.fire({
+          title: 'Quantity cannot be 0.',
+          text: '',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
+      location.reload();
+    });
 
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
