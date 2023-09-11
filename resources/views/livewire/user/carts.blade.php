@@ -66,7 +66,7 @@
                                 </tbody>
                                 
                                 @empty
-                                <div class="d-flex justify-content-center mb-0">
+                                <div class="d-flex justify-content-center mb-0 mt-5">
                                    No product added to cart.
                                 </div>
                                 @endforelse
@@ -90,7 +90,7 @@
                                     <h5 class="text-dark mb-2 mx-1"> &#8369;{{ number_format($totalAmount,2) }}</h5>
                                 </div>
                                 <div class="d-flex justify-content-end" style="right: 10px;">
-                                    <button  type="button" data-bs-toggle="modal" data-bs-target="#checkout" class="btn btn-warning buy-btn ">Check Out</button>
+                                    <button  type="button" data-bs-toggle="modal" data-bs-target="#checkout" class="btn btn-warning buy-btn " {{$products->count() == 0 ? 'disabled':''}}>Check Out</button>
                                 </div>
                             </div>
                         </div>
@@ -146,8 +146,7 @@
                                     <div class="d-flex flex-row align-items-center">
                                         <div  class="d-flex align-items-center">
                                             <div>
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                                class="img-fluid rounded-3 p-image" alt="Shopping item">
+                                                <img src="/uploads/products/{{$product->image}}" class="avatar avatar-lg  me-3 border-radius-lg" alt="Shopping item" style="object-fit: cover;">
                                             </div>
                                             
                                             <div class="ms-3">
@@ -177,7 +176,7 @@
                             
                     <div class="modal-footer m-0">
                         
-                        <button type="button" wire:click = "checkout({{auth()->user()->id}})" class="btn btn-warning modal-update-btn" id="updateBtn" >Place Order</button>
+                        <button type="button" wire:click = "checkout({{$totalAmount}})" class="btn btn-warning modal-update-btn" id="updateBtn" >Place Order</button>
                         <button type="button" class="btn btn-danger modal-cancel-btn" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </form>

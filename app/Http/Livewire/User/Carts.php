@@ -3,10 +3,12 @@
 namespace App\Http\Livewire\User;
 
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\OrderItem;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Carts extends Component
 {
@@ -43,8 +45,29 @@ class Carts extends Component
 
     }
 
-    public function checkout($user_id){
-        dd('insert sa order table + insert sa order items table');
+    public function checkout($totalAmount){
+        $cartItems = Cart::where('user_id', Auth()->user()->id)->get();
+        $order = Order::create([
+            'user_id' => auth()->user()->id,
+            'status' => 'pending',
+            'amount' => $totalAmount,
+        ]);
+        foreach($cartItems as $cartItem){
+            $product = Product::where('id',$cartItem->product_id)->first();
+            $orderItem = OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $cartItem->product_id,
+                'price' => $product->selling_price,
+                'quantity' => $cartItem->quantity,
+            ]);
+        }
+        if($order && $orderItem){
+            Cart::where('user_id', Auth()->user()->id)->delete();
+            $this->dispatchBrowserEvent('orderSuccess');
+        }else if($cartItems->count() == '0'){
+            $this->dispatchBrowserEvent('emptyCart');
+        }
+
     }
 
    public function updateQuantity($cart_id,$product_id,$quantity){

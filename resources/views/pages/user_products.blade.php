@@ -55,8 +55,11 @@
           title: 'Product is added to your cart.',
           text: '',
           icon: 'success',
-          timer: 5000,
           showConfirmButton: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+        }
       })
     });
 

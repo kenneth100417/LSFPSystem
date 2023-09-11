@@ -43,6 +43,7 @@ window.addEventListener('cartDeleted', event =>{
       timer: 3000,
       showConfirmButton: false
   })
+  location.reload();
 });
 
 window.addEventListener('greaterThanStock', event =>{
@@ -65,6 +66,36 @@ window.addEventListener('greaterThanStock', event =>{
           showConfirmButton: true
       })
       location.reload();
+    });
+
+    window.addEventListener('orderSuccess', event =>{
+        Swal.fire({
+          title: 'Thank you!',
+          text: 'Track the progress of your order in Orders Tab.',
+          icon: 'success',
+          showConfirmButton: true
+      })
+      location.reload();
+    });
+
+    window.addEventListener('orderError', event =>{
+        Swal.fire({
+          title: 'Ooops!',
+          text: 'An error occured. Try Again.',
+          icon: 'error',
+          timer: 5000,
+          showConfirmButton: true
+      })
+    });
+
+    window.addEventListener('emptycart', event =>{
+        Swal.fire({
+          title: 'Your cart is empty.',
+          text: 'Add product to your cart first.',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
     });
 
   var win = navigator.platform.indexOf('Win') > -1;

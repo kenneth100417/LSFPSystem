@@ -120,9 +120,13 @@ window.addEventListener('exists', event =>{
           title: 'Product is added to your cart.',
           text: '',
           icon: 'success',
-          timer: 5000,
           showConfirmButton: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+        }
       })
+      
     });
 
     window.addEventListener('greaterThanStock', event =>{
@@ -154,6 +158,7 @@ window.addEventListener('exists', event =>{
           showConfirmButton: true
       })
     });
+    
     window.addEventListener('lessThanZero', event =>{
         Swal.fire({
           title: 'Quantity must be more than 0.',
