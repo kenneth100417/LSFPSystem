@@ -90,7 +90,7 @@
                                     <h5 class="text-dark mb-2 mx-1"> &#8369;{{ number_format($totalAmount,2) }}</h5>
                                 </div>
                                 <div class="d-flex justify-content-end" style="right: 10px;">
-                                    <button  type="button" data-bs-toggle="modal" data-bs-target="#checkout" class="btn btn-warning buy-btn " {{$products->count() == 0 ? 'disabled':''}}>Check Out</button>
+                                    <button  type="button" data-bs-toggle="modal" data-bs-target="#checkout" class="btn btn-warning" {{$products->count() == 0 ? 'disabled':''}}>Check Out</button>
                                 </div>
                             </div>
                         </div>
@@ -126,11 +126,14 @@
                                 <hr class="bg-dark mt-3 mb-0"/>
                                 <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2 m-2">
                                     <div class="d-flex align-items-center">
-                                        <div>
+                                        <div class="mx-2">
                                             <h5 for="" class="text-sm my-0">Name: <span><label>{{Auth()->user()->firstname}} {{Auth()->user()->lastname}}</label></span></h5>
                                             <h5 for="" class="text-sm my-0">Email: <span><label>{{Auth()->user()->email}}</label></span></h5>
                                             <h5 for="" class="text-sm my-0">Contact Number: <span><label>{{Auth()->user()->mobile_number}}</label></span></h5>
                                             <h5 for="" class="text-sm my-0">Complete address: <span><label>{{Auth()->user()->address}} </label></span></h5>
+                                            <div class="d-flex justify-content-center">
+                                                <textarea wire:model.defer = "note" class="form-control mx-3 px-2" name="note" id="note"  rows="2" placeholder="Input nearest location or landmark" style="border:1px solid rgb(155, 155, 155); width: 600px;"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -190,3 +193,4 @@
     
     
 </div>
+

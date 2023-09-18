@@ -49,8 +49,8 @@ class UserController extends Controller
                     //send verification code to user's mobile number.
                     $verificationCode = $this->generateOtp($user->id);
                     $message = "Your recovery code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                    $this->sendSMS(auth()->user()->mobile_number, $message); // Send Recovery SMS ->with('success',  $message)
-                return redirect('/recovery-verification/'.$user->id);
+                    //$this->sendSMS(auth()->user()->mobile_number, $message); // Send Recovery SMS 
+                return redirect('/recovery-verification/'.$user->id)->with('success',  $message);
                 }else{
                     return redirect()->back()->withErrors(['error' => 'No User Found. Try another Email or Mobile Number.']);
                 }
@@ -253,8 +253,8 @@ class UserController extends Controller
         $user = User::where('id', $user_id)->first();
         $verificationCode = $this->generateOtp($user->id);
         $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
-       // $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS 
-        return redirect('/otp/verify/'.$user->id)->with('success',  $message);
+        $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS 
+        //return redirect('/otp/verify/'.$user->id)->with('success',  $message);
     }
 
     public function add_user(Request $request){
@@ -290,27 +290,6 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email',$validated['email'])->first();
-        
-     
-        // if(auth()->attempt($validated)){
-
-        //     if(auth()->user()->access == "0"){
-        //          $request->session()->regenerate();
-
-        //         // $name = auth()->user()->firstname;
-
-        //         $verificationCode = $this->generateOtp($user->id);
-        //         $message = "Welcome back ".auth()->user()->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-        //          //$this->sendSMS(auth()->user()->mobile_number, $message); //Send OTP SMS
-        //         return redirect('/otp/verify/'.$user->id)->with('success',  $message);; 
-        //     }else{
-        //         $request->session()->regenerate();
-
-        //         // $name = auth()->user()->firstname;
-        //         return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
-        //     }
-        
-        // }
         
         if($validated){
             if(Hash::check($validated['password'], $user->password)){
@@ -406,29 +385,33 @@ class UserController extends Controller
     }
 
 
-    // public function changePassword(Request $request){
+    public function changePass(Request $request){
 
-    //     $validated = $request->validate([
-    //         'current-password' => 'required|min:6',
-    //         'password' => 'required|confirmed|min:6',
-    //         'email' => ['required', 'email']
-    //     ]);
-    //     $user = User::findOrFail($validated['email'], 'email');
+        $validated = $request->validate([
+            'current_password' => 'required|min:6',
+            'password' => 'required|confirmed|min:6',
+            'email' => ['required', 'email'],
+        ]);
         
-    //     $currentPasswordStatus = Hash::check($validated['current-password'], $user->password);
-    //     if($currentPasswordStatus){
+        $user = User::where('email', $validated['email'])->where('id', auth()->user()->id)->first();
+        
+        $currentPasswordStatus = Hash::check($validated['current_password'], $user->password);
+
+        if($currentPasswordStatus){
            
-    //         User::findOrFail($user->id)->update([
-    //             'password' => Hash::make($validated['password']),
-    //         ]);
+           $user->update([
+                'password' => Hash::make($validated['password']),
+            ]);
 
-    //         return redirect()->back()->with('success','Password Updated Successfully');
+            return redirect()->back()->with('success','Your password has been updated.');
 
-    //     }else{
+        }else{
+            return redirect()->back()->with('error','Current Password does not match with Old Password');
+        }
 
-    //         return redirect()->back()->with('error','Current Password does not match with Old Password');
-    //     }
-    //}
+        // 
+        
+    }
 
 
 

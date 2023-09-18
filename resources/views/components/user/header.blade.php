@@ -157,8 +157,8 @@
                             <li class="nav-item d-flex align-items-center">
                                 <form action="/logout" method="POST" id="logout">
                                     @csrf
-                                    <button  type="button" class="logout-btn" onclick="logout();">
-                                        <i class="fa fa-power-off ms-2 nav-power"></i>
+                                    <button  type="button" class="logout-btn" onclick="logout();" >
+                                        <i class="fa-solid fa-right-from-bracket ms-2 nav-power" style="font-size: 20px"></i>
                                     </button>
                                 </form>
                             </li>

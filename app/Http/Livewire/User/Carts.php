@@ -15,7 +15,7 @@ class Carts extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $delete_id;
+    public $delete_id,$note;
 
     
     
@@ -28,7 +28,6 @@ class Carts extends Component
                             ->select('products.*','carts.quantity as cart_quantity','carts.id as cart_id','carts.product_id as product_id')
                             ->orderBy('carts.id','DESC')
                             ->paginate(6);
-        
         return view('livewire.user.carts',['products' => $products]);
     }
 
@@ -50,6 +49,7 @@ class Carts extends Component
         $order = Order::create([
             'user_id' => auth()->user()->id,
             'status' => 'pending',
+            'note' => $this->note,
             'amount' => $totalAmount,
         ]);
         foreach($cartItems as $cartItem){
@@ -60,6 +60,7 @@ class Carts extends Component
                 'price' => $product->selling_price,
                 'quantity' => $cartItem->quantity,
             ]);
+            
         }
         if($order && $orderItem){
             Cart::where('user_id', Auth()->user()->id)->delete();

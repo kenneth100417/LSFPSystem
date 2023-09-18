@@ -243,7 +243,7 @@
                       </div>
                     </div>
                     
-                    <form action="/user_change_password"  method="POST" id="update-form">
+                    <form action="{{url('/change_pass')}}"  method="POST" id="update-form">
                         @method('PUT')
                         @csrf
                     <div class="card-body px-0 pb-2 mt-5 mx-5 text-sm profile">
@@ -255,7 +255,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="email">Email</label>
-                                    <input  name="email" class="form-control profile-input-form" type="email" value="{{auth()->user()->email;}}" placeholder="Email">
+                                    <input  name="email" class="form-control profile-input-form" type="email" value="{{auth()->user()->email}}" placeholder="Email">
                                     @error('email')
                                         <p class="text-danger">
                                             <small> {{$message}} </small>
@@ -274,7 +274,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for=""> Old Password</label>
-                                    <input   class="form-control profile-input-form" type="password" placeholder="Old Password">
+                                    <input name="current_password"  class="form-control profile-input-form" type="password" placeholder="Old Password">
                                 </div>
                             </div>
 

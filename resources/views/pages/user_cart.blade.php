@@ -74,8 +74,12 @@ window.addEventListener('greaterThanStock', event =>{
           text: 'Track the progress of your order in Orders Tab.',
           icon: 'success',
           showConfirmButton: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+        }
       })
-      location.reload();
+      
     });
 
     window.addEventListener('orderError', event =>{

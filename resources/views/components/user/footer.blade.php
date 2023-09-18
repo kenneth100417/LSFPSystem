@@ -4,9 +4,63 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+
 <script type="text/javascript">
 
+window.addEventListener('show-cancel-confirmation', event =>{
+    Swal.fire({
+    title: 'Are you sure you want to cancel your order?',
+    text: "You can reorder this in 'Cancelled' tab.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes',
+    cancelButtonText:'Abort',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Livewire.emit('cancelConfirmed')
+    }
+  })
+});
 
+window.addEventListener('show-received-message', event =>{
+    Swal.fire({
+    title: "Thank you for purchasing Louela's Sweet Food Products!",
+    text: "Rate this products in 'Completed' tab.",
+    icon: '',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Rate Now',
+    cancelButtonText:'Later',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href = "{{url('/user_completed')}}"
+    }
+  })
+});
+
+window.addEventListener('buy-again', event =>{
+    Swal.fire({
+    title: "Are you sure you want to place this order again?",
+    text: "View your pending orders in 'Order Request' tab.",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Place Order',
+    cancelButtonText:'Cancel',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Livewire.emit('buyAgain')
+    }
+  })
+});
+
+window.addEventListener('goto-order-requests', event =>{
+  location.href = "{{url('/user_orders')}}"
+});
 
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {

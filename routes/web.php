@@ -84,6 +84,8 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     Route::get('/user_cancelled',  'user_cancelled');
 
     Route::put('/user_update',  'update');
+    // change password
+    Route::put('/change_pass','changePass');
 
     // products
     Route::get('/product-view/{category_slug}/{product_slug}',  'productView');

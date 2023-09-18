@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('status'); //pending,approved,completed,archived
+            $table->longText('note'); //pending,approved,completed,archived
             $table->integer('amount');
             $table->timestamps();
         });
