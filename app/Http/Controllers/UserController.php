@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Rating;
 use App\Models\Product;
@@ -292,20 +293,22 @@ class UserController extends Controller
         $user = User::where('email',$validated['email'])->first();
         
         if($validated){
-            if(Hash::check($validated['password'], $user->password)){
-                if($user->access == "0"){
-                    
-                    $verificationCode = $this->generateOtp($user->id);
-                    $message = "Welcome back ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                    //$this->sendSMS($user->mobile_number, $message); // 
-                    return redirect('/otp/verify/'.$user->id)->with('success',  $message);
-                }else{
-                    auth()->login($user);
-                    return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
-                }
-            }
+            if($user){
+                if(Hash::check($validated['password'], $user->password)){
+                    if($user->access == "0"){
+                        
+                        $verificationCode = $this->generateOtp($user->id);
+                        $message = "Welcome back ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
+                        //$this->sendSMS($user->mobile_number, $message); //otp 
+                        return redirect('/otp/verify/'.$user->id)->with('success',  $message);
+                    }else{
+                        auth()->login($user);
+                        return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
+                    }
+                }return back()->withErrors(['error' => 'Email and Password does not match.']);
+            }return back()->withErrors(['error' => 'Email and Password does not match.']);
         }
-        return back()->withErrors(['error' => 'Email and Password does not match.']);
+        return back()->withErrors(['error' => 'An error occured.']);
     }
 
 
@@ -464,6 +467,40 @@ class UserController extends Controller
     public function notifications(){
         
         return view('pages.user_notifs');
+    }
+
+    //buy now
+    public function buyNow($product_id){
+        $product = Product::where('id',$product_id)->where('status', '1')->first();
+        if(Auth::check()){
+            
+            if(Cart::where('user_id', auth()->user()->id)->where('product_id', $product_id)->exists()){
+                $this->dispatchBrowserEvent('exists');
+            }else{
+                if(Product::where('id',$product_id)->where('status', '1')->exists()){
+                    $inStock = $product->quantity - $product->quantity_sold;
+                    if($inStock > 0 ){
+
+                        Cart::where('user_id',auth()->user()->id)->delete();
+                    
+                        Cart::create([
+                            'user_id' => auth()->user()->id,
+                            'product_id' => $product_id,
+                            'quantity' => 1
+                        ]);
+                        
+                        return redirect('/cart');
+                            
+                        
+                    }else{
+                        return redirect()->back()->with('outOfStock','Out of Stock');
+                    }
+                }else{
+                    return redirect()->back()->with('notFound','Not Found.');
+                }
+                
+            }
+        }
     }
 
    

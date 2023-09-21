@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\ProductFormRequest;
@@ -17,10 +18,12 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('pages.admin-product-info-pages.admin_product_info_list', compact('products', 'categories'));
     }
+
     public function add(){
         $categories = Category::all();
         return view('admin.products.add', compact('categories'));
     }
+
     public function store(ProductFormRequest $request){
         
         $validatedData = $request->validated();
@@ -33,9 +36,10 @@ class ProductController extends Controller
             $filename = time().'.'.$ext;
 
             $file->move('uploads/products/',$filename);
-
-
         }
+
+        $date =  $validatedData['expiry_date'];
+        $expiryDate = Carbon::createFromFormat('m/d/Y', $date)->format('Y-m-d');
         $category->products()->create([
             'category_id' => $validatedData['category_id'],
             'name' => $validatedData['name'],
@@ -43,6 +47,7 @@ class ProductController extends Controller
             'selling_price' => $validatedData['selling_price'],
             'quantity' => $validatedData['quantity'],
             'description' => $validatedData['description'],
+            'expiry_date' => $expiryDate,
             'image' => $filename,
             'slug' => Str::slug($validatedData['slug']),
             'meta_title' => $validatedData['meta_title'],

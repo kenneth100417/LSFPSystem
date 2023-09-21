@@ -209,8 +209,8 @@
                         <li class="nav-item d-flex align-items-center">
                             <form action="/logout" method="POST" id="logout">
                                 @csrf
-                                <button  type="button" class="logout-btn" onclick="logout();">
-                                    <i class="fa fa-power-off mx-2 nav-power"></i>
+                                <button  type="button" class=" btn btn-danger btn-sm py-2 px-3 ms-4 mt-2" onclick="logout();">
+                                    Log Out 
                                 </button>
                             </form>
                         </li>

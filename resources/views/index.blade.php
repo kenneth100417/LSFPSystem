@@ -188,7 +188,7 @@
     }
     // datepicker
     $('#birthdate').datepicker({
-       endDate: '-16y'
+       endDate: '-18y'
       });
 
 

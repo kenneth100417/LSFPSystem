@@ -15,7 +15,7 @@ window.addEventListener('show-cancel-confirmation', event =>{
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes',
+    confirmButtonText: 'Yes, Cancel',
     cancelButtonText:'Abort',
   }).then((result) => {
     if (result.isConfirmed) {

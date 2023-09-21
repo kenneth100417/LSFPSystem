@@ -46,24 +46,24 @@
                       <table class="table align-items-center mb-0" >
                         <thead>
                           <tr>
-                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Product ID</th>
-                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Products</th>
-                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Price</th>
-                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Sold</th>
-                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">In Stock</th>
-                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Category</th>
-                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Description</th>
-                            <th class="text-dark opacity-7 w-10"></th>
+                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ">Product ID</th>
+                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ">Products</th>
+                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ">Price</th>
+                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ">Sold</th>
+                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ">In Stock</th>
+                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ">Category</th>
+                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ">Expiration Date</th>
+                            <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ">Status</th>
                           </tr>
                         </thead>
                         <tbody>
                             @forelse ($products as $product)
                         
                             <tr>
-                                <td class="w-10">
+                                <td class="">
                                     <p class="text-xs text-dark mb-0"><span>LSFP_P</span>{{$product->id}}</p>
                                 </td>
-                                <td class="mw-15">
+                                <td class="">
                                     <div class="d-flex px-2 py-1 align-items-center justify-content-start" style="min-width: 15; max-width: 15; white-space:normal;min-height:80px ;max-height: 80px; overflow:scroll; align-items: center;">
                                         <div>
                                         <img src="/uploads/products/{{$product->image}}" class="avatar avatar-md me-3 border-radius-lg" style="object-fit: cover">
@@ -73,26 +73,23 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="mw-10 text-center">
+                                <td class=" text-center">
                                     <p class="text-xs text-dark mb-0"><span class="text-success text-md">&#8369;</span>{{number_format($product->selling_price, 2)}}</p>
                                 </td>
-                                <td class="mw-10 text-center">
+                                <td class=" text-center">
                                     <p class="text-xs text-dark mb-0">{{$product->quantity_sold}}</p>
                                 </td>
-                                <td class="mw-10 text-center">
+                                <td class=" text-center">
                                     <p class="text-xs text-dark mb-0">{{$product->quantity}}</p>
                                 </td>
-                                <td class="mw-15 text-center">
+                                <td class=" text-center">
                                     <p class="text-xs text-dark mb-0">{{$product->category->name}}</p>
                                 </td>
-                                <td class="mw-15 text-center" >
-                                    <div class="d-flex" style="min-width: 15; max-width: 15; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
-                                        <p class="text-xs text-dark mb-0">{{$product->description}}</p>
-                                    </div>
+                                <td class=" text-center">
+                                    <p class="text-xs text-dark mb-0">{{$product->expiry_date}}</p>
                                 </td>
-                                <td class="mw-10">
-                                    <button class="btn btn-success btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer ">View details<i class="fa-solid fa-arrow-up-right-from-square ms-2" title="View product details" style="font-size: 14px;"></i></button>
-                                    
+                                <td class="">
+                                    <button class="btn btn-success btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer ">In Stock</button>
                                 </td>
                             </tr>
         

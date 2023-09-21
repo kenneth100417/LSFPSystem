@@ -53,7 +53,7 @@
                                         <p class="text-xs text-dark mb-0">{{$order->created_at}}</p>
                                     </td>
                                     <td class="w-10 text-center">
-                                        <p class="text-xs text-dark mb-0">PHP&#8369;{{number_format($order->amount,2)}}</p>
+                                        <p class="text-xs text-dark mb-0">&#8369;{{number_format($order->amount,2)}}</p>
                                     </td>
                                     <td class="w-10 text-center align-items-middle">
                                         <button class="btn btn-danger btn-sm mt-3" wire:click.prevent = "cancelConfirmation({{$order->id}})"> Cancel Order</button>

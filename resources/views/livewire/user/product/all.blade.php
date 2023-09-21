@@ -4,10 +4,33 @@
         <div class="align-items-center"> 
           <h4 class="text-start mx-3 swiper-title" style="font-family: Arial, Helvetica, sans-serif; font-size: 26px">All Products</h4>
         </div>
-        <div class="align-items-center">
-          <form class="form-inline search-container ">
-            <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" style="display: block !important;">
-          </form>
+        
+        <div class="d-flex align-items-center">
+          
+          
+           <div class="align-items-center mx-3 pb-2">
+            <input wire:model.lazy="search" class="form-control search-input" type="search" placeholder="Search" aria-label="Search" style="display: block !important;">
+           </div>
+          
+          <div class="d-flex  align-items-center">
+            <div class="d-flex  align-items-center" >
+                <h5 class="text-success text-capitalize pe-3" wire:click.prevent = "desc()" style="cursor: pointer"><i class="fa-solid fa-arrow-up-wide-short" ></i></h5>
+  
+                <h5 class="text-success text-capitalize pe-4" wire:click.prevent = "asc()" style="cursor: pointer"><i class="fa-solid fa-arrow-down-short-wide"></i></h5>
+            </div>
+  
+            <div class="btn-group pe-3">
+                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{$sortby}}
+                </button>
+                <div class="dropdown-menu">
+                  @foreach($categories as $category)
+                    <a class="dropdown-item" wire:click.prevent = "category({{$category->id}})">{{$category->name}}</a>
+                  @endforeach
+                  <a class="dropdown-item text-center" wire:click.prevent = "all()">Show All</a>
+                </div> 
+            </div>
+        </div>
         </div>
       </div>
       <hr class="bg-dark mx-5"/>
@@ -65,13 +88,16 @@
             </div>
             </a>
             <div class="d-flex justify-content-between m-2">
+              <form role="form" action='/buy/{{$product->id}}' method="POST">
+                @csrf
                 <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 16px !important">Add to Cart</button>
-                <button type="button" class="btn btn-warning buy-btn ">Buy Now</button>
+                <button type="submit" class="btn btn-warning buy-btn ">Buy Now</button>
+              </form>
             </div>
         </div>
           </div>
         @empty
-            <div class="text-center">
+            <div class="text-center mt-5">
                 <p>No products found at the moment.</p>
             </div>
         @endforelse

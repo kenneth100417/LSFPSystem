@@ -13,7 +13,7 @@ class Archived extends Component
 
     public function render()
     {
-        $products = Product::orderBy('id', 'DESC')->where('status','0')->paginate(3);
+        $products = Product::orderBy('id', 'DESC')->where('status','0')->paginate(5);
         return view('livewire.admin.product.archived', ['products' => $products]);
     }
 

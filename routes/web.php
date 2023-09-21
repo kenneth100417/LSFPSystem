@@ -93,6 +93,9 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     //cart
     Route::get('/cart',  'cart');
     Route::get('/notifications',  'notifications');
+
+    // 
+    Route::post('/buy/{product_id}', 'buyNow');
     
 });
 

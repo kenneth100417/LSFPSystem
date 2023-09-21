@@ -50,6 +50,9 @@ class ProductFormRequest extends FormRequest
                 'required',
                 'string'
             ],
+            'expiry_date' => [
+                'required',
+            ],
             'image' => [
                 'nullable',
                 'mimes:jpg,jpeg,png'

@@ -1,211 +1,234 @@
 @include('components.admin.header')
         
       
-        <section class="mx-2">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12 bg-white border-radius-lg mt-5">
-                        <div class="card-header p-0 mt-n4 mx-3 z-index-2 mb-n2">
-                            <div class="bg-gradient-success border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h6 class="text-white text-capitalize ps-3">Add New Product</h6>
-                                </div>
-                                <div class="me-3">
-                                    <a class="btn btn-warning btn-sm" href="{{url('admin/products')}}">View All Products<i class="fa-solid fa-arrow-up-right-from-square ms-2" style="font-size: 14px"></i></a>
-                                </div>
-                            </div>
-                            
+<section class="mx-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 bg-white border-radius-lg mt-5">
+                <div class="card-header p-0 mt-n4 mx-3 z-index-2 mb-n2">
+                    <div class="bg-gradient-success border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-white text-capitalize ps-3">Add New Product</h6>
                         </div>
-                        <div class="card-body px-0">
-                            <form action="{{url('admin/products')}}" id="categoryForm" enctype="multipart/form-data" method="post">
-                                @csrf
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            <div class=" mx-4 pb-4" style="min-height: 15rem;">
-                                                <div class="mt-3">
-                                                    <div class="row">
-                                                        <div class="col-lg-7">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Product Name</h6>
-                                                                <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Product Name" style="box-shadow: 0 2px 5px #b6b6b6bf; font-size: 14px;" name="name" value="{{old('name')}}"/>
-                                                                </div>
-                                                                @error('name')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
+                        <div class="me-3">
+                            <a class="btn btn-warning btn-sm" href="{{url('admin/products')}}">View All Products<i class="fa-solid fa-arrow-up-right-from-square ms-2" style="font-size: 14px"></i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body px-0">
+                    <form action="{{url('admin/products')}}" id="categoryForm" enctype="multipart/form-data" method="post">
+                        @csrf
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class=" mx-4 pb-4" style="min-height: 15rem;">
+                                        <div class="mt-3">
+                                            <div class="row">
+                                                <div class="col-lg-7">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Product Name</h6>
+                                                        <div class="form-outline">
+                                                        <input type="text" id="" class="form-control  p-2" placeholder="Product Name" style="box-shadow: 0 2px 5px #b6b6b6bf; font-size: 14px;" name="name" value="{{old('name')}}"/>
                                                         </div>
-                                                        <div class="col-lg-5">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Product Category</h6>
-                                                                <div class="form-outline">
-                                                                <Select type="text" id="" class="form-control  p-2 selectpicker" data-style="select-with-transition" placeholder="Product Category" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="category_id" value="{{old('category_id')}}">
-                                                                    @foreach ($categories as $category)
-                                                                        <option class="" value="{{$category->id}}">{{$category->name}}</option>
-                                                                    @endforeach
-                                                                
-                                                                
-                                                                </Select>
-                                                                </div>
-                                                                @error('category_id')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Original Price</h6>
-                                                                <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Original Price" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="original_price" value="{{old('original_price')}}"/>
-                                                                </div>
-                                                                @error('original_price')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Selling Price</h6>
-                                                                <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Selling Price" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="selling_price" value="{{old('selling_price')}}"/>
-                                                                </div>
-                                                                @error('selling_price')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Stock Quantity</h6>
-                                                                <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Stock Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="quantity" value="{{old('quantity')}}"/>
-                                                                </div>
-                                                                @error('quantity')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Description</h6>
-                                                                <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Description" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="description" value="{{old('description')}}"/>
-                                                                </div>
-                                                                @error('description')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <h5 class="mt-5 mb-0">SEO (Search Engine Otimization) Tags</h5>
-                                                        <div class="col-lg-6">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Slug</h6>
-                                                                <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Slug" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="slug" value="{{old('slug')}}"/>
-                                                                </div>
-                                                                @error('slug')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Meta Title</h6>
-                                                                <div class="form-outline">
-                                                                <input type="Meta title" id="" class="form-control  p-2" placeholder="Slug" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_title" value="{{old('meta_title')}}"/>
-                                                                </div>
-                                                                @error('meta_title')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Meta Keyword</h6>
-                                                                <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Meta keyword" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_keyword" value="{{old('meta_keyword')}}"/>
-                                                                </div>
-                                                                @error('meta_keyword')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="mt-3">
-                                                                <h6 class="">Meta Description</h6>
-                                                                <div class="form-outline">
-                                                                <input type="text" id="" class="form-control  p-2" placeholder="Meta description" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_description" value="{{old('meta_description')}}"/>
-                                                                </div>
-                                                                @error('meta_description')
-                                                                    <p class="text-danger">
-                                                                        <small>{{$message}}</small>
-                                                                    </p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        
+                                                        @error('name')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="col-lg-5">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Product Category</h6>
+                                                        <div class="form-outline">
+                                                        <Select type="text" id="" class="form-control  p-2 selectpicker" data-style="select-with-transition" placeholder="Product Category" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="category_id" value="{{old('category_id')}}">
+                                                            @foreach ($categories as $category)
+                                                                <option class="" value="{{$category->id}}">{{$category->name}}</option>
+                                                            @endforeach
                                                         
-                                                
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <div class="mt-5 d-flex justify-content-center" >
-                                                <div class="" style="border-radius: 15px; width: 80%; height: 45vh; overflow:hidden;box-shadow: 1px 2px 5px #491815;">          
-                                                    <img type="image" src="/img/category/category.jpg" class="card-title" alt="Category image preview" id="category-pic" style="width: 100%;height: 100%;object-fit: cover;margin: 0;">
+                                                        
+                                                        </Select>
+                                                        </div>
+                                                        @error('category_id')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Original Price</h6>
+                                                        <div class="form-outline">
+                                                        <input type="text" id="" class="form-control  p-2" placeholder="Original Price" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="original_price" value="{{old('original_price')}}"/>
+                                                        </div>
+                                                        @error('original_price')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Selling Price</h6>
+                                                        <div class="form-outline">
+                                                        <input type="text" id="" class="form-control  p-2" placeholder="Selling Price" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="selling_price" value="{{old('selling_price')}}"/>
+                                                        </div>
+                                                        @error('selling_price')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Stock Quantity</h6>
+                                                        <div class="form-outline">
+                                                        <input type="text" id="" class="form-control  p-2" placeholder="Stock Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="quantity" value="{{old('quantity')}}"/>
+                                                        </div>
+                                                        @error('quantity')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Description</h6>
+                                                        <div class="form-outline">
+                                                        <input type="text" id="" class="form-control  p-2" placeholder="Description" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="description" value="{{old('description')}}"/>
+                                                        </div>
+                                                        @error('description')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Expiration Date</h6>
+                                                        <div class=" input-group input-group-outline mb-2 date" id="datepicker">
+                                                            <input placeholder="Expiration Date" name="expiry_date" id="expiry_date" type="text" class="form-control" value="{{old('expiry_date')}}" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;">
+                                                            <span class="input-group-append">
+                                                                <span class="input-group-text mx-2">
+                                                                <i class="fa fa-calendar"></i>
+                                                                </span>
+                                                            </span>
+                                                            </div>
+                                                            @error('expiry_date')
+                                                            <p class="text-danger">
+                                                                <small> {{$message}} </small>
+                                                            </p>
+                                                            @enderror
+                                                    </div>
+                                                </div>
+                                                <h5 class="mt-5 mb-0">SEO (Search Engine Otimization) Tags</h5>
+                                                <div class="col-lg-6">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Slug</h6>
+                                                        <div class="form-outline">
+                                                        <input type="text" id="" class="form-control  p-2" placeholder="Slug" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="slug" value="{{old('slug')}}"/>
+                                                        </div>
+                                                        @error('slug')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Meta Title</h6>
+                                                        <div class="form-outline">
+                                                        <input type="Meta title" id="" class="form-control  p-2" placeholder="Slug" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_title" value="{{old('meta_title')}}"/>
+                                                        </div>
+                                                        @error('meta_title')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Meta Keyword</h6>
+                                                        <div class="form-outline">
+                                                        <input type="text" id="" class="form-control  p-2" placeholder="Meta keyword" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_keyword" value="{{old('meta_keyword')}}"/>
+                                                        </div>
+                                                        @error('meta_keyword')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="mt-3">
+                                                        <h6 class="">Meta Description</h6>
+                                                        <div class="form-outline">
+                                                        <input type="text" id="" class="form-control  p-2" placeholder="Meta description" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="meta_description" value="{{old('meta_description')}}"/>
+                                                        </div>
+                                                        @error('meta_description')
+                                                            <p class="text-danger">
+                                                                <small>{{$message}}</small>
+                                                            </p>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 
-                                                
-                                            </div>
-                                            <div class="mt-3">
-                                                <h6 class="">Category Image</h6>
-                                                <input type="file" accept="image/x-png,image/jpeg"  class="form-control  p-2" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" id="category-pic-upload" name="image"/>
-                                                @error('image')
-                                                    <p class="text-danger">
-                                                        <small>{{$message}}</small>
-                                                    </p>
-                                                @enderror
-                                            </div>
-                                            <div class="d-flex justify-content-center align-items-center mt-5">
-                                                <button type="submit" class="btn btn-success btn-md mx-2 w-25">Save</button>
-                                                <a href="{{url('admin/products')}}" class="btn btn-danger btn-md mx-2 w-25">Back</a>
                                             </div>
                                         </div>
                                     </div>
-
+                                                
+                                        
                                 </div>
-                            </form>
+
+                                <div class="col-lg-4">
+                                    <div class="mt-5 d-flex justify-content-center" >
+                                        <div class="" style="border-radius: 15px; width: 80%; height: 45vh; overflow:hidden;box-shadow: 1px 2px 5px #491815;">          
+                                            <img type="image" src="/img/addProductImage.png" class="card-title" alt="Category image preview" id="category-pic" style="width: 100%;height: 100%;object-fit: cover;margin: 0;">
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6 class="">Product Image</h6>
+                                        <input type="file" accept="image/x-png,image/jpeg"  class="form-control  p-2" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" id="category-pic-upload" name="image"/>
+                                        @error('image')
+                                            <p class="text-danger">
+                                                <small>{{$message}}</small>
+                                            </p>
+                                        @enderror
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mt-5">
+                                        <button type="submit" class="btn btn-success btn-md mx-2 w-25">Save</button>
+                                        <a href="{{url('admin/products')}}" class="btn btn-danger btn-md mx-2 w-25">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                </div>
+                    </form>
                 </div>
             </div>
-        </section>
+        </div>
+        </div>
+    </div>
+</section>
     
-    </main>
+</main>
 @livewireScripts
 <script type="text/javascript">
+
+$('#expiry_date').datepicker({
+       startDate: '+2d'
+      });
+
 // Event listener for the file input element
 
 let profilePicInput = document.getElementById('category-pic-upload');

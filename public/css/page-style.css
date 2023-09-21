@@ -234,7 +234,7 @@ button.swal2-confirm, button.swal2-cancel{
 }
 button.swal2-confirm{
     background-color:  #28a745 !important;
-    width: 100px !important;
+    width: 130px !important;
 }
 button.swal2-cancel{
     background-color: #007bff !important;

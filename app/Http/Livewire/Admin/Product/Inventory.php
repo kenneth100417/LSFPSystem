@@ -13,7 +13,7 @@ class Inventory extends Component
 
     public function render()
     {
-        $products = Product::orderBy('id', 'DESC')->where('status','1')->paginate(3);
+        $products = Product::orderBy('id', 'DESC')->where('status','1')->paginate(5);
         return view('livewire.admin.product.inventory', ['products' => $products]);
     }
 }

@@ -14,7 +14,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'atcegory_id',
+        'category_id',
         'name',
         'image',
         'slug',
@@ -27,7 +27,8 @@ class Product extends Model
         'status',
         'meta_title',
         'meta_keyword',
-        'meta_description'
+        'meta_description',
+        'expiry_date'
     ];
 
     public function category(){

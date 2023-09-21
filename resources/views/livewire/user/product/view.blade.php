@@ -66,8 +66,11 @@
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mt-3">
+                      <form role="form" action='/buy/{{$product->id}}' method="POST">
+                        @csrf
                       <button type="button" class="btn btn-success add-cart-btn me-2" style="font-size: 12px !important" wire:click="addToCart({{$product->id}})" id="addToCartBtn">Add to Cart</button>
-                      <button type="button" class="btn btn-warning buy-btn mx-2" style="font-size: 12px !important">Buy Now</button>
+                      <button type="submit" class="btn btn-warning buy-btn mx-2" style="font-size: 12px !important">Buy Now</button>
+                      </form>
                     </div>
                   </div>
                 </div>
