@@ -6,7 +6,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="/img/logo.png">
   <title>
     Louella's Sweet Food Products
@@ -31,14 +30,15 @@
 <link rel="stylesheet" href="/css/page-style.css">
 <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.0.5" rel="stylesheet" />
 
-<!-- Nepcha Analytics (nepcha.com) -->
-<!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-<script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
 
 @livewireStyles
 </head>
@@ -95,6 +95,22 @@
                         <span class="nav-link-text ms-1">Product Informaton</span>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white tab
+                        {{ 'admin/category' == request()->path() ? 'active' : ''}}
+                        {{ 'admin/category/add' == request()->path() ? 'active' : ''}}
+                        {{ 'admin/category/edit' == request()->path() ? 'active' : ''}}" href="{{url('admin/category')}}">
+                        
+                        <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
+                            <i class="fa-solid fa-folder-tree fa-lg"></i>
+                        </div>
+                        
+                        <span class="nav-link-text ms-1">
+                            Product Categories
+                        </span>
+                    </a>
+                </li>
     
                 <li class="nav-item">
                     <a class="nav-link text-white tab 
@@ -145,22 +161,19 @@
                             <i class="fa-solid fa-layer-group fa-lg"></i>
                         </div>
                         
-                        <span class="nav-link-text ms-1">Add Sales</span>
+                        <span class="nav-link-text ms-1">Walk-in Transaction</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-white tab
-                        {{ 'admin/category' == request()->path() ? 'active' : ''}}
-                        {{ 'admin/category/add' == request()->path() ? 'active' : ''}}
-                        {{ 'admin/category/edit' == request()->path() ? 'active' : ''}}" href="{{url('admin/category')}}">
+                    <a class="nav-link text-white tab">
                         
                         <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
-                            <i class="fa-solid fa-layer-group fa-lg"></i>
+                            <i class="fa-solid fa-file fa-lg"></i></i>
                         </div>
                         
                         <span class="nav-link-text ms-1">
-                            Product Categories
+                            Generate Reports
                         </span>
                     </a>
                 </li>

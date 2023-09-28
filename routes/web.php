@@ -67,7 +67,9 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     Route::get('/admin_orders_inprocess', 'admin_orders_inprocess');
     Route::get('/admin_orders_completed', 'admin_orders_completed');
     Route::get('/admin_orders_cancelled',  'admin_orders_cancelled');
-
+    
+    //vew product reviews
+    Route::get('/product_reviews/{category_slug}/{product_slug}','viewProductReviews');
 });
 
 

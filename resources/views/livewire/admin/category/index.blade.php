@@ -7,8 +7,33 @@
                         <div>
                             <h6 class="text-white text-capitalize ps-3">Product Category</h6>
                         </div>
-                        <div class="me-3">
-                            <a class="btn btn-info btn-sm" href="{{url('admin/category/add')}}">Add New <i class="fa-regular fa-square-plus ms-2" style="font-size: 14px"></i></a>
+                        
+                        <div class="d-flex  align-items-center" >
+
+                            <div class="search mb-2 mx-3">
+                                <input wire:model="search" class="form-control search-input bg-white" type="search" placeholder="Search" aria-label="Search"  style="display: block !important">
+                            </div>
+                            
+                            <div class="d-flex  align-items-center" >
+    
+                                <h5 class="text-white text-capitalize pe-3" wire:click.prevent = "sortDesc()"><i class="fa-solid fa-arrow-up-wide-short" style="cursor:pointer"></i></h5>
+    
+                                <h5 class="text-white text-capitalize pe-4" wire:click.prevent = "sortAsc()"><i class="fa-solid fa-arrow-down-short-wide" style="cursor:pointer"></i></h5>
+    
+                            </div>
+    
+                            <div class="btn-group pe-3">
+                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Sort By {{$sortByText}}
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" wire:click.prevent = "sortById()" style="cursor:pointer">ID</a>
+                                  <a class="dropdown-item" wire:click.prevent = "sortByName()" style="cursor:pointer">Name</a>
+                                </div>
+                            </div>
+                            <div class="me-3">
+                                <a class="btn btn-info btn-sm" href="{{url('admin/category/add')}}">Add New <i class="fa-regular fa-square-plus ms-2" style="font-size: 14px"></i></a>
+                            </div>
                         </div>
                     </div>
                     
@@ -40,7 +65,7 @@
                                     </div>
                                 </td>
                                 <td class="mw-20 text-center" >
-                                    <div class="d-flex justify-content-center align-items-center" style="min-width: 20; max-width: 20; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll;">
+                                    <div class="d-flex justify-content-start align-items-center" style="min-width: 20; max-width: 20; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll;">
                                         <p class="text-xs text-dark mb-0">{{$category->name}}</p>
                                     </div>
                                 </td>
@@ -52,7 +77,7 @@
                                   </td>
                                   <td class="w-5 text-center">
                                     <div class="d-flex justify-content-center align-items-center" style="min-width: 5; max-width: 5; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll;">
-                                        <p class="text-xs text-dark mb-0">{{$category->status == 1 ? 'Visible':'Hidden'}}</p>
+                                        <p class="text-xs {{$category->status == 1 ? 'text-success':'text-danger'}} mb-0">{{$category->status == 1 ? 'Active':'Disabled'}}</p>
                                     </div>
                                 </td>
                                   <td class="mw-20">

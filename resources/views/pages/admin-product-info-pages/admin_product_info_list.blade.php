@@ -39,9 +39,13 @@ window.addEventListener('categoryDeleted', event =>{
       title: 'Success!',
       text: productName.concat(' will be moved to archived products list'),
       icon: 'success',
-      timer: 3000,
-      showConfirmButton: false
+      showConfirmButton: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.reload(true);
+    }
   })
+
 });
 
 

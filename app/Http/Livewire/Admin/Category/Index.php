@@ -11,6 +11,29 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+    public $sortBy = 'id';
+    public $sortByText = 'id';
+    public $sort =  'DESC';
+    public $search = '';
+
+    public function sortById(){
+        $this->sortBy = 'id';
+        $this->sortByText = 'id';
+
+    }
+    public function sortByName(){
+        $this->sortBy = 'name';
+        $this->sortByText = 'Name';
+    }
+
+    public function sortAsc(){
+        $this->sort = 'ASC';
+    }
+    public function sortDesc(){
+        $this->sort = 'DESC';
+    }
+
+
     public $delete_id;
     protected $listeners = ['deleteConfirmed' => 'deleteCategory'];
 
@@ -29,7 +52,9 @@ class Index extends Component
 
     public function render()
     {
-        $categories = Category::orderBy('id', 'DESC')->paginate(5);
-        return view('livewire.admin.category.index', ['categories' => $categories]);
+        $categories = Category::orderBy($this->sortBy, $this->sort)
+                                ->where('name','like','%'.$this->search.'%')
+                                ->paginate(5);
+        return view('livewire.admin.category.index', ['categories' => $categories,'sortByText' => $this->sortByText]);
     }
 }

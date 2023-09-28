@@ -25,9 +25,9 @@
                 </button>
                 <div class="dropdown-menu">
                   @foreach($categories as $category)
-                    <a class="dropdown-item" wire:click.prevent = "category({{$category->id}})">{{$category->name}}</a>
+                    <a class="dropdown-item" wire:click.prevent = "category({{$category->id}})" style="cursor:pointer">{{$category->name}}</a>
                   @endforeach
-                  <a class="dropdown-item text-center" wire:click.prevent = "all()">Show All</a>
+                  <a class="dropdown-item text-center" wire:click.prevent = "all()" style="cursor: pointer">Show All</a>
                 </div> 
             </div>
         </div>
@@ -90,18 +90,17 @@
             <div class="d-flex justify-content-between m-2">
               <form role="form" action='/buy/{{$product->id}}' method="POST">
                 @csrf
-                <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 16px !important">Add to Cart</button>
+                <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 15px !important">Add to Cart</button>
                 <button type="submit" class="btn btn-warning buy-btn ">Buy Now</button>
               </form>
             </div>
         </div>
-          </div>
+      </div>
         @empty
-            <div class="text-center mt-5">
-                <p>No products found at the moment.</p>
+            <div class="text-center mt-2">
+               <p>No Products Found.</p>
             </div>
         @endforelse
-        
         
       </div>
     </div>  

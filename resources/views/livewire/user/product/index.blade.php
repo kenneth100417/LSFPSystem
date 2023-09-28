@@ -72,7 +72,7 @@
                             <div class="d-flex justify-content-between m-2">
                                 <form role="form" action='/buy/{{$product->id}}' method="POST">
                                     @csrf
-                                    <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 23px !important">Add to Cart</button>
+                                    <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 22px !important">Add to Cart</button>
                                     <button type="submit" class="btn btn-warning buy-btn ">Buy Now</button>
                                 </form>
                             </div>
@@ -165,7 +165,7 @@
                             <div class="d-flex justify-content-between m-2">
                                 <form role="form" action='/buy/{{$best_product->id}}' method="POST">
                                     @csrf
-                                <button type="button" wire:click="addToCart({{$best_product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 23px !important">Add to Cart</button>
+                                <button type="button" wire:click="addToCart({{$best_product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 22px !important">Add to Cart</button>
                                 <button type="submit" class="btn btn-warning buy-btn ">Buy Now</button>
                                 </form>
                             </div>

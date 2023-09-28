@@ -8,40 +8,32 @@
                         <h6 class="text-white text-capitalize ps-3">Product Inventory</h6>
                       </div>
                       <div class="d-flex  align-items-center">
+                        <div class="search mb-2 mx-3">
+                            <input wire:model="search" class="form-control search-input bg-white" type="search" placeholder="Search" aria-label="Search"  style="display: block !important">
+                        </div>
                         
                         <div class="d-flex  align-items-center" >
 
-                            <h5 class="text-white text-capitalize pe-3"><i class="fa-solid fa-arrow-up-wide-short"></i></h5>
+                            <h5 class="text-white text-capitalize pe-3" wire:click.prevent = "sortDesc()"><i class="fa-solid fa-arrow-up-wide-short" style="cursor:pointer"></i></h5>
 
-                            <h5 class="text-white text-capitalize pe-4"><i class="fa-solid fa-arrow-down-short-wide"></i></h5>
+                            <h5 class="text-white text-capitalize pe-4" wire:click.prevent = "sortAsc()"><i class="fa-solid fa-arrow-down-short-wide" style="cursor:pointer"></i></h5>
 
                         </div>
 
                         <div class="btn-group pe-3">
                             <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Sort By
+                              Sort By {{$sortByText}}
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Product Name</a>
-                              <a class="dropdown-item" href="#">Sold Count</a>
-                              <a class="dropdown-item" href="#">Number of Stocks</a>
+                              <a class="dropdown-item" wire:click.prevent = "sortById()" style="cursor:pointer">Product ID</a>
+                              <a class="dropdown-item" wire:click.prevent = "sortByProductName()" style="cursor:pointer">Product Name</a>
+                              <a class="dropdown-item" wire:click.prevent = "sortBySoldCount()" style="cursor:pointer">Quantity Sold</a>
                             </div>
-                      </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
-                    <div class="col-lg-12 mt-2">
-                        <div class="d-flex justify-content-end search align-items-center">
-                            <form class="form-inline search-container">
-                                <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search"  style="display: 
-                                {{ 'admin_product_info' == request()->path() ? 'block !important;' : ''}}
-                                {{ 'admin_product_info_list' == request()->path() ? 'block !important;' : ''}}
-                                {{ 'admin_product_info_inventory' == request()->path() ? 'block !important;' : ''}}
-                                {{ 'admin_product_info_reviews' == request()->path() ? 'block !important;' : ''}}
-                                {{ 'admin_product_info_archived' == request()->path() ? 'block !important;' : ''}}">
-                            </form>
-                        </div>
-                    </div>
+    
                     <div class="table-responsive p-0">
                       <table class="table align-items-center mb-0" >
                         <thead>
@@ -88,15 +80,19 @@
                                 <td class=" text-center">
                                     <p class="text-xs text-dark mb-0">{{$product->expiry_date}}</p>
                                 </td>
-                                <td class="">
-                                    <button class="btn btn-success btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer ">In Stock</button>
+                                <td class="text-center">
+                                    <button class="btn btn-success btn-sm mt-3 me-1 text-white tbl-row-icon px-3 py-1" style="display:{{$product->quantity - $product->quantity_sold == 0 ? 'none':''}}">Available</button>
+                                    <button class="btn btn-danger btn-sm mt-3 me-1 text-white tbl-row-icon px-3 py-1" style="display:{{date('Y-m-d') >= date('Y-m-d',strtotime($product->expiry_date))  ? '':'none'}}">Expired </button>
+                                    
+                                    <button class="btn btn-warning btn-sm mt-3 me-1 text-white tbl-row-icon px-3 py-1" style="display:{{$product->quantity - $product->quantity_sold == 0 ? '':'none'}}">Out of Stock</button>
+
                                 </td>
                             </tr>
         
                             @empty
-                            <td class="mw-100 text-center" >
-                                <div class="d-flex" style="min-width: 100; max-width: 100; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
-                                    <p class="text-xs text-dark mb-0">No Products Found.</p>
+                            <td class="col-12 text-center" >
+                                <div class="text-center d-flex" style="min-width: 100; max-width: 100; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
+                                    <p class=" text-center text-xs text-dark mb-0">No Products Found.</p>
                                 </div>
                             </td>
                             @endforelse

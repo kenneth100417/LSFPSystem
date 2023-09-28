@@ -457,6 +457,33 @@ class UserController extends Controller
         
     }
 
+    //view product reviews
+
+    public function viewProductReviews($category_slug, $product_slug){
+        $category = Category::where('slug',$category_slug)->first();
+        if($category){
+
+            $product = $category->products()->where('slug',$product_slug)->where('status', '1')->first();
+            $ratings = Rating::where('product_id', $product->id)->get();
+            $ratings_sum = Rating::where('product_id', $product->id)->sum('star_rating');
+            $reviews = Rating::where('product_id', $product->id)->where('user_id','!=', Auth::user()->id)->get();
+            $ratingcount = $ratings->count();
+            if($ratings->count() == 0){
+                $ratingval = 0;
+            }else{
+                $ratingval = $ratings_sum/$ratingcount;
+            }
+
+            if($product){
+                return view('pages.admin-product-info-pages.product_reviews',compact('category','product','ratingval','ratingcount','reviews'));
+            }else{
+                return redirect()->back();
+            }
+        }else{
+            return redirect()->back();
+        }
+    }
+
     //cart
     public function cart(){
         

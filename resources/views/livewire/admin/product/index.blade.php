@@ -8,22 +8,25 @@
                         <h6 class="text-white text-capitalize ps-3">Product List</h6>
                       </div>
                       <div class="d-flex  align-items-center">
+                        <div class="search mb-2 mx-3">
+                            <input wire:model="search" class="form-control search-input bg-white" type="search" placeholder="Search" aria-label="Search"  style="display: block !important">
+                        </div>
                         <div class="d-flex  align-items-center" >
 
-                            <h5 class="text-white text-capitalize pe-3"><i class="fa-solid fa-arrow-up-wide-short"></i></h5>
+                            <h5 class="text-white text-capitalize pe-3" wire:click.prevent = "sortDesc()"><i class="fa-solid fa-arrow-up-wide-short" style="cursor:pointer"></i></h5>
 
-                            <h5 class="text-white text-capitalize pe-4"><i class="fa-solid fa-arrow-down-short-wide"></i></h5>
+                            <h5 class="text-white text-capitalize pe-4" wire:click.prevent = "sortAsc()"><i class="fa-solid fa-arrow-down-short-wide" style="cursor:pointer"></i></h5>
 
                         </div>
 
                         <div class="btn-group pe-3">
                             <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Sort By
+                              Sort By {{$sortByText}}
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Product Name</a>
-                              <a class="dropdown-item" href="#">Sold Count</a>
-                              <a class="dropdown-item" href="#">Number of Stocks</a>
+                                <a class="dropdown-item" wire:click.prevent = "sortById()" style="cursor:pointer">Product ID</a>
+                                <a class="dropdown-item" wire:click.prevent = "sortByProductName()" style="cursor:pointer">Product Name</a>
+                                <a class="dropdown-item" wire:click.prevent = "sortBySoldCount()" style="cursor:pointer">Quantity Sold</a>
                             </div>
                       </div>
                       <div class="d-flex align-items-center">
