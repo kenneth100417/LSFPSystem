@@ -42,7 +42,8 @@ class Index extends Component
     {   
         $products = Product::orderBy($this->sortBy, $this->sort)
                             ->where('status','1')
-                            ->where('name','like','%'.$this->search.'%')->paginate(5);
+                            ->where('name','like','%'.$this->search.'%')
+                            ->paginate(5);
         return view('livewire.admin.product.index', ['products' => $products, 'sortByText' => $this->sortByText]);
     }
 

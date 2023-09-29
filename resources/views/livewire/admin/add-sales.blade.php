@@ -31,16 +31,14 @@
                                             <div class="mt-3">
                                                 <h6 class="">Quantity</h6>
                                                 <div class="form-outline">
-                                                  <input wire:model="quantity" type="number" id="quantity" class="form-control  p-2" placeholder="Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;"/>
+                                                  <input wire:model="quantity" wire:change="updateTotal()" type="number" id="quantity" class="form-control  p-2" placeholder="Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;"/>
                                                 </div>
                                                 <div class="d-flex justify-content-center align-items-center mt-5">
                                                     <button type="button" class="btn btn-warning btn-sm mx-1" onClick="clear(location.reload())">Refresh</button>
-                                                    <button class="btn btn-info btn-sm mx-1">Confirm Payment</button>
+                                                    <button wire:click="addSale()" class="btn btn-info btn-sm mx-1">Confirm Payment</button>
                                                 </div>
                                               </div>
                                             </div>
-                                            
-                                            
                                     </div>
 
                                     <div class="col-lg-4 display-card">
@@ -61,7 +59,7 @@
                                             <h6 class="">Total Amount Payable</h6>
                                             <div class="form-outline d-flex justify-content-start">
                                                 <h5 for="" class="mx-2">&#8369;</h5>
-                                              <input value="{{$selected == true ? number_format($selectedProduct->selling_price*$quantity,2):''}}" type="text" id="total" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 16px; font-weight:bold;" readonly/>
+                                              <input wire:model = "total" value="" type="text" id="total" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 16px; font-weight:bold;" readonly/>
                                             </div>
                                         </div>
                                         

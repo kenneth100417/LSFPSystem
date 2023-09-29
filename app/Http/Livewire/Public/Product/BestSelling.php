@@ -12,7 +12,7 @@ class BestSelling extends Component
 {
     public function render()
     {
-        $best_products = Product::orderBy('quantity_sold','DESC')->where('quantity_sold','!=','0')->where('status','1')->get();
+        $best_products = Product::orderBy('quantity_sold','DESC')->where('quantity_sold','!=','0')->where('status','1')->where('expiry_date','>',date('Y-m-d'))->get();
 
         return view('livewire.public.product.best-selling', ['bestProducts' => $best_products]);
     }

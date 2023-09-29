@@ -8,6 +8,7 @@ use App\Models\Rating;
 use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Carbon;
+use App\Models\walkinTransaction;
 use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
@@ -84,14 +85,20 @@ class Dashboard extends Component
         $userAccounts = User::where('access','0')->get();
 
         $this->month = date('m');
-        $monthlySales = Order::where('status','completed')
+        $onlineSales = Order::where('status','completed')
                         ->whereMonth('created_at', $this->month)
                         ->sum('amount');
+
+        $walkinSales = walkinTransaction::whereMonth('created_at', $this->month)
+                                        ->sum('amount');
+        
+        $monthlySales = $onlineSales + $walkinSales;
 
         $rec_products = Product::with('ratings')
                                 ->orderBy(Rating::select('star_rating')->whereColumn('products.id', 'ratings.product_id'), 'DESC')
                                 ->where(Rating::select('star_rating')->whereColumn('products.id', 'ratings.product_id'),'!=','0')
                                 ->where('products.status','1')
+                                ->where('expiry_date','>=',date('Y-m-d'))
                                 ->get();
 
         $best_products = Product::orderBy('quantity_sold','DESC')->where('quantity_sold','!=','0')->where('status','1')->get();

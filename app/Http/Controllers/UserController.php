@@ -294,6 +294,9 @@ class UserController extends Controller
         
         if($validated){
             if($user){
+                if($user->status == 0){
+                    return back()->withErrors(['error' => "You are not allowed to Log in. For further information, please contact Louella's Sweet Food Products Administrator."]);
+                }
                 if(Hash::check($validated['password'], $user->password)){
                     if($user->access == "0"){
                         

@@ -17,28 +17,76 @@
     // Listen for Select2 changes and update Livewire
   $('#select2').on('change', function() {
     Livewire.emit('selectedProduct', $(this).val());
+    
   });
 
   var quantity = document.getElementById('quantity');
   var instock = document.getElementById('stock');
+
+  
    
     quantity.addEventListener('change', (event) => {
-      if(quantity.value > instock.value){
+      if(parseInt(instock.value) == 0){
+          Swal.fire({
+          title: 'Oops!',
+          text: "The product is out of stock.",
+          icon: 'info',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          }) 
+        }else if(quantity.value > parseInt(instock.value)){
+          Swal.fire({
+            title: 'Product Insufficient Stock!',
+            text: "The maximum quantity allowed is ".concat(instock.value),
+            icon: 'info',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              quantity.value = "";
+            }
+          }) 
+        }
+    });
+  
+    window.addEventListener('transactionAdded', event =>{
         Swal.fire({
-          title: 'Product Insufficient Stock!',
-          text: "The maximum quantity allowed is ".concat(instock.value),
+          title: 'Success!',
+          text: 'Transaction Added!',
+          icon: 'success',
+          showConfirmButton: true
+      }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        }) 
+    });
+    window.addEventListener('outOfStock', event =>{
+        Swal.fire({
+          title: 'Oops!',
+          text: "The product is out of stock.",
           icon: 'info',
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'Ok'
         }).then((result) => {
           if (result.isConfirmed) {
-            quantity.value = "";
+            location.reload();
           }
         }) 
-      }
     });
-  
-   
+
+    window.addEventListener('TransactionError', event =>{
+        Swal.fire({
+          title: 'Error!',
+          text: 'There is an error occured while processing transaction.',
+          icon: 'error',
+          showConfirmButton: true
+      })
+    });
 
 
   
@@ -46,6 +94,7 @@
   
 
 </script>
+
 
 <!--   Core JS Files   -->
 <script src="./assets/js/core/popper.min.js" ></script>

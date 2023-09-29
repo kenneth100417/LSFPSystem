@@ -23,9 +23,14 @@ class Index extends Component
                                 ->orderBy(Rating::select('star_rating')->whereColumn('products.id', 'ratings.product_id'), 'DESC')
                                 ->where(Rating::select('star_rating')->whereColumn('products.id', 'ratings.product_id'),'!=','0')
                                 ->where('products.status','1')
+                                ->where('products.expiry_date','>=',date('Y-m-d'))
                                 ->get();
 
-        $best_products = Product::orderBy('quantity_sold','DESC')->where('quantity_sold','!=','0')->where('status','1')->get();
+        $best_products = Product::orderBy('quantity_sold','DESC')
+                                ->where('quantity_sold','!=','0')
+                                ->where('status','1')
+                                ->where('products.expiry_date','>=',date('Y-m-d'))
+                                ->get();
         return view('livewire.user.product.index', [ 'recommendedProducts' => $rec_products, 'bestProducts' => $best_products]);
     }
 

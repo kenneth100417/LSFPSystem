@@ -21,19 +21,22 @@ class All extends Component
     public $category_id;
     public $sortByCat = false;
     public $search = '';
-
+    
     public function render()
     {
+        //dd(date('Y-m-d'));
         if($this->sortByCat == false){
             $products = Product::where('status','1')
+                            ->where('expiry_date','>=',date('Y-m-d'))
                             ->orderBy($this->sortBy,$this->sort)
                             ->where('name','like','%'.$this->search.'%')
                             ->paginate(20);
         }else{
             $products = Product::where('status','1')
-            ->orderBy($this->sortBy,$this->sort)
-            ->where('category_id',$this->category_id)
-            ->paginate(20);
+                                ->where('expiry_date','>=',date('Y-m-d'))
+                                ->orderBy($this->sortBy,$this->sort)
+                                ->where('category_id',$this->category_id)
+                                ->paginate(20);
         }
         
         $categories = Category::where('status','1')->get();
