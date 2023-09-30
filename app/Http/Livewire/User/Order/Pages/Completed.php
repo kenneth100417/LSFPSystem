@@ -13,6 +13,7 @@ class Completed extends Component
     protected $paginationTheme = 'bootstrap';
     
     public $order_id;
+    public $productToRate;
 
     protected $listeners = ['buyAgain' => 'placeOrder'];
 
@@ -34,6 +35,11 @@ class Completed extends Component
             'created at' => Carbon::now()
         ]);
         $this->dispatchBrowserEvent('goto-order-requests');
+    }
+
+    public function rate($product_id){
+        $this->productToRate = $product_id;
+        $this->dispatchBrowserEvent('open-rating-modal');
     }
 
 }

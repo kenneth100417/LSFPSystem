@@ -20,7 +20,7 @@ class OrderRequests extends Component
         $orders = Order::with('orderItems.product')
                         ->join('users','orders.user_id','users.id')
                         ->select('orders.*','users.firstname as fName','users.lastname as lName',)
-                        ->where('status','pending')
+                        ->where('orders.status','pending')
                         ->orderBy($this->sortBy,$this->sort)
                         ->paginate(5);
         return view('livewire.admin.order.order-requests',['orders' => $orders,'sortby' => $this->sortby]);

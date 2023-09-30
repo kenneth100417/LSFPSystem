@@ -62,15 +62,20 @@
                                     <div class="col-md-12 mt-5">
                                         <h5 class="mb-0">Account Information</h5>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="firsname">Email</label>
                                         <input class="form-control profile-input-form" type="email" value="{{auth()->user()->email;}}" disabled>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="firsname">Mobile Number</label>
                                         <input class="form-control profile-input-form" type="text" value="{{auth()->user()->mobile_number;}}" disabled>
                                     </div>
+                                    <div class="col-md-4">
+                                        <label for="password"> Password </label><br>
+                                        <button class="btn btn-info btn-sm py-2" style="border-radius: 15px;" data-toggle="modal" data-target="#change_password" type="button" data-dismiss="modal">Change Password</button>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                 </div>
@@ -200,7 +205,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="password"> Password </label>
+                                    <label for="password"> Password </label><br/>
                                     <button class="btn btn-info btn-sm py-2" style="border-radius: 15px;" data-toggle="modal" data-target="#change_password" type="button" data-dismiss="modal">Change Password</button>
                                 </div>
                             </div>
@@ -243,7 +248,7 @@
                       </div>
                     </div>
                     
-                    <form action="{{url('/change_pass')}}"  method="POST" id="update-form">
+                    <form action="{{url('/change_pass')}}"  method="POST" id="change-pass-form">
                         @method('PUT')
                         @csrf
                     <div class="card-body px-0 pb-2 mt-5 mx-5 text-sm profile">
@@ -274,14 +279,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for=""> Old Password</label>
-                                    <input name="current_password"  class="form-control profile-input-form" type="password" placeholder="Old Password">
+                                    <input name="current_password"  class="form-control profile-input-form" type="password" placeholder="Old Password" id="old-pass">
                                 </div>
                             </div>
 
                             <div class="row mb-3 mt-3">
                                 <div class="col-md-4">
                                     <label for="password">New Password</label>
-                                    <input  name="password" class="form-control profile-input-form" type="password" value="" placeholder="New Password">
+                                    <input  name="password" class="form-control profile-input-form" type="password" value="" placeholder="New Password" id="new-pass">
                                     @error('password')
                                         <p class="text-danger">
                                             <small> {{$message}} </small>
@@ -290,7 +295,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="password_confirmation">Confirm New Password</label>
-                                    <input  name="password_confirmation" class="form-control profile-input-form" type="password" value="" placeholder="Confirm Password">
+                                    <input  name="password_confirmation" class="form-control profile-input-form" type="password" value="" placeholder="Confirm Password" id="confirm-pass">
                                     @error('password_confirmation')
                                         <p class="text-danger">
                                             <small> {{$message}} </small>
@@ -304,7 +309,7 @@
     
                     <div class="modal-footer me-3">
                         
-                            <button type="submit" class="btn btn-success modal-update-btn">Submit</button>
+                            <button type="submit" class="btn btn-success modal-update-btn" id="submitBtn" disabled>Submit</button>
                             <button type="button" class="btn btn-danger modal-cancel-btn" data-toggle="modal" data-target="#editProfile" data-dismiss="modal">Cancel</button>
                         
                     </div>
@@ -329,11 +334,44 @@
 <script type="text/javascript">
 // button disable if not edited
 let updateForm = document.getElementById('profile-update-form');
+let changePassForm = document.getElementById('change-pass-form');
 
 updateForm.addEventListener('change', function(){
     let updateBtn = document.getElementById('updateBtn');
     updateBtn.disabled = false;
 });
+
+changePassForm.addEventListener('change', function(){
+    let submitBtn = document.getElementById('submitBtn');
+    let oldPass = document.getElementById('old-pass').value;
+    let newPass = document.getElementById('new-pass').value;
+    let confirmPass = document.getElementById('confirm-pass').value;
+    if(oldPass != '' && newPass != '' && confirmPass != ''){
+        
+
+        if(newPass.trim().length < 6){
+            Swal.fire({
+            title: 'Ooops!',
+            text: "New password must be 6 characters.",
+            icon: 'info',
+            showConfirmButton: true
+            });
+            newPass = '';
+        }else if(newPass != confirmPass){
+            Swal.fire({
+            title: 'Ooops!',
+            text: "Password confirmation does not match.",
+            icon: 'info',
+            showConfirmButton: true
+            });
+            confirmPass = '';
+        }else{
+            submitBtn.disabled = false;
+        }
+    }
+   
+});
+
 
 
   var win = navigator.platform.indexOf('Win') > -1;
@@ -383,7 +421,7 @@ $('.add-input').change(function(){
     let address = purok.concat(barangay, municipality, province, country, zip_code);
 
     new_address.value = address;
-    console.log(address);
+    //console.log(address);
 });
 
 // Bootstrap Modal
@@ -433,7 +471,7 @@ function handleFileSelect(event) {
         function message(){
             Swal.fire(
                     'Updated Successfully!',
-                    'Your profile has been Updated!',
+                    'Profile updated successfully',
                     'success'
                 )
         }   
@@ -445,11 +483,42 @@ function handleFileSelect(event) {
 
     setTimeout(message, 1000);
 
-    function message(){t
+    function message(){
         Swal.fire(
                 'Update Failed!',
-                'An error occured!',
-                'error'
+                'An error occured while processing update.',
+                'info'
+            )
+    }   
+</script>
+@endif
+
+@if (session('changePassSuccess'))
+      
+    <script type="text/javascript">
+
+        setTimeout(message, 1000);
+
+        function message(){
+            Swal.fire(
+                    'Success!',
+                    'Your password is updated successfully.',
+                    'success'
+                )
+        }   
+    </script>
+@endif     
+
+@if (session('changePassError'))
+<script type="text/javascript">
+
+    setTimeout(message, 1000);
+
+    function message(){
+        Swal.fire(
+                'Update Failed!',
+                'Current Password does not match with Old Password',
+                'info'
             )
     }   
 </script>

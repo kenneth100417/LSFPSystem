@@ -30,7 +30,7 @@ Route::controller(App\Http\Controllers\UserController::class)->group(function(){
     Route::get('/otp/resend_code/{user_id}', 'resendOtp');
 
     // change Password
-    // Route::post('/change-password', 'changePassword');
+     Route::post('/change-password', 'changePassword');
 
     // forgot-pass
     Route::get('/forgot-password', 'forgotPassword');
@@ -70,6 +70,16 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     
     //vew product reviews
     Route::get('/product_reviews/{category_slug}/{product_slug}','viewProductReviews');
+
+    //update profile
+    Route::put('/admin_update',  'adminUpdate');
+
+ 
+    // change password
+    Route::put('/admin_change_pass','adminChangePass');
+
+    // Add admin account
+    Route::put('/add_admin','addAdmin');
 });
 
 

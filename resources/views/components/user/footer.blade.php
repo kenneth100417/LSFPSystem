@@ -70,6 +70,15 @@ window.addEventListener('goto-order-requests', event =>{
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
   }
 
+
+  //open rating modal
+  window.addEventListener('open-rating-modal', event =>{
+    $('#ratingModal').modal('toggle');
+  });
+
+
+
+
 //   alerts
 
 function logout(){

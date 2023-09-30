@@ -116,15 +116,7 @@ class UserController extends Controller
     }
 
     public function update(Request $request){
-        // $user = auth()->user();
-        // $user->firstname = request('firstname');
-        // $user->middlename = request('middlename');
-        // $user->lastname = request('lastname');
-        // $user->birthdate = request('birthdate');
-        // $user->address = request('address');
-
-        // profile pic
-        // $requestData = $request->all();
+    
         $validated = $request->validate([
             "firstname" => ['required'],
             "lastname" => ['required'],
@@ -136,6 +128,40 @@ class UserController extends Controller
             $filename = time().$request->file('profile_pic')->getClientOriginalName();
             $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
             $photo = '/storage/'.$path;
+        }else{
+            $photo = auth()->user()->photo;
+        }
+
+        $user = User::findOrFail(Auth()->user()->id);
+        if($user){
+            $user->update([
+                "firstname" => $validated['firstname'],
+                "middlename" => request('middlename'),
+                "lastname" => $validated['lastname'],
+                "birthdate" => $validated['birthdate'],
+                "address" => $validated['address'],
+                "photo" => $photo
+            ]);
+        }
+        
+        return back()->with('success', 'Your profile has been Updated!');
+    }
+
+    public function adminUpdate(Request $request){
+    
+        $validated = $request->validate([
+            "firstname" => ['required'],
+            "lastname" => ['required'],
+            "birthdate" => ['required'],
+            "address" => ['required']
+        ]);
+
+        if($request->hasFile('profile_pic')){
+            $filename = time().$request->file('profile_pic')->getClientOriginalName();
+            $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
+            $photo = '/storage/'.$path;
+        }else{
+            $photo = auth()->user()->photo;
         }
 
         $user = User::findOrFail(Auth()->user()->id);
@@ -392,12 +418,41 @@ class UserController extends Controller
 
 
     public function changePass(Request $request){
+        $validated = $request->validate([
+            'current_password' => 'required|min:6',
+            'password' => 'required|confirmed|min:6',
+            'email' => ['required', 'email'],
+        ]);
+
+        $user = User::where('email', $validated['email'])->where('id', auth()->user()->id)->first();
+        
+        $currentPasswordStatus = Hash::check($validated['current_password'], $user->password);
+
+        if($currentPasswordStatus){
+           dd('true');
+           $user->update([
+                'password' => Hash::make($validated['password']),
+            ]);
+
+            return redirect()->back()->with('changePassSuccess','Your password has been updated.');
+
+        }else{
+            //dd('false');
+            return redirect()->back()->with('changePassError','Current Password does not match with Old Password');
+        }
+
+        // 
+        
+    }
+
+    public function adminChangePass(Request $request){
 
         $validated = $request->validate([
             'current_password' => 'required|min:6',
             'password' => 'required|confirmed|min:6',
             'email' => ['required', 'email'],
         ]);
+
         
         $user = User::where('email', $validated['email'])->where('id', auth()->user()->id)->first();
         
@@ -409,15 +464,58 @@ class UserController extends Controller
                 'password' => Hash::make($validated['password']),
             ]);
 
-            return redirect()->back()->with('success','Your password has been updated.');
+            return redirect()->back()->with('changePassSuccess','Your password has been updated.');
 
         }else{
-            return redirect()->back()->with('error','Current Password does not match with Old Password');
+            return redirect()->back()->with('changePassError','Current Password does not match with Old Password');
         }
 
         // 
         
     }
+
+    //addAdmin
+    public function addAdmin(Request $request){
+        $validated = $request->validate([
+            "firstname" => ['required'],
+            "middlename" => ['required'],
+            "lastname" => ['required'],
+            "birthdate" => ['required'],
+            "address" => ['required'],
+            "mobile_number" => ['required','min:11','numeric',Rule::unique('users', 'mobile_number')],
+            "email" => ['required', 'email', Rule::unique('users', 'email')],
+            "password"=> 'required|confirmed|min:6',
+        ]);
+
+        if($request->hasFile('profile_pic')){
+            $filename = time().$request->file('profile_pic')->getClientOriginalName();
+            $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
+            $photo = '/storage/'.$path;
+        }else{
+            $photo = "/img/Profile_pic/profile_temp.png";
+        }
+
+        $validated['password'] = Hash::make($validated['password']); //pwede bycrypt instead hash:make
+
+        if($validated){
+           User::create([
+                "firstname" => $validated['firstname'],
+                "middlename" => $validated['middlename'],
+                "lastname" => $validated['lastname'],
+                "birthdate" => $validated['birthdate'],
+                "address" => $validated['address'],
+                "mobile_number" => $validated['mobile_number'],
+                "email" => $validated['email'],
+                "password" => $validated['password'],
+                "access" => '1',
+                "photo" => $photo
+            ]);
+                return redirect()->back()->with('addAdminSuccess','Admin Added!');
+        }else{
+            return redirect()->back()->with('addAdminError','Failed to add admin account.');
+        }
+    }
+    
 
 
 
@@ -425,16 +523,6 @@ class UserController extends Controller
 
     public function productView($category_slug, $product_slug){
 
-        // $product = Product::where('id', $product_id)->where('status', '1')->get();
-        // $ratings = Rating::where('product_id', $product_id)->where('user_id', Auth::user()->id)->get();
-        // $reviews = Rating::where('product_id', $product_id)->where('user_id','!=', Auth::user()->id)->get();
-        // $rating_sum = Rating::where('product_id', $product_id)->where('user_id', Auth::user()->id)->sum('star_rating');
-        
-        // if($ratings->count() == 0){
-        //     $rating_val = 0;
-        // }else{
-        //     $rating_val = $rating_sum/$ratings->count();
-        // }
         $category = Category::where('slug',$category_slug)->first();
         if($category){
 

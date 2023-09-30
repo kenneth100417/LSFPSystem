@@ -2,146 +2,7 @@
 
     
       
-        <section>
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 col-md-12 mt-4">
-                        <div class="card admin-account-cards" style="height: 102%">
-                            
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <div class="">
-                                        <h5 class="card-title">Admin Accounts</h5>
-                                    </div>
-                                    <div class="text-success cursor-pointer">
-                                        <i class="fa-solid fa-user-plus"></i>
-                                    </div>
-                                </div>
-                                <hr class="horizontal mt-0 mb-2 nav-horizontal">
-                                <div class="mt-3">
-                                    <ul class="navbar-nav ">
-        
-                                        <li class="">
-                                            <div class="d-flex px-2 py-1 align-items-center justify-content-start" style="overflow: hidden">
-                                                <div>
-                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-md me-3 border-radius-lg">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-start">
-                                                <h6 class="mb-0 text-sm text-dark">Kath Gollena</h6>
-                                                <p class="mb-0 text-sm text-success">admin1@admin.com</p>
-                                                </div>
-                                            </div>
-                                            <hr class="horizontal mt-2 mb-2 bg-dark">
-                                        </li>
-                                        <li class="">
-                                            <div class="d-flex px-2 py-1 align-items-center justify-content-start" style="overflow: hidden">
-                                                <div>
-                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-md me-3 border-radius-lg">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-start">
-                                                <h6 class="mb-0 text-sm text-dark">Aljon Adamos</h6>
-                                                <p class="mb-0 text-sm text-success">admin2@admin.com</p>
-                                                </div>
-                                            </div>
-                                            <hr class="horizontal mt-2 mb-2 bg-dark">
-                                        </li>
-                                        <li class="">
-                                            <div class="d-flex px-2 py-1 align-items-center justify-content-start" style="overflow: hidden">
-                                                <div>
-                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-md me-3 border-radius-lg">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-start">
-                                                <h6 class="mb-0 text-sm text-dark">Cha Gerero</h6>
-                                                <p class="mb-0 text-sm text-success">admin3@admin.com</p>
-                                                </div>
-                                            </div>
-                                            <hr class="horizontal mt-2 mb-2 bg-dark">
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                          </div>
-                    </div>
-
-                    <div class="col-lg-9 col-md-12">
-                        <div class="card my-4 mt-5" style="height: 93%">
-                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
-                              <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
-                                <div class="float-end position-absolute col-md-12 edit-profie-icon" >
-                                    <div class="col-lg-12 d-flex justify-content-end">
-                                        <a href="" data-toggle="modal" data-target="#editProfile" title="Edit Profile">
-                                            <i class="profile-edit-icon fa-regular fa-pen-to-square mx-4"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
-                                    <div class="profile-img-container-lg">
-                                        <img src="{{auth()->user()->photo}}" class="profile-img" alt="profile">
-                                    </div>
-                                    <div class="profile-text-container-lg ps-3">
-                                        <h4 class="text-name text-white text-capitalize ">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h4>
-                                        <p class="text-email text-success">{{auth()->user()->email;}}</p>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <div class="card-body px-0 pb-2 mt-3 mx-5 profile">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12 ">
-                                            <h5 class="mb-0">Profile Information</h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="firsname">Firstname</label>
-                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->firstname;}}" disabled>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="firsname">Middlename</label>
-                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->middlename;}}" disabled>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="firsname">Lastname</label>
-                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->lastname;}}" disabled>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="firsname">Birthdate</label>
-                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->birthdate;}}" disabled>
-                                        </div>
-                                    </div>
-    
-                                    <div class="row mt-3">
-                                        <div class="col-md-12">
-                                            <label for="firsname">Home Address</label>
-                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->address;}}" disabled>
-                                        </div>
-                                    </div>
-    
-                                    <div class="row mb-3">
-                                        <div class="col-md-12 mt-5">
-                                            <h5 class="mb-0">Account Information</h5>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="firsname">Email</label>
-                                            <input class="form-control profile-input-form" type="email" value="{{auth()->user()->email;}}" disabled>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="firsname">Mobile Number</label>
-                                            <input class="form-control profile-input-form" type="text" value="{{auth()->user()->mobile_number;}}" disabled>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="firsname">Password</label>
-                                            <input class="form-control profile-input-form" type="password" value="******" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <livewire:admin.manage-accounts.index/>
     
     </main>
         
@@ -153,6 +14,196 @@
 <script src="./assets/js/plugins/smooth-scrollbar.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 <script type="text/javascript">
+  // datepicker
+  $('#bdate').datepicker({
+       endDate: '-16y'
+      });
+
+// button disable if not edited
+let updateForm = document.getElementById('profile-update-form');
+let changePassForm = document.getElementById('change-pass-form');
+
+updateForm.addEventListener('change', function(){
+    let updateBtn = document.getElementById('updateBtn');
+    updateBtn.disabled = false;
+});
+
+changePassForm.addEventListener('change', function(){
+    let submitBtn = document.getElementById('submitBtn');
+    let oldPass = document.getElementById('old-pass').value;
+    let newPass = document.getElementById('new-pass').value;
+    let confirmPass = document.getElementById('confirm-pass').value;
+
+    
+    if(oldPass != '' && newPass != '' && confirmPass != ''){
+
+        if(newPass.trim().length < 6){
+            Swal.fire({
+            title: 'Ooops!',
+            text: "New password must be 6 characters.",
+            icon: 'info',
+            showConfirmButton: true
+            });
+            newPass = '';
+        }else if(newPass != confirmPass){
+            Swal.fire({
+            title: 'Ooops!',
+            text: "Password confirmation does not match.",
+            icon: 'info',
+            showConfirmButton: true
+            });
+            confirmPass = '';
+        }else{
+            submitBtn.disabled = false;
+        }
+
+    }
+   
+});
+
+//Add form
+let addform = document.getElementById('add-admin-form');
+let addBtn = document.getElementById('addBtn');
+
+
+
+//Add Admin ADDRESS
+$('.admin-add-input').change(function(){
+    let Purok = document.getElementById('Purok').value;
+    let Barangay = document.getElementById('Barangay').value;
+    let Municipality = document.getElementById('Municipality').value;
+    let Province = document.getElementById('Province').value;
+    let Country = document.getElementById('Country').value;
+    let Zip_code = document.getElementById('Zip_code').value;
+    let New_address = document.getElementById('Address');
+
+   
+  
+    let Address = Purok+', '+Barangay+', '+Municipality+', '+Province+', '+Country+', '+Zip_code;
+
+    New_address.value = Address;
+    //console.log(address);
+});
+
+addBtn.addEventListener('click', function(){
+ 
+  
+        if(Purok == '' && Barangay == '' && Municipality == '' && Province == '' && Purok == '' && Zip_code == ''){
+            Swal.fire({
+                title: 'Ooops!',
+                text: "Address fields are required.",
+                icon: 'info',
+                showConfirmButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        addBtn.disabled = true;
+                    }
+                })
+        }else{
+            addBtn.disabled = false;
+        }
+
+   
+});
+
+let pass = document.getElementById('pass');
+let confirmPass = document.getElementById('confirm-pass');
+
+pass.addEventListener('change', function(){
+    if(pass.value.trim().length < 6){
+            Swal.fire({
+            title: 'Ooops!',
+            text: "New password must be atleast 6 characters.",
+            icon: 'info',
+            showConfirmButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    addBtn.disabled = true;
+                }
+            })
+        }
+});
+
+confirmPass.addEventListener('change', function(){
+    
+    if(pass.value != confirmPass.value){
+            Swal.fire({
+            title: 'Ooops!',
+            text: "Password confirmation does not match.",
+            icon: 'info',
+            showConfirmButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    addBtn.disabled = true;
+                }
+            })
+        }else{
+            addBtn.disabled = false;
+        }
+});
+
+
+
+
+
+
+//ADDRESS
+$('.add-input').change(function(){
+    let purok = document.getElementById('purok').value.concat(' ');
+    let barangay = document.getElementById('barangay').value.concat(', ');
+    let municipality = document.getElementById('municipality').value.concat(', ' );
+    let province = document.getElementById('province').value.concat(', ');
+    let country = document.getElementById('country').value.concat(', ');
+    let zip_code = document.getElementById('zip_code').value;
+    let new_address = document.getElementById('address');
+
+    let address = purok.concat(barangay, municipality, province, country, zip_code);
+
+    new_address.value = address;
+    console.log(address);
+});
+
+
+
+
+
+// Bootstrap Modal
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+});
+
+// profile pic apload trigger
+const profilePic = document.getElementById('profile-pic-upload');
+const profilePicInput = document.getElementById('profile-pic');
+
+profilePic.addEventListener('click', function() {
+      // Trigger the hidden file input when the image is clicked
+      profilePicInput.click();
+    });
+
+
+
+// Event listener for the file input element
+profilePicInput.addEventListener('change', handleFileSelect, false);
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  const imageType = /^image\//;
+
+  if (imageType.test(file.type)) {
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      const previewImage = document.getElementById('profile-img');
+      previewImage.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    alert('Please select an image file.');
+  }
+}
+
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
     var options = {
@@ -160,7 +211,9 @@
     }
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
   }
+  
 
+  
 //   alerts
 
 function logout(){
@@ -214,97 +267,98 @@ window.addEventListener("load", function(){
 
 
 </script>
+@if (session('success'))
+      
+    <script type="text/javascript">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        setTimeout(message, 1000);
+
+        function message(){
+            Swal.fire(
+                    'Updated Successfully!',
+                    'Profile updated successfully',
+                    'success'
+                )
+        }   
+    </script>
+@endif     
+
+@if (session('error'))
 <script type="text/javascript">
-    
 
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
+    setTimeout(message, 1000);
 
-    new Chart(ctx2, {
-        type: "line",
-        data: {
-            labels: ["S", "M", "T", "W", "T", "F", "S"],
-            datasets: [{
-                label: "Mobile apps",
-                tension: 0,
-                borderWidth: 0,
-                pointRadius: 5,
-                pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                pointBorderColor: "transparent",
-                borderColor: "rgba(255, 255, 255, .8)",
-                borderColor: "rgba(255, 255, 255, .8)",
-                borderWidth: 4,
-                backgroundColor: "transparent",
-                fill: true,
-                data: [50, 40, 300, 320, 500, 350, 40],
-                maxBarThickness: 6
-
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5],
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
-                        display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-            },
-        },
-    });
-
-    
-
+    function message(){
+        Swal.fire(
+                'Update Failed!',
+                'An error occured while processing update.',
+                'info'
+            )
+    }   
 </script>
+@endif
+
+@if (session('changePassSuccess'))
+      
+    <script type="text/javascript">
+
+        setTimeout(message, 1000);
+
+        function message(){
+            Swal.fire(
+                    'Success!',
+                    'Your password is updated successfully.',
+                    'success'
+                )
+        }   
+    </script>
+@endif     
+
+@if (session('changePassError'))
+<script type="text/javascript">
+
+    setTimeout(message, 1000);
+
+    function message(){
+        Swal.fire(
+                'Update Failed!',
+                'Current Password does not match with Old Password',
+                'info'
+            )
+    }   
+</script>
+@endif
+
+@if (session('addAdminSuccess'))
+      
+    <script type="text/javascript">
+
+        setTimeout(message, 1000);
+
+        function message(){
+            Swal.fire(
+                    'Success!',
+                    'Admin account created successfully.',
+                    'success'
+                )
+        }   
+    </script>
+@endif     
+
+@if (session('addAdminError'))
+<script type="text/javascript">
+
+    setTimeout(message, 1000);
+
+    function message(){
+        Swal.fire(
+                'Ooops!',
+                'An error occured while creating an admin account.',
+                'info'
+            )
+    }   
+</script>
+@endif
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

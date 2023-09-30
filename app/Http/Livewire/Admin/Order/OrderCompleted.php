@@ -21,7 +21,7 @@ class OrderCompleted extends Component
         $orders = Order::with('orderItems.product')
             ->join('users','orders.user_id','users.id')
             ->select('orders.*','users.firstname as fName','users.lastname as lName',)
-            ->where('status','completed')
+            ->where('orders.status','completed')
             ->orderBy($this->sortBy,$this->sort)
             ->paginate(10);
         return view('livewire.admin.order.order-completed',['orders' => $orders]);

@@ -20,7 +20,7 @@ class OrderInProcess extends Component
         $orders = Order::with('orderItems.product')
             ->join('users','orders.user_id','users.id')
             ->select('orders.*','users.firstname as fName','users.lastname as lName',)
-            ->where('status','approved')
+            ->where('orders.status','approved')
             ->orderBy($this->sortBy,$this->sort)
             ->paginate(10);
         return view('livewire.admin.order.order-in-process',['orders' => $orders]);

@@ -34,15 +34,18 @@
                                                         <img src="/uploads/products/{{$item->product->image}}" class="avatar avatar-lg  me-3 border-radius-lg" alt="Shopping item" style="object-fit: cover;">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{$item->product->name}}</h6>
-                                                    <div class="d-flex justify-content-between" style="width: 200px !important;">
-                                                        <div>
-                                                            <p class="text-xs text-dark mb-0">&#8369;{{number_format($item->product->selling_price,2)}}</p>
+                                                        <h6 class="mb-0 text-sm">{{$item->product->name}}</h6>
+                                                        <div class="d-flex justify-content-between" style="width: 200px !important;">
+                                                            <div>
+                                                                <p class="text-xs text-dark mb-0">&#8369;{{number_format($item->product->selling_price,2)}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <p class="text-xs text-dark mb-0">x{{$item->quantity}}</p>
+                                                            </div>
                                                         </div>
-                                                        <div>
-                                                            <p class="text-xs text-dark mb-0">x{{$item->quantity}}</p>
+                                                        <div class="d-flex justify-content-end mt-1">
+                                                            <button class="btn btn-sm btn-warning text-white py-1 px-2" style="font-size: 10px;" wire:click="rate({{$item->product_id}})">Rate this Product</button>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -69,7 +72,55 @@
                 </div>
             </div>
         </div>
+         
+
     </section>
+<!-- Modal -->
+   
+<div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="change_passwordTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            
+            <div class="card my-4 mt-5 modal-card">
+            
+                <div class="card-body px-0 pb-2 mt-5 mx-5 text-sm ">
+                    <div class="rating-css">
+                        <div class="star-icon">
+                            <input type="radio" value="1" name="product_rating" checked id="rating1">
+                            <label for="rating1" class="fa fa-star"></label>
+                            <input type="radio" value="2" name="product_rating" id="rating2">
+                            <label for="rating2" class="fa fa-star "></label>
+                            <input type="radio" value="3" name="product_rating" id="rating3">
+                            <label for="rating3" class="fa fa-star"></label>
+                            <input type="radio" value="4" name="product_rating" id="rating4">
+                            <label for="rating4" class="fa fa-star"></label>
+                            <input type="radio" value="5" name="product_rating" id="rating5">
+                            <label for="rating5" class="fa fa-star"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer me-3">
+                    
+                        <button id="submitBtn" type="submit" class="btn btn-success modal-update-btn" disabled>Submit</button>
+                        <button type="button" class="btn btn-danger modal-cancel-btn" data-toggle="modal" data-target="#editProfile" data-dismiss="modal">Cancel</button>
+                    
+                </div>
+          
+        </div>
+        
+      </div>
+    </div>
+    </div>
+</div>
     
+
+
+
+
+
+
+
 </div>
 
