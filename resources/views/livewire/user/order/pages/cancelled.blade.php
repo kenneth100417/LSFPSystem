@@ -4,9 +4,12 @@
             <div class="row">
                 <div class="col-md-12 bg-white border-radius-lg">
                     <div class="card-header p-0 mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-success border-radius-lg pt-4 pb-3">
-                          <h6 class="text-white text-capitalize ps-3">Pending Order Requests</h6>
-                        </div>
+                        <div class="bg-gradient-success border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+                            <div><h6 class="text-white text-capitalize ps-3">Cancelled Orders</h6></div>
+                            <div class="search mb-2 mx-3">
+                              <input wire:model="search" class="form-control search-input bg-white" type="search" placeholder="Search" aria-label="Search"  style="display: block !important">
+                              </div>
+                          </div>
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
@@ -53,7 +56,7 @@
                                         <p class="text-xs text-dark mb-0">{{$order->created_at}}</p>
                                     </td>
                                     <td class="w-10 text-center">
-                                        <p class="text-xs text-dark mb-0">PHP&#8369;{{number_format($order->amount,2)}}</p>
+                                        <p class="text-xs text-dark mb-0">&#8369;{{number_format($order->amount,2)}}</p>
                                     </td>
                                     <td class="w-10 text-center align-items-middle">
                                         <button class="btn btn-danger btn-sm mt-3" wire:click.prevent = "buyAgain({{$order->id}})"> Reorder</button>

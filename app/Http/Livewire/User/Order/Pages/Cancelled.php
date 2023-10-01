@@ -13,12 +13,19 @@ class Cancelled extends Component
     protected $paginationTheme = 'bootstrap';
     
     public $order_id;
+    public $search = '';
 
     protected $listeners = ['buyAgain' => 'placeOrder'];
 
     public function render()
     {
-        $orders = Order::with('orderItems.product')->where('orders.user_id',auth()->user()->id)->where('status','cancelled')->paginate(5);
+        $searchTerm = $this->search;
+        $orders = Order::whereHas('orderItems.product', function ($query) use ($searchTerm) {
+                        $query->where('name', 'like', '%' . $searchTerm . '%');
+                    })
+                    ->where('orders.user_id',auth()->user()->id)
+                    ->where('status','cancelled')
+                    ->paginate(5);
         return view('livewire.user.order.pages.cancelled',['orders' => $orders]);
     }
 

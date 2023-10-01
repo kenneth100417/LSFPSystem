@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 use App\Models\VerificationCode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -224,6 +225,15 @@ class UserController extends Controller
     }
     public function admin_add_sales(){
         return view('pages.admin_add_sales');
+    }
+    public function admin_generate_report(){
+        return view('pages.admin_generate_report');
+    }
+
+    //open pdf
+    public function openPDF(){
+        $pdf = Pdf::loadView('admin.reports.reports');
+        return $pdf->stream();
     }
 
 

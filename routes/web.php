@@ -54,6 +54,7 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     Route::get('/admin_manage_account',  'admin_manage_account');
     Route::get('/admin_users',  'admin_users');
     Route::get('/admin_add_sales', 'admin_add_sales');
+    Route::get('/admin_generate_report', 'admin_generate_report');
 
 
     // admin product info pages
@@ -80,6 +81,10 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
 
     // Add admin account
     Route::put('/add_admin','addAdmin');
+
+    //open pdf
+    Route::get('/open_pdf','openPDF');
+
 });
 
 
@@ -111,8 +116,8 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     
 });
 
-Route::controller(App\Http\Controllers\RatingController::class)->middleware(['auth','isUser'])->group(function(){
-    Route::get('add-rating', 'addRating');
+Route::controller(App\Http\Controllers\Product\RatingController::class)->middleware(['auth','isUser'])->group(function(){
+    Route::put('/rate_product/{product_id}', 'addRating');
 });
 
 

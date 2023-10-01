@@ -72,7 +72,7 @@
                                     <p class="text-xs text-dark mb-0">{{$product->quantity_sold}}</p>
                                 </td>
                                 <td class=" text-center">
-                                    <p class="text-xs text-dark mb-0">{{$product->quantity}}</p>
+                                    <p class="text-xs text-dark mb-0">{{$product->quantity - $product->quantity_sold}}</p>
                                 </td>
                                 <td class=" text-center">
                                     <p class="text-xs text-dark mb-0">{{$product->category->name}}</p>

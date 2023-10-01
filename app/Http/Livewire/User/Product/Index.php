@@ -20,10 +20,10 @@ class Index extends Component
     public function render()
     {
         $rec_products = Product::with('ratings')
-                                ->orderBy(Rating::select('star_rating')->whereColumn('products.id', 'ratings.product_id'), 'DESC')
-                                ->where(Rating::select('star_rating')->whereColumn('products.id', 'ratings.product_id'),'!=','0')
-                                ->where('products.status','1')
-                                ->where('products.expiry_date','>=',date('Y-m-d'))
+                                ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
+                                ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+                                ->groupBy('products.id','products.name')
+                                ->orderBy('avg_rating', 'DESC')
                                 ->get();
 
         $best_products = Product::orderBy('quantity_sold','DESC')

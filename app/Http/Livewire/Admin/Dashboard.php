@@ -95,10 +95,10 @@ class Dashboard extends Component
         $monthlySales = $onlineSales + $walkinSales;
 
         $rec_products = Product::with('ratings')
-                                ->orderBy(Rating::select('star_rating')->whereColumn('products.id', 'ratings.product_id'), 'DESC')
-                                ->where(Rating::select('star_rating')->whereColumn('products.id', 'ratings.product_id'),'!=','0')
-                                ->where('products.status','1')
-                                ->where('expiry_date','>=',date('Y-m-d'))
+                                ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
+                                ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+                                ->groupBy('products.id','products.name')
+                                ->orderBy('avg_rating', 'DESC')
                                 ->get();
 
         $best_products = Product::orderBy('quantity_sold','DESC')->where('quantity_sold','!=','0')->where('status','1')->get();

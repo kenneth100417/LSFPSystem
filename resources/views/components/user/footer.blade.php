@@ -76,6 +76,26 @@ window.addEventListener('goto-order-requests', event =>{
     $('#ratingModal').modal('toggle');
   });
 
+  //validation for rating modal form
+  // let ratingForm = document.getElementById('ratingForm');
+  // ratingForm.addEventListener('change', function(){
+  //   let star = document.getElementByName('rating').value
+  //   alert(star);
+  // });
+
+    const radioButtons = document.querySelectorAll('input[name="rating"]');
+    let selectedValue = null;
+    let submitBtn = document.getElementById('submitBtn');
+    let starRating = document.getElementById('starRating');
+
+    radioButtons.forEach(radioButton => {
+        radioButton.addEventListener('change', (event) => {
+            selectedValue = event.target.value;
+              submitBtn.disabled = false;
+              starRating.value = selectedValue;
+        });
+    });
+
 
 
 
@@ -119,6 +139,36 @@ window.addEventListener("load", function(){
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <script src="./assets/js/material-dashboard.min.js?v=3.0.5"></script>
+@if (session('ratingSuccess'))
+      
+    <script type="text/javascript">
+
+        setTimeout(message, 1000);
+
+        function message(){
+            Swal.fire(
+                    'Success!',
+                    'Thank you for sharing your experience with us!',
+                    'success'
+                )
+        }   
+    </script>
+@endif     
+
+@if (session('ratingError'))
+<script type="text/javascript">
+
+    setTimeout(message, 1000);
+
+    function message(){
+        Swal.fire(
+                'Ooops',
+                'An error occured while processing your request.',
+                'info'
+            )
+    }   
+</script>
+@endif
   </body>
 
 </html>
