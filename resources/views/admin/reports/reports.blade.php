@@ -16,15 +16,14 @@
         #customers td, #customers th {
           border: 1px solid #ddd;
           padding: 8px;
+          font-size: 10px;
         }
         
         #customers tr:nth-child(even){background-color: #f2f2f2;}
         
-        #customers tr:hover {background-color: #ddd;}
-        
         #customers th {
-          padding-top: 12px;
-          padding-bottom: 12px;
+          padding-top: 8px;
+          padding-bottom: 8px;
           text-align: left;
           background-color: #04AA6D;
           color: white;
@@ -32,66 +31,50 @@
 </style>
 </head>
 <body>
+  <div class="text-center position-relative mt-1 mx-2" style="border-bottom: 2px solid #000000">
+    {{-- <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="logo" style="position: absolute;  height:60px; left: 10px;"> --}}
+    <h4 class="text-center" style="font-size: 24px; font-weight: bold; color: #642b2b">Louella's Sweet Food Products</h4>
+    <h6 class="text-center" style="margin-top: -10px;">Bulan, Sorsogon</h6>
+    <p class="text-center" style="margin-top: -8px;">{{date('F j, Y')}}</p>
+  </div>
+
+  <div class="text-center mt-4 mb-2">
+    <h3 class="text-center"  style="font-size: 20px; font-weight: bold;">Inventory Report</h3>
+  </div>
+
+  <div>
+    <table id="customers">
+      <tr>
+        <th class="text-center">Product Name</th>
+        <th class="text-center">Category</th>
+        <th class="text-center">Quantity Sold</th>
+        <th class="text-center">Quantity in stock</th>
+        <th class="text-center">Total Quantity</th>
+        <th class="text-center">Status</th>
         
-        <h1>PDF generator test 101</h1>
+      </tr>
+      @forelse ($products as $product)
+        <tr>
+          <td>{{$product->name}}</td>
+          <td>{{$product->category->name}}</td>
+          <td class="text-center">{{$product->quantity_sold}}</td>
+          <td class="text-center">{{$product->quantity-$product->quantity_sold}}</td>
+          <td class="text-center">{{$product->quantity}}</td>
+          <td class="text-center">
+            {{$product->status == '1' ? 'In Stock':''}}
+            {{$product->status == '0' ? 'Out of Stock':''}}
+            {{$product->expiry_date <= date('Y-m-d') ? 'Expired':''}}
+          </td>
+        </tr>
+      @empty
+          
+      @endforelse
+      
+     
+    </table>
+  </div>
         
-        <table id="customers">
-          <tr>
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Country</th>
-          </tr>
-          <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-          </tr>
-          <tr>
-            <td>Berglunds snabbköp</td>
-            <td>Christina Berglund</td>
-            <td>Sweden</td>
-          </tr>
-          <tr>
-            <td>Centro comercial Moctezuma</td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-          </tr>
-          <tr>
-            <td>Ernst Handel</td>
-            <td>Roland Mendel</td>
-            <td>Austria</td>
-          </tr>
-          <tr>
-            <td>Island Trading</td>
-            <td>Helen Bennett</td>
-            <td>UK</td>
-          </tr>
-          <tr>
-            <td>Königlich Essen</td>
-            <td>Philip Cramer</td>
-            <td>Germany</td>
-          </tr>
-          <tr>
-            <td>Laughing Bacchus Winecellars</td>
-            <td>Yoshi Tannamuri</td>
-            <td>Canada</td>
-          </tr>
-          <tr>
-            <td>Magazzini Alimentari Riuniti</td>
-            <td>Giovanni Rovelli</td>
-            <td>Italy</td>
-          </tr>
-          <tr>
-            <td>North/South</td>
-            <td>Simon Crowther</td>
-            <td>UK</td>
-          </tr>
-          <tr>
-            <td>Paris spécialités</td>
-            <td>Marie Bertrand</td>
-            <td>France</td>
-          </tr>
-        </table>
+        
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

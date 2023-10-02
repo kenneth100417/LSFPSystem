@@ -20,7 +20,7 @@
 
                         </div>
 
-                        <div class="btn-group pe-3">
+                        <div class="btn-group pe-2">
                             <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Sort By {{$sortByText}}
                             </button>
@@ -29,6 +29,9 @@
                               <a class="dropdown-item" wire:click.prevent = "sortByProductName()" style="cursor:pointer">Product Name</a>
                               <a class="dropdown-item" wire:click.prevent = "sortBySoldCount()" style="cursor:pointer">Quantity Sold</a>
                             </div>
+                        </div>
+                        <div>
+                            <a class="btn btn-info btn-sm me-2" href="{{url('/open_pdf')}}">Print Report</a>
                         </div>
                     </div>
                 </div>

@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+
 use Carbon\Carbon;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Rating;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
 use App\Models\VerificationCode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -232,8 +235,12 @@ class UserController extends Controller
 
     //open pdf
     public function openPDF(){
-        $pdf = Pdf::loadView('admin.reports.reports');
-        return $pdf->stream();
+        $products = Product::orderBy('name','ASC')->get();
+
+         $pdf = Pdf::loadView('admin.reports.reports',['products' => $products]);
+         return $pdf->stream();
+
+        //return view('admin.reports.reports',['products' => $products]);
     }
 
 
