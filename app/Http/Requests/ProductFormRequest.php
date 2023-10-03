@@ -28,19 +28,23 @@ class ProductFormRequest extends FormRequest
             ],
             'name' => [
                 'required',
-                'string'
+                'string',
+                'alpha'
             ],
             'original_price' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1'
             ],
             'selling_price' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1'
             ],
             'quantity' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1'
             ],
             'quantity_sold' => [
                 'nullable',
@@ -54,7 +58,7 @@ class ProductFormRequest extends FormRequest
                 'required',
             ],
             'image' => [
-                'nullable',
+                'required',
                 'mimes:jpg,jpeg,png'
             ],
             'trending' => [
@@ -83,6 +87,20 @@ class ProductFormRequest extends FormRequest
             ],
             
             
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Product name is required',
+            'name.alpha' => 'Product name may only contain letters.',
+            'image.required' => 'Product image is required.',
+            'category_id.required' => 'Please select product category.',
+            'original_price.min' => 'The minimum amount required is :min',
+            'selling_price.min' => 'The minimum amount required is :min',
+            'quantity.min' => 'The minimum quantity required is :min',
+
         ];
     }
 }

@@ -280,7 +280,7 @@
 
                 <div class="modal-footer me-3">
                     
-                        <button type="submit" class="btn btn-success modal-update-btn" id="addBtn" disabled>Update</button>
+                        <button type="submit" class="btn btn-success modal-update-btn" id="addBtn" disabled>Create</button>
                         <button type="button" class="btn btn-danger modal-cancel-btn" data-dismiss="modal">Cancel</button>
                     
                 </div>

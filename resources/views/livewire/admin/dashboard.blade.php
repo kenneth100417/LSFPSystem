@@ -117,9 +117,9 @@
                                       Showing Daily Sales
                                     </button>
                                     <div class="dropdown-menu">
-                                      <button class="dropdown-item"  wire:click="showDaily">Daily</button>
-                                      <a class="dropdown-item" wire:click="showMonthly">Monthly</a>
-                                      <a class="dropdown-item" wire:click="showAnnually">Annually</a>
+                                      <button class="dropdown-item"  wire:click="setToShow('1')">Daily</button>
+                                      <a class="dropdown-item" wire:click="setToShow('2')">Monthly</a>
+                                      <a class="dropdown-item" wire:click="setToShow('3')">Annually</a>
                                     </div>
                               </div>
                             </div>
@@ -186,6 +186,7 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@if($toShow == 'daily')
 <script type="text/javascript">
     
 
@@ -194,18 +195,105 @@
     new Chart(ctx2, {
         type: "line",
         data: {
-            labels: [
-                @if($toShow == 'daily')
-                "6 days ago", "5 days ago", "4 days ago", "3 days ago", "2 days ago", "Yesterday", "Today"
-                @endif
-                @if($toShow == 'monthly')
-                "6 months ago", "5 months ago", "4 months ago", "3 months ago", "2 months ago", "Last month", "This month"
-                @endif
-                @if($toShow == 'annually')
-                "6 year ago", "5 year ago", "4 year ago", "3 year ago", "2 year ago", "Last year", "This year"
-                @endif
+            labels: [ "6 days ago", "5 days ago", "4 days ago", "3 days ago", "2 days ago", "Yesterday", "Today"],
+            datasets: [{
+                label: "Total Sales",
+                tension: 0,
+                borderWidth: 0,
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                pointBorderColor: "transparent",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderWidth: 4,
+                backgroundColor: "transparent",
+                fill: true,
+                data:[ {{$data[6]}},{{$data[5]}},{{$data[4]}},{{$data[3]}},{{$data[2]}},{{$data[1]}},{{$data[0]}}],
+                maxBarThickness: 6
 
-            ],
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index',
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5],
+                        color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#f8f9fa',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: false,
+                        drawOnChartArea: false,
+                        drawTicks: false,
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#f8f9fa',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+            },
+        },
+    });
+
+    window.addEventListener('updateChart', event => {
+        alert('test');
+    });
+        
+    
+
+    
+
+</script>
+@endif
+
+@if($toShow == 'monthly')
+<script type="text/javascript">
+    
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    new Chart(ctx2, {
+        type: "line",
+        data: {
+            labels: ["6 months ago", "5 months ago", "4 months ago", "3 months ago", "2 months ago", "Last month", "This month"],
             datasets: [{
                 label: "Total Sales",
                 tension: 0,
@@ -292,5 +380,105 @@
     
 
 </script>
+@endif
+
+@if($toShow == 'annually')
+<script type="text/javascript">
+    
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    new Chart(ctx2, {
+        type: "line",
+        data: {
+            labels: ["6 year ago", "5 year ago", "4 year ago", "3 year ago", "2 year ago", "Last year", "This year"],
+            datasets: [{
+                label: "Total Sales",
+                tension: 0,
+                borderWidth: 0,
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                pointBorderColor: "transparent",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderWidth: 4,
+                backgroundColor: "transparent",
+                fill: true,
+                data:[ {{$data[6]}},{{$data[5]}},{{$data[4]}},{{$data[3]}},{{$data[2]}},{{$data[1]}},{{$data[0]}}],
+                maxBarThickness: 6
+
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index',
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5],
+                        color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#f8f9fa',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: false,
+                        drawOnChartArea: false,
+                        drawTicks: false,
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#f8f9fa',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+            },
+        },
+    });
+
+    window.addEventListener('updateChart', data => {
+        alert('test');
+    });
+        
+    
+
+    
+
+</script>
+@endif
+
 
 @livewireScripts

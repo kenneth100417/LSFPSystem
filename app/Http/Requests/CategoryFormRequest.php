@@ -25,7 +25,8 @@ class CategoryFormRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'string'
+                'string',
+                'alpha'
             ],
             'slug' => [
                 'required',
@@ -36,7 +37,7 @@ class CategoryFormRequest extends FormRequest
                 'string'
             ],
             'image' => [
-                'nullable',
+                'required',
                 'mimes:jpg,jpeg,png'
             ],
             'meta_title' => [
@@ -52,6 +53,16 @@ class CategoryFormRequest extends FormRequest
                 'string'
             ]
             
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Category name is required',
+            'name.alpha' => 'Category name may only contain letters.',
+            'image.required' => 'Category image is required.',
+
         ];
     }
 }

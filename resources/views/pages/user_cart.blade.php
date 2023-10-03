@@ -70,13 +70,13 @@ window.addEventListener('greaterThanStock', event =>{
 
     window.addEventListener('orderSuccess', event =>{
         Swal.fire({
-          title: 'Thank you!',
-          text: 'Track the progress of your order in Orders Tab.',
+          title: 'Order Success!',
+          text: 'Your order is pending for approval.',
           icon: 'success',
           showConfirmButton: true
       }).then((result) => {
         if (result.isConfirmed) {
-          location.reload();
+          location.href = '/user_orders'
         }
       })
       

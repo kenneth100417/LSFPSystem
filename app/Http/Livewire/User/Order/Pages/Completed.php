@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\User\Order\Pages;
 
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\OrderItem;
 use Livewire\WithPagination;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Completed extends Component
 {
@@ -43,14 +46,37 @@ class Completed extends Component
     }
 
     public function placeOrder(){
-        $order = Order::where('id',$this->order_id)->first();
-        $order->update([
-            'status' => 'pending',
-            'created at' => Carbon::now()
-        ]);
-        $this->dispatchBrowserEvent('goto-order-requests');
-    }
+        // $order = Order::where('id',$this->order_id)->first();
+        // $order->update([
+        //     'status' => 'pending',
+        //     'created at' => Carbon::now()
+        // ]);
+        // $this->dispatchBrowserEvent('goto-order-requests');
 
+        $orderItems = OrderItem::where('order_id',$this->order_id)->get();
+        if(Auth::check()){
+                foreach($orderItems as $item){
+                    if(Product::where('id',$item->product_id)->where('status', '1')->exists()){
+                        $inStock = $item->quantity - $item->quantity_sold;
+                        if($inStock > 0 ){
+                            Cart::create([
+                                'user_id' => auth()->user()->id,
+                                'product_id' => $item->product_id,
+                                'quantity' => 1
+                            ]);
+                            
+                            return redirect('/cart');
+                                 
+                        }else{
+                            $this->dispatchBrowserEvent('outOfStock');
+                        }
+                    }else{
+                        $this->dispatchBrowserEvent('notFound');
+                    }
+                }
+                
+        }
+    }
     public function rate($product_id){
         $this->productToRate = Product::where('id',$product_id)->first();
         $this->productToRateActive = true;

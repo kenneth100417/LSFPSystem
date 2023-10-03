@@ -43,6 +43,7 @@
                                                         <h6 class="">Product Category</h6>
                                                         <div class="form-outline">
                                                         <Select type="text" id="" class="form-control  p-2 selectpicker" data-style="select-with-transition" placeholder="Product Category" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" name="category_id" value="{{old('category_id')}}">
+                                                            <option value="">Select Category</option>
                                                             @foreach ($categories as $category)
                                                                 <option class="" value="{{$category->id}}">{{$category->name}}</option>
                                                             @endforeach
@@ -191,19 +192,22 @@
                                 <div class="col-lg-4">
                                     <div class="mt-5 d-flex justify-content-center" >
                                         <div class="" style="border-radius: 15px; width: 80%; height: 45vh; overflow:hidden;box-shadow: 1px 2px 5px #491815;">          
-                                            <img type="image" src="/img/addProductImage.png" class="card-title" alt="Category image preview" id="category-pic" style="width: 100%;height: 100%;object-fit: cover;margin: 0;">
+                                            <img type="image" src="/img/category/category.png" class="card-title" alt="Category image preview" id="category-pic" style="width: 100%;height: 100%;object-fit: cover;margin: 0;">
+                                           
                                         </div>
-                                        
+                                       
                                         
                                     </div>
                                     <div class="mt-3">
-                                        <h6 class="">Product Image</h6>
-                                        <input type="file" accept="image/x-png,image/jpeg"  class="form-control  p-2" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" id="category-pic-upload" name="image"/>
+                                        <h6 class="">Upload Product Image</h6>
+                                        <button type="button" class="btn btn-info w-100" id="select-img-btn">Select Image</button>
                                         @error('image')
                                             <p class="text-danger">
                                                 <small>{{$message}}</small>
                                             </p>
                                         @enderror
+                                        <input type="file" accept="image/x-png,image/jpeg"  class="form-control" style="display: none;" id="category-pic-upload" name="image" title="Upload image"/>
+                                        
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center mt-5">
                                         <button type="submit" class="btn btn-success btn-md mx-2 w-25">Save</button>
@@ -230,6 +234,12 @@ $('#expiry_date').datepicker({
       });
 
 // Event listener for the file input element
+var uploadBtn = document.getElementById('select-img-btn');
+    var uploadInput = document.getElementById('category-pic-upload');
+
+    uploadBtn.addEventListener('click', function(){
+        uploadInput.click();
+    });
 
 let profilePicInput = document.getElementById('category-pic-upload');
 

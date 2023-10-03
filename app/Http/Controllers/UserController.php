@@ -359,8 +359,7 @@ class UserController extends Controller
 
 
     // Generate OTP
-    public function generateOtp($user_id)
-    {
+    public function generateOtp($user_id){
         $user = User::where('id',$user_id)->first();
         # User Does not Have Any Existing OTP
         $verificationCode = VerificationCode::where('mobile_number', $user->mobile_number)->latest()->first();
@@ -379,8 +378,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function verifyOtp(Request $request, $user_id)
-    {
+    public function verifyOtp(Request $request, $user_id){
         #Validation
         $request->validate([
             'otp' => 'required'

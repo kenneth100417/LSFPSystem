@@ -14,7 +14,7 @@
         showConfirmButton: true,
         }).then((result) => {
             if (result.isConfirmed) {
-            window.reload();
+            location.href = '/admin_orders_inprocess'
             }
         })
     });

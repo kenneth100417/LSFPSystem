@@ -31,7 +31,7 @@ class Cancelled extends Component
 
     public function buyAgain($id){
         $this-> order_id = $id;
-        $this->dispatchBrowserEvent('buy-again');
+        $this->dispatchBrowserEvent('place-order');
     }
 
     public function placeOrder(){

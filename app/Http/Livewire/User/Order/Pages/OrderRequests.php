@@ -36,5 +36,6 @@ class OrderRequests extends Component
         $order->update([
             'status' => 'cancelled',
         ]);
+        return redirect('/user_cancelled');
     }
 }

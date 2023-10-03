@@ -49,6 +49,23 @@ window.addEventListener('buy-again', event =>{
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
+    confirmButtonText: 'Buy Again',
+    cancelButtonText:'Cancel',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Livewire.emit('buyAgain')
+    }
+  })
+});
+
+window.addEventListener('place-order', event =>{
+    Swal.fire({
+    title: "Are you sure you want to place this order again?",
+    text: "View your pending orders in 'Order Request' tab.",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
     confirmButtonText: 'Place Order',
     cancelButtonText:'Cancel',
   }).then((result) => {
@@ -57,6 +74,25 @@ window.addEventListener('buy-again', event =>{
     }
   })
 });
+
+
+window.addEventListener('outOfStock', event =>{
+    Swal.fire({
+    title: "Ooops!",
+    text: "Out of Stock",
+    icon: 'info',
+    showConfirmButton: True
+  })
+});
+window.addEventListener('notFound', event =>{
+    Swal.fire({
+    title: "Ooops!",
+    text: "Product not found.",
+    icon: 'info',
+    showConfirmButton: True
+  })
+});
+
 
 window.addEventListener('goto-order-requests', event =>{
   location.href = "{{url('/user_orders')}}"

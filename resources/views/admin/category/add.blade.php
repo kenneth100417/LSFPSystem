@@ -136,12 +136,13 @@
                                             <div class="mt-3">
                                                 <h6 class="">Upload Category Image</h6>
                                                 <button type="button" class="btn btn-info w-100" id="select-img-btn">Select Image</button>
-                                                <input type="file" accept="image/x-png,image/jpeg"  class="form-control" style="display: none;" id="category-pic-upload" name="image" title="Upload image"/>
                                                 @error('image')
                                                     <p class="text-danger">
                                                         <small>{{$message}}</small>
                                                     </p>
                                                 @enderror
+                                                <input type="file" accept="image/x-png,image/jpeg"  class="form-control" style="display: none;" id="category-pic-upload" name="image" title="Upload image"/>
+                                                
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center mt-4">
                                                 <button type="submit" class="btn btn-success btn-md mx-2 w-25">Save</button>

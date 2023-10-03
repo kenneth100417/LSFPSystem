@@ -118,7 +118,7 @@
                     {{ 'admin_orders_orderrequests' == request()->path()   ? 'active' : ''}}
                     {{ 'admin_orders_inprocess' == request()->path()   ? 'active' : ''}}
                     {{ 'admin_orders_completed' == request()->path()  ? 'active' : ''}}
-                    {{ 'admin_orders_cancelled' == request()->path()  ? 'active' : ''}} "href="admin_orders">
+                    {{ 'admin_orders_cancelled' == request()->path()  ? 'active' : ''}} "href="/admin_orders">
                         
                         <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
                             <i class="fa-solid fa-cubes fa-lg"></i>

@@ -36,6 +36,8 @@ class ProductController extends Controller
             $filename = time().'.'.$ext;
 
             $file->move('uploads/products/',$filename);
+        }else{
+            return redirect()->back()->with('error','Please upload a product image.');
         }
 
         $date =  $validatedData['expiry_date'];

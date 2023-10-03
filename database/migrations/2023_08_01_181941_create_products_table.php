@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('name');
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->string('slug');
             $table->string('description');
             $table->integer('original_price');
