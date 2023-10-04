@@ -24,7 +24,7 @@
                         </div>
                         @empty
                         <div class="d-flex justify-content-center mb-0">
-                            No product added to cart.
+                            You don't have notifications.
                         </div>
                         @endforelse
                         

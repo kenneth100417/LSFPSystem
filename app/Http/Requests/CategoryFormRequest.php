@@ -25,8 +25,7 @@ class CategoryFormRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'string',
-                'alpha'
+                'string'
             ],
             'slug' => [
                 'required',
@@ -60,8 +59,7 @@ class CategoryFormRequest extends FormRequest
     {
         return [
             'name.required' => 'Category name is required',
-            'name.alpha' => 'Category name may only contain letters.',
-            'image.required' => 'Category image is required.',
+            'image.required' => 'Category image is required.'
 
         ];
     }

@@ -79,12 +79,12 @@
       <div class="sidenav-header d-flex justify-content-start align-items-center mx-3">
           <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
   
-          <button class="profile-img-container d-flex justify-content-start align-items-center">
-              <img src="{{auth()->user()->photo}}" class=" profile-img" alt="profile">
+          <button class="profile-img-container d-flex justify-content-start align-items-center" style="min-width: 50px;height:50px">
+              <img src="{{auth()->user()->photo}}" class=" profile-img" alt="profile" >
           </button>
           <div class="text-start p-0 profile-name-email align-items-center mx-1">
-              <h6 class="ms-1 font-weight-bold text-dark user-name">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h6>
-              <p class="ms-1 text-dark user-email px-0 mt-1">{{auth()->user()->email;}}</p>
+              <h6 class="ms-1 font-weight-bold text-dark user-name text-truncate">{{auth()->user()->firstname." ".auth()->user()->lastname;}}</h6>
+              <p class="ms-1 text-dark user-email px-0 mt-1 text-truncate">{{auth()->user()->email;}}</p>
           </div>
       </div>
   

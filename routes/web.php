@@ -1,8 +1,9 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use GuzzleHttp\Middleware;
+use App\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,10 @@ Route::controller(App\Http\Controllers\UserController::class)->group(function(){
     Route::get('/create-new-password/{user_id}', 'createNewPassword');
     Route::post('/create-new-password/{user_id}', 'setNewPassword');
     Route::get('/resend-recovery-code/{user_id}', 'resendRecoveryCode');
+
+    //send mail
+    Route::post('/contact_mail', 'send_contact_mail');
+
 
 });
 

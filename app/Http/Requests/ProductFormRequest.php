@@ -29,7 +29,6 @@ class ProductFormRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                'alpha'
             ],
             'original_price' => [
                 'required',
@@ -94,7 +93,6 @@ class ProductFormRequest extends FormRequest
     {
         return [
             'name.required' => 'Product name is required',
-            'name.alpha' => 'Product name may only contain letters.',
             'image.required' => 'Product image is required.',
             'category_id.required' => 'Please select product category.',
             'original_price.min' => 'The minimum amount required is :min',

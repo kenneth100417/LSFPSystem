@@ -11,12 +11,14 @@ use App\Models\User;
 use App\Models\Rating;
 use App\Models\Product;
 use App\Models\Category;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
 use App\Models\VerificationCode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -130,8 +132,10 @@ class UserController extends Controller
 
         if($request->hasFile('profile_pic')){
             $filename = time().$request->file('profile_pic')->getClientOriginalName();
-            $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
-            $photo = '/storage/'.$path;
+            $img = $request->file('profile_pic');
+            $img->move('uploads/profiles/',$filename);
+            
+            $photo = '/uploads/profiles/'.$filename;
         }else{
             $photo = auth()->user()->photo;
         }
@@ -607,35 +611,49 @@ class UserController extends Controller
         $product = Product::where('id',$product_id)->where('status', '1')->first();
         if(Auth::check()){
             
-            if(Cart::where('user_id', auth()->user()->id)->where('product_id', $product_id)->exists()){
-                $this->dispatchBrowserEvent('exists');
-            }else{
-                if(Product::where('id',$product_id)->where('status', '1')->exists()){
-                    $inStock = $product->quantity - $product->quantity_sold;
-                    if($inStock > 0 ){
+        
+            if(Product::where('id',$product_id)->where('status', '1')->exists()){
+                $inStock = $product->quantity - $product->quantity_sold;
+                if($inStock > 0 ){
 
-                        Cart::where('user_id',auth()->user()->id)->delete();
-                    
-                        Cart::create([
-                            'user_id' => auth()->user()->id,
-                            'product_id' => $product_id,
-                            'quantity' => 1
-                        ]);
-                        
-                        return redirect('/cart');
-                            
-                        
-                    }else{
-                        return redirect()->back()->with('outOfStock','Out of Stock');
-                    }
-                }else{
-                    return redirect()->back()->with('notFound','Not Found.');
-                }
+                    Cart::where('user_id',auth()->user()->id)->delete();
                 
+                    Cart::create([
+                        'user_id' => auth()->user()->id,
+                        'product_id' => $product_id,
+                        'quantity' => 1
+                    ]);
+                    
+                    return redirect('/cart');
+                        
+                    
+                }else{
+                    return redirect()->back()->with('outOfStock','Out of Stock');
+                }
+            }else{
+                return redirect()->back()->with('notFound','Not Found.');
             }
+            
         }
     }
 
-   
 
+    //Send Mail
+    public function send_contact_mail(Request $request){
+        $validated = $request->validate([
+            'name' => ['required'],
+            'email' => ['required','email'],
+            'subject' => ['required'],
+            'message' => ['required'],
+        ]);
+        if($validated){
+            Mail::to('gisalankenneth1010@gmail.com')->send(new ContactMail($request));
+        return redirect()->back()->with('emailSent','Email has been sent!');
+        }else{
+            return back() -> with(['error', 'Failed to send message. Try Again.']);
+        }
+
+        
+   
+    }
 }

@@ -234,10 +234,20 @@
  <script>
    Swal.fire(
                'Ooops!',
-               '{{$message}}',
+               'An Error Occured.',
                'error'
            )
  </script>
  @enderror
+
+ @if(session()->has('emailSent'))
+ <script>
+  Swal.fire(
+              'Sent!',
+              'Your email has been sent.',
+              'success'
+          )
+</script>
+ @endif
   
   @include('partials.footer')

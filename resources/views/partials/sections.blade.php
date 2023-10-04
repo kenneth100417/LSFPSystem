@@ -178,23 +178,35 @@
               </div>
   
               <div class="col-lg-5 contact-form">
-                <form action="">
+                <form action="{{url('contact_mail')}}" method="POST">
                   @csrf
                   <div class="input-container mx-3 text-center mt-3">
                     <div class="input-group input-group-outline mb-2 mt-5">
                       <input placeholder="Name" name="name" id="name" type="text" class="form-control email-input-form" value={{old('name')}}>
+                      @error('name')
+                        <p class="text-danger">{{$message}}</p>
+                      @enderror
                     </div>
                     <div class="input-group input-group-outline mb-2">
                       <input placeholder="Email" name="email" id="email" type="Email" class="form-control email-input-form" value={{old('email')}}>
+                      @error('email')
+                        <p class="text-danger">{{$message}}</p>
+                      @enderror
                     </div>
                     <div class="input-group input-group-outline mb-2">
                       <input placeholder="Subject" name="subject" id="subject" type="text" class="form-control email-input-form" value={{old('subject')}}>
+                      @error('subject')
+                        <p class="text-danger">{{$message}}</p>
+                      @enderror
                     </div>
                     <div class="input-group input-group-outline mb-2">
                       <textarea placeholder="Your message here" name="message" id="message" type="text" class="form-control email-input-form email-textarea" value={{old('message')}}></textarea>
+                      @error('message')
+                        <p class="text-danger">{{$message}}</p>
+                      @enderror
                     </div>
                     <div class="d-flex justify-content-end mt-2">
-                      <button class="btn btn-success btn-sm">Send Message</button>
+                      <button type="submit" class="btn btn-success btn-sm">Send Message</button>
                     </div>
                   </div>
                 </form>

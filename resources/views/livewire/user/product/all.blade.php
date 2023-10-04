@@ -87,11 +87,19 @@
                 </div>
             </div>
             </a>
-            <div class="d-flex justify-content-between m-2">
+            <div class="container-fluid">
               <form role="form" action='/buy/{{$product->id}}' method="POST">
                 @csrf
-                <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 15px !important">Add to Cart</button>
-                <button type="submit" class="btn btn-warning buy-btn ">Buy Now</button>
+                <div class="row p-0">
+                  <div class="col-6 p-0 m-0">
+                    <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 15px !important">Add to Cart</button>
+  
+                  </div>
+                  <div class="col-6 p-0 m-0">
+  
+                  <button type="submit" class="btn btn-warning buy-btn ">Buy Now</button>
+                  </div>
+                </div>
               </form>
             </div>
         </div>

@@ -69,11 +69,19 @@
                                         </div>
                                 </div>
                             </a>
-                            <div class="d-flex justify-content-between m-2">
+                            <div class="container-fluid ">
                                 <form role="form" action='/buy/{{$product->id}}' method="POST">
                                     @csrf
-                                    <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 22px !important">Add to Cart</button>
-                                    <button type="submit" class="btn btn-warning buy-btn ">Buy Now</button>
+                                    <div class="row m-0 ">
+                                        <div class="col-6 m-0 p-0 text-center">
+                                            <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn-success add-cart-btn" style="width: 95px;padding: 10px 15px !important">Add to Cart</button>
+                                        </div>
+                                        <div class="col-6 m-0 p-0 text-center">
+                                            <button type="submit" class="btn btn-warning buy-btn " style="width: 95px;padding: 10px 12px !important">Buy Now</button>
+                                        </div>
+                                    </div>
+                                    
+                                    
                                 </form>
                             </div>
                         </div>
@@ -162,11 +170,17 @@
                                         </div>
                                 </div>
                             </a>
-                            <div class="d-flex justify-content-between m-2">
+                            <div class="container-fluid">
                                 <form role="form" action='/buy/{{$best_product->id}}' method="POST">
                                     @csrf
-                                <button type="button" wire:click="addToCart({{$best_product->id}})" class="btn btn-success add-cart-btn" style="padding: 10px 22px !important">Add to Cart</button>
-                                <button type="submit" class="btn btn-warning buy-btn ">Buy Now</button>
+                                    <div class="row m-0 ">
+                                        <div class="col-6 m-0 p-0 text-center">
+                                            <button type="button" wire:click="addToCart({{$best_product->id}})" class="btn btn-success add-cart-btn" style="width: 95px;padding: 10px 15px !important">Add to Cart</button>
+                                        </div>
+                                        <div class="col-6 m-0 p-0 text-center">
+                                            <button type="submit" class="btn btn-warning buy-btn " style="width: 95px;padding: 10px 12px !important">Buy Now</button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

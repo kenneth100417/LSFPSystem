@@ -74,6 +74,80 @@ window.addEventListener("load", function(){
 
 
 </script>
+<script>
+  window.addEventListener('exists', event =>{
+        Swal.fire({
+          title: 'Product already in your cart.',
+          text: '',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
+
+    });
+
+    window.addEventListener('success', event =>{
+        Swal.fire({
+          title: 'Product is added to your cart.',
+          text: '',
+          icon: 'success',
+          showConfirmButton: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+        }
+      })
+    });
+
+    window.addEventListener('greaterThanStock', event =>{
+        Swal.fire({
+          title: 'Insufficient Stock.',
+          text: '',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
+    });
+
+    window.addEventListener('notFound', event =>{
+        Swal.fire({
+          title: 'Product not Found.',
+          text: '',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
+    });
+
+    window.addEventListener('outOfStock', event =>{
+        Swal.fire({
+          title: 'Product out of Stock',
+          text: '',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
+    });
+    window.addEventListener('lessThanZero', event =>{
+        Swal.fire({
+          title: 'Quantity must be more than 0.',
+          text: '',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
+    });
+    window.addEventListener('null', event =>{
+        Swal.fire({
+          title: 'Please input quantity.',
+          text: '',
+          icon: 'info',
+          timer: 5000,
+          showConfirmButton: true
+      })
+    });
+
+</script>
 
 
 
