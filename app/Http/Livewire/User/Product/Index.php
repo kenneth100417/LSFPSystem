@@ -24,6 +24,7 @@ class Index extends Component
                                 ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
                                 ->groupBy('products.id','products.name')
                                 ->orderBy('avg_rating', 'DESC')
+                                ->havingRaw('AVG(ratings.star_rating) != 0')
                                 ->get();
 
         $best_products = Product::orderBy('quantity_sold','DESC')

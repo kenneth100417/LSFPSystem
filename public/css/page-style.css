@@ -417,7 +417,11 @@ input.cart-quantity::placeholder{
     opacity: 1 !important;
     color: #353434 !important;
 }
-
+/* card nav hover */
+.card-pdf:hover{
+    background-color: #0aa137 !important;
+    color: #ffffff;
+}
   
 
 @media screen and (max-width:767px){

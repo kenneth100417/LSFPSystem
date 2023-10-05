@@ -54,7 +54,7 @@ class Index extends Component
     {
         $categories = Category::orderBy($this->sortBy, $this->sort)
                                 ->where('name','like','%'.$this->search.'%')
-                                ->paginate(5);
+                                ->paginate(6);
         return view('livewire.admin.category.index', ['categories' => $categories,'sortByText' => $this->sortByText]);
     }
 }

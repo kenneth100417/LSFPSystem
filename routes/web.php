@@ -87,8 +87,16 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     // Add admin account
     Route::put('/add_admin','addAdmin');
 
-    //open pdf
-    Route::get('/open_pdf','openPDF');
+    //Print Report
+    Route::get('/inventory_pdf','inventoryPDF');
+    Route::get('/best_selling_products_pdf','bestSellingProductsPDF');
+    Route::get('/top_products_pdf','topProductsPDF');
+    Route::get('/expired_products_pdf','expiredProductsPDF');
+    Route::get('/daily_sales_pdf','dailySalesPDF');
+    Route::get('/monthly_sales_pdf','monthlySalesPDF');
+    Route::get('/annual_sales_pdf','annualSalesPDF');
+    Route::get('/all_sales_pdf','allSalesPDF');
+    Route::get('/all_report_pdf','allReportPDF');
 
 });
 

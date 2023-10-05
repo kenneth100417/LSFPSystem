@@ -9,5 +9,12 @@
     "roboto slab": {
         "normal": "C:\\xampp\\htdocs\\LSFPSystem\\public\\assets\/fonts\/roboto_slab_normal_21896e4d1a036eedceb7eae6c2ce15eb",
         "bold": "roboto_slab_bold_326672abcbcf2ca10d672b438b831b47"
+    },
+    "font awesome 5 brands": {
+        "normal": "font_awesome_5_brands_normal_6c7b9742dc5ae85c1a4a9ff1945464dc"
+    },
+    "font awesome 5 free": {
+        "normal": "C:\\xampp\\htdocs\\LSFPSystem\\public\\assets\/fonts\/font_awesome_5_free_normal_53a461860a760912241c035ad97e42ed",
+        "900": "font_awesome_5_free_900_a496f8644d2cd386b5617d8f041a0ea0"
     }
 }

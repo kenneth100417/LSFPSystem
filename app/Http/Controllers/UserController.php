@@ -8,6 +8,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Rating;
 use App\Models\Product;
 use App\Models\Category;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
 use App\Models\VerificationCode;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -237,15 +239,6 @@ class UserController extends Controller
         return view('pages.admin_generate_report');
     }
 
-    //open pdf
-    public function openPDF(){
-        $products = Product::orderBy('name','ASC')->get();
-
-         $pdf = Pdf::loadView('admin.reports.reports',['products' => $products]);
-         return $pdf->stream();
-
-        //return view('admin.reports.reports',['products' => $products]);
-    }
 
 
     // admin product info pages
@@ -656,4 +649,195 @@ class UserController extends Controller
         
    
     }
+
+
+    ////Print report
+
+    public function inventoryPDF(){
+        $products = Product::orderBy('name','ASC')->get();
+
+        $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products]);
+        return $pdf->stream();
+
+        //return redirect()->back()->with('message','Your download request is on process.');
+    }
+
+    public function bestSellingProductsPDF(){
+        $best_products = Product::orderBy('quantity_sold','DESC')
+        ->where('quantity_sold','!=','0')
+        ->where('status','1')
+        ->where('products.expiry_date','>=',date('Y-m-d'))
+        ->get();
+
+        $pdf = Pdf::loadView('admin.reports.best-selling-products',['products' => $best_products]);
+        return $pdf->stream();
+
+
+    }
+
+    public function topProductsPDF(){
+        $rec_products = Product::with('ratings')
+        ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->groupBy('products.id','products.name')
+        ->orderBy('avg_rating', 'DESC')
+        ->havingRaw('AVG(ratings.star_rating) != 0')
+        ->get();
+
+        
+        $pdf = Pdf::loadView('admin.reports.top-products',['products' => $rec_products]);
+        return $pdf->stream();
+
+    }
+
+    public function expiredProductsPDF(){
+        $exp_product = Product::where('expiry_date','<=',date('Y-m-d'))->get();
+
+        $pdf = Pdf::loadView('admin.reports.expired-products',['products' => $exp_product]);
+        return $pdf->stream();
+
+    }
+
+    public function dailySalesPDF(){
+            
+        $dailySales = Order::where('status','completed')
+                    ->select(DB::raw('DATE(updated_at) as order_date'), DB::raw('SUM(amount) as daily_sales'))
+                    ->groupBy(DB::raw('DATE(updated_at)'))
+                    ->orderBy('order_date','DESC')
+                    ->whereMonth('updated_at',date('m'))
+                    ->get();
+
+        $totalSales = Order::where('status','completed')
+                            ->sum('amount');
+        
+        $pdf = Pdf::loadView('admin.reports.daily-sales',['dailySales' => $dailySales, 'total' => $totalSales]);
+       
+
+        return $pdf->stream();
+    }
+
+    public function monthlySalesPDF(){
+               
+        $monthlySales = Order::select(
+                            DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as month'),
+                            DB::raw('SUM(amount) as total_sales')
+                        )
+                        ->where('status', 'completed')
+                        ->groupBy('month')
+                        ->orderBy('month', 'DESC')
+                        ->whereYear('updated_at',date('Y'))
+                        ->get();
+
+        $totalSales = Order::where('status','completed')
+                            ->sum('amount');
+        
+        $pdf = Pdf::loadView('admin.reports.monthly-sales',['monthlySales' => $monthlySales, 'total' => $totalSales]);
+       
+
+        return $pdf->stream();
+    }
+
+    public function annualSalesPDF(){
+        $annualSales =Order::select(DB::raw('YEAR(updated_at) as year'), DB::raw('SUM(amount) as sales'))
+                            ->where('status', 'completed')
+                            ->groupBy(DB::raw('YEAR(updated_at)'))
+                            ->orderBy('year', 'DESC')
+                            ->get();
+
+        $totalSales = Order::where('status','completed')
+                    ->sum('amount');
+
+        $pdf = Pdf::loadView('admin.reports.annual-sales',['annualSales' => $annualSales, 'total' => $totalSales]);
+
+
+        return $pdf->stream();
+    }
+
+    public function allSalesPDF(){
+        $dailySales = Order::where('status','completed')
+        ->select(DB::raw('DATE(updated_at) as order_date'), DB::raw('SUM(amount) as daily_sales'))
+        ->groupBy(DB::raw('DATE(updated_at)'))
+        ->orderBy('order_date','DESC')
+        ->whereMonth('updated_at',date('m'))
+        ->get();
+
+        $monthlySales = Order::select(
+            DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as month'),
+            DB::raw('SUM(amount) as total_sales')
+        )
+        ->where('status', 'completed')
+        ->groupBy('month')
+        ->orderBy('month', 'DESC')
+        ->whereYear('updated_at',date('Y'))
+        ->get();
+
+        $annualSales =Order::select(DB::raw('YEAR(updated_at) as year'), DB::raw('SUM(amount) as sales'))
+        ->where('status', 'completed')
+        ->groupBy(DB::raw('YEAR(updated_at)'))
+        ->orderBy('year', 'DESC')
+        ->get();
+
+        $totalSales = Order::where('status','completed')
+        ->sum('amount');
+
+        $pdf = Pdf::loadView('admin.reports.all-sales',['dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales]);
+
+        return $pdf->stream();
+
+    }
+
+    public function allReportPDF(){
+       
+        $products = Product::orderBy('name','ASC')->get();
+        
+        $best_products = Product::orderBy('quantity_sold','DESC')
+        ->where('quantity_sold','!=','0')
+        ->where('status','1')
+        ->where('products.expiry_date','>=',date('Y-m-d'))
+        ->get();
+
+        $rec_products = Product::with('ratings')
+        ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->groupBy('products.id','products.name')
+        ->orderBy('avg_rating', 'DESC')
+        ->havingRaw('AVG(ratings.star_rating) != 0')
+        ->get();
+
+        $exp_product = Product::where('expiry_date','<=',date('Y-m-d'))->get();
+    
+       
+        $dailySales = Order::where('status','completed')
+        ->select(DB::raw('DATE(updated_at) as order_date'), DB::raw('SUM(amount) as daily_sales'))
+        ->groupBy(DB::raw('DATE(updated_at)'))
+        ->orderBy('order_date','DESC')
+        ->whereMonth('updated_at',date('m'))
+        ->get();
+
+        $monthlySales = Order::select(
+            DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as month'),
+            DB::raw('SUM(amount) as total_sales')
+        )
+        ->where('status', 'completed')
+        ->groupBy('month')
+        ->orderBy('month', 'DESC')
+        ->whereYear('updated_at',date('Y'))
+        ->get();
+
+        $annualSales =Order::select(DB::raw('YEAR(updated_at) as year'), DB::raw('SUM(amount) as sales'))
+        ->where('status', 'completed')
+        ->groupBy(DB::raw('YEAR(updated_at)'))
+        ->orderBy('year', 'DESC')
+        ->get();
+
+        $totalSales = Order::where('status','completed')
+        ->sum('amount');
+
+        $pdf = Pdf::loadView('admin.reports.all-reports',['products' => $products,'best_products' => $best_products,'rec_products' => $rec_products,'exp_products' => $exp_product,'dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales]);
+
+        return $pdf->stream();
+
+    }
+
+    
 }

@@ -24,6 +24,7 @@ class TopRecommended extends Component
                                 ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
                                 ->groupBy('products.id','products.name')
                                 ->orderBy('avg_rating', 'DESC')
+                                ->havingRaw('AVG(ratings.star_rating) != 0')
                                 ->get();
         return view('livewire.public.product.top-recommended', [ 'recommendedProducts' => $rec_products]);
     }

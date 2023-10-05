@@ -1,8 +1,10 @@
 @include('components.admin.header')
 
-<div class="d-flex justify-content-center align-items-center mt-5">
+{{-- <div class="d-flex justify-content-center align-items-center mt-5">
   <a class="btn btn-success" href="{{url('/open_pdf')}}">Export to PDF</a>
-</div>
+</div> --}}
+<livewire:admin.generate-report/>
+
 </main>
     
 

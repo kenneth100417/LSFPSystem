@@ -125,9 +125,14 @@ class Dashboard extends Component
                                 ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
                                 ->groupBy('products.id','products.name')
                                 ->orderBy('avg_rating', 'DESC')
+                                ->havingRaw('AVG(ratings.star_rating) != 0')
                                 ->get();
 
-        $best_products = Product::orderBy('quantity_sold','DESC')->where('quantity_sold','!=','0')->where('status','1')->get();
+        $best_products = Product::orderBy('quantity_sold','DESC')
+                                ->where('quantity_sold','!=','0')
+                                ->where('status','1')
+                                ->where('products.expiry_date','>=',date('Y-m-d'))
+                                ->get();
         
       
 
