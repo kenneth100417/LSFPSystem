@@ -2,11 +2,13 @@
   
     <livewire:admin.dashboard/>
     
-        
+    @stack('scripts')
+  </main>
 
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 <script type="text/javascript">
+
 
 $('#alert').delay(5000).hide(0); 
   

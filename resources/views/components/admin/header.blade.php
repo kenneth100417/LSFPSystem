@@ -40,7 +40,11 @@
 
 
 
+
+
+
 @livewireStyles
+
 </head>
 
 

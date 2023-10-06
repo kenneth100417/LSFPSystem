@@ -134,7 +134,7 @@
                   <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                     <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
                         <div class="profile-img-container-lg">
-                            <img type="image" src="/img/Profile_pic/profile_temp.png" class="profile-img edit-photo" alt="profile" style="cursor: pointer;" id="profile-img">
+                            <img type="image" src="{{auth()->user()->photo}}" class="profile-img edit-photo" alt="profile" style="cursor: pointer;" id="profile-img">
 
                             <span class="profile-upload-icon" id="profile-pic-upload"><i class="fa-solid fa-camera"></i><br /><p style="font-size: 1vw;">Upload Profile</p></span>
 
@@ -305,11 +305,11 @@
                   <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                     <div class="profile-header-content position-absolute z-index-5 d-flex justify-content-start align-items-center ms-3">
                         <div class="profile-img-container-lg">
-                            <img type="image" src="{{auth()->user()->photo}}" class="profile-img edit-photo" alt="profile"  style="cursor: pointer;" id="profile-img">
+                            <img type="image" src="{{auth()->user()->photo}}" class="profile-img edit-photo" alt="profile" style="cursor: pointer;" id="profile-img2">
 
-                            <span class="profile-upload-icon" id="profile-pic-upload"><i class="fa-solid fa-camera"></i><br /><p style="font-size: 1vw;">Change Profile</p></span>
+                            <span class="profile-upload-icon" id="profile-pic-upload2"><i class="fa-solid fa-camera"></i><br /><p style="font-size: 1vw;">Upload Profile</p></span>
 
-                            <input type="file" name="profile_pic" id="profile-pic" style="display: none; " accept="image/x-png,image/jpeg">
+                            <input type="file" name="profile_pic" id="profile-pic2" style="display: none; " accept="image/x-png,image/jpeg">
                             
                         </div>
                         <div class="profile-text-container-lg ps-3">

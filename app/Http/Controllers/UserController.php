@@ -168,8 +168,10 @@ class UserController extends Controller
 
         if($request->hasFile('profile_pic')){
             $filename = time().$request->file('profile_pic')->getClientOriginalName();
-            $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
-            $photo = '/storage/'.$path;
+            $img = $request->file('profile_pic');
+            $img->move('uploads/profiles/',$filename);
+            
+            $photo = '/uploads/profiles/'.$filename;
         }else{
             $photo = auth()->user()->photo;
         }
@@ -501,10 +503,12 @@ class UserController extends Controller
 
         if($request->hasFile('profile_pic')){
             $filename = time().$request->file('profile_pic')->getClientOriginalName();
-            $path = $request->file('profile_pic')->storeAs('images', $filename, 'public'); 
-            $photo = '/storage/'.$path;
+            $img = $request->file('profile_pic');
+            $img->move('uploads/profiles/',$filename);
+            
+            $photo = '/uploads/profiles/'.$filename;
         }else{
-            $photo = "/img/Profile_pic/profile_temp.png";
+            $photo = auth()->user()->photo;
         }
 
         $validated['password'] = Hash::make($validated['password']); //pwede bycrypt instead hash:make

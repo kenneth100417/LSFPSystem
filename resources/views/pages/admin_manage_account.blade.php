@@ -183,6 +183,8 @@ profilePic.addEventListener('click', function() {
 
 
 
+
+
 // Event listener for the file input element
 profilePicInput.addEventListener('change', handleFileSelect, false);
 
@@ -203,6 +205,39 @@ function handleFileSelect(event) {
     alert('Please select an image file.');
   }
 }
+
+// profile pic apload trigger
+const profilePic2 = document.getElementById('profile-pic-upload2');
+const profilePicInput2 = document.getElementById('profile-pic2');
+
+profilePic2.addEventListener('click', function() {
+      // Trigger the hidden file input when the image is clicked
+      profilePicInput2.click();
+    });
+
+
+// Event listener for the file input element
+profilePicInput2.addEventListener('change', handleFileSelect, false);
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  const imageType = /^image\//;
+
+  if (imageType.test(file.type)) {
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      const previewImage2 = document.getElementById('profile-img2');
+      previewImage2.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    alert('Please select an image file.');
+  }
+}
+
+
 
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
