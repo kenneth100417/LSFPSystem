@@ -38,11 +38,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-
-
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @livewireStyles
 
 </head>
@@ -211,11 +207,7 @@
 
                     <ul class="navbar-nav">
                     
-                        <li class="nav-item d-flex align-items-center mx-1">
-                            <a href="/" class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-bell me-sm-1 mx-2 nav-bell"></i>
-                            </a>
-                        </li>
+                        <livewire:admin.nav/>
     
                         <li class="nav-item d-flex align-items-center">
                             <a href="/admin_manage_account" class="nav-link text-body font-weight-bold px-0">

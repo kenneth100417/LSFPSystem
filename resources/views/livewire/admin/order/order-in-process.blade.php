@@ -22,10 +22,10 @@
                               Sort by {{$sortby}}
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" wire:click.prevent = "id()">Order ID</a>
-                                <a class="dropdown-item" wire:click.prevent = "name()">Customer Name</a>
-                                <a class="dropdown-item" wire:click.prevent = "date()">Order Date</a>
-                                <a class="dropdown-item" wire:click.prevent = "amount()">Amount Payable</a>
+                                <a class="dropdown-item" wire:click.prevent = "id()" style="cursor: pointer">Order ID</a>
+                                <a class="dropdown-item" wire:click.prevent = "name()" style="cursor: pointer">Customer Name</a>
+                                <a class="dropdown-item" wire:click.prevent = "date()" style="cursor: pointer">Order Date</a>
+                                <a class="dropdown-item" wire:click.prevent = "amount()" style="cursor: pointer">Amount Payable</a>
                             </div>
                         </div>
                         </div>
@@ -40,6 +40,7 @@
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Customer Name</th>
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Order Date</th>
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Amount Payable</th>
+                                <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Note/Landmark/Instruction</th>
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Status</th>
                               </tr>
                             </thead>
@@ -60,6 +61,9 @@
                                     </td>
                                     <td class="mw-15 text-center">
                                         <p class="text-xs text-dark mb-0">&#8369;{{number_format($order->amount,2)}}</p>
+                                    </td>
+                                    <td class="mw-10 text-center">
+                                        <p class="text-xs text-dark mb-0" style="min-width: 15; max-width: 15; white-space:normal; min-height:20px; max-height: 80px; overflow:scroll; ">{{$order->note}}</p>
                                     </td>
                                     <td class="mw-15 text-center">
                                         <p class="text-sm mb-0 text-success">Order in process</p>

@@ -240,7 +240,9 @@ class UserController extends Controller
     public function admin_generate_report(){
         return view('pages.admin_generate_report');
     }
-
+    public function adminNotifications(){
+        return view('pages.admin_notifs');
+    }
 
 
     // admin product info pages
@@ -276,6 +278,7 @@ class UserController extends Controller
     public function admin_orders_cancelled(){
         return view('pages.admin-orders-pages.admin_orders_cancelled');
     }
+
 
 
 

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('user_id');
             $table->longText('notification');
-            $table->dateTime('created_at', $precision = 0);
+            $table->integer('access');
+            $table->timestamps();
         });
     }
 

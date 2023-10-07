@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\OrderItem;
+use App\Models\Notification;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,7 +46,10 @@ class Carts extends Component
     }
 
     public function checkout($totalAmount){
-        $cartItems = Cart::where('user_id', Auth()->user()->id)->get();
+        if($this->note == null){
+            $this->dispatchBrowserEvent('noteIsEmpty');
+        }else{
+            $cartItems = Cart::where('user_id', Auth()->user()->id)->get();
         $order = Order::create([
             'user_id' => auth()->user()->id,
             'status' => 'pending',
@@ -64,10 +68,17 @@ class Carts extends Component
         }
         if($order && $orderItem){
             Cart::where('user_id', Auth()->user()->id)->delete();
+            Notification::create([
+                'user_id' => auth()->user()->id,
+                'notification' => auth()->user()->firstname.' '.auth()->user()->lastname.' placed an Order.',
+                'access' => '1'
+            ]);
             $this->dispatchBrowserEvent('orderSuccess');
         }else if($cartItems->count() == '0'){
             $this->dispatchBrowserEvent('emptyCart');
         }
+        }
+        
 
     }
 

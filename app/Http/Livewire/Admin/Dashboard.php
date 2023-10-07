@@ -15,12 +15,73 @@ class Dashboard extends Component
 {
     public $selectedPeriod = 'daily';
     public $chartData=[];
-    public $options;
+    public $latestSales;
+    public $data = [];
+    public $labels = [];
 
     public $periodOptions = [
         'daily' => 'Daily Sales',
         'monthly' => 'Monthly Sales',
         'annual' => 'Annual Sales',
+    ];
+
+    public $options = [
+        'responsive' => true,
+        'maintainAspectRatio' => true,
+        'plugins' => [
+            'legend' => [
+                'display' => false,
+            ],
+        ],
+        'interaction' => [
+            'intersect' => false,
+            'mode' => 'index',
+        ],
+        'scales' => [
+            'y' => [
+                'grid' => [
+                    'drawBorder' => false,
+                    'display' => true,
+                    'drawOnChartArea' => true,
+                    'drawTicks' => false,
+                    'borderDash' => [5, 5],
+                    'color' => 'rgba(255, 255, 255, .2)',
+                ],
+                'ticks' => [
+                    'display' => true,
+                    'color' => '#f8f9fa',
+                    'padding' => 10,
+                    'font' => [
+                        'size' => 14,
+                        'weight' => 300,
+                        'family' => 'Roboto',
+                        'style' => 'normal',
+                        'lineHeight' => 2,
+                    ],
+                ],
+            ],
+            'x' => [
+                'grid' => [
+                    'drawBorder' => false,
+                    'display' => false,
+                    'drawOnChartArea' => false,
+                    'drawTicks' => false,
+                    'borderDash' => [5, 5],
+                ],
+                'ticks' => [
+                    'display' => true,
+                    'color' => '#f8f9fa',
+                    'padding' => 10,
+                    'font' => [
+                        'size' => 14,
+                        'weight' => 300,
+                        'family' => 'Roboto',
+                        'style' => 'normal',
+                        'lineHeight' => 2,
+                    ],
+                ],
+            ],
+        ],
     ];
     
 
@@ -86,12 +147,23 @@ class Dashboard extends Component
     
         $salesData = $query->get();
     
-        // Prepare data for Chart.js
-        $labels = $salesData->pluck('date' ?? 'month' ?? 'year');
-        $data = $salesData->pluck('total_sales');
+        
+
+        if ($period == 'daily') {
+            $this->labels = $salesData->pluck('date');
+            $this->latestSales = $query->whereDay('updated_at', now()->day)->latest()->value('total_sales');
+        } elseif ($period == 'monthly') {
+            $this->labels = $salesData->pluck('month');
+            $this->latestSales = $query->whereMonth('updated_at', now()->month)->latest()->value('total_sales');
+        } elseif ($period == 'annual') {
+            $this->labels = $salesData->pluck('year');
+            $this->latestSales = $query->whereYear('updated_at', now()->year)->latest()->value('total_sales');
+        }
+
+        $this->data = $salesData->pluck('total_sales');
     
         return [
-            'labels' =>   ['1','2','3','4','5','6'],
+            'labels' =>   $this->labels,
             'datasets' => [
                 [
                 'label'=>"Total Sales",
@@ -101,12 +173,11 @@ class Dashboard extends Component
                 'pointBackgroundColor' => "rgba(255, 255, 255, .8)",
                 'pointBorderColor'=> "transparent",
                 'borderColor'=> "rgba(255, 255, 255, .8)",
-                'borderColor'=> "rgba(255, 255, 255, .8)",
                 'borderWidth'=> '4',
                 'backgroundColor' => "transparent",
                 'fill'=>true,
                 'maxBarThickness'=>6 ,
-                'data' =>  $data, // Replace with actual sales data
+                'data' =>  $this->data, 
                 ],
             ],
         ];
@@ -119,7 +190,7 @@ class Dashboard extends Component
         $this->chartData = $this->getDataForPeriod($this->selectedPeriod);
 
     // Emit a Livewire event to update the chart
-    $this->emit('chartDataUpdated', $this->chartData);
+    $this->emit('chartDataUpdated', $this->chartData, $this->options);
     //dd($this->chartData);
     }
 

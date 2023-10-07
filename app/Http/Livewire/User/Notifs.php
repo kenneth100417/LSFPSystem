@@ -13,7 +13,7 @@ class Notifs extends Component
 
     public function render()
     {
-        $notifs = Notification::orderBy('created_at','DESC')->where('user_id',Auth()->user()->id)->paginate(6);
+        $notifs = Notification::orderBy('created_at','DESC')->where('user_id',Auth()->user()->id)->where('access','0')->paginate(10);
 
         return view('livewire.user.notifs',['notifs' => $notifs]);
     }

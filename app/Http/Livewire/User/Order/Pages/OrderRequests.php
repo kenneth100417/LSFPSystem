@@ -3,9 +3,10 @@
 namespace App\Http\Livewire\User\Order\Pages;
 
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\OrderItem;
+use App\Models\Notification;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +36,11 @@ class OrderRequests extends Component
         $order = Order::where('id',$this->order_id)->first();
         $order->update([
             'status' => 'cancelled',
+        ]);
+        Notification::create([
+            'user_id' => auth()->user()->id,
+            'notification' => auth()->user()->firstname.' '.auth()->user()->lastname.' cancelled an Order.',
+            'access' => '1'
         ]);
         return redirect('/user_cancelled');
     }

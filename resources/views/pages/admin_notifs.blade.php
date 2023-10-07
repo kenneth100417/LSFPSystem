@@ -1,7 +1,7 @@
-@include('components.user.header')
+@include('components.admin.header')
 
 
-<livewire:user.carts/>
+<livewire:admin.notifs/>
 </main>
     
 
@@ -14,10 +14,7 @@
 
 <script type="text/javascript">
 
-// var quantity = document.getElementById('quantity'); 
-// quantity.addEventListener('change', function(){
-//   Livewire.emit('quantityUpdate')
-// });
+
 
 window.addEventListener('show-delete-confirmation', event =>{
     Swal.fire({
@@ -43,77 +40,9 @@ window.addEventListener('cartDeleted', event =>{
       timer: 3000,
       showConfirmButton: false
   })
-  location.reload();
 });
 
-window.addEventListener('greaterThanStock', event =>{
-        Swal.fire({
-          title: 'Insufficient Stock.',
-          text: '',
-          icon: 'info',
-          timer: 5000,
-          showConfirmButton: true
-      })
-      location.reload();
-    });
 
-    window.addEventListener('zero', event =>{
-        Swal.fire({
-          title: 'Quantity cannot be 0.',
-          text: '',
-          icon: 'info',
-          timer: 5000,
-          showConfirmButton: true
-      })
-      location.reload();
-    });
-
-    window.addEventListener('orderSuccess', event =>{
-        Swal.fire({
-          title: 'Order Success!',
-          text: 'Your order is pending for approval.',
-          icon: 'success',
-          showConfirmButton: true
-      }).then((result) => {
-        if (result.isConfirmed) {
-          location.href = '/user_orders'
-        }
-      })
-      
-    });
-
-    window.addEventListener('orderError', event =>{
-        Swal.fire({
-          title: 'Ooops!',
-          text: 'An error occured. Try Again.',
-          icon: 'error',
-          timer: 5000,
-          showConfirmButton: true
-      })
-    });
-
-    window.addEventListener('emptycart', event =>{
-        Swal.fire({
-          title: 'Your cart is empty.',
-          text: 'Add product to your cart first.',
-          icon: 'info',
-          timer: 5000,
-          showConfirmButton: true
-      })
-    });
-
-    window.addEventListener('noteIsEmpty', event =>{
-        Swal.fire({
-          title: 'Ooops!',
-          text: 'Nearest location, landmark or instruction message is required.',
-          icon: 'info',
-          showConfirmButton: true
-      }).then((result) => {
-        if (result.isConfirmed) {
-          location.reload();
-        }
-      })
-    });
 
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {

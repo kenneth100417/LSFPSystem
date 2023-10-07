@@ -3,7 +3,10 @@
 namespace App\Http\Livewire\Admin\Order;
 
 use App\Models\Order;
+use App\Models\Product;
 use Livewire\Component;
+use App\Models\Notification;
+use App\Models\OrderItem;
 use Livewire\WithPagination;
 
 class OrderRequests extends Component
@@ -30,6 +33,11 @@ class OrderRequests extends Component
         $order = Order::where('id',$id)->first();
         $order->update([
             'status' => 'approved',
+        ]);
+        Notification::create([
+            'user_id' => $order->user_id,
+            'notification' => 'Your order has been approved and now in process. Please prepare '.number_format($order->amount,2).' pesos during delivery.',
+            'access' => '0'
         ]);
         $this->dispatchBrowserEvent('show-approved-message');
     }

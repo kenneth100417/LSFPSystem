@@ -132,7 +132,7 @@
                                             <h5 for="" class="text-sm my-0">Contact Number: <span><label>{{Auth()->user()->mobile_number}}</label></span></h5>
                                             <h5 for="" class="text-sm my-0">Complete address: <span><label>{{Auth()->user()->address}} </label></span></h5>
                                             <div class="d-flex justify-content-center">
-                                                <textarea wire:model.defer = "note" class="form-control mx-3 px-2" name="note" id="note"  rows="2" placeholder="Input nearest location or landmark" style="border:1px solid rgb(155, 155, 155); width: 600px;"></textarea>
+                                                <textarea wire:model.defer = "note" class="form-control mx-3 px-2" name="note" id="note"  rows="2" placeholder="Input nearest location, landmark or instruction during delivery." style="border:1px solid rgb(155, 155, 155); width: 600px;"></textarea>
                                             </div>
                                         </div>
                                     </div>

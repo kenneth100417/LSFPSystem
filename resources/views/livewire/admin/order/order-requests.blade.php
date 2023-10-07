@@ -23,10 +23,10 @@
                                     Sort by {{$sortby}}
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" wire:click.prevent = "id()">Order ID</a>
-                                        <a class="dropdown-item" wire:click.prevent = "name()">Customer Name</a>
-                                        <a class="dropdown-item" wire:click.prevent = "date()">Order Date</a>
-                                        <a class="dropdown-item" wire:click.prevent = "amount()">Amount Payable</a>
+                                        <a class="dropdown-item" style="cursor: pointer" wire:click.prevent = "id()">Order ID</a>
+                                        <a class="dropdown-item" style="cursor: pointer" wire:click.prevent = "name()">Customer Name</a>
+                                        <a class="dropdown-item" style="cursor: pointer" wire:click.prevent = "date()">Order Date</a>
+                                        <a class="dropdown-item" style="cursor: pointer" wire:click.prevent = "amount()">Amount Payable</a>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                         
                                     </td>
                                     <td class="mw-15 text-center">
-                                        <p class="text-md text-dark mb-0">&#8369;{{number_format($order->amount,2)}}</p>
+                                        <p class="text-sm text-dark mb-0">&#8369;{{number_format($order->amount,2)}}</p>
                                     </td>
                                     <td class="mw-10 text-center">
                                         <button class="btn btn-info btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer " wire:click.prevent = "approve({{$order->id}})">Approve<i class="fa-solid fa-check ms-2" title="View product details" style="font-size: 14px;"></i></button>

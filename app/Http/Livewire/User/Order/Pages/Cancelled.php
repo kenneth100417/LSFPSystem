@@ -4,6 +4,7 @@ namespace App\Http\Livewire\User\Order\Pages;
 
 use App\Models\Order;
 use Livewire\Component;
+use App\Models\Notification;
 use Livewire\WithPagination;
 use Illuminate\Support\Carbon;
 
@@ -39,6 +40,11 @@ class Cancelled extends Component
         $order->update([
             'status' => 'pending',
             'created at' => Carbon::now()
+        ]);
+        Notification::create([
+            'user_id' => auth()->user()->id,
+            'notification' => auth()->user()->firstname.' '.auth()->user()->lastname.' placed an Order.',
+            'access' => '1'
         ]);
         $this->dispatchBrowserEvent('goto-order-requests');
     }

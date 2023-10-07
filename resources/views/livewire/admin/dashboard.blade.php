@@ -10,8 +10,8 @@
                                     <i class="fa-solid fa-peso-sign"></i>
                                 </div>
                                 <div class="text-end pt-1">
-                                    <p class="text-md mb-0 text-capitalize ">Monthly Sales</p>
-                                    <h4 class="mb-0 ">&#8369;{{number_format($monthlySales,2)}}</h4>
+                                    <p class="text-md mb-0 text-capitalize ">{{$selectedPeriod}} Sales</p>
+                                    <h4 class="mb-0 ">&#8369;{{number_format($latestSales,2)}}</h4>
                                 </div>
                             </div>
                           
@@ -99,8 +99,8 @@
             <div class="row">
                 <div class="col-lg-7 col-md-12 mt-4">
                     <div class="card z-index-2 graph-card">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-success shadow-success border-radius-lg py-0 pe-1">
+                        <div class="card-header p-0 mt-n4 mx-3  bg-transparent">
+                            <div class="bg-gradient-success shadow-success border-radius-lg ">
                                 <div class="chart">
                                     <canvas id="chart-line" class="chart-canvas" ></canvas>
                                 </div>
@@ -108,23 +108,13 @@
                         </div>
                         <div class="card-body d-flex justify-content-between">
                             <div>
-                                <h6 class="mb-0"> Daily Sales </h6>
+                                <h6 class="mb-0 text-capitalize"> Sales Visual Analytics </h6>
                                 <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now();}} </p>
                             </div>
                             <div>
-                                {{-- <div class="btn-group pe-3">
-                                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle w-25" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Showing Daily Sales
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <button class="dropdown-item"  wire:click="setToShow('1')">Daily</button>
-                                      <a class="dropdown-item" wire:click="setToShow('2')">Monthly</a>
-                                      <a class="dropdown-item" wire:click="setToShow('3')">Annually</a>
-                                    </div>
-                              </div> --}}
-                              <select class="form-select form-select-sm" aria-label=".form-select-sm example" wire:model="selectedPeriod" id="period" wire:change="updateChart">>
+                              <select class="form-select form-select-sm bg-warning text-white px-3 py-1 text-md rounded" aria-label=".form-select-sm example" wire:model="selectedPeriod" id="period" wire:change="updateChart"   style="appearance: none;-webkit-appearance: none; -moz-appearance: none; ">
                                 @foreach ($periodOptions as $value => $label)
-                                    <option value="{{ $value }}">{{ $label }}</option>
+                                    <option class="bg-white text-dark" value="{{ $value }}">{{ $label }}</option>
                                 @endforeach
                               </select>
                             </div>
@@ -187,8 +177,11 @@
             </div>
         </div>
     </section>
-    @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</div>
+
+@push('scripts')
+   
         
         <script>
     
@@ -196,7 +189,25 @@
         
             var chart = new Chart(ctx, {
                 type: "line",
-                data: @json($chartData),
+                data:{
+            labels: @json($labels),
+            datasets: [{
+                label: "Mobile apps",
+                tension: 0,
+                borderWidth: 0,
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                pointBorderColor: "transparent",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderWidth: 4,
+                backgroundColor: "transparent",
+                fill: true,
+                data: @json($data),
+                maxBarThickness: 6
+
+            }],
+        },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -217,7 +228,7 @@
                                 drawOnChartArea: true,
                                 drawTicks: false,
                                 borderDash: [5, 5],
-                                color: 'rgba(255, 255, 255, .2)',
+                                color: 'rgba(255, 255, 255, .2)'
                             },
                             ticks: {
                                 display: true,
@@ -256,29 +267,25 @@
                     },
                 },
             });
-            // Livewire.on('chartDataUpdated', function (newChartData) {
-            //     chart.data = newChartData;
-            //     chart.update();
-            // });
-            Livewire.on('chartDataUpdated', function (newChartData) {
+
+            Livewire.on('chartDataUpdated', function (newChartData,newOptions) {
                 // Clear existing data
                 chart.data.labels = [];
                 chart.data.datasets = [];
+                chart.options = [];
 
                 // Update with new data
                 chart.data.labels = newChartData.labels;
                 chart.data.datasets = newChartData.datasets;
-                chart.update();
+                chart.options = newOptions;
+                 chart.update();
             });
-            
+             
         </script>
         
     @endpush
     
    @livewireScripts 
-</div>
-
-
 
 
 

@@ -74,17 +74,17 @@
 <div id="preloader"></div> 
 <div class="page-container">
   <section id="home">
-    <div class="container search-container pt-4" id="search">
-      <div class="row d-flex justify-content-end">
+    <div class="container search-container pt-4 mt-5" id="search">
+      <div class="row d-flex justify-content-end mt-5">
         <div class=" col-lg-3 col-sm-3 col-md-3 col-xl-3">
           <div class="d-flex justify-content-end search">
             <form class="form-inline search-container">
-              <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+              {{-- <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
               <div class="input-group-append">
                 <button class="btn btn-outline-success search-btn d-flex justify-content-center align-items-center" type="button">
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
-              </div>
+              </div> --}}
             </form>
           </div>
         </div>
