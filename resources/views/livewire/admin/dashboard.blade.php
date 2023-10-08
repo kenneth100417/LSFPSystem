@@ -102,14 +102,14 @@
                         <div class="card-header p-0 mt-n4 mx-3  bg-transparent">
                             <div class="bg-gradient-success shadow-success border-radius-lg ">
                                 <div class="chart">
-                                    <canvas id="chart-line" class="chart-canvas" ></canvas>
+                                    <canvas id="chart-line" class="chart-canvas" style="height: 500px !important; max-height: 6000px !important; padding: 0 !important"></canvas>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body d-flex justify-content-between">
                             <div>
-                                <h6 class="mb-0 text-capitalize"> Sales Visual Analytics </h6>
-                                <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now();}} </p>
+                                <h6 class="mb-0 text-capitalize"> Sales Analytics </h6>
+                                <p class="mb-0 text-sm"> As of {{Carbon\Carbon::now()->format('F j, Y');}} </p>
                             </div>
                             <div>
                               <select class="form-select form-select-sm bg-warning text-white px-3 py-1 text-md rounded" aria-label=".form-select-sm example" wire:model="selectedPeriod" id="period" wire:change="updateChart"   style="appearance: none;-webkit-appearance: none; -moz-appearance: none; ">
@@ -192,7 +192,7 @@
                 data:{
             labels: @json($labels),
             datasets: [{
-                label: "Mobile apps",
+                label: "Total Sales",
                 tension: 0,
                 borderWidth: 0,
                 pointRadius: 5,
@@ -222,6 +222,7 @@
                     },
                     scales: {
                         y: {
+                            beginAtZero: true,
                             grid: {
                                 drawBorder: false,
                                 display: true,
@@ -242,6 +243,7 @@
                                     lineHeight: 2
                                 },
                             }
+                            
                         },
                         x: {
                             grid: {
@@ -278,6 +280,7 @@
                 chart.data.labels = newChartData.labels;
                 chart.data.datasets = newChartData.datasets;
                 chart.options = newOptions;
+
                  chart.update();
             });
              

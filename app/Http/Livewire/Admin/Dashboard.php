@@ -133,15 +133,18 @@ class Dashboard extends Component
             $query->selectRaw('DATE(updated_at) as date, SUM(amount) as total_sales')
                 ->groupByRaw('DATE(updated_at)')
                 ->whereMonth('updated_at', now()->month)
+                ->limit(7)
                 ->orderByRaw('DATE(updated_at)');
         } elseif ($period == 'monthly') {
             $query->selectRaw('DATE_FORMAT(updated_at, "%Y-%m") as month, SUM(amount) as total_sales')
                 ->groupByRaw('DATE_FORMAT(updated_at, "%Y-%m")')
                 ->whereYear('updated_at', now()->year)
+                ->limit(7)
                 ->orderByRaw('DATE_FORMAT(updated_at, "%Y-%m")');
         } elseif ($period == 'annual') {
             $query->selectRaw('YEAR(updated_at) as year, SUM(amount) as total_sales')
                 ->groupByRaw('YEAR(updated_at)')
+                ->limit(7)
                 ->orderByRaw('YEAR(updated_at)');
         }
     

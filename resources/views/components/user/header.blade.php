@@ -91,7 +91,7 @@
   
     <hr class="horizontal mt-0 mb-2 nav-horizontal mx-3">
   
-      <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+      <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main" style="height: 100% !important">
           <ul class="navbar-nav">
           
               <li class="nav-item ">
@@ -141,65 +141,70 @@
                       <span class="nav-link-text ms-1">Profile</span>
                   </a>
               </li>
+              
           </ul>
+
+          <div class="d-flex justify-content-end" style="margin-top: 230px">
+            <form action="/logout" method="POST" id="logout">
+                @csrf
+                <a href="javascript:;" type="button" class="mx-2 user-logout-side btn btn-danger btn-sm py-2 px-3 ms-4 mt-2" onclick="logout();">
+                    Log Out 
+                </a>
+            </form>
+          </div>
     
   </aside>
   
   <main class="main-content border-radius-lg ">
   
-          <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="true">
-              <div class="container-fluid py-1 d-flex justify-content-between">
-                  
-                  <div>
-                    <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="user-dash-logo">
-                    <x-message />
-
-
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="true">
+        <div class="container-fluid py-1 d-flex justify-content-between">
+            
+            <div>
+                <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="user-dash-logo">
+                <x-message />
+            </div>
+            
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-0 d-flex justify-content-end" id="navbar">
+                {{-- <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <form class="form-inline search-container">
+                        <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div> --}}
+                <div>
+                    <ul class="navbar-nav d-flex justify-content-end">
                     
-
-
-                  </div>
-                  
-                  <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-0 d-flex justify-content-end" id="navbar">
-                      <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                          <form class="form-inline search-container">
-                              <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
-                          </form>
-                      </div>
-                      <div>
-                        <ul class="navbar-nav d-flex justify-content-end">
-                          
-                            <livewire:user.nav>
-        
-                            <li class="nav-item d-flex align-items-center">
-                                <a href="/user_profile" class="nav-link text-body font-weight-bold px-0">
-                                    <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
-                                    
-                                </a>
-                            </li>
-        
-                            <li class="nav-item d-flex align-items-center">
-                                <form action="/logout" method="POST" id="logout">
-                                    @csrf
-                                    <button  type="button" class=" btn btn-danger btn-sm py-2 px-3 ms-4 mt-2" onclick="logout();">
-                                        Log Out 
-                                    </button>
-                                </form>
-                            </li>
-        
-                            <li class="nav-item d-xl-none ps-0 d-flex align-items-center justify-content-end p3-n5">
-                                <a href="javascript:;" class="nav-link text-body menu" id="iconNavbarSidenav">
-                                    <div class="sidenav-toggler-inner">
+                        <livewire:user.nav>
+    
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="/user_profile" class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
+                                
+                            </a>
+                        </li>
+    
+                        <li class="nav-item d-flex align-items-center">
+                            <form action="/logout" method="POST" id="logout">
+                                @csrf
+                                <button  type="button" class="user-logout-top btn btn-danger btn-sm py-2 px-3 ms-4 mt-2" onclick="logout();">
+                                    Log Out 
+                                </button>
+                            </form>
+                        </li>
+    
+                        <li class="nav-item d-xl-none ps-0 d-flex align-items-center justify-content-end pe-0">
+                            <a href="javascript:;" class="nav-link text-body menu" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
                                     <i class="sidenav-toggler-line"></i>
                                     <i class="sidenav-toggler-line"></i>
                                     <i class="sidenav-toggler-line"></i>
-                                    </div>
-                                </a>
-                            </li>
-        
-                        </ul>
-                      </div>
-                  </div>
-              </div>
-          </nav>
+                                </div>
+                            </a>
+                        </li>
+    
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
 
