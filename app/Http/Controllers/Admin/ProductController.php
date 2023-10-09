@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\ProductFormRequest;
+use App\Http\Requests\UpdateProductFormRequest;
 
 class ProductController extends Controller
 {
@@ -69,16 +70,15 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product','categories'));
     }
 
-    public function update(ProductFormRequest $request,int $product_id){
-        
+    public function update(UpdateProductFormRequest $request,int $product_id){
         $validatedData = $request->validated();
 
         $category = Product::where('id',$product_id)->first(['category_id'])->category_id;
 
         $product = Category::findOrFail($category)->products()->where('id',$product_id)->first();
-
+        
         if($product){
-       
+            
             if($request->hasFile('image')){
                 $path = 'uploads/products/'.$product->image;
                 if(File::exists($path)){
@@ -90,7 +90,8 @@ class ProductController extends Controller
 
                 $file->move('uploads/products/',$filename);
                 $validatedData['image'] = $filename;
-                $product->update(['image'=>$validatedData['image']]);
+            }else{
+                $validatedData['image'] = $product->image;
             }
         
         
@@ -104,7 +105,8 @@ class ProductController extends Controller
                 'slug' => Str::slug($validatedData['slug']),
                 'meta_title' => $validatedData['meta_title'],
                 'meta_keyword' => $validatedData['meta_keyword'],
-                'meta_description' => $validatedData['meta_description']
+                'meta_description' => $validatedData['meta_description'],
+                'image' => $validatedData['image']
             ]);
         
             return redirect('admin/products')->with('success', 'Product successfully updated.');

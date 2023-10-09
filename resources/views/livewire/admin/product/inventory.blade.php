@@ -30,9 +30,7 @@
                               <a class="dropdown-item" wire:click.prevent = "sortBySoldCount()" style="cursor:pointer">Quantity Sold</a>
                             </div>
                         </div>
-                        <div>
-                            <a class="btn btn-info btn-sm me-2" href="{{url('/open_pdf')}}">Print Report</a>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">

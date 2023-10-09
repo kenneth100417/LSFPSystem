@@ -504,6 +504,10 @@ a.card-nav:hover{
 /* MOBILE VIEW */
 
 @media screen and (max-width:767px){
+    /* section{
+        height: 100vh !important;
+        width: 100vw !important;
+    } */
     nav{
         background: #ebebeb;
     }

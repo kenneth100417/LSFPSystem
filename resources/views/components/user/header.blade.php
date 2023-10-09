@@ -91,7 +91,7 @@
   
     <hr class="horizontal mt-0 mb-2 nav-horizontal mx-3">
   
-      <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main" style="height: 100% !important">
+      <div class="position-relative collapse navbar-collapse  w-auto " id="sidenav-collapse-main" style="height: 80vh !important">
           <ul class="navbar-nav">
           
               <li class="nav-item ">
@@ -144,10 +144,10 @@
               
           </ul>
 
-          <div class="d-flex justify-content-end" style="margin-top: 230px">
+          <div class="d-flex justify-content-end position-absolute bottom-0 end-0" style="margin-top: 230px">
             <form action="/logout" method="POST" id="logout">
                 @csrf
-                <a href="javascript:;" type="button" class="mx-2 user-logout-side btn btn-danger btn-sm py-2 px-3 ms-4 mt-2" onclick="logout();">
+                <a href="javascript:;" type="button" class=" mx-2 user-logout-side btn btn-danger btn-sm py-2 px-3 ms-4 mt-2" onclick="logout();">
                     Log Out 
                 </a>
             </form>

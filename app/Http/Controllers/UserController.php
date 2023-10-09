@@ -299,7 +299,7 @@ class UserController extends Controller
         $user = User::where('id', $user_id)->first();
         $verificationCode = $this->generateOtp($user->id);
         $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
-        $this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS 
+        $this->sendSMS($user->mobile_number, $message); // Send OTP SMS 
         //return redirect('/otp/verify/'.$user->id)->with('success',  $message);
     }
 

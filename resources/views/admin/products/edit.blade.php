@@ -99,7 +99,7 @@
                                                                 @enderror
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12">
+                                                        <div class="col-lg-9">
                                                             <div class="mt-3">
                                                                 <h6 class="">Description</h6>
                                                                 <div class="form-outline">
@@ -110,6 +110,24 @@
                                                                         <small>{{$message}}</small>
                                                                     </p>
                                                                 @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="mt-3">
+                                                                <h6 class="">Expiration Date</h6>
+                                                                <div class=" input-group input-group-outline mb-2 date" id="datepicker">
+                                                                    <input placeholder="Expiration Date" name="expiry_date" id="expiry_date" type="text" class="form-control" value="{{$product->expiry_date}}" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;">
+                                                                    <span class="input-group-append">
+                                                                        <span class="input-group-text mx-2">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                        </span>
+                                                                    </span>
+                                                                    </div>
+                                                                    @error('expiry_date')
+                                                                    <p class="text-danger">
+                                                                        <small> {{$message}} </small>
+                                                                    </p>
+                                                                    @enderror
                                                             </div>
                                                         </div>
                                                         <h5 class="mt-5 mb-0">SEO (Search Engine Otimization) Tags</h5>
@@ -182,14 +200,17 @@
                                                 
                                             </div>
                                             <div class="mt-3">
-                                                <h6 class="">Category Image</h6>
-                                                <input type="file" accept="image/x-png,image/jpeg"  class="form-control  p-2" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" id="category-pic-upload" name="image"/>
+                                                <h6 class="">Upload Product Image</h6>
+                                                <button type="button" class="btn btn-info w-100" id="select-img-btn">Select Image</button>
                                                 @error('image')
                                                     <p class="text-danger">
                                                         <small>{{$message}}</small>
                                                     </p>
                                                 @enderror
+                                                <input type="file" accept="image/x-png,image/jpeg"  class="form-control" style="display: none;" id="category-pic-upload" name="image" title="Upload image"/>
+                                                
                                             </div>
+                                            
                                             <div class="d-flex justify-content-center align-items-center mt-5">
                                                 <button type="submit" class="btn btn-success btn-md mx-2 w-25">Save</button>
                                                 <a href="{{url('admin/products')}}" class="btn btn-danger btn-md mx-2 w-25">Back</a>
@@ -209,7 +230,17 @@
     </main>
 @livewireScripts
 <script type="text/javascript">
+$('#expiry_date').datepicker({
+       startDate: '+2d'
+      });
+
 // Event listener for the file input element
+var uploadBtn = document.getElementById('select-img-btn');
+    var uploadInput = document.getElementById('category-pic-upload');
+
+    uploadBtn.addEventListener('click', function(){
+        uploadInput.click();
+    });
 
 let profilePicInput = document.getElementById('category-pic-upload');
 

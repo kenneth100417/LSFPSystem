@@ -86,7 +86,7 @@
                                     </div>
                                 </td>
                                 <td class="mw-10">
-                                    <a class="mt-3 me-1 text-success tbl-row-icon" style="cursor: pointer "><i class="fa-solid fa-arrow-up-right-from-square" title="View product details" style="font-size: 20px;"></i></a>
+                                    
                                     <a href="{{url('admin/products/'.$product->id.'/edit')}}" class="mt-3 mx-1 text-warning tbl-row-icon" style="cursor: pointer"><i class="fa-regular fa-pen-to-square" title="Edit product details" style="font-size: 21px;"></i></a>
                                     <a class="mt-3 mx-1 text-danger fa-sm tbl-row-icon" style="cursor: pointer" wire:click.prevent = 'deleteConfirmation({{$product->id}})'><i class="fa-solid fa-trash" title="Remove product" style="font-size: 19px;"></i></a>
 
