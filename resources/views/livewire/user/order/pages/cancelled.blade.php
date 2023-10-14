@@ -1,5 +1,5 @@
 <div>
-    <section class="mt-5 mx-2">
+    <section class="mt-5 mx-2 mb-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 bg-white border-radius-lg">

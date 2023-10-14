@@ -81,8 +81,8 @@ div.welcome-message{
     top: 80px;
     z-index: 100;
     height: 55px;
-    width: 300px;
-    padding: 15px 10px;
+    width: auto;
+    padding: 15px 15px;
 }
 .search-input{
     border: 1px solid #b4b4b4 !important;
@@ -297,9 +297,9 @@ button.swal2-cancel{
     border-radius: 15px !important;
 }
 div.modal{
-    width: 1200px !important;
+    /* width: 1200px !important; */
     height: auto !important;
-    margin-left: 240px;
+    /* margin-left: 240px; */
 }
 div.modal-content{
     background: rgba(0, 0, 0, 0);
@@ -427,7 +427,7 @@ input.cart-quantity::placeholder{
 button.user-logout-top{
     display: block !important;
 }
-button.user-logout-side{
+a.user-logout-side{
     display: none !important;
 }
 
@@ -437,10 +437,16 @@ button.user-logout-side{
     width: 50px !important;
 }
 
+.best-product-container{
+    margin-top: 0;
+   }
 
 @media screen and (max-width:767px){
     /* .welcome-message{
         display: none !important;
+    } */
+    /* .navbar{
+        margin-top: 20px !important;
     } */
     .swal2-container {
         z-index: 10000;
@@ -467,27 +473,87 @@ button.user-logout-side{
     p.lsfp-tagline{
         font-size: 14px;
     }
-   
+   /* product cards */
     .swiper-header{
         margin-top: 20px !important;
     }
     .swiper-title{
-        font-size: 18px;
+        font-size: 15px !important;
     }
     .browse-all-text{
-        font-size: 14px !important;
+        font-size: 13px !important;
     }
 
+
     div.cat-card, div.product-card{
-        width: 200px;
-        height: 300px !important;
+        width: 150px;
+        height: 250px !important;
+    }
+    .product-img-container{
+        height: 118px !important;
+    }
+    .product-name{
+        margin-top: 8px !important;
+        font-size: 12px !important;
+    }
+    .category-sold-container{
+        margin: -10px 0px !important;
+    }
+    .cat-container{
+        width: 65% !important;
+        padding: 0 !important;
+    }
+    .sold-container{
+        width: 35% !important;
+        padding: 0 !important;
+    }
+    .category-name{
+        padding: 0px !important;
+        font-size: 11px !important;
+    }
+    .product-sold{
+        font-size: 11px !important;
+        text-align: left;
     }
     .product-price{
-        font-size: 16px;
+        font-size: 14px;
     }
     .product-selling-price{
-        font-size: 18px;
+        font-size: 16px;
     }
+    .product-btn-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .btn-div{
+        width: 100;
+    }
+   .buy-btn{
+    margin-top: -20px !important;
+    width: 100% !important;
+    height: 20px !important;
+    padding: 2px 0px !important;
+    font-size: 10px !important;
+    align-items: center;
+   }
+   .add-cart-btn{
+    margin-top: -5px !important;
+    width: 100% !important;
+    padding: 2px 0px !important;
+    font-size: 10px !important;
+    height: 20px !important;
+   }
+   .top-product-container{
+    margin-top: 50px !important;
+   }
+   .best-product-container{
+    margin-top: -50px !important;
+   }
+   .sm-sf{
+    font-size: 38px !important;
+   }
+/* end of product cards */
+
     /* profile page */
 
     .profile-img-container-lg{
@@ -517,8 +583,10 @@ button.user-logout-side{
     button.user-logout-top{
         display: none !important;
     }
-    button.user-logout-side{
+    a.user-logout-side{
         display: block !important;
+        font-size: 10px !important;
+        width: 35%;
     }
     /*side nav toggler
      */
@@ -568,15 +636,38 @@ button.user-logout-side{
     .view-product-comment-content{
         font-size: 12px !important
     }
-    
+    /* all products page */
+    .all-products-menu{
+        overflow: auto;
+    }
+    .all-product-container{
+        margin-bottom: 60px !important;
+    }
+    /* order tables */
+    .table-container{
+        margin-bottom: 50px !important;
+    }
 }
 @media screen and (min-width:768px) and (max-width: 1023px){
-
+/* logout btn */
+button.user-logout-top{
+    display: block !important;
+}
+button.user-logout-side{
+    display: none !important;
+}
 
 }
 
 
 @media screen and (min-width:1440px){
+    /* logout btn */
+button.user-logout-top{
+    display: block !important;
+}
+button.user-logout-side{
+    display: none !important;
+}
     .lsfp{
         font-size: 34px !important;
     }

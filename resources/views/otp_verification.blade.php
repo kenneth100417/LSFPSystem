@@ -1,16 +1,6 @@
 @include('partials.header')
 
-          @if (session('success'))
-          <div x-data="{show: true}" x-init="setTimeout(()=> show =   false, 5000)" class="alert alert-success alert-message fixed-bottom" role="alert">
-            {{ session('success') }}
-          </div>
-          @endif
-
-          @if (session('error'))
-          <div class="alert alert-success alert-message fixed-bottom alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-          </div>
-          @endif
+          
 
           <!-- verify OTP Form -->
           <div class="card z-index-0 fadeIn3 fadeInBottom mt-n4 m-2 " id="otpverify-form">    
@@ -151,5 +141,28 @@ window.addEventListener("load", function(){
       },
     });
   </script>
+  
+
+@if (session()->has('error'))
+  <script type="text/javascript">
+    Swal.fire({
+        title: "Ooops!",
+        text: "{{session('error')}}",
+        icon: 'info',
+        showConfirmButton: true
+    })
+  </script>
+@endif
+
+@if (session()->has('success'))
+  <script type="text/javascript">
+    Swal.fire({
+        title: "Success!",
+        text: "{{session('success')}}",
+        icon: 'success',
+        showConfirmButton: true
+    })
+  </script>
+@endif
   
   @include('partials.footer')

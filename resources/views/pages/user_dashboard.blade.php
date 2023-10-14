@@ -8,7 +8,7 @@
                     <div class="col md-12">
                         <div class="text-center lsfp-container col-md-12 mt-3">
                           <H4 class="lsfp">Louella's</H4>
-                          <H1 class="text-bold lsfp">Sweet Food Products</H1>
+                          <H1 class="text-bold lsfp"><span class="sm-sf">Sweet Food</span> Products</H1>
                           <p class="lsfp-tagline">Every Bite is Delight!</p>
                         </div>
                     </div>
@@ -193,6 +193,10 @@ window.addEventListener('exists', event =>{
         sticky: true,
       },
       breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 10,
+        },
         480: {
           slidesPerView: 2,
           spaceBetween: 10,

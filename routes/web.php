@@ -22,7 +22,7 @@ Route::controller(App\Http\Controllers\UserController::class)->group(function(){
     Route::get('/register',  'register');
     Route::get('/verify','verify');
     Route::post('/add_user',  'add_user');
-    Route::post('/logout', 'logout');
+    Route::get('/logout', 'logout');
     Route::post('/login', 'login');
 
     // otp verification routes

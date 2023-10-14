@@ -501,6 +501,38 @@ a.card-nav:hover{
     color: #ffc107;
   }
 
+/* sweetalert custom */
+div.swal2-popup{
+    border-radius: 15px !important;
+    padding: 20px !important;
+    box-shadow: 1px 2px 5px #491815;
+}
+h2.swal2-title{
+    font-size: 24px !important;
+}
+div.swal2-icon{
+    width: 70px !important;
+    height: 70px !important;
+}
+button.swal2-confirm, button.swal2-cancel{
+    border-radius: 15px !important;
+    padding: 5px 10px;
+}
+button.swal2-confirm{
+    background-color:  #28a745 !important;
+    width: 130px !important;
+}
+button.swal2-cancel{
+    background-color: #007bff !important;
+}
+.swal2-success-line-tip, .swal2-success-line-long {
+    font-size: 14px !important;
+  }
+
+.swal2-x-mark-line-right, .swal2-x-mark-line-left {
+    font-size: 14px !important;
+  } 
+
 /* MOBILE VIEW */
 
 @media screen and (max-width:767px){

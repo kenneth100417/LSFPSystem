@@ -38,9 +38,9 @@ class UserController extends Controller
     public function resendRecoveryCode($user_id){
         $user = User::where('id', $user_id)->first();
         $verificationCode = $this->generateOtp($user->id);
-        $message = "Your recovery code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-        //$this->sendSMS(auth()->user()->mobile_number, $message); // Send Recovery SMS
-        return redirect('/recovery-verification/'.$user->id)->with('success',  $message);
+        $message = "Your recovery code is:{otp}. Please note that this code is valid only for 10 minutes.";
+        $this->sendSMS($user->mobile_number, $message,$verificationCode->otp); // Send Recovery SMS
+        return redirect('/recovery-verification/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.');
     }
 
     public function forgotPasswordVerify(Request $request){
@@ -57,9 +57,9 @@ class UserController extends Controller
                 if($validated['mobile_number'] === $user->mobile_number){
                     //send verification code to user's mobile number.
                     $verificationCode = $this->generateOtp($user->id);
-                    $message = "Your recovery code is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                    //$this->sendSMS(auth()->user()->mobile_number, $message); // Send Recovery SMS 
-                return redirect('/recovery-verification/'.$user->id)->with('success',  $message);
+                    $message = "Your recovery code is:{otp}. Please note that this code is valid only for 10 minutes.";
+                    $this->sendSMS($user->mobile_number, $message, $verificationCode->otp); // Send Recovery SMS 
+                return redirect('/recovery-verification/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.');
                 }else{
                     return redirect()->back()->withErrors(['error' => 'No User Found. Try another Email or Mobile Number.']);
                 }
@@ -298,9 +298,9 @@ class UserController extends Controller
     public function resendOtp($user_id){
         $user = User::where('id', $user_id)->first();
         $verificationCode = $this->generateOtp($user->id);
-        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
-        $this->sendSMS($user->mobile_number, $message); // Send OTP SMS 
-        //return redirect('/otp/verify/'.$user->id)->with('success',  $message);
+        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."! Your OTP is:{otp}. Please note that this code is valid only for 10 minutes.";
+        $this->sendSMS($user->mobile_number, $message, $verificationCode->otp); // Send OTP SMS 
+        return redirect('/otp/verify/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.');
     }
 
     public function add_user(Request $request){
@@ -323,9 +323,10 @@ class UserController extends Controller
         $user = User::create($validated);
        
         $verificationCode = $this->generateOtp($user->id);
-        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp.". Please note that this code is valid only for 10 minutes.";
-        //$this->sendSMS(auth()->user()->mobile_number, $message); // Send OTP SMS 
-        return redirect('/otp/verify/'.$user->id)->with('success',  $message);
+        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."! Your OTP is:{otp}. Please note that this code is valid only for 10 minutes.";
+        //dd($user->mobile_number);
+        $this->sendSMS($user->mobile_number, $message, $verificationCode->otp); // Send OTP SMS 
+        return redirect('/otp/verify/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.');
 
     }
 
@@ -346,9 +347,10 @@ class UserController extends Controller
                     if($user->access == "0"){
                         
                         $verificationCode = $this->generateOtp($user->id);
-                        $message = "Welcome back ".$user->firstname."!"." Your OTP is - ".$verificationCode->otp." Please note that this code is valid only for 10 minutes.";
-                        //$this->sendSMS($user->mobile_number, $message); //otp 
-                        return redirect('/otp/verify/'.$user->id)->with('success',  $message);
+                        $message = "Welcome back ".$user->firstname."! Your OTP is: {otp}. Please note that this code is valid only for 10 minutes.";
+                        //$this->sendSMS($user->mobile_number, $message, $verificationCode->otp); //otp 
+                        //dd($user->mobile_number);
+                        return redirect('/otp/verify/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.'); // 'message = Your OTP has been sent to your mobile number '.$user->mobile_number.'.'
                     }else{
                         auth()->login($user);
                         return redirect('admin_dashboard')->with('message', 'Welcome back, Admin!');
@@ -356,7 +358,7 @@ class UserController extends Controller
                 }return back()->withErrors(['error' => 'Email and Password does not match.']);
             }return back()->withErrors(['error' => 'Email and Password does not match.']);
         }
-        return back()->withErrors(['error' => 'An error occured.']);
+        return back()->withErrors(['error' => 'An error occured in processing your request. Please Try again.']);
     }
 
 
@@ -365,6 +367,7 @@ class UserController extends Controller
         $user = User::where('id',$user_id)->first();
         # User Does not Have Any Existing OTP
         $verificationCode = VerificationCode::where('mobile_number', $user->mobile_number)->latest()->first();
+        $verCode = VerificationCode::where('mobile_number', $user->mobile_number);
 
         $now = Carbon::now();
 
@@ -372,12 +375,21 @@ class UserController extends Controller
             return $verificationCode;
         }
 
-        // Create a New OTP
-        return VerificationCode::create([
-            'mobile_number' => $user->mobile_number,
-            'otp' => rand(123456, 999999),
-            'expire_at' => Carbon::now()->addMinutes(10)
-        ]);
+        if($verCode->exists()){
+            return $verCode->update([
+                'otp' => rand(123456, 999999),
+                'expire_at' => Carbon::now()->addMinutes(10)
+            ]);
+        }else{
+             // Create a New OTP
+            return VerificationCode::create([
+                'mobile_number' => $user->mobile_number,
+                'otp' => rand(123456, 999999),
+                'expire_at' => Carbon::now()->addMinutes(10)
+            ]);
+        }
+
+       
     }
 
     public function verifyOtp(Request $request, $user_id){
@@ -410,15 +422,16 @@ class UserController extends Controller
     }
 
 
-    public function sendSMS($mobile_number, $message){
+    public function sendSMS($mobile_number, $message, $otp){
         $ch = curl_init();
         $parameters = array(
             'apikey' => '1ee8625dd653bdf085653d29c9b69b20', //Your API KEY acd2a93b808ee8f8e725ceba1f84ff3b - old
             'number' => $mobile_number,
             'message' => $message,
+            'code' => $otp,
             'sendername' => "SEMAPHORE"
         );
-        curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
+        curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/otp' );//https://api.semaphore.co/api/v4/messages
         curl_setopt( $ch, CURLOPT_POST, 1 );
 
         //Send the parameters set above with the request
@@ -430,7 +443,7 @@ class UserController extends Controller
         curl_close ($ch);
 
         //Show the server response
-        // echo $output;
+        //echo $output;
     }
 
 

@@ -91,7 +91,7 @@
   
     <hr class="horizontal mt-0 mb-2 nav-horizontal mx-3">
   
-      <div class="position-relative collapse navbar-collapse  w-auto " id="sidenav-collapse-main" style="height: 80vh !important">
+      <div class="position-relative collapse navbar-collapse  w-auto " id="sidenav-collapse-main" style="height: 75vh !important">
           <ul class="navbar-nav">
           
               <li class="nav-item ">
@@ -142,22 +142,19 @@
                   </a>
               </li>
               
-          </ul>
-
-          <div class="d-flex justify-content-end position-absolute bottom-0 end-0" style="margin-top: 230px">
-            <form action="/logout" method="POST" id="logout">
-                @csrf
-                <a href="javascript:;" type="button" class=" mx-2 user-logout-side btn btn-danger btn-sm py-2 px-3 ms-4 mt-2" onclick="logout();">
-                    Log Out 
+              <li class="nav-item d-flex justify-content-end">
+                <a href="javascript:;" type="button" class="text-white nav-link user-logout-side btn btn-danger btn-sm mt-2  py-1 px-2" onclick="logout();">
+                    <span class="nav-link-text text-white ms-1">Log Out</span>
                 </a>
-            </form>
-          </div>
+              </li>
+              
+          </ul>
     
   </aside>
   
-  <main class="main-content border-radius-lg ">
+  <main class="main-content border-radius-lg">
   
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="true">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
         <div class="container-fluid py-1 d-flex justify-content-between">
             
             <div>
