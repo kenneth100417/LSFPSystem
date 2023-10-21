@@ -125,14 +125,22 @@
                 <div class="col-lg-5 col-md-12">
                     
                     <div class="card top-p-container ">
-                        <div class="bg-transparent top-product-text-con">
-                           <h4 class="mt-3 ms-4 top-product-text">Top Products</h4>
-                           <hr class="dark horizontal mb-1 mt-n2">
+                        <div class="d-flex justify-content-between">
+                            <div class="bg-transparent top-product-text-con">
+                                <h4 class="mt-3 ms-4 top-product-text">{{$selectedProductAnalysis == "top" ? "Top Products":"Best Selling Products"}}</h4>
+                            </div>
+                            <div class="align-items-center mt-2 me-3">
+                                <select class="form-select form-select-sm bg-warning text-white rounded" aria-label="Default select example" wire:model="selectedProductAnalysis">
+                                    <option class="bg-white text-dark" value="top">Top Products</option>
+                                    <option class="bg-white text-dark" value="best">Best Selling Products</option>
+                                </select>
+                            </div>
                         </div>
+                        <hr class="dark horizontal mb-1 mt-n2">
                     
                         <div class="card-body p-main-container mt-0 py-0 pe-3">
 
-                            @forelse ($recommendedProducts as $product)
+                            @forelse ($productAnalysis as $product)
                                 <div class="d-flex justify-content-between p-container rounded-3 p-2 my-2">
                                     <div class="d-flex flex-row align-items-center">
                                         <div  class="d-flex align-items-center">

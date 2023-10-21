@@ -62,6 +62,28 @@
                                               <input wire:model = "total" value="" type="text" id="total" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 16px; font-weight:bold;" readonly/>
                                             </div>
                                         </div>
+                                        {{-- <div class="container mb-2 mt-2">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="mt-2  ">
+                                                        <h6 class="">Cash</h6>
+                                                        <div class="form-outline d-flex justify-content-start">
+                                                            <h5 for="" class="mx-2">&#8369;</h5>
+                                                          <input type="text" id="cash" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 16px; font-weight:bold;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mt-2  ">
+                                                        <h6 class="">Change</h6>
+                                                        <div class="form-outline d-flex justify-content-start">
+                                                            <h5 for="" class="mx-2">&#8369;</h5>
+                                                          <input type="text" id="change" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 16px; font-weight:bold;" readonly/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> --}}
                                         
                                     </div>
                                     <hr class="bg-dark">

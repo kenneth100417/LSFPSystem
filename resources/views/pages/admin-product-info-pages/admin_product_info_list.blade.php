@@ -20,7 +20,7 @@
     window.addEventListener('show-delete-confirmation', event =>{
     Swal.fire({
     title: 'Are you sure?',
-    text: "This action will move the ".concat(productName,' to archived products.'),
+    text: 'This action will move the product to archived items.',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -37,7 +37,7 @@ window.addEventListener('categoryDeleted', event =>{
     
     Swal.fire({
       title: 'Success!',
-      text: productName.concat(' will be moved to archived products list'),
+      text: 'Product will be moved to archived products list',
       icon: 'success',
       showConfirmButton: true
   }).then((result) => {

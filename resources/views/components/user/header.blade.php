@@ -181,7 +181,7 @@
                         </li>
     
                         <li class="nav-item d-flex align-items-center">
-                            <form action="/logout" method="POST" id="logout">
+                            <form action="/logout" method="GET" id="logout">
                                 @csrf
                                 <button  type="button" class="user-logout-top btn btn-danger btn-sm py-2 px-3 ms-4 mt-2" onclick="logout();">
                                     Log Out 

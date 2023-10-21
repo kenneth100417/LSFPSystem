@@ -25,6 +25,7 @@ class Index extends Component
                                 ->groupBy('products.id','products.name')
                                 ->orderBy('avg_rating', 'DESC')
                                 ->havingRaw('AVG(ratings.star_rating) != 0')
+                                ->where('expiry_date','>=',date('Y-m-d'))
                                 ->get();
 
         $best_products = Product::orderBy('quantity_sold','DESC')

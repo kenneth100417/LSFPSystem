@@ -36,7 +36,10 @@ class AddSales extends Component
     
     public function addSale(){
         //dd($this->selectedProductId." ".$this->quantity." ".$this->total);
-        $product = Product::where('id', $this->selectedProductId)->first();
+        if($this->quantity == null) {
+            $this->dispatchBrowserEvent('quantityIsNull');
+        }else{
+             $product = Product::where('id', $this->selectedProductId)->first();
             if(Product::where('id', $this->selectedProductId)->exists()){
                 $stock = $product->quantity - $product->quantity_sold;
                 if($stock == 0){
@@ -56,6 +59,8 @@ class AddSales extends Component
             }else{
                 $this->dispatchBrowserEvent('TransactionError');
             }
+        }
+       
     }
 
     public function render(){

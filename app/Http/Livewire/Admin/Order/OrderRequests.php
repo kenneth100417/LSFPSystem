@@ -17,6 +17,26 @@ class OrderRequests extends Component
     public $sort = 'DESC';
     public $sortBy = 'id';
     public $sortby = 'Order ID';
+    public $order_id;
+
+    protected $listeners = ['cancelConfirmed' => 'cancelOrder'];
+    public function cancelConfirmation($id){
+        $this->order_id = $id;
+        $this->dispatchBrowserEvent('show-cancel-confirmation');
+    }
+
+    public function cancelOrder(){
+        $order = Order::where('id',$this->order_id)->first();
+        $order->update([
+            'status' => 'cancelled',
+        ]);
+        Notification::create([
+            'user_id' => $order->user_id,
+            'notification' => 'Admin cancelled your order. Try placing order again.',
+            'access' => '0'
+        ]);
+        return redirect('/admin_orders_cancelled');
+    }
 
     public function render()
     {

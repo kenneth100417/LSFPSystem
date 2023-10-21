@@ -40,7 +40,7 @@
                                                     <h6 class="mb-0 text-sm">{{$item->product->name}}</h6>
                                                     <div class="d-flex justify-content-between" style="width: 200px !important;">
                                                         <div>
-                                                            <p class="text-xs text-dark mb-0">&#8369;{{number_format($item->product->selling_price,2)}}</p>
+                                                            <p class="text-xs text-dark mb-0">&#8369;{{number_format($order->amount/$item->quantity,2)}}</p>
                                                         </div>
                                                         <div>
                                                             <p class="text-xs text-dark mb-0">x{{$item->quantity}}</p>

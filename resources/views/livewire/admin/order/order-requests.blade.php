@@ -73,7 +73,7 @@
                                                     <h6 class="mb-0 text-sm">{{$item->product->name}}</h6>
                                                     <div class="d-flex justify-content-between" style="width: 200px !important;">
                                                         <div>
-                                                            <p class="text-xs text-dark mb-0">&#8369;{{number_format($item->product->selling_price,2)}}</p>
+                                                            <p class="text-xs text-dark mb-0">&#8369;{{number_format($order->amount/$item->quantity,2)}}</p>
                                                         </div>
                                                         <div>
                                                             <p class="text-xs text-dark mb-0">x{{$item->quantity}}</p>
@@ -90,10 +90,12 @@
                                     </td>
                                     <td class="mw-10 text-center">
                                         <button class="btn btn-info btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer " wire:click.prevent = "approve({{$order->id}})">Approve<i class="fa-solid fa-check ms-2" title="View product details" style="font-size: 14px;"></i></button>
+                                        <button class="btn btn-danger btn-sm mt-3 me-1 text-white tbl-row-icon" style="cursor: pointer " wire:click.prevent = "cancelConfirmation({{$order->id}})">Cancel</button>
+                                       
                                     </td>
                                 </tr>
                                 @empty
-                                    <div class=" text-center">No pending Orders.</div>
+                                    <div class=" text-center">No pending Orders.</div>.prevent
                                 @endforelse
                             </tbody>
                           </table>
@@ -108,3 +110,21 @@
     </section>
 </main>
 </div>
+<script>
+    window.addEventListener('show-cancel-confirmation', event =>{
+    Swal.fire({
+    title: 'Are you sure you want to cancel the order?',
+    text: "You cannot revert this action.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, Cancel',
+    cancelButtonText:'Abort',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Livewire.emit('cancelConfirmed')
+    }
+  })
+});
+</script>

@@ -102,6 +102,12 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     Route::get('/admin_notifications','adminNotifications');
 
 
+
+    //retrieve sms testing
+    //Route::get('/retrieve_sms','retrieveSms');
+
+
+
 });
 
 

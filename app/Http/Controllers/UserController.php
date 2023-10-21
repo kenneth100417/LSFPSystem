@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Exception;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -10,17 +11,25 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Rating;
+use GuzzleHttp\Client;
 use App\Models\Product;
 use App\Models\Category;
 use App\Mail\ContactMail;
+use ClickSend\Api\SMSApi;
+use ClickSend\Configuration;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use ClickSend\Model\SmsMessage;
 use Illuminate\Validation\Rule;
 use App\Models\VerificationCode;
 use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use ClickSend\Model\SmsMessageCollection;
+use GuzzleHttp\Exception\GuzzleException;
 
 class UserController extends Controller
 {
@@ -38,7 +47,7 @@ class UserController extends Controller
     public function resendRecoveryCode($user_id){
         $user = User::where('id', $user_id)->first();
         $verificationCode = $this->generateOtp($user->id);
-        $message = "Your recovery code is:{otp}. Please note that this code is valid only for 10 minutes.";
+        $message = "Your recovery code is: ".$verificationCode->otp." This code is valid only for 10 minutes.";
         $this->sendSMS($user->mobile_number, $message,$verificationCode->otp); // Send Recovery SMS
         return redirect('/recovery-verification/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.');
     }
@@ -298,7 +307,7 @@ class UserController extends Controller
     public function resendOtp($user_id){
         $user = User::where('id', $user_id)->first();
         $verificationCode = $this->generateOtp($user->id);
-        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."! Your OTP is:{otp}. Please note that this code is valid only for 10 minutes.";
+        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."! Your OTP is: ".$verificationCode->otp." This code is valid only for 10 minutes."; 
         $this->sendSMS($user->mobile_number, $message, $verificationCode->otp); // Send OTP SMS 
         return redirect('/otp/verify/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.');
     }
@@ -323,7 +332,7 @@ class UserController extends Controller
         $user = User::create($validated);
        
         $verificationCode = $this->generateOtp($user->id);
-        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."! Your OTP is:{otp}. Please note that this code is valid only for 10 minutes.";
+        $message = "Welcome to Louella's Sweet Food Products ".$user->firstname."! Your OTP is: ".$verificationCode->otp." This code is valid only for 10 minutes.";
         //dd($user->mobile_number);
         $this->sendSMS($user->mobile_number, $message, $verificationCode->otp); // Send OTP SMS 
         return redirect('/otp/verify/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.');
@@ -347,8 +356,11 @@ class UserController extends Controller
                     if($user->access == "0"){
                         
                         $verificationCode = $this->generateOtp($user->id);
-                        $message = "Welcome back ".$user->firstname."! Your OTP is: {otp}. Please note that this code is valid only for 10 minutes.";
-                        //$this->sendSMS($user->mobile_number, $message, $verificationCode->otp); //otp 
+                        $otp = $verificationCode->otp;
+                        //$message = "Welcome back ".$user->firstname."! Your OTP is: {otp}. This code is valid only for 10 minutes.";
+                        $message = "Welcome back ".$user->firstname."! Your OTP is: ".$otp." This code is valid only for 10 minutes.";
+                       
+                        $this->sendSMS($user->mobile_number, $message, $otp); //otp 
                         //dd($user->mobile_number);
                         return redirect('/otp/verify/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.'); // 'message = Your OTP has been sent to your mobile number '.$user->mobile_number.'.'
                     }else{
@@ -367,7 +379,7 @@ class UserController extends Controller
         $user = User::where('id',$user_id)->first();
         # User Does not Have Any Existing OTP
         $verificationCode = VerificationCode::where('mobile_number', $user->mobile_number)->latest()->first();
-        $verCode = VerificationCode::where('mobile_number', $user->mobile_number);
+        // $verCode = VerificationCode::where('mobile_number', $user->mobile_number)->first();
 
         $now = Carbon::now();
 
@@ -375,21 +387,21 @@ class UserController extends Controller
             return $verificationCode;
         }
 
-        if($verCode->exists()){
-            return $verCode->update([
+        if($verificationCode){
+            $verificationCode->update([
                 'otp' => rand(123456, 999999),
                 'expire_at' => Carbon::now()->addMinutes(10)
             ]);
+
+            return $verificationCode;
         }else{
-             // Create a New OTP
             return VerificationCode::create([
                 'mobile_number' => $user->mobile_number,
                 'otp' => rand(123456, 999999),
                 'expire_at' => Carbon::now()->addMinutes(10)
             ]);
         }
-
-       
+   
     }
 
     public function verifyOtp(Request $request, $user_id){
@@ -423,15 +435,16 @@ class UserController extends Controller
 
 
     public function sendSMS($mobile_number, $message, $otp){
+        //semaphore
         $ch = curl_init();
         $parameters = array(
             'apikey' => '1ee8625dd653bdf085653d29c9b69b20', //Your API KEY acd2a93b808ee8f8e725ceba1f84ff3b - old
             'number' => $mobile_number,
             'message' => $message,
-            'code' => $otp,
+            //'code' => $otp,
             'sendername' => "SEMAPHORE"
         );
-        curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/otp' );//https://api.semaphore.co/api/v4/messages
+        curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );//https://api.semaphore.co/api/v4/messages
         curl_setopt( $ch, CURLOPT_POST, 1 );
 
         //Send the parameters set above with the request
@@ -442,9 +455,71 @@ class UserController extends Controller
         $output = curl_exec( $ch );
         curl_close ($ch);
 
-        //Show the server response
-        //echo $output;
+        //return $output;
+
+        //vonage
+        // $basic  = new \Vonage\Client\Credentials\Basic("6ca0462c", "3Xr3WEyRLOXiyUZD");
+        // $client = new \Vonage\Client($basic);
+        // $sms = new \Vonage\SMS\Message\SMS($mobile_number, 'LSFP-OTP', $message);
+        // $response = $client->sms()->send($sms);
+        
+        // $mes = $response->current();
+        
+        // // if ($mes->getStatus() == 0) {
+        // //     return "The message was sent successfully\n";
+        // // } else {
+        // //     return "The message failed with status: " . $mes->getStatus() . "\n";
+        // // }
+
+        
+        // //CLICKSEND 
+        
+        // // Configure HTTP basic authorization: BasicAuth
+        // $config = Configuration::getDefaultConfiguration()
+        //             ->setUsername('katherine.gollena@sorsu.edu.ph')
+        //             ->setPassword('44176A59-EA56-F20E-6517-ADB40B8D270F');
+
+        // $apiInstance = new SMSApi(new Client(),$config);
+        // $msg = new SmsMessage();
+        // $msg->setBody($message); 
+        // $msg->setTo($mobile_number);
+        // $msg->setSource("sdk");
+
+        // // \ClickSend\Model\SmsMessageCollection | SmsMessageCollection model
+        // $sms_messages = new SmsMessageCollection(); 
+        // $sms_messages->setMessages([$msg]);
+
+        // try {
+        //     $result = $apiInstance->smsSendPost($sms_messages);
+        //     print_r($result);
+        // } catch (Exception $e) {
+        //     echo 'Exception when calling SMSApi->smsSendPost: ', $e->getMessage(), PHP_EOL;
+        // }
+
     }
+
+    // public function retrieveSms(){
+    //     $apiKey = '1ee8625dd653bdf085653d29c9b69b20'; // Your API KEY
+    //     $status = 'success';
+
+    //     $url = 'https://api.semaphore.co/api/v4/messages?apikey=' . urlencode($apiKey) . '&status=' . urlencode($status);
+
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    //     $output = curl_exec($ch);
+
+    //     if ($output === false) {
+    //         echo "Failed to make the GET request: " . curl_error($ch);
+    //     } else {
+    //         echo $output;
+    //     }
+
+    //     curl_close($ch);
+
+    // }
+
 
 
     public function changePass(Request $request){
@@ -547,6 +622,7 @@ class UserController extends Controller
             return redirect()->back()->with('addAdminError','Failed to add admin account.');
         }
     }
+
     
 
 

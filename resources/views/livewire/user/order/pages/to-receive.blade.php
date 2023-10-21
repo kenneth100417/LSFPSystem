@@ -37,7 +37,7 @@
                                                     <h6 class="mb-0 text-sm">{{$item->product->name}}</h6>
                                                     <div class="d-flex justify-content-between" style="width: 200px !important;">
                                                         <div>
-                                                            <p class="text-xs text-dark mb-0">&#8369;{{number_format($item->product->selling_price,2)}}</p>
+                                                            <p class="text-xs text-dark mb-0">&#8369;{{number_format($order->amount/$item->quantity,2)}}</p>
                                                         </div>
                                                         <div>
                                                             <p class="text-xs text-dark mb-0">x{{$item->quantity}}</p>
@@ -53,7 +53,7 @@
                                         <p class="text-xs text-dark mb-0">{{$order->created_at}}</p>
                                     </td>
                                     <td class="w-10 text-center">
-                                        <p class="text-xs text-dark mb-0">PHP&#8369;{{number_format($order->amount,2)}}</p>
+                                        <p class="text-xs text-dark mb-0">&#8369;{{number_format($order->amount,2)}}</p>
                                     </td>
                                     <td class="w-10 text-center align-items-middle">
                                         <button class="btn btn-success btn-sm mt-3" wire:click.prevent = "received({{$order->id}})"> Order Received</button>

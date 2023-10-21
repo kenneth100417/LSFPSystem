@@ -88,10 +88,29 @@
       })
     });
 
+    window.addEventListener('quantityIsNull', event =>{
+        Swal.fire({
+          title: 'Oops!',
+          text: "Quantity is required.",
+          icon: 'info',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        }) 
+    });
 
-  
-        
-  
+  // var cash = document.getElementById('cash');
+  // var change = document.getElementById('change');
+
+  // cash.addEventListener('change',function(){
+  //   let total = document.getElementById('total').value;
+  //   let changeAmount = cash.value - total;
+  //   change.value  = Math.ceil(changeAmount*100)/100;
+    
+  // });
 
 </script>
 

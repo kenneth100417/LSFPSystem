@@ -19,6 +19,8 @@ class Dashboard extends Component
     public $data = [];
     public $labels = [];
 
+    public $selectedProductAnalysis = "top";
+
     public $periodOptions = [
         'daily' => 'Daily Sales',
         'monthly' => 'Monthly Sales',
@@ -84,9 +86,6 @@ class Dashboard extends Component
         ],
     ];
     
-
-
-
     public function render()
     {  
         $pending = Order::where('status','pending')->get();
@@ -105,24 +104,29 @@ class Dashboard extends Component
         
         $monthlySales = $onlineSales + $walkinSales;
 
-        $rec_products = Product::with('ratings')
+        if($this->selectedProductAnalysis == "top"){
+            $productAnalysis = Product::with('ratings')
                                 ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
                                 ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
                                 ->groupBy('products.id','products.name')
                                 ->orderBy('avg_rating', 'DESC')
                                 ->havingRaw('AVG(ratings.star_rating) != 0')
                                 ->get();
+        }
 
-        $best_products = Product::orderBy('quantity_sold','DESC')
+        if($this->selectedProductAnalysis == "best"){
+            $productAnalysis = Product::orderBy('quantity_sold','DESC')
                                 ->where('quantity_sold','!=','0')
                                 ->where('status','1')
                                 ->where('products.expiry_date','>=',date('Y-m-d'))
                                 ->get();
+        }
+
         
         $this->chartData = $this->getDataForPeriod($this->selectedPeriod);
   
         
-        return view('livewire.admin.dashboard',['pending' => $pending,'inProcess' => $inProcess,'userAccounts' => $userAccounts,'monthlySales' => $monthlySales,'recommendedProducts' => $rec_products, 'bestProducts' => $best_products]);
+        return view('livewire.admin.dashboard',['pending' => $pending,'inProcess' => $inProcess,'userAccounts' => $userAccounts,'monthlySales' => $monthlySales,'productAnalysis' => $productAnalysis]);
     }
 
     private function getDataForPeriod($period)
@@ -151,7 +155,6 @@ class Dashboard extends Component
         $salesData = $query->get();
     
         
-
         if ($period == 'daily') {
             $this->labels = $salesData->pluck('date');
             $this->latestSales = $query->whereDay('updated_at', now()->day)->latest()->value('total_sales');
@@ -197,5 +200,6 @@ class Dashboard extends Component
     //dd($this->chartData);
     }
 
+  
     
 }
