@@ -4,7 +4,7 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-12 mt-4">
-                    <div class="card admin-account-cards" style="height: 102%">
+                    <div class="card admin-account-cards" style="height: 108% !important">
                         
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
@@ -34,17 +34,14 @@
                                     @empty
                                         
                                     @endforelse
-                                    
-                                    
                                 </ul>
-
                             </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
 
                 <div class="col-lg-9 col-md-12">
-                    <div class="card my-4 mt-5" style="height: 93%">
+                    <div class="card my-4 mt-5" style="height: 150% !mportant">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 h-25">
                           <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3 profile-card-header">
                             <div class="float-end position-absolute col-md-12 edit-profie-icon" >
@@ -66,10 +63,10 @@
                           </div>
                         </div>
                         
-                        <div class="card-body px-0 pb-2 mt-3 mx-5 profile">
+                        <div class="card-body px-0 mt-3 mx-5 profile">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-12 ">
+                                    <div class="col-md-12 mt-5">
                                         <h5 class="mb-0">Profile Information</h5>
                                     </div>
                                     <div class="col-md-3">
@@ -97,7 +94,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="row">
                                     <div class="col-md-12 mt-5">
                                         <h5 class="mb-0">Account Information</h5>
                                     </div>

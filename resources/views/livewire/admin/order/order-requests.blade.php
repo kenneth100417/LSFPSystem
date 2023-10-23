@@ -37,8 +37,8 @@
                             <thead>
                               <tr>
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Order ID</th>
-                                <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Customer ID</th>
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Customer Name</th>
+                                <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Contact Number</th>
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Order Date</th>
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-20">Items</th>
                                 <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Amount Payable</th>
@@ -53,11 +53,11 @@
                                     <td class="mw-10 text-center">
                                         <p class="text-xs text-dark mb-0">LSFP_ORDER{{$order->id}}</p>
                                     </td>
-                                    <td class="mw-15 text-center">
-                                        <p class="text-xs text-dark mb-0">LSFP_USER{{$order->user_id}}</p>
-                                    </td>
                                     <td class="mw-10 text-center">
                                         <p class="text-xs text-dark mb-0">{{$order->fName}} {{$order->lName}}</p>
+                                    </td>
+                                    <td class="mw-15 text-center">
+                                        <p class="text-xs text-dark mb-0">{{$order->contact}}</p>
                                     </td>
                                     <td class="mw-10 text-center">
                                         <p class="text-xs text-dark mb-0">{{$order->created_at->format('Y-m-d')}}</p>

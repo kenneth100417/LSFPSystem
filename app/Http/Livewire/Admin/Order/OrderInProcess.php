@@ -19,7 +19,7 @@ class OrderInProcess extends Component
     {
         $orders = Order::with('orderItems.product')
             ->join('users','orders.user_id','users.id')
-            ->select('orders.*','users.firstname as fName','users.lastname as lName',)
+            ->select('orders.*','users.firstname as fName','users.lastname as lName','users.mobile_number as contact')
             ->where('orders.status','approved')
             ->orderBy($this->sortBy,$this->sort)
             ->paginate(10);
