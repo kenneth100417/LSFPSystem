@@ -18,7 +18,7 @@ use App\Http\Controllers\EmailController;
 
 Route::controller(App\Http\Controllers\UserController::class)->group(function(){
     // User Routes
-    Route::get('/', 'index' )->name('login')->middleware('guest');
+    Route::get('/', 'index')->name('login')->middleware('guest');
     Route::get('/register',  'register');
     Route::get('/verify','verify');
     Route::post('/add_user',  'add_user');
@@ -50,7 +50,7 @@ Route::controller(App\Http\Controllers\UserController::class)->group(function(){
 
 
 
-Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth', 'isAdmin'])->group(function(){
+Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth', 'isAdmin'])->name('admin')->group(function(){
 
     // admin pages
     Route::get('/admin_dashboard', 'admin_dashboard')->name('admin');
@@ -111,7 +111,7 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
 });
 
 
-Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth','isUser'])->group(function(){
+Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth','isUser'])->name('user')->group(function(){
 
       
     Route::get('/user_dashboard',  'user_dashboard')->name('user');
