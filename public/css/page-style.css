@@ -440,7 +440,10 @@ a.user-logout-side{
 .best-product-container{
     margin-top: 0;
    }
-
+/* datepicker in print report */
+   .ui-datepicker-calendar {
+    display: none;
+    }
 @media screen and (max-width:767px){
     /* .welcome-message{
         display: none !important;

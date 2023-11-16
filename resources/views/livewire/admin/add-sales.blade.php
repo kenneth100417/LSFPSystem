@@ -31,7 +31,7 @@
                                             <div class="mt-3">
                                                 <h6 class="">Quantity</h6>
                                                 <div class="form-outline">
-                                                  <input wire:model="quantity" wire:change="updateTotal()" type="number" id="quantity" class="form-control  p-2" placeholder="Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;"/>
+                                                  <input wire:model="quantity" wire:change="updateTotal()" type="number" id="quantity" class="form-control  p-2" placeholder="Quantity" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 14px;" />
                                                 </div>
                                                 <div class="d-flex justify-content-center align-items-center mt-5">
                                                     <button type="button" class="btn btn-warning btn-sm mx-1" onClick="clear(location.reload())">Refresh</button>

@@ -22,10 +22,24 @@
 
   var quantity = document.getElementById('quantity');
   var instock = document.getElementById('stock');
+  var productSelect = document.getElementById('select2');
 
   
    
     quantity.addEventListener('change', (event) => {
+      if(productSelect.value == ''){
+        Swal.fire({
+          title: 'Oops!',
+          text: "Please select product first.",
+          icon: 'info',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          }) 
+      }
       if(parseInt(instock.value) == 0){
           Swal.fire({
           title: 'Oops!',

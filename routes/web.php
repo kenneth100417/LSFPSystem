@@ -98,6 +98,11 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     Route::get('/all_sales_pdf','allSalesPDF');
     Route::get('/all_report_pdf','allReportPDF');
 
+    //print custom report
+    Route::post('/print_custom_report','printCustomReport');
+
+
+
     //notifcations
     Route::get('/admin_notifications','adminNotifications');
 

@@ -31,7 +31,10 @@ class AddSales extends Component
     }
 
     public function updateTotal(){
-        $this->total = number_format($this->selectedProduct->selling_price * $this->quantity,2);
+        if($this->selectedProduct != null){
+            $this->total = number_format($this->selectedProduct->selling_price * $this->quantity,2);
+        }
+        
     }
     
     public function addSale(){

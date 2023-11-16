@@ -753,9 +753,9 @@ class UserController extends Controller
         $products = Product::orderBy('name','ASC')->get();
 
         $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products]);
-        return $pdf->stream();
+        $pdf->stream();
 
-        //return redirect()->back()->with('message','Your download request is on process.');
+        return redirect()->back()->with('success','Your request is on process.');
     }
 
     public function bestSellingProductsPDF(){
@@ -884,6 +884,117 @@ class UserController extends Controller
 
     public function allReportPDF(){
        
+        $products = Product::orderBy('name','ASC')->get();
+        
+        $best_products = Product::orderBy('quantity_sold','DESC')
+        ->where('quantity_sold','!=','0')
+        ->where('status','1')
+        ->where('products.expiry_date','>=',date('Y-m-d'))
+        ->get();
+
+        $rec_products = Product::with('ratings')
+        ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->groupBy('products.id','products.name')
+        ->orderBy('avg_rating', 'DESC')
+        ->havingRaw('AVG(ratings.star_rating) != 0')
+        ->get();
+
+        $exp_product = Product::where('expiry_date','<=',date('Y-m-d'))->get();
+    
+       
+        $dailySales = Order::where('status','completed')
+        ->select(DB::raw('DATE(updated_at) as order_date'), DB::raw('SUM(amount) as daily_sales'))
+        ->groupBy(DB::raw('DATE(updated_at)'))
+        ->orderBy('order_date','DESC')
+        ->whereMonth('updated_at',date('m'))
+        ->get();
+
+        $monthlySales = Order::select(
+            DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as month'),
+            DB::raw('SUM(amount) as total_sales')
+        )
+        ->where('status', 'completed')
+        ->groupBy('month')
+        ->orderBy('month', 'DESC')
+        ->whereYear('updated_at',date('Y'))
+        ->get();
+
+        $annualSales =Order::select(DB::raw('YEAR(updated_at) as year'), DB::raw('SUM(amount) as sales'))
+        ->where('status', 'completed')
+        ->groupBy(DB::raw('YEAR(updated_at)'))
+        ->orderBy('year', 'DESC')
+        ->get();
+
+        $totalSales = Order::where('status','completed')
+        ->sum('amount');
+
+        $pdf = Pdf::loadView('admin.reports.all-reports',['products' => $products,'best_products' => $best_products,'rec_products' => $rec_products,'exp_products' => $exp_product,'dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales]);
+
+        return $pdf->stream();
+
+    }
+
+// Print Custom Report
+    public function printCustomReport(Request $request){
+
+        $selectedReport = $request['report'];
+        $startDate = $request['start'];
+        $endDate = $request['end'];
+        
+        switch($selectedReport){
+            case('1'): //inventory
+                $products = Product::where('updated_at', '>=', date('d-m-Y', strtotime($startDate)))
+                                    ->where('updated_at', '<=', date('d-m-Y', strtotime($startDate)))
+                                    ->orderBy('name', 'ASC')
+                                    ->get();
+
+                $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products]);
+                return $pdf->stream();
+            break;
+
+
+            case('2'): //best selling products
+                dd("2".$startDate."->".$endDate);
+            break;
+
+
+            case('3'): //top products
+                dd("3".$startDate."->".$endDate);
+            break;
+
+
+            case('4'): // expred products
+                dd("4".$startDate."->".$endDate);
+            break;
+
+
+            case('5'): //daily sales
+                dd("5".$startDate."->".$endDate);
+            break;
+
+
+            case('6'): //monthly sales
+                dd("6".$startDate."->".$endDate);
+            break;
+
+
+            case('7'): //annual sales
+                dd("7".$startDate."->".$endDate);
+            break;
+
+
+            case('8'): //all sales
+                dd("8".$startDate."->".$endDate);
+            break;
+
+            
+            case('9'): // all reports
+                dd("9".$startDate."->".$endDate);
+            break;
+        }
+
+
         $products = Product::orderBy('name','ASC')->get();
         
         $best_products = Product::orderBy('quantity_sold','DESC')
