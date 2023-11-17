@@ -40,6 +40,7 @@
 
   <div class="text-center mt-4 mb-2">
     <h3 class="text-center"  style="font-size: 20px; font-weight: bold;">Best Selling Products Report</h3>
+    <p class="text-center" style="margin-top: -8px;">as of {{$reportDate}}</p>
   </div>
 
   <div>

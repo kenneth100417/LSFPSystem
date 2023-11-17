@@ -40,6 +40,7 @@
 
   <div class="text-center mt-4 mb-2">
     <h3 class="text-center"  style="font-size: 20px; font-weight: bold;">Product Inventory Report</h3>
+    <p class="text-center" style="margin-top: -8px;">as of {{$reportDate}}</p>
   </div>
 
   <div>
@@ -76,5 +77,6 @@
         
         
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </body>
 </html>

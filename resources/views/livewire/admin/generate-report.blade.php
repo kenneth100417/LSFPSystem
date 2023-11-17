@@ -245,7 +245,7 @@
                     </div>
     
                     <div class="modal-footer me-3">
-                        <button id="submitBtn" type="submit" class="btn btn-success modal-update-btn" disabled>Generate</button>
+                        <button id="submitBtn" type="submit" class="btn btn-success modal-update-btn" disabled data-bs-dismiss="modal" aria-label="Close">Generate</button>
                         <button type="button" class="btn btn-danger modal-cancel-btn" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                     </div>
                 </form>
@@ -289,14 +289,9 @@
         //     $('.end').datepicker('setStartDate', '2023-09');
         // });
      
-
-       
-       
-        
-        
-       
-       
     </script>
+
+    
 </div>
 
 

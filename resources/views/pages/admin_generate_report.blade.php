@@ -110,6 +110,16 @@
       })
   </script>
 @endif
+@if(session()->has('error'))
+  <script>
+    Swal.fire({
+          title: 'Ooops!',
+          text: '{{session('error')}}',
+          icon: 'info',
+          showConfirmButton: true
+      })
+  </script>
+@endif
 
 <!--   Core JS Files   -->
 <script src="./assets/js/core/popper.min.js" ></script>

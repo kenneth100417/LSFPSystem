@@ -48,6 +48,12 @@
     <p class="text-center" style="margin-top: -8px;">{{date('F j, Y')}}</p>
   </div>
   {{-- //////////////////////// --}}
+
+  <div class="text-center mt-4 mb-2">
+    <h3 class="text-center"  style="font-size: 20px; font-weight: bold;">All Reports</h3>
+    <p class="text-center" style="margin-top: -8px;">as of {{$reportDate}}</p>
+  </div>
+
   <div class="text-center mt-4 mb-2">
     <h3 class="text-center"  style="font-size: 20px; font-weight: bold;">Product Inventory </h3>
   </div>
@@ -88,6 +94,7 @@
 
   <div class="text-center mt-4 mb-2">
     <h3 class="text-center"  style="font-size: 20px; font-weight: bold;">Best Selling Products </h3>
+    <p></p>
   </div>
 
   <div>
@@ -277,7 +284,7 @@
 
   <div class="mt-5">
     <div class="text-center">
-        <h4 style="font-size: 18px">Total Sales</h4><span><small>(For the year {{date('Y')}})</small></span>
+        <h4 style="font-size: 18px">Total Sales</h4><span><small>(For the year {{$year}})</small></span>
         <div style="display: flex; justify-content:center">
             <div  style="border: 2px solid #642b2b;">
                 <h3 class="py-2" style="font-size: 20px"><span style="color: #28a745;">P</span> {{number_format($total,2)}}</h3>

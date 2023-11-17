@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use ClickSend\Model\SmsMessageCollection;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -741,31 +742,28 @@ class UserController extends Controller
         }else{
             return back() -> with(['error', 'Failed to send message. Try Again.']);
         }
-
-        
-   
     }
 
-
+   
     ////Print report
 
     public function inventoryPDF(){
         $products = Product::orderBy('name','ASC')->get();
-
-        $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products]);
-        $pdf->stream();
-
-        return redirect()->back()->with('success','Your request is on process.');
+        $reportDate = date('F j, Y');
+        $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products,'reportDate'=>$reportDate]);
+        
+        return $pdf->stream();
     }
 
     public function bestSellingProductsPDF(){
+        $reportDate = date('F j, Y');
         $best_products = Product::orderBy('quantity_sold','DESC')
         ->where('quantity_sold','!=','0')
         ->where('status','1')
         ->where('products.expiry_date','>=',date('Y-m-d'))
         ->get();
 
-        $pdf = Pdf::loadView('admin.reports.best-selling-products',['products' => $best_products]);
+        $pdf = Pdf::loadView('admin.reports.best-selling-products',['products' => $best_products,'reportDate'=>$reportDate]);
         return $pdf->stream();
 
 
@@ -780,16 +778,17 @@ class UserController extends Controller
         ->havingRaw('AVG(ratings.star_rating) != 0')
         ->get();
 
-        
-        $pdf = Pdf::loadView('admin.reports.top-products',['products' => $rec_products]);
+        $reportDate = date('F j, Y');
+        $pdf = Pdf::loadView('admin.reports.top-products',['products' => $rec_products,'reportDate'=>$reportDate]);
         return $pdf->stream();
 
     }
 
     public function expiredProductsPDF(){
         $exp_product = Product::where('expiry_date','<=',date('Y-m-d'))->get();
+        $reportDate = date('F j, Y');
 
-        $pdf = Pdf::loadView('admin.reports.expired-products',['products' => $exp_product]);
+        $pdf = Pdf::loadView('admin.reports.expired-products',['products' => $exp_product,'reportDate'=>$reportDate]);
         return $pdf->stream();
 
     }
@@ -805,8 +804,8 @@ class UserController extends Controller
 
         $totalSales = Order::where('status','completed')
                             ->sum('amount');
-        
-        $pdf = Pdf::loadView('admin.reports.daily-sales',['dailySales' => $dailySales, 'total' => $totalSales]);
+         $reportDate = date('F j, Y');
+        $pdf = Pdf::loadView('admin.reports.daily-sales',['dailySales' => $dailySales, 'total' => $totalSales,'reportDate'=>$reportDate]);
        
 
         return $pdf->stream();
@@ -826,8 +825,8 @@ class UserController extends Controller
 
         $totalSales = Order::where('status','completed')
                             ->sum('amount');
-        
-        $pdf = Pdf::loadView('admin.reports.monthly-sales',['monthlySales' => $monthlySales, 'total' => $totalSales]);
+        $reportDate = date('F j, Y');
+        $pdf = Pdf::loadView('admin.reports.monthly-sales',['monthlySales' => $monthlySales, 'total' => $totalSales,'reportDate'=>$reportDate]);
        
 
         return $pdf->stream();
@@ -842,8 +841,8 @@ class UserController extends Controller
 
         $totalSales = Order::where('status','completed')
                     ->sum('amount');
-
-        $pdf = Pdf::loadView('admin.reports.annual-sales',['annualSales' => $annualSales, 'total' => $totalSales]);
+        $reportDate = date('F j, Y');
+        $pdf = Pdf::loadView('admin.reports.annual-sales',['annualSales' => $annualSales, 'total' => $totalSales,'reportDate'=>$reportDate]);
 
 
         return $pdf->stream();
@@ -876,7 +875,10 @@ class UserController extends Controller
         $totalSales = Order::where('status','completed')
         ->sum('amount');
 
-        $pdf = Pdf::loadView('admin.reports.all-sales',['dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales]);
+        $reportDate = date('F j, Y');
+        $year = date('Y');
+
+        $pdf = Pdf::loadView('admin.reports.all-sales',['dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales,'reportDate'=>$reportDate,'year'=>$year]);
 
         return $pdf->stream();
 
@@ -929,8 +931,10 @@ class UserController extends Controller
         $totalSales = Order::where('status','completed')
         ->sum('amount');
 
-        $pdf = Pdf::loadView('admin.reports.all-reports',['products' => $products,'best_products' => $best_products,'rec_products' => $rec_products,'exp_products' => $exp_product,'dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales]);
-
+        $reportDate = date('F j, Y');
+        $year = date('Y');
+        $pdf = Pdf::loadView('admin.reports.all-reports',['products' => $products,'best_products' => $best_products,'rec_products' => $rec_products,'exp_products' => $exp_product,'dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales,'reportDate'=>$reportDate,'year'=>$year]);
+        
         return $pdf->stream();
 
     }
@@ -944,12 +948,20 @@ class UserController extends Controller
         
         switch($selectedReport){
             case('1'): //inventory
-                $products = Product::where('updated_at', '>=', date('d-m-Y', strtotime($startDate)))
-                                    ->where('updated_at', '<=', date('d-m-Y', strtotime($startDate)))
+                if(date('m, Y', strtotime($startDate)) > date('m, Y', strtotime($endDate))){
+                    return redirect()->back()->with('error',"Date range is invalid. Start date must be earlier than end date.");
+                }
+
+                $products = Product::whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                    ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                    ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                    ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
                                     ->orderBy('name', 'ASC')
                                     ->get();
 
-                $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products]);
+                $reportDate = date('F, Y',strtotime($startDate))." - ".date('F, Y',strtotime($endDate));
+                $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products,'reportDate'=>$reportDate]);
+               
                 return $pdf->stream();
             break;
 
