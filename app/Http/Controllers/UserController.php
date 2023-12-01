@@ -945,118 +945,268 @@ class UserController extends Controller
         $selectedReport = $request['report'];
         $startDate = $request['start'];
         $endDate = $request['end'];
+        $reportDate = date('F, Y',strtotime($startDate))." - ".date('F, Y',strtotime($endDate));
+
+        if(date('m, Y', strtotime($startDate)) > date('m, Y', strtotime($endDate))){
+            return redirect()->back()->with('error',"Date range is invalid. Start date must be earlier than end date.");
+        }else{
+            switch($selectedReport){
+                case('1'): //inventory
+                    $products = Product::whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                        ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                        ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                        ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                        ->orderBy('name', 'ASC')
+                                        ->get();
+
+                    $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products,'reportDate'=>$reportDate]);
+                
+                    return $pdf->stream();
+                break;
+
+
+                case('2'): //best selling products
+                    
+                    $best_products = Product::orderBy('quantity_sold','DESC')
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->where('quantity_sold','!=','0')
+                                            ->where('status','1')
+                                            ->where('products.expiry_date','>=',date('Y-m-d'))
+                                            ->get();
+
+                    $pdf = Pdf::loadView('admin.reports.best-selling-products',['products' => $best_products,'reportDate'=>$reportDate]);
+                    return $pdf->stream();
+                break;
+
+
+                case('3'): //top products
+                    $rec_products = Product::with('ratings')
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
+                                            ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+                                            ->groupBy('products.id','products.name')
+                                            ->orderBy('avg_rating', 'DESC')
+                                            ->havingRaw('AVG(ratings.star_rating) != 0')
+                                            ->get();
+
+                    $pdf = Pdf::loadView('admin.reports.top-products',['products' => $rec_products,'reportDate'=>$reportDate]);
+                    return $pdf->stream();
+
+                break;
+
+
+                case('4'): // expired products
+                    $exp_product = Product::where('expiry_date','<=',date('Y-m-d'))
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->get();
+
+                    $pdf = Pdf::loadView('admin.reports.expired-products',['products' => $exp_product,'reportDate'=>$reportDate]);
+                    return $pdf->stream();
+                break;
+
+
+                case('5'): //daily sales
+                    $dailySales = Order::where('status','completed')
+                                        ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                        ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                        ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                        ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                        ->select(DB::raw('DATE(updated_at) as order_date'), DB::raw('SUM(amount) as daily_sales'))
+                                        ->groupBy(DB::raw('DATE(updated_at)'))
+                                        ->orderBy('order_date','DESC')
+                                        ->whereMonth('updated_at',date('m'))
+                                        ->get();
+
+                    $totalSales = Order::where('status','completed')
+                                        ->sum('amount');
+                
+                    $pdf = Pdf::loadView('admin.reports.daily-sales',['dailySales' => $dailySales, 'total' => $totalSales,'reportDate'=>$reportDate]);
+
+                    return $pdf->stream();
+                break;
+
+
+                case('6'): //monthly sales
+                    $monthlySales = Order::select(
+                                                DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as month'),
+                                                DB::raw('SUM(amount) as total_sales')
+                                            )
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->where('status', 'completed')
+                                            ->groupBy('month')
+                                            ->orderBy('month', 'DESC')
+                                            ->whereYear('updated_at',date('Y'))
+                                            ->get();
+
+                    $totalSales = Order::where('status','completed')
+                                        ->sum('amount');
+                    $pdf = Pdf::loadView('admin.reports.monthly-sales',['monthlySales' => $monthlySales, 'total' => $totalSales,'reportDate'=>$reportDate]);
+                
+
+                    return $pdf->stream();
+                break;
+
+
+                case('7'): //annual sales
+                    $annualSales =Order::select(DB::raw('YEAR(updated_at) as year'), DB::raw('SUM(amount) as sales'))
+                                        ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                        ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                        ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                        ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                        ->where('status', 'completed')
+                                        ->groupBy(DB::raw('YEAR(updated_at)'))
+                                        ->orderBy('year', 'DESC')
+                                        ->get();
+
+                    $totalSales = Order::where('status','completed')
+                                ->sum('amount');
+                    $pdf = Pdf::loadView('admin.reports.annual-sales',['annualSales' => $annualSales, 'total' => $totalSales,'reportDate'=>$reportDate]);
+
+
+                    return $pdf->stream();
+                break;
+
+
+                case('8'): //all sales
+                    $dailySales = Order::where('status','completed')
+                                        ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                        ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                        ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                        ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                        ->select(DB::raw('DATE(updated_at) as order_date'), DB::raw('SUM(amount) as daily_sales'))
+                                        ->groupBy(DB::raw('DATE(updated_at)'))
+                                        ->orderBy('order_date','DESC')
+                                        ->whereMonth('updated_at',date('m'))
+                                        ->get();
+
+                    $monthlySales = Order::select(
+                                                DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as month'),
+                                                DB::raw('SUM(amount) as total_sales')
+                                            )
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->where('status', 'completed')
+                                            ->groupBy('month')
+                                            ->orderBy('month', 'DESC')
+                                            ->whereYear('updated_at',date('Y'))
+                                            ->get();
+
+                    $annualSales =Order::select(DB::raw('YEAR(updated_at) as year'), DB::raw('SUM(amount) as sales'))
+                                        ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                        ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                        ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                        ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                        ->where('status', 'completed')
+                                        ->groupBy(DB::raw('YEAR(updated_at)'))
+                                        ->orderBy('year', 'DESC')
+                                        ->get();
+
+                    $totalSales = Order::where('status','completed')
+                                        ->sum('amount');
+
+                    $year = date('Y');
+
+                    $pdf = Pdf::loadView('admin.reports.all-sales',['dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales,'reportDate'=>$reportDate,'year'=>$year]);
+
+                    return $pdf->stream();
+                break;
+
+                
+                case('9'): // all reports
+                    $products = Product::orderBy('name','ASC')->get();
         
-        switch($selectedReport){
-            case('1'): //inventory
-                if(date('m, Y', strtotime($startDate)) > date('m, Y', strtotime($endDate))){
-                    return redirect()->back()->with('error',"Date range is invalid. Start date must be earlier than end date.");
-                }
+                    $best_products = Product::orderBy('quantity_sold','DESC')
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->where('quantity_sold','!=','0')
+                                            ->where('status','1')
+                                            ->where('products.expiry_date','>=',date('Y-m-d'))
+                                            ->get();
 
-                $products = Product::whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
-                                    ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
-                                    ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
-                                    ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
-                                    ->orderBy('name', 'ASC')
-                                    ->get();
+                    $rec_products = Product::with('ratings')
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
+                                            ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+                                            ->groupBy('products.id','products.name')
+                                            ->orderBy('avg_rating', 'DESC')
+                                            ->havingRaw('AVG(ratings.star_rating) != 0')
+                                            ->get();
 
-                $reportDate = date('F, Y',strtotime($startDate))." - ".date('F, Y',strtotime($endDate));
-                $pdf = Pdf::loadView('admin.reports.inventory',['products' => $products,'reportDate'=>$reportDate]);
-               
-                return $pdf->stream();
-            break;
+                    $exp_product = Product::where('expiry_date','<=',date('Y-m-d'))
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->get();
+                
+                
+                    $dailySales = Order::where('status','completed')
+                                        ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                        ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                        ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                        ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                        ->select(DB::raw('DATE(updated_at) as order_date'), DB::raw('SUM(amount) as daily_sales'))
+                                        ->groupBy(DB::raw('DATE(updated_at)'))
+                                        ->orderBy('order_date','DESC')
+                                        ->whereMonth('updated_at',date('m'))
+                                        ->get();
 
+                    $monthlySales = Order::select(
+                                                DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as month'),
+                                                DB::raw('SUM(amount) as total_sales')
+                                            )
+                                            ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                            ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                            ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                            ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                            ->where('status', 'completed')
+                                            ->groupBy('month')
+                                            ->orderBy('month', 'DESC')
+                                            ->whereYear('updated_at',date('Y'))
+                                            ->get();
 
-            case('2'): //best selling products
-                dd("2".$startDate."->".$endDate);
-            break;
+                    $annualSales =Order::select(DB::raw('YEAR(updated_at) as year'), DB::raw('SUM(amount) as sales'))
+                                        ->whereMonth('updated_at', '>=', date('m', strtotime($startDate)))
+                                        ->whereMonth('updated_at', '<=', date('m', strtotime($endDate)))
+                                        ->whereYear('updated_at', '>=', date('Y', strtotime($startDate)))
+                                        ->whereYear('updated_at', '<=', date('Y', strtotime($endDate)))
+                                        ->where('status', 'completed')
+                                        ->groupBy(DB::raw('YEAR(updated_at)'))
+                                        ->orderBy('year', 'DESC')
+                                        ->get();
 
+                    $totalSales = Order::where('status','completed')
+                    ->sum('amount');
 
-            case('3'): //top products
-                dd("3".$startDate."->".$endDate);
-            break;
-
-
-            case('4'): // expred products
-                dd("4".$startDate."->".$endDate);
-            break;
-
-
-            case('5'): //daily sales
-                dd("5".$startDate."->".$endDate);
-            break;
-
-
-            case('6'): //monthly sales
-                dd("6".$startDate."->".$endDate);
-            break;
-
-
-            case('7'): //annual sales
-                dd("7".$startDate."->".$endDate);
-            break;
-
-
-            case('8'): //all sales
-                dd("8".$startDate."->".$endDate);
-            break;
-
-            
-            case('9'): // all reports
-                dd("9".$startDate."->".$endDate);
-            break;
+                    $year = date('Y');
+                    $pdf = Pdf::loadView('admin.reports.all-reports',['products' => $products,'best_products' => $best_products,'rec_products' => $rec_products,'exp_products' => $exp_product,'dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales,'reportDate'=>$reportDate,'year'=>$year]);
+                    
+                    return $pdf->stream();
+                break;
+            }
         }
-
-
-        $products = Product::orderBy('name','ASC')->get();
-        
-        $best_products = Product::orderBy('quantity_sold','DESC')
-        ->where('quantity_sold','!=','0')
-        ->where('status','1')
-        ->where('products.expiry_date','>=',date('Y-m-d'))
-        ->get();
-
-        $rec_products = Product::with('ratings')
-        ->select('products.*',DB::raw('AVG(ratings.star_rating) as avg_rating'))
-        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
-        ->groupBy('products.id','products.name')
-        ->orderBy('avg_rating', 'DESC')
-        ->havingRaw('AVG(ratings.star_rating) != 0')
-        ->get();
-
-        $exp_product = Product::where('expiry_date','<=',date('Y-m-d'))->get();
-    
-       
-        $dailySales = Order::where('status','completed')
-        ->select(DB::raw('DATE(updated_at) as order_date'), DB::raw('SUM(amount) as daily_sales'))
-        ->groupBy(DB::raw('DATE(updated_at)'))
-        ->orderBy('order_date','DESC')
-        ->whereMonth('updated_at',date('m'))
-        ->get();
-
-        $monthlySales = Order::select(
-            DB::raw('DATE_FORMAT(updated_at, "%Y-%m") as month'),
-            DB::raw('SUM(amount) as total_sales')
-        )
-        ->where('status', 'completed')
-        ->groupBy('month')
-        ->orderBy('month', 'DESC')
-        ->whereYear('updated_at',date('Y'))
-        ->get();
-
-        $annualSales =Order::select(DB::raw('YEAR(updated_at) as year'), DB::raw('SUM(amount) as sales'))
-        ->where('status', 'completed')
-        ->groupBy(DB::raw('YEAR(updated_at)'))
-        ->orderBy('year', 'DESC')
-        ->get();
-
-        $totalSales = Order::where('status','completed')
-        ->sum('amount');
-
-        $pdf = Pdf::loadView('admin.reports.all-reports',['products' => $products,'best_products' => $best_products,'rec_products' => $rec_products,'exp_products' => $exp_product,'dailySales' => $dailySales,'monthlySales' => $monthlySales,'annualSales' => $annualSales, 'total' => $totalSales]);
-
-        return $pdf->stream();
-
     }
-
-    
 }
