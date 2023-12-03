@@ -36,6 +36,7 @@ class Completed extends Component
                     })
                     ->where('orders.user_id',auth()->user()->id)
                     ->where('status','completed')
+                    ->orderBy('updated_at', 'DESC')
                     ->paginate(5);
         return view('livewire.user.order.pages.completed',['orders' => $orders]);
     }

@@ -72,6 +72,9 @@
                             </tbody>
                           </table>
                         </div>
+                        <div class="d-flex justify-content-center mt-5">
+                            {{$orders->links()}}
+                        </div>
                       </div>
                 </div>
             </div>

@@ -151,8 +151,10 @@ class Dashboard extends Component
                 ->limit(7)
                 ->orderByRaw('YEAR(updated_at)');
         }
+
     
         $salesData = $query->get();
+        // dd($salesData);
     
         
         if ($period == 'daily') {
