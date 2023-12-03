@@ -75,14 +75,12 @@ class Completed extends Component
                         $this->dispatchBrowserEvent('notFound');
                     }
                 }
-                
         }
     }
     public function rate($product_id){
         $this->productToRate = Product::where('id',$product_id)->first();
         $this->productToRateActive = true;
-
         $this->dispatchBrowserEvent('open-rating-modal');
     }
-
 }
+
