@@ -136,36 +136,71 @@ class Dashboard extends Component
         if ($period == 'daily') {
             $query->selectRaw('DATE(updated_at) as date, SUM(amount) as total_sales')
                 ->groupByRaw('DATE(updated_at)')
-                ->whereMonth('updated_at', now()->month)
-                ->limit(7)
-                ->orderByRaw('DATE(updated_at)');
+                ->whereYear('updated_at', now()->year)
+                ->latest('updated_at');
         } elseif ($period == 'monthly') {
-            $query->selectRaw('DATE_FORMAT(updated_at, "%Y-%m") as month, SUM(amount) as total_sales')
+            $query->selectRaw('DATE_FORMAT(updated_at, "%Y-%m") as date, SUM(amount) as total_sales')
                 ->groupByRaw('DATE_FORMAT(updated_at, "%Y-%m")')
                 ->whereYear('updated_at', now()->year)
-                ->limit(7)
                 ->orderByRaw('DATE_FORMAT(updated_at, "%Y-%m")');
         } elseif ($period == 'annual') {
-            $query->selectRaw('YEAR(updated_at) as year, SUM(amount) as total_sales')
+            $query->selectRaw('YEAR(updated_at) as date, SUM(amount) as total_sales')
                 ->groupByRaw('YEAR(updated_at)')
-                ->limit(7)
                 ->orderByRaw('YEAR(updated_at)');
         }
 
-    
-        $salesData = $query->get();
-        // dd($salesData);
-    
+        $walkinTransactions = DB::table('walkin_transactions');
+
+        if ($period == 'daily') {
+            $walkinTransactions->selectRaw('DATE(updated_at) as date, SUM(amount) as total_sales')
+                ->groupByRaw('DATE(updated_at)')
+                ->whereYear('updated_at', now()->year)
+                ->latest('updated_at');
+        } elseif ($period == 'monthly') {
+            $walkinTransactions->selectRaw('DATE_FORMAT(updated_at, "%Y-%m") as date, SUM(amount) as total_sales')
+                ->groupByRaw('DATE_FORMAT(updated_at, "%Y-%m")')
+                ->whereYear('updated_at', now()->year)
+                
+                ->orderByRaw('DATE_FORMAT(updated_at, "%Y-%m")');
+        } elseif ($period == 'annual') {
+            $walkinTransactions->selectRaw('YEAR(updated_at) as date, SUM(amount) as total_sales')
+                ->groupByRaw('YEAR(updated_at)')
+                ->orderByRaw('YEAR(updated_at)');
+        }
         
+        // if ($period == 'daily') {
+        //     $queryResult = $query->unionAll($walkinTransactions)->get();
+
+        //     // Combine rows with the same date and sum their total_sales
+        //     $salesData = $queryResult->groupBy('date')->map(function ($group) {
+        //         return [
+        //             'date' => $group->first()->date,
+        //             'total_sales' => $group->sum('total_sales'),
+        //         ];
+        //     })->sortByDesc('date')->values()->reverse()->slice(-7);
+        // }else{
+        //     $salesData = $query->unionAll($walkinTransactions)->groupBy('date')->limit(7)->get();
+        // }
+        $queryResult = $query->unionAll($walkinTransactions)->get();
+
+            // Combine rows with the same date and sum their total_sales
+            $salesData = $queryResult->groupBy('date')->map(function ($group) {
+                return [
+                    'date' => $group->first()->date,
+                    'total_sales' => $group->sum('total_sales'),
+                ];
+            })->sortByDesc('date')->values()->reverse()->slice(-7);
+        
+
         if ($period == 'daily') {
             $this->labels = $salesData->pluck('date');
-            $this->latestSales = $query->whereDay('updated_at', now()->day)->latest()->value('total_sales');
+            $this->latestSales = $salesData->slice(-1)->value('total_sales');
         } elseif ($period == 'monthly') {
-            $this->labels = $salesData->pluck('month');
-            $this->latestSales = $query->whereMonth('updated_at', now()->month)->latest()->value('total_sales');
+            $this->labels = $salesData->pluck('date');
+            $this->latestSales = $salesData->slice(-1)->value('total_sales');
         } elseif ($period == 'annual') {
-            $this->labels = $salesData->pluck('year');
-            $this->latestSales = $query->whereYear('updated_at', now()->year)->latest()->value('total_sales');
+            $this->labels = $salesData->pluck('date');
+            $this->latestSales = $salesData->slice(-1)->value('total_sales');
         }
 
         $this->data = $salesData->pluck('total_sales');
