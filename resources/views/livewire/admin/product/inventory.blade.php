@@ -82,10 +82,10 @@
                                     <p class="text-xs text-dark mb-0">{{$product->expiry_date}}</p>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-success btn-sm mt-3 me-1 text-white tbl-row-icon px-3 py-1" style="display:{{$product->quantity - $product->quantity_sold == 0 ? 'none':''}}">Available</button>
+                                    <button class="btn btn-success btn-sm mt-3 me-1 text-white tbl-row-icon px-3 py-1" style="display:{{$product->quantity - $product->quantity_sold == 0 ? 'none;':''}} {{date('Y-m-d') >= date('Y-m-d',strtotime($product->expiry_date))  ? 'none;':''}}">Available</button>
                                     <button class="btn btn-danger btn-sm mt-3 me-1 text-white tbl-row-icon px-3 py-1" style="display:{{date('Y-m-d') >= date('Y-m-d',strtotime($product->expiry_date))  ? '':'none'}}">Expired </button>
                                     
-                                    <button class="btn btn-warning btn-sm mt-3 me-1 text-white tbl-row-icon px-3 py-1" style="display:{{$product->quantity - $product->quantity_sold == 0 ? '':'none'}}">Out of Stock</button>
+                                    <button class="btn btn-warning btn-sm mt-3 me-1 text-white tbl-row-icon px-3 py-1" style="display:{{$product->quantity - $product->quantity_sold == 0 ? '':'none;'}}{{date('Y-m-d') >= date('Y-m-d',strtotime($product->expiry_date))  ? 'none;':''}}">Out of Stock</button>
 
                                 </td>
                             </tr>
