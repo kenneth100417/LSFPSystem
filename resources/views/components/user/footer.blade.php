@@ -84,6 +84,7 @@ window.addEventListener('outOfStock', event =>{
     showConfirmButton: True
   })
 });
+
 window.addEventListener('notFound', event =>{
     Swal.fire({
     title: "Ooops!",
@@ -91,6 +92,10 @@ window.addEventListener('notFound', event =>{
     icon: 'info',
     showConfirmButton: True
   })
+});
+
+window.addEventListener('open-invoice-modal', event =>{
+  $('#invoiceModal').modal('toggle');
 });
 
 

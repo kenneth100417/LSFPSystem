@@ -179,31 +179,11 @@
                 </li>
 
                 
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white tab {{ 'admin_generate_report' == request()->path() ? 'active' : ''}}" href="/retrieve_sms">
-                        
-                        <div class="text-success text-center me-2 d-flex align-items-center justify-content-center icon">
-                            <i class="fa-solid fa-file fa-lg"></i></i>
-                        </div>
-                        
-                        <span class="nav-link-text ms-1">
-                           retieve
-                        </span>
-                    </a>
-                </li> --}}
-
+             
     
             </ul>
     
-                
-        {{-- <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-            <form action="/logout" method="POST">
-                @csrf
-                <div class="mx-3 text-end">
-                    <button class="btn text-white bg-danger mt-4 w-50 nav-logout" href="" type="button" onclick="logout();">Log Out</button>
-                </div>
-            </form>
-        </div> --}}
+
       
     </aside>
     
@@ -224,11 +204,11 @@
                     
                         <livewire:admin.nav/>
     
-                        <li class="nav-item d-flex align-items-center">
+                        {{-- <li class="nav-item d-flex align-items-center">
                             <a href="/admin_manage_account" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1 mx-2 nav-user"></i>
                             </a>
-                        </li>
+                        </li> --}}
     
                         <li class="nav-item d-flex align-items-center">
                             <form action="/logout" method="GET" id="logout">

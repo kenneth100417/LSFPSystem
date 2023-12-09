@@ -63,7 +63,8 @@
                                         <p class="text-xs text-dark mb-0">&#8369;{{number_format($order->amount,2)}}</p>
                                     </td>
                                     <td class="w-10 text-center align-items-middle">
-                                        <button class="btn btn-warning btn-sm mt-3" wire:click.prevent = "buyAgain({{$order->id}})"> Buy Again</button>
+                                        <button class="btn btn-warning btn-sm mt-3 " wire:click.prevent = "buyAgain({{$order->id}})"> Buy Again</button><br/>
+                                        <button class="btn btn-success btn-sm mt-3" wire:click.prevent = "viewInvoice({{$order->id}})">E-Invoice</button>
                                     </td>
                                 </tr>
                                 @empty
@@ -147,7 +148,30 @@
 </div>
     
 
-
+<!-- Invoice Modal -->
+   
+<div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="change_passwordTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            
+                <div class="card my-4 modal-card">
+            
+                    <div class="card-body px-0  mx-3 text-sm ">
+                                    
+                        <H1>{{$invoice == null ? '':$invoice->id}}</H1>
+                            {{-- to be continue -  invoice content --}}
+                        <div class="modal-footer me-3">
+                        
+                            <button id="submitBtn" type="submit" class="btn btn-success modal-update-btn" disabled>Submit</button>
+                            <button  type="button" class="btn btn-danger modal-cancel-btn" data-toggle="modal" data-target="#editProfile" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

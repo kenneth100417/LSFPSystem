@@ -19,6 +19,7 @@ class Completed extends Component
     public $order_id;
     public $productToRate;
     public $productToRateActive = false;
+    public $invoice = null;
 
     public $search = '';
 
@@ -38,7 +39,11 @@ class Completed extends Component
                     ->where('status','completed')
                     ->orderBy('updated_at', 'DESC')
                     ->paginate(5);
-        return view('livewire.user.order.pages.completed',['orders' => $orders]);
+
+
+       
+
+        return view('livewire.user.order.pages.completed',['orders' => $orders, 'invoice' => $this->invoice]);
     }
 
     public function buyAgain($id){
@@ -81,6 +86,11 @@ class Completed extends Component
         $this->productToRate = Product::where('id',$product_id)->first();
         $this->productToRateActive = true;
         $this->dispatchBrowserEvent('open-rating-modal');
+    }
+
+    public function viewInvoice($order_id){
+        $this->invoice = Order::where('id', $order_id)->first();
+        $this->dispatchBrowserEvent('open-invoice-modal');
     }
 }
 
