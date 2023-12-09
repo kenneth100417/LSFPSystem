@@ -39,7 +39,7 @@
                                             <div class="text-center mx-2 mt-2 p-0 d-flex flex-column align-items-center">
                                                 <input type="number" min="1" max="" id="quantity" class="form-control px-2 py-1 m-0 cart-quantity"  style="max-width: 100px !important; border: 1px solid gray; " value="" wire:change = "updateQuantity({{$product->cart_id}},{{$product->product_id}},$event.target.value)" placeholder="{{$product->cart_quantity}}">
                                                 <label for="" class="
-                                                {{$product->quantity - $product->quantity_sold == "0" ?  'text-danger':'text-info'}}">{{$product->quantity - $product->quantity_sold == "0" ?  'Sold Out':$product->quantity - $product->quantity_sold.' in Stock'}}</label>
+                                                {{$product->quantity - $product->quantity_sold > 0 ?  'text-info':'text-danger'}}">{{$product->quantity - $product->quantity_sold > 0 ?  $product->quantity - $product->quantity_sold.' in Stock':'Sold Out'}}</label>
                                             </div>
                                         </td>
                                       
@@ -90,7 +90,7 @@
                                     <h5 class="text-dark mb-2 mx-1"> &#8369;{{ number_format($totalAmount,2) }}</h5>
                                 </div>
                                 <div class="d-flex justify-content-end" style="right: 10px;">
-                                    <button  type="button" data-bs-toggle="modal" data-bs-target="#checkout" class="btn btn-warning" {{$products->count() == 0 ? 'disabled':''}}>Check Out</button>
+                                    <button  type="button" data-bs-toggle="modal" data-bs-target="#checkout" class="btn btn-warning" {{$products->count() == 0 ? 'disabled':''}} {{$soldOutExists == true ? 'disabled':''}}>Check Out</button>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +190,5 @@
         </div>
     </div>
     </section>
-    
-    
 </div>
 

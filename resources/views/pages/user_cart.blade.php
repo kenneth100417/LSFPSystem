@@ -18,6 +18,9 @@
 // quantity.addEventListener('change', function(){
 //   Livewire.emit('quantityUpdate')
 // });
+window.addEventListener('sold-out-exists', event =>{
+    alert('sdgsdfsdf')
+}); 
 
 window.addEventListener('show-delete-confirmation', event =>{
     Swal.fire({
@@ -91,6 +94,8 @@ window.addEventListener('greaterThanStock', event =>{
           showConfirmButton: true
       })
     });
+
+    
 
     window.addEventListener('emptycart', event =>{
         Swal.fire({

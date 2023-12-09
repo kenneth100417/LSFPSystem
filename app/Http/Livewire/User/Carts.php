@@ -24,12 +24,22 @@ class Carts extends Component
 
     public function render()
     {
+        $cartItems = Cart::where('user_id', Auth()->user()->id)->get();
+        foreach($cartItems as $cartItem){
+            $product = Product::where('id',$cartItem->product_id)->first();
+            if($product->quantity - $product->quantity_sold == 0){
+                $soldOutExists = true;
+            }else{
+                $soldOutExists = false;
+            }
+        }
+        
         $products = Product::join('carts','products.id','=','carts.product_id')
                             ->where('carts.user_id','=',Auth()->user()->id)
                             ->select('products.*','carts.quantity as cart_quantity','carts.id as cart_id','carts.product_id as product_id')
                             ->orderBy('carts.id','DESC')
                             ->paginate(6);
-        return view('livewire.user.carts',['products' => $products]);
+        return view('livewire.user.carts',['products' => $products, 'soldOutExists' => $soldOutExists]);
     }
 
     public function deleteConfirmation($id){
@@ -50,33 +60,32 @@ class Carts extends Component
             $this->dispatchBrowserEvent('noteIsEmpty');
         }else{
             $cartItems = Cart::where('user_id', Auth()->user()->id)->get();
-        $order = Order::create([
-            'user_id' => auth()->user()->id,
-            'status' => 'pending',
-            'note' => $this->note,
-            'amount' => $totalAmount,
-        ]);
-        foreach($cartItems as $cartItem){
-            $product = Product::where('id',$cartItem->product_id)->first();
-            $orderItem = OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $cartItem->product_id,
-                'price' => $product->selling_price,
-                'quantity' => $cartItem->quantity,
-            ]);
-            
-        }
-        if($order && $orderItem){
-            Cart::where('user_id', Auth()->user()->id)->delete();
-            Notification::create([
+            $order = Order::create([
                 'user_id' => auth()->user()->id,
-                'notification' => auth()->user()->firstname.' '.auth()->user()->lastname.' placed an Order.',
-                'access' => '1'
+                'status' => 'pending',
+                'note' => $this->note,
+                'amount' => $totalAmount,
             ]);
-            $this->dispatchBrowserEvent('orderSuccess');
-        }else if($cartItems->count() == '0'){
-            $this->dispatchBrowserEvent('emptyCart');
-        }
+            foreach($cartItems as $cartItem){
+                $product = Product::where('id',$cartItem->product_id)->first();
+                $orderItem = OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $cartItem->product_id,
+                    'price' => $product->selling_price,
+                    'quantity' => $cartItem->quantity,
+                ]);
+            }
+            if($order && $orderItem){
+                Cart::where('user_id', Auth()->user()->id)->delete();
+                Notification::create([
+                    'user_id' => auth()->user()->id,
+                    'notification' => auth()->user()->firstname.' '.auth()->user()->lastname.' placed an Order.',
+                    'access' => '1'
+                ]);
+                $this->dispatchBrowserEvent('orderSuccess');
+            }else if($cartItems->count() == '0'){
+                $this->dispatchBrowserEvent('emptyCart');
+            }
         }
         
 

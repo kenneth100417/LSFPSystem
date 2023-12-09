@@ -361,7 +361,7 @@ class UserController extends Controller
                         //$message = "Welcome back ".$user->firstname."! Your OTP is: {otp}. This code is valid only for 10 minutes.";
                         $message = "Welcome back ".$user->firstname."! Your OTP is: ".$otp." This code is valid only for 10 minutes.";
                        
-                        $this->sendSMS($user->mobile_number, $message, $otp); //otp 
+                        //$this->sendSMS($user->mobile_number, $message, $otp); //otp 
                         //dd($user->mobile_number);
                         return redirect('/otp/verify/'.$user->id)->with('success',  'Your OTP has been sent to your mobile number '.$user->mobile_number.'.'); // 'message = Your OTP has been sent to your mobile number '.$user->mobile_number.'.'
                     }else{
