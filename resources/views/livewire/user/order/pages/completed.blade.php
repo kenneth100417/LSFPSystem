@@ -150,7 +150,7 @@
 
 <!-- Invoice Modal -->
    
-<div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="change_passwordTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="invoiceModal" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="width: 100%">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -159,12 +159,17 @@
             
                     <div class="card-body px-0  mx-3 text-sm ">
                                     
-                        <H1>{{$invoice == null ? '':$invoice->id}}</H1>
+                        <h4 class="text-center">Thank You for your purchase!</h4>
+
+                        <div class="container">
+                            <div class="row mt-5">
+                                <h6 for="">Order ID: LSWP_ORDR{{$invoice == null ? '':$invoice->id}}</h6>
+                                <h6 for="">Order Date: {{$invoice == null ? '':date('Y-m-d',strtotime($invoice->updated_at))}}</h6>
+                            </div>
+                        </div>
                             {{-- to be continue -  invoice content --}}
                         <div class="modal-footer me-3">
-                        
-                            <button id="submitBtn" type="submit" class="btn btn-success modal-update-btn" disabled>Submit</button>
-                            <button  type="button" class="btn btn-danger modal-cancel-btn" data-toggle="modal" data-target="#editProfile" data-dismiss="modal">Cancel</button>
+                            <button  type="button" class="btn btn-danger modal-cancel-btn" data-toggle="modal" data-target="#editProfile" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
