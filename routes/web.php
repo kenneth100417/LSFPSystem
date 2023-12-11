@@ -111,6 +111,12 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
     //retrieve sms testing
     //Route::get('/retrieve_sms','retrieveSms');
 
+    
+    //print Invoice
+    Route::get('admin/printInvoice/{product_id}', 'printInvoice');
+    //print Invoice
+    Route::get('admin/walkinPrintInvoice/{product_id}', 'walkinPrintInvoice');
+
 
 
 });
@@ -141,6 +147,9 @@ Route::controller(App\Http\Controllers\UserController::class)->middleware(['auth
 
     // 
     Route::post('/buy/{product_id}', 'buyNow');
+    
+    //print Invoice
+    Route::get('user/printInvoice/{product_id}', 'printInvoice');
     
 });
 

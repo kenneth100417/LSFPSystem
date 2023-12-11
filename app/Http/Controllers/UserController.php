@@ -10,6 +10,8 @@ use Dompdf\Options;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\walkinTransaction;
 use App\Models\Rating;
 use GuzzleHttp\Client;
 use App\Models\Product;
@@ -1208,5 +1210,29 @@ class UserController extends Controller
                 break;
             }
         }
+    }
+
+    //print invoice
+    public function printInvoice($order_id){
+        $invoice = Order::where('id', $order_id)->first();
+        $invoiceItem = OrderItem::where('order_id',$invoice->id)->get();
+        $invoiceUser = User::where('id',$invoice->user_id)->first();
+
+        $customPaper = array(0,0,400,700);
+        
+        $pdf = Pdf::loadView('invoice.walkinPrintInvoice',['invoice' => $invoice, 'invoiceItem' => $invoiceItem, 'invoiceUser' => $invoiceUser]);
+        $pdf->setPaper($customPaper);
+        return $pdf->stream();
+    }
+
+    //print invoice
+    public function walkinPrintInvoice($product_id){
+        $invoice = walkinTransaction::latest('created_at')->first();
+        $invoiceItem = Product::where('id',$invoice->product_id)->first();
+        $customPaper = array(0,0,400,700);
+        
+        $pdf = Pdf::loadView('invoice.walkinPrintInvoice',['invoice' => $invoice, 'invoiceItem' => $invoiceItem]);
+        $pdf->setPaper($customPaper);
+        return $pdf->stream();
     }
 }

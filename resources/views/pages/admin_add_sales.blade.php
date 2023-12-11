@@ -67,18 +67,6 @@
         }
     });
   
-    window.addEventListener('transactionAdded', event =>{
-        Swal.fire({
-          title: 'Success!',
-          text: 'Transaction Added!',
-          icon: 'success',
-          showConfirmButton: true
-      }).then((result) => {
-          if (result.isConfirmed) {
-            location.reload();
-          }
-        }) 
-    });
     window.addEventListener('outOfStock', event =>{
         Swal.fire({
           title: 'Oops!',
@@ -116,6 +104,11 @@
         }) 
     });
 
+    window.addEventListener('open-invoice-modal', event =>{
+            $('#invoiceModal').modal('toggle');
+    });
+
+   
   // var cash = document.getElementById('cash');
   // var change = document.getElementById('change');
 

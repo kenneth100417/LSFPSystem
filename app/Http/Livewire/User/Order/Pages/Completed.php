@@ -20,6 +20,7 @@ class Completed extends Component
     public $productToRate;
     public $productToRateActive = false;
     public $invoice = null;
+    public $invoiceItem = [];
 
     public $search = '';
 
@@ -40,10 +41,7 @@ class Completed extends Component
                     ->orderBy('updated_at', 'DESC')
                     ->paginate(5);
 
-
-       
-
-        return view('livewire.user.order.pages.completed',['orders' => $orders, 'invoice' => $this->invoice]);
+        return view('livewire.user.order.pages.completed',['orders' => $orders, 'invoice' => $this->invoice,'invoiceItem' => $this->invoiceItem]);
     }
 
     public function buyAgain($id){
@@ -90,6 +88,7 @@ class Completed extends Component
 
     public function viewInvoice($order_id){
         $this->invoice = Order::where('id', $order_id)->first();
+        $this->invoiceItem = OrderItem::where('order_id',$this->invoice->id)->get();
         $this->dispatchBrowserEvent('open-invoice-modal');
     }
 }

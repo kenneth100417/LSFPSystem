@@ -17,6 +17,8 @@ class AddSales extends Component
     public $quantity;
     public $selectedProduct;
     public $total;
+    public $invoice = null;
+    public $invoiceItem = null;
 
     protected $listeners = ['selectedProduct' => 'show'];
 
@@ -66,13 +68,18 @@ class AddSales extends Component
        
     }
 
+    public function viewInvoice($id){
+        $this->invoice = walkinTransaction::latest('created_at')->first();
+        $this->invoiceItem = Product::where('id',$this->id)->first();
+        $this->dispatchBrowserEvent('open-invoice-modal');
+    }
+
     public function render(){
         
         $products = Product::orderBy('name','ASC')
                     ->where('expiry_date','>=',date('Y-m-d'))
                     ->get();
-
-       
-        return view('livewire.admin.add-sales',['products' => $products]);
+        return view('livewire.admin.add-sales',['products' => $products, 'invoice' => $this->invoice, 'invoiceItem' => $this->invoiceItem]);
     }
+
 }

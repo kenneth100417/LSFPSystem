@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Admin\Order;
 
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,6 +16,9 @@ class OrderCompleted extends Component
     public $sort = 'DESC';
     public $sortBy = 'id';
     public $sortby = 'Order ID';
+    public $invoice = null;
+    public $invoiceItem = [];
+    public $invoiceUser = [];
 
     public function render()
     {
@@ -24,7 +29,7 @@ class OrderCompleted extends Component
             ->where('orders.status','completed')
             ->orderBy($this->sortBy,$this->sort)
             ->paginate(10);
-        return view('livewire.admin.order.order-completed',['orders' => $orders]);
+        return view('livewire.admin.order.order-completed',['orders' => $orders, 'invoice' => $this->invoice, 'invoiceItem' => $this->invoiceItem, 'invoiceUser' => $this->invoiceUser]);
     }
 
     public function asc(){
@@ -48,5 +53,11 @@ class OrderCompleted extends Component
     public function amount(){
         $this->sortBy = 'amount';
         $this->sortby = 'Amount Payable';
+    }
+    public function viewInvoice($order_id){
+        $this->invoice = Order::where('id', $order_id)->first();
+        $this->invoiceItem = OrderItem::where('order_id',$this->invoice->id)->get();
+        $this->invoiceUser = User::where('id',$this->invoice->user_id)->first();
+        $this->dispatchBrowserEvent('open-invoice-modal');
     }
 }

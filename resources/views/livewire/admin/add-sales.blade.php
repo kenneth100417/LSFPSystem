@@ -62,28 +62,7 @@
                                               <input wire:model = "total" value="" type="text" id="total" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 16px; font-weight:bold;" readonly/>
                                             </div>
                                         </div>
-                                        {{-- <div class="container mb-2 mt-2">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="mt-2  ">
-                                                        <h6 class="">Cash</h6>
-                                                        <div class="form-outline d-flex justify-content-start">
-                                                            <h5 for="" class="mx-2">&#8369;</h5>
-                                                          <input type="text" id="cash" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 16px; font-weight:bold;" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="mt-2  ">
-                                                        <h6 class="">Change</h6>
-                                                        <div class="form-outline d-flex justify-content-start">
-                                                            <h5 for="" class="mx-2">&#8369;</h5>
-                                                          <input type="text" id="change" class="form-control  p-2" placeholder="" aria-label="Search" style="box-shadow: 0 2px 5px rgba(182, 182, 182, 0.75); font-size: 16px; font-weight:bold;" readonly/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
+                                        
                                         
                                     </div>
                                     <hr class="bg-dark">
@@ -98,7 +77,7 @@
                                                   <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">Sold</th>
                                                   <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-10">In Stock</th>
                                                   <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Category</th>
-                                                  <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15">Description</th>
+                                                  <th class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7 mw-15"></th>
                                      
                                                 </tr>
                                               </thead>
@@ -131,15 +110,10 @@
                                                           <p  class="text-xs text-dark mb-0">{{$selected == true ? $selectedProduct->category->name:''}}</p>
                                                       </td>
                                                       <td class="mw-15 text-center" >
-                                                          <div class="d-flex" style="min-width: 15; max-width: 15; white-space:normal; min-height:80px; max-height: 80px; overflow:scroll; align-items: center;">
-                                                              <p class="text-xs text-dark mb-0">{{$selected == true ? $selectedProduct->description:''}}</p>
-                                                          </div>
+                                                        <a id="invoiceBtn" class="btn btn-success btn-sm mt-3" style="display: none;" href="{{url('admin/walkinPrintInvoice')}}/{{$selected == true ? $selectedProduct->id:''}}">Print Invoice</a>
                                                       </td>
-                                                    
                                                   </tr>
               
-                                                  
-                                                 
                                               </tbody>
                                             </table>
                                           </div>
@@ -152,8 +126,117 @@
             </div>
             </div>
         </div>
+        
+           <!-- Invoice Modal -->
+{{--    
+<div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="invoiceModal" aria-bs-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
+    <div class="modal-dialog modal-dialog-scrollable" role="document" style="width: auto; max-width: 550px">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card my-4 modal-card">
+                    <div class="card-body px-0  mx-2 text-sm ">
+                        <div class="container">
+                            <div class="row d-flex">
+                                <div class="text-center">
+                                    <img src="/img/logo.png" alt="Louella's Sweet Food Products" class="logo" style="width: 150px">
+                                </div>
+                                <div class="text-center">
+                                    <h5>Louella's Sweet Food Products</h5>
+                                    <p>Bulan, Sorsogon</p>
+                                    <p>{{date('F j, Y')}}</p>
+                                </div>
+                            </div>
+
+                            <h5 class="text-center mt-1">INVOICE</h5>
+                            <hr class="bg-dark my-0 mx-0">
+                            <div class="row mt-2">
+                                <div class="d-flex">
+                                    <div class="mx-2">
+                                        <p class="text-dark" style="font-weight: bold">Date:</p>
+                                        <p class="text-dark" style="font-weight: bold">Transaction ID:</p>
+                                    </div>
+                                    <div>
+                                        <p for="">{{date('Y-m-d')}}</p>
+                                        <p for="">{{$invoice == null ? '':'LSWP_WIT'.$invoice->id}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="bg-dark my-0 mx-0">
+                            <div class="row">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center mb-0 ">
+                                        <tbody>
+                                            <tr >
+                                                <td>
+                                                    <div class="">
+                                                        <div class="d-flex py-1">
+                                                            <div>
+                                                                <img src="/uploads/products/{{$invoiceItem == null ?'':$invoiceItem->image}}" class="avatar avatar-lg  me-3 border-radius-lg" alt="Shopping item" style="object-fit: cover;">
+                                                            </div>
+                                                            <div class="d-flex flex-column justify-content-center" >
+                                                                <h6 class="mb-0 text-sm">{{$invoiceItem == null ?'':$invoiceItem->name}}</h6>
+                                                                <div class="d-flex justify-content-between" style="width: 400px">
+                                                                    <div>
+                                                                        <p class="text-xs text-dark mb-0">&#8369;{{$invoiceItem == null ?'':number_format($invoiceItem->price,2)}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="text-xs text-dark mb-0">x{{$invoiceItem == null ?'':$invoiceItem->quantity}}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-end mt-1">
+                                                                <p class="text-xs text-dark mb-0">&#8369;{{$invoiceItem == null ? '':number_format($invoiceItem->price * $invoiceItem->quantity,2)}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                  </div>
+                                                  
+                                              </td>
+                                              
+                                          </tr>
+                                         
+                                      </tbody>
+                                    </table>
+                                    <hr class="bg-dark">
+                                  <div class="d-flex justify-content-end">
+                                    <td class="w-10 text-center">
+                                        <h5 class="text-sm text-dark mx-2">Total Amount: <span style="font-size: 22px">&#8369;{{$invoice == null ? '':$invoice->amount}}</span></h5>
+                                    </td>
+                                  </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a  type="button" class="btn btn-sm btn-info modal-cancel-btn" href="{{url('admin/printInvoice/')}}{{$invoice == null ? '':"/".$invoice->id}}">Print</a>
+                            <button  type="button" class="btn btn-sm btn-danger modal-cancel-btn" data-bs-toggle="modal" data-bs-target="#invoiceModal" data-dismiss="modal">Close</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
     </section>  
     
 </div>
+<script>
+    
+    window.addEventListener('transactionAdded', event =>{
+        document.getElementById('invoiceBtn').style.display = 'block';
+
+        Swal.fire({
+          title: 'Success!',
+          text: 'Transaction Added!',
+          icon: 'success',
+          confirmButtonText: 'Print Invoice',
+          showConfirmButton: true,
+          showCancelButton: true
+      }).then((result) => {
+          if (result.isConfirmed) {
+            document.getElementById('invoiceBtn').click();
+          }
+        }) 
+    });
+</script>
 
 

@@ -69,6 +69,9 @@ window.addEventListener("load", function(){
     loader.style.display = "none";
 });
 
+window.addEventListener('open-invoice-modal', event =>{
+            $('#invoiceModal').modal('toggle');
+    });
 
 </script>
 
@@ -158,6 +161,9 @@ window.addEventListener("load", function(){
             },
         },
     });
+
+   
+   
 
     
 
