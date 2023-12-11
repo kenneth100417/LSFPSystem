@@ -1220,7 +1220,7 @@ class UserController extends Controller
 
         $customPaper = array(0,0,400,700);
         
-        $pdf = Pdf::loadView('invoice.walkinPrintInvoice',['invoice' => $invoice, 'invoiceItem' => $invoiceItem, 'invoiceUser' => $invoiceUser]);
+        $pdf = Pdf::loadView('invoice.printInvoice',['invoice' => $invoice, 'invoiceItem' => $invoiceItem, 'invoiceUser' => $invoiceUser]);
         $pdf->setPaper($customPaper);
         return $pdf->stream();
     }

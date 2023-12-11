@@ -234,7 +234,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a  type="button" class="btn btn-sm btn-info modal-cancel-btn" href="{{url('user/printInvoice/')}}{{$invoice == null ? '':$invoice->id}}">Print</a>
+                            <a  type="button" class="btn btn-sm btn-info modal-cancel-btn" href="{{url('user/printInvoice')}}/{{$invoice == null ? '':$invoice->id}}">Print</a>
                             <button  type="button" class="btn btn-sm btn-danger modal-cancel-btn" data-toggle="modal" data-dismiss="modal">Close</button>
                         </div>
                     </div>
