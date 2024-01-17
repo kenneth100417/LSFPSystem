@@ -95,7 +95,7 @@
                                     </td>
                                 </tr>
                                 @empty
-                                    <div class=" text-center">No pending Orders.</div>.prevent
+                                    <div class=" text-center">No pending Orders.</div>
                                 @endforelse
                             </tbody>
                           </table>
